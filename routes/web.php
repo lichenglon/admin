@@ -125,6 +125,8 @@ Route::group(['prefix'=>'house'],function() {
     Route::post('houseLister/');
     #导出Excel
     Route::get('houseLister/houseExcel',$controller.'houseExcel');
+    #地图
+    Route::get('houseLister/houseMap');
 });
 //国家地区城市添加
 Route::group(['prefix'=>'nation'],function() {
