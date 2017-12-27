@@ -116,4 +116,8 @@ class AccountController extends BaseController
         }
         return $this->ajaxError('删除账号失败！', url('/account/user'));
     }
+
+    public function userExcel() {
+
+    }
 }

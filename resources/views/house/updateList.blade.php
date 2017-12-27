@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('css')
-
+    <link rel="stylesheet" type="text/css" href="{{asset('house/css/H-ui.min.css')}}" />
 @stop
 
 @section('content')
@@ -12,29 +12,39 @@
 
             <div class="Hui-article">
                 <article class="cl pd-20">
-                    <div class="text-c">
-				<span class="select-box inline">
-				<select name="" class="select">
-                    <option value="0">全部分类</option>
-                    <option value="1">分类一</option>
-                    <option value="2">分类二</option>
-                </select>
-				</span>
-
-                        <input type="text" name="" id="" placeholder=" 房源关键词" style="width:250px" class="input-text">
-                        <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜房源</button>
-                        <span class="r">共有数据：<strong>54</strong> 条</span>
-                    </div>
                     <div class="cl pd-5 bg-1 bk-gray mt-20">
-				<span class="l">
 
-				</span>
+						<span class="select-box inline">
+							<form action="{{url('house/houseLister/findType')}}" method="post" id="typeSubmit">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="hidden" value="1">
+                                <select name="type" class="select" id="findType">
+                                    <option value="0">分类</option>
+                                    @foreach($typeObject as $value)
+                                        <option value="{{$value->name}}">{{$value->name}}</option>
+                                    @endforeach
+                                </select>
+                            </form>
+						</span>
+                        当前页面检索
+                        <input type="text" name="" id="searching" placeholder="Please enter the content you want to search" style="width:350px" class="input-text">
 
+                        <form action="{{url('house/houseLister/findDate')}}" method="post" id="dateSubmit" style="display:inline-block">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="hidden" value="1">
+                            日期范围：
+                            <input type="text" id="rise" name="rise" value="" class="input-text" style="width:120px;"/>
+                            -
+                            <input type="text" id="duration" name="duration" value="" class="input-text" style="width:120px;">
+                            <input type="button" value="确定" id="findDate">
+                        </form>
+
+                        <span class="r">共有数据：<strong>{{$houseCount}}</strong> 条</span>
                     </div>
                     <div class="mt-20">
                         <table class="table table-border table-bordered table-bg table-hover table-sort">
                             <thead>
-                            <tr class="text-c">
+                            <tr class="text-c" id="theader">
                                 <th width="25"><input type="checkbox" name="" value=""></th>
                                 <th width="">ID</th>
                                 <th width="">房源编号</th>
@@ -85,7 +95,31 @@
 @stop
 
 @section('js')
-
+    <script>
+        //当前页面检索
+        $(function(){
+            $("#searching").keyup(function(){
+                var txt=$("#searching").val();
+                if($.trim(txt)!=""){
+                    $("table tr:not('#theader')").hide().filter(":contains('"+txt+"')").show();
+                }else{
+                    $("table tr:not('#theader')").show();
+                }
+            });
+        });
+        //分类搜索表单提交
+        $("select#findType").change(function(){
+            $("#typeSubmit").submit();
+        });
+        //日期搜索
+        $('#findDate').click(function(){
+            var rise = $('#rise').val();
+            var duration = $('#duration').val();
+            if(rise != '' && duration != ''){
+                $('#dateSubmit').submit();
+            }
+        });
+    </script>
 
 @stop
 

@@ -55,19 +55,11 @@
                 <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
                     <span style="line-height:34px;">业务人员列表</span>
                     <div style="float:right;">
-                        <button type="button" class="btn btn-default">导出EXCEL</button>
+
+                        {{--<button type="button" class="btn btn-default">导出EXCEL</button>--}}
                         <a href="/account/user/create" type="button" class="btn btn-default">新增账号</a>
                     </div>
                 </h4>
-                <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
-                    <span style="line-height:34px;">批量操作</span>
-                    <div style="float:right;">
-                        <button type="button" class="btn btn-default">停用账号</button>
-                        <button type="button" class="btn btn-default">启用账号</button>
-                        <button type="button" class="btn btn-default">删除</button>
-                    </div>
-                </h4>
-
 
 
                 <div class="row" style="margin-bottom:10px;">

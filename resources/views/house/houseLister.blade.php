@@ -16,9 +16,11 @@
 					<div class="cl pd-5 bg-1 bk-gray mt-20">
 
 						<span class="select-box inline">
-							<form action="{{url('house/findType')}}" method="post">
+							<form action="{{url('house/houseLister/findType')}}" method="post" id="typeSubmit">
+								{{ csrf_field() }}
+								<input type="hidden" name="hidden" value="1">
 								<select name="type" class="select" id="findType">
-									<option value="0">全部分类</option>
+									<option value="0">分类</option>
 									@foreach($typeObject as $value)
 									<option value="{{$value->name}}">{{$value->name}}</option>
 									@endforeach
@@ -27,17 +29,25 @@
 						</span>
 						当前页面检索
 						<input type="text" name="" id="searching" placeholder="Please enter the content you want to search" style="width:350px" class="input-text">
-						日期范围：
-						<input type="text" id="rise" class="input-text" style="width:120px;">
-						-
-						<input type="text" id="duration" class="input-text" style="width:120px;">
 
-						<span class="r">共有数据：<strong>{{$houseCount}}</strong> 条</span>
+						<form action="{{url('house/houseLister/findDate')}}" method="post" id="dateSubmit" style="display:inline-block">
+							{{ csrf_field() }}
+							<input type="hidden" name="hidden" value="1">
+						日期范围：
+							<input type="text" id="rise" name="rise" value="" class="input-text" style="width:120px;"/>
+							-
+							<input type="text" id="duration" name="duration" value="" class="input-text" style="width:120px;">
+							<input type="button" value="确定" id="findDate">
+						</form>
+
+						<span class="r"><a href="{{ url('house/houseLister/houseExcel') }}" class="btn btn-default">导出EXCEL</a>共有数据：<strong>{{$houseCount}}</strong> 条</span>
+
 					</div>
 					<div class="mt-20">
 						<table class="table table-border table-bordered table-bg table-hover table-sort">
 							<thead>
 							<tr class="text-c" id="theader">
+								<th>类型</th>
 								<th width="">ID</th>
 								<th width="">房源编号</th>
 								<th width="">房源结构</th>
@@ -53,6 +63,7 @@
 							<tbody>
 							@foreach($houseObj as $key => $val)
 								<tr class="text-c">
+									<td>{{$val->house_type}}</td>
 									<td>{{$val->msgid}}</td>
 									<td class="text-l"><a href="{{url('house/houseLister/detail',['id'=>$val->msgid])}}"><u style="cursor:pointer" class="text-primary" title="查看">{{$val->serial_number}}</u></a></td>
 									<td>{{$val->house_structure}}</td>
@@ -98,11 +109,19 @@
 						$("table tr:not('#theader')").show();
 					}
 				});
-			})
+			});
 			//分类搜索表单提交
 			$("select#findType").change(function(){
-				console.log('11');
-			})
+				$("#typeSubmit").submit();
+			});
+			//日期搜索
+			$('#findDate').click(function(){
+				var rise = $('#rise').val();
+				var duration = $('#duration').val();
+				if(rise != '' && duration != ''){
+					$('#dateSubmit').submit();
+				}
+			});
 		</script>
 		<script>
 			//常规用法 日期

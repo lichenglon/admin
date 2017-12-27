@@ -10,8 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//前台
 
-//首页
+
+
+//后台首页
 Route::get('/', 'HomeController@index')->name('/');
 //上传
 Route::any('home/upload_image', 'HomeController@upload_image');
@@ -19,21 +22,6 @@ Route::any('home/upload_image', 'HomeController@upload_image');
 Route::any('users/login','UsersController@login')->name('users/login');
 Route::any('users/logout','UsersController@logout')->name('users/logout');
 
-//app管理
-/*Route::group(['prefix'=>'app'],function(){
-    Route::any('ad', 'App\AdController@index')->name('app/ad');
-    Route::any('ad/ad_slot', 'App\AdController@adSlot')->name('app/ad/ad_slot');
-
-    Route::any('ad_cate', 'App\AdCateController@index')->name('app/ad_cate');
-    Route::any('ad_cate/down_cate', 'App\AdCateController@downCate')->name('app/ad_cate/down_cate');
-
-
-    Route::resource('ad', 'App\AdController');
-    Route::resource('ad_cate', 'App\AdCateController');
-    Route::resource('image', 'App\ImageController');
-    Route::resource('seckill', 'App\SeckillController');
-    Route::resource('news', 'App\NewsController');
-});*/
 
 
 //账号管理
@@ -51,6 +39,7 @@ Route::group(['prefix'=>'account'],function(){
     Route::resource('role', 'Account\RoleController');
     Route::post('role/store', 'Account\RoleController@store');
     Route::get('role/updateStatus/{id}/{status}','Account\RoleController@updateStatus');
+
 
 });
 
@@ -130,6 +119,12 @@ Route::group(['prefix'=>'house'],function() {
     Route::any('type/delete/{id}',$typeController.'delete');
     #修改
     Route::any('type/update',$typeController.'update');
+    #房源检索/类型
+    Route::post('houseLister/findType',$controller.'findType');
+    #房源检索/日期
+    Route::post('houseLister/');
+    #导出Excel
+    Route::get('houseLister/houseExcel',$controller.'houseExcel');
 });
 //国家地区城市添加
 Route::group(['prefix'=>'nation'],function() {

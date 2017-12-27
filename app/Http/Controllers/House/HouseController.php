@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use DB;
+use App\libraries\libs\pinyin;
 class HouseController extends BaseController {
 	/**
 	 * 房源列表
@@ -36,6 +37,7 @@ class HouseController extends BaseController {
 	 */
 	public function save(Request $param) {
 		$houseData = Input::all();
+
 		//国家
 		$state = explode(',',$houseData['state']);
 		//城市
@@ -156,9 +158,12 @@ class HouseController extends BaseController {
 	 *房源更新列表
 	 */
 	public function updateList() {
+		$houseType = new House_type();
+		$typeObject = $houseType->select('name')->get();
 		$houseMessage = new House_message();
-		$gather = $houseMessage->orderBy('msgid','desc')->paginate(10);
-		return view('house.updateList',['houseObj'=>$gather]);
+		$houseCount = $houseMessage->count();
+		$gather = $houseMessage->orderBy('msgid','desc')->paginate(100);
+		return view('house.updateList',['houseObj'=>$gather,'typeObject'=>$typeObject,'houseCount'=>$houseCount]);
 	}
 
 	/**
@@ -186,7 +191,6 @@ class HouseController extends BaseController {
 		if(isset($_GET['p_nation_ID'])){
 			$p_nation_ID = $_GET['p_nation_ID'];
 			$provinceArr = DB::table('province')->where('p_nation_ID',$p_nation_ID)->get()->toArray();
-			//return json_encode($provinceArr);
 			return $provinceArr;
 		}
 		if(isset($_GET['c_province_ID'])){
@@ -301,4 +305,51 @@ class HouseController extends BaseController {
 		$imgArr = $houseImg->where('house_msg_id','=',$id)->get();
 		return view('house.houseDetail',['houseMsg'=>$houseMsg,'imgArr'=>$imgArr]);
 	}
+
+	/**
+	 *房源检索 类型
+	 *@param type
+	 */
+	public function findType(Request $request) {
+		$type = $request->type;
+		$houseType = new House_type();
+		$typeObject = $houseType->select('name')->get();
+		$houseMessage = new House_message();
+		$houseCount = $houseMessage->count();
+		$gather = $houseMessage->where('house_type',$type)->orderBy('msgid','desc')->paginate(100);
+		if(isset($request->hidden)){
+			return view('house.houseLister',['houseObj'=>$gather,'typeObject'=>$typeObject,'houseCount'=>$houseCount]);
+		} else {
+			return view('house.updateList',['houseObj'=>$gather,'typeObject'=>$typeObject,'houseCount'=>$houseCount]);
+		}
+	}
+
+	/**
+	 *房源检索 日期
+	 *@param date
+	 */
+	public function findDate(Request $request) {
+		$rise = $request->rise;
+		$duration = $request->duration;
+		$houseType = new House_type();
+		$typeObject = $houseType->select('name')->get();
+		$houseMessage = new House_message();
+		$houseCount = $houseMessage->count();
+		$gather = $houseMessage->where('house_rise',$rise)->where('house_duration',$duration)->orderBy('msgid','desc')->paginate(100);
+		if(isset($request->hidden)){
+			return view('house.houseLister',['houseObj'=>$gather,'typeObject'=>$typeObject,'houseCount'=>$houseCount]);
+		} else {
+			return view('house.updateList',['houseObj'=>$gather,'typeObject'=>$typeObject,'houseCount'=>$houseCount]);
+		}
+	}
+
+	/**
+	 *导出 Excel
+	 */
+	public function houseExcel() {
+		$data = DB::table('house_message')->select()->get('serial_number','house_location')->toArray();
+		$title = ['房源ID号','编号','房源位置','房源结构','房源价格','房源大小/平方','房源类型','房屋设备','关键字','房源简介','起租期','租期时长','状态','房东证件号','房源中介ID','国家','省','城市','周边信息','押金','预付款比例','结算方式'];
+		exportData($title,$data,'房源信息'.date('Y-m-d'));
+	}
+
  }

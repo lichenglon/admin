@@ -62,7 +62,7 @@
                 <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
                     <span style="line-height:34px;">列表</span>
                     <div style="float:right;">
-                        <a href="{{ url('order/order/exportOrderData') }}?{{ http_build_query($_REQUEST) }}" type="button" class="btn btn-default">导出EXCEL</a>
+                        <a href="{{ url('order/order/exportOrderData') }}" type="button" class="btn btn-default">导出EXCEL</a>
                     </div>
                 </h4>
 

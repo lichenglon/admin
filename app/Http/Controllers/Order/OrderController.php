@@ -77,60 +77,7 @@ class OrderController extends BaseController
      * Excel导出订单数据
      * @param Request $request
      */
-    public function exportOrderData(Request $request){
-        $where = [];
-        $pay_status = $request->input('pay_status');
-        $status = $request->input('status');
-        $order_no = $request->input('order_no');
-        unset($_REQUEST['_token']);
-        //搜索
-        if(!empty($request->search)){
-
-            if(!empty($order_no)){
-                $where['tbuy_order.order_no'] = $order_no;
-            }
-            if(!empty($status)){
-                $where['tbuy_order_details.status'] = $status;
-            }
-            if($pay_status != ''){
-                $where['tbuy_order.status'] = $pay_status;
-            }
-            if(!empty($request->keyword)){
-                $where[] = [$request->keyword_type, 'like', '%'.$request->keyword.'%'];
-            }
-        }
-
-        $order_list = DB::table('tbuy_order')
-            ->join('tbuy_order_details', 'tbuy_order.order_id', '=', 'tbuy_order_details.order_id')
-            ->join('tnet_reginfo', 'tbuy_order.node_id', '=', 'tnet_reginfo.nodeid')
-            ->join('tbuy_order_consignee', 'tbuy_order.order_id', '=', 'tbuy_order_consignee.order_id')
-            ->where($where)
-            ->select('tbuy_order.order_id', 'tbuy_order.order_no',  'tbuy_order_details.product_name', 'tbuy_order_details.sku_remarks', 'tnet_reginfo.nodecode', 'tbuy_order_details.price', 'tbuy_order_details.buy_count', 'tbuy_order_details.postage', 'tbuy_order.status as pay_status', 'tbuy_order.pay_type_group','tbuy_order_details.status', 'tbuy_order.create_time', 'tbuy_order.pay_time','tbuy_order_consignee.province','tbuy_order_consignee.city','tbuy_order_consignee.region','tbuy_order_consignee.address','tbuy_order_consignee.consignee_name','tbuy_order_consignee.mobile_no','tbuy_order_consignee.phone','tbuy_order_consignee.post_code')
-            ->orderBy('order_id', 'desc')
-            ->get();
-
-        foreach ($order_list as &$val) {
-            $val->price = round($val->price, 2);
-            $pay_type_group = json_decode($val->pay_type_group, true);
-            $str = '';
-            foreach ($pay_type_group as $k => $v) {
-                $str.= $v['Remarks'] . ':' . $v['PayAmount']/ 100 . '，';
-            }
-            $val->pay_type_group = trim($str, '，');
-            $val->pay_status = isset($this->payStatus[$val->pay_status]) ? $this->payStatus[$val->pay_status] : $val->pay_status;
-            $val->status = isset($this->orderStatus[$val->status]) ? $this->orderStatus[$val->status] : $val->pay_status;
-
-            $val->order_no = "'".$val->order_no;
-            $val->product_name = str_replace("\r\n",'',$val->product_name);
-            $val->consignee_address = $val->province.' '.$val->city.' '.$val->region.' '.$val->address;
-            unset($val->province,$val->city,$val->region,$val->address);
-        }
-
-        $order_list = json_decode(json_encode($order_list), true);
-
-        $title = ['订单ID号','订单编号','产品名称','商品属性','手机号','商品单价','数量','邮费','支付状态','支付方式','订单状态','下单时间','支付时间','收货人姓名','收货人手机号','收货人电话','邮编','收货地址'];
-
-        exportData($title,$order_list,'订单数据'.date('Y-m-d'));
+    public function exportOrderData(){
 
     }
 

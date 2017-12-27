@@ -4,8 +4,76 @@
     <link rel="stylesheet" type="text/css" href="{{asset('house/css/H-ui.min.css')}}" />
     <link href="{{asset('house/region/chosen.min.css')}}" rel='stylesheet'>
     <style type="text/css">
-        .dept_select{min-width: 200px;}
 
+        .shade {
+            position: absolute;
+            display: none;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+        .shade div {
+            width: 300px;
+            height: 200px;
+            line-height: 200px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -100px;
+            margin-left: -150px;
+            background: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .a-upload {
+            padding: 4px 10px;
+            height: 20px;
+            line-height: 20px;
+            position: relative;
+            cursor: pointer;
+            color: #888;
+            background: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1
+        }
+
+        .a-upload input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            cursor: pointer
+        }
+
+        .a-upload:hover {
+            color: #444;
+            background: #eee;
+            border-color: #ccc;
+            text-decoration: none
+        }
+        .img_div{min-height: 100px; min-width: 100px;}
+        .isImg{width: 120px; height: 120px; position: relative; float: left; margin-left: 10px;}
+        .removeBtn{position: absolute; top: 0; right: 0; z-index: 11; border: 0px; border-radius: 50px; background: red; width: 22px; height: 22px; color: white;}
+        .shadeImg{position: absolute;
+            display: none;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 15;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.55);}
+        .showImg{width: 400px; height: 500px; margin-top: 140px;}
     </style>
 @stop
 
@@ -138,7 +206,13 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">房屋设备：</label>
                         <div class="formControls col-xs-8 col-sm-9 skin-minimal">
-                            <?php $equipment = explode(',',$houseMsg->house_facility);?>
+                            <?php
+                                if(empty($houseMsg->house_facility)){
+                                    $equipment = array();
+                                }else{
+                                    $equipment = explode(',',$houseMsg->house_facility);
+                                }
+                            ?>
                             <div class="check-box">
                                 <input name="house_facility[]" @if(isset($equipment['0'])) checked="checked" @endif value='洗衣机' type="checkbox" id="checkbox-1">
                                 <label for="checkbox-1">洗衣机</label>
@@ -306,12 +380,24 @@
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">选择图片：</label>
-                        <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                        <span class="btn-upload form-group">
-					        <input class="input-text upload-url" type="text" name="" id="uploadfile-2" readonly  datatype="*" nullmsg="请添加附件！" style="width:200px">
-					        <a href="javascript:void();" class="btn btn-primary upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
-					        <input type="file" multiple name="upload[]" class="input-file">
-                        </span>
+                        <div class="formControls col-xs-8 col-sm-9">
+                            <a href="javascript:;" class="a-upload" style="width:15%;height:30px;">
+                                <input type="file" name="upload[]" id="myFile" multiple="multiple"/><span>点击这里上传文件</span>
+                            </a>
+                            <div class="img_div"></div>
+
+                            <div class="shade" onclick="javascript:closeShade()">
+                                <div class="">
+                                    <span class="text_span"></span>
+                                </div>
+                            </div>
+
+                            <div class="shadeImg" onclick="javascript:closeShadeImg()">
+                                <div class="">
+                                    <img class="showImg" src=""/>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -385,11 +471,116 @@
     <script type="text/javascript" src="{{asset('house/region/chosen.jquery.min.js')}}"></script>
     <script>
         document.getElementById('houseTypeVal').value='{{$houseMsg->house_type}}';
-        document.getElementById('country').value='{{$houseMsg->state}}';
-        document.getElementById('province').value='{{$houseMsg->province}}';
-        document.getElementById('city').value='{{$houseMsg->city}}';
         document.getElementById('payment_proportion').value='{{$houseMsg->payment_proportion}}';
         document.getElementById('knot_way').value='{{$houseMsg->knot_way}}';
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            var objUrl;
+            var img_html;
+            $("#myFile").change(function() {
+                var img_div = $(".img_div");
+                var filepath = $("input[name='upload[]']").val();
+                for(var i = 0; i < this.files.length; i++) {
+                    objUrl = getObjectURL(this.files[i]);
+                    var extStart = filepath.lastIndexOf(".");
+                    var ext = filepath.substring(extStart, filepath.length).toUpperCase();
+                    /*
+                     作者：z@qq.com
+                     时间：2016-12-10
+                     描述：鉴定每个图片上传尾椎限制
+                     * */
+                    if(ext != ".BMP" && ext != ".PNG" && ext != ".GIF" && ext != ".JPG" && ext != ".JPEG") {
+                        $(".shade").fadeIn(500);
+                        $(".text_span").text("图片限于bmp,png,gif,jpeg,jpg格式");
+                        this.value = "";
+                        $(".img_div").html("");
+                        return false;
+                    } else {
+                        /*
+                         若规则全部通过则在此提交url到后台数据库
+                         * */
+                        img_html = "<div class='isImg'><img src='" + objUrl + "' onclick='javascript:lookBigImg(this)' style='height: 100%; width: 100%;' /><button class='removeBtn' onclick='javascript:removeImg(this)'>x</button></div>";
+                        img_div.append(img_html);
+                    }
+                }
+                /*
+                 作者：z@qq.com
+                 时间：2016-12-10
+                 描述：鉴定每个图片大小总和
+                 * */
+                var file_size = 0;
+                var all_size = 0;
+                for(j = 0; j < this.files.length; j++) {
+                    file_size = this.files[j].size;
+                    all_size = all_size + this.files[j].size;
+                    var size = all_size / 1024;
+                    if(size > 5000) {
+                        $(".shade").fadeIn(5000);
+                        $(".text_span").text("上传的图片大小不能超过1000k！");
+                        this.value = "";
+                        $(".img_div").html("");
+                        return false;
+                    }
+                }
+                /*
+                 描述：鉴定每个图片宽高 以后会做优化 多个图片的宽高 暂时隐藏掉 想看效果可以取消注释就行
+                 * */
+                //					var img = new Image();
+                //					img.src = objUrl;
+                //					img.onload = function() {
+                //						if (img.width > 100 && img.height > 100) {
+                //							alert("图片宽高不能大于一百");
+                //							$("#myFile").val("");
+                //							$(".img_div").html("");
+                //							return false;
+                //						}
+                //					}
+                return true;
+            });
+            /*
+             作者：z@qq.com
+             时间：2016-12-10
+             描述：鉴定每个浏览器上传图片url 目前没有合并到Ie
+             * */
+            function getObjectURL(file) {
+                var url = null;
+                if(window.createObjectURL != undefined) { // basic
+                    url = window.createObjectURL(file);
+                } else if(window.URL != undefined) { // mozilla(firefox)
+                    url = window.URL.createObjectURL(file);
+                } else if(window.webkitURL != undefined) { // webkit or chrome
+                    url = window.webkitURL.createObjectURL(file);
+                }
+                //console.log(url);
+                return url;
+            }
+        });
+        /*
+         描述：上传图片附带删除 再次地方可以加上一个ajax进行提交到后台进行删除
+         * */
+        function removeImg(r){
+            $(r).parent().remove();
+        }
+        /*
+         描述：上传图片附带放大查看处理
+         * */
+        function lookBigImg(b){
+            $(".shadeImg").fadeIn(500);
+            $(".showImg").attr("src",$(b).attr("src"))
+        }
+        /*
+         描述：关闭弹出层
+         * */
+        function closeShade(){
+            $(".shade").fadeOut(500);
+        }
+        /*
+         描述：关闭弹出层
+         * */
+        function closeShadeImg(){
+            $(".shadeImg").fadeOut(500);
+        }
     </script>
 @stop
 
