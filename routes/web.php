@@ -126,7 +126,7 @@ Route::group(['prefix'=>'house'],function() {
     #导出Excel
     Route::get('houseLister/houseExcel',$controller.'houseExcel');
     #地图
-    Route::get('houseLister/houseMap');
+    Route::get('houseLister/houseMap',$controller.'houseMap');
 });
 //国家地区城市添加
 Route::group(['prefix'=>'nation'],function() {
@@ -139,6 +139,13 @@ Route::group(['prefix'=>'nation'],function() {
     Route::post('add/province',$controller.'province');
     #市区添加
     Route::post('add/city',$controller.'city');
+});
+
+//数据报表
+Route::group(['prefix'=>'data_statement'],function() {
+    $controller = 'Data_statement\DataController@';
+    #柱形图
+    Route::get('column',$controller.'column');
 });
 
 

@@ -70,7 +70,7 @@
 									<td>{{$val->house_price}}</td>
 									<td><span>{{$val->house_size}}</span> /平方</td>
 									<td><?php $equipment = explode(',',$val->house_facility); foreach ($equipment as $value){ echo $value.'&nbsp;&nbsp;&nbsp;'; }?></td>
-									<td class="text-l"><u style="cursor:pointer" class="text-primary" title="查看">{{$val->house_location}}</u></td>
+									<td class="text-l"><a href="{{url('house/houseLister/houseMap')}}"><u style="cursor:pointer" class="text-primary" title="查看">{{$val->house_location}}</u></a></td>
 									<td>{{$val->house_rise}}<b style="font-size:15px;">~</b>{{$val->house_duration}}</td>
 									<td class="td-status"><span class="label label-success radius">{{$val->house_status}}</span></td>
 									<td class="f-14 td-manage">

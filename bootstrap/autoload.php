@@ -18,3 +18,6 @@ require __DIR__.'/../vendor/autoload.php';
 
 // 引入自定义全局函数
 require __DIR__ . '/../app/Helpers/functions.php';
+
+
+
