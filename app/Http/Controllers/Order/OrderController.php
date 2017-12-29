@@ -21,13 +21,14 @@ class OrderController extends BaseController
         2=>'支付失败',
         3=>'订单关闭',
     ];
+    //订单状态
     public $orderStatus = [
-        0=>'未初始化',      //待付款
-        1=>'商家待发货',    //待发货
-        2=>'已发货待签收',  //待收货
-        4=>'已签收',       //已收货
-        8=>'维权中',       //申请售后
-        16=>'已退款',      //已退款
+        '1' => '未审核',
+        '2' => '审核中',
+        '3' => '订单驳回',
+        '4' => '订单确认',
+        '5' => '订单取消',
+        '6' => '合同上传'
     ];
     /**
      * Display a listing of the resource.
@@ -220,5 +221,19 @@ class OrderController extends BaseController
         return $expressData;
     }
 
+    //订单详情
+    public function detail($id) {
+        $result = DB::table('order')->where('order_id', $id)->first();
+        return view("order.order.detail",['result'=>$result,'orderStatus'=>$this->orderStatus]);
+    }
 
+    /**
+     *导出详情
+     */
+    public function detail_excel($id)
+    {
+        $data = DB::table('order')->where('order_id', $id)->select('order_no','creat_time','name','house_no','house_name','house_position','house_price','rent_time','sign_time','sign_position','order_status','house_eva','intermediary_eva')->get()->toArray();
+        $title = ['订单号','日期','租客姓名','房源编号','房源名称','房源位置','价格','租期','签约时间','签约地点','订单状态','房屋评价','中介评价'];
+        exportData($title,$data,'房源信息'.date('Y-m-d'));
+    }
 }

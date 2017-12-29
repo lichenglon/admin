@@ -64,6 +64,9 @@ Route::group(['prefix'=>'order'],function(){
     Route::any('order/exportOrderData', 'Order\OrderController@exportOrderData');
     Route::any('order/ship/{id}', 'Order\OrderController@ship');
     Route::any('order/{id}', 'Order\OrderController@show');
+    Route::any('order/detail/{id}','Order\OrderController@detail');
+    #Excel导出
+    Route::any('order/detail/excel/{id}','Order\OrderController@detail_excel');
 
 
     Route::any('order/after_sale/{id}', 'Order\OrderController@afterSale');
@@ -72,6 +75,7 @@ Route::group(['prefix'=>'order'],function(){
 //    Route::resource('order', 'Order\OrderController');
     Route::any('after_sale', 'Order\AfterSaleController@index');
     Route::any('ship', 'Order\ShipController@index');
+
 });
 
 

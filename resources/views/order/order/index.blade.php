@@ -136,7 +136,7 @@
                                             <a href="{{ url('order/order/after_sale',[$value->order_id]) }}" target="dialog" width="600px" height="450px;">审核</a>
                                         @endif
                                             &nbsp;|&nbsp;
-                                        <a href="{{ url('order/order',[$value->order_id]) }}" target="_blank">查看详情</a>
+                                        <a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">查看详情</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -349,7 +349,7 @@
                                 <label for="radioTwo-2">女</label>
                             </div>
                             <div class="check-box">
-                                <input name="landlord_sex" value="未知>" type="radio" id="radioTwo-3">
+                                <input name="landlord_sex" value="未知" type="radio" id="radioTwo-3">
                                 <label for="radioTwo-3">未知</label>
                             </div>
                         </div>

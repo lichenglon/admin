@@ -21,12 +21,15 @@ class AccountController extends BaseController
     public function index(Request $request){
         $where = [];
         if(isset($request->search)){
+            //判断权限
             if(!empty($request->role_id)){
                 $where['role_id'] = $request->role_id;
             }
+            //判断登陆状态
             if($request->status != ''){
                 $where['status'] = $request->status;
             }
+            //判断搜索关键字
             if(!empty($request->keyword)){
                 $where[] = [$request->keyword_type,'LIKE', '%'.$request->keyword.'%' ];;
             }
@@ -42,6 +45,7 @@ class AccountController extends BaseController
         return view('account.account_index', ['account_lists' => $account_lists, 'roleList'=>$roleList]);
     }
 
+    //添加用户
     public function create(){
         $roles = Account::where('status',1)->get(['id','name']);
         $departmentList = $this->getSelectList('departments');

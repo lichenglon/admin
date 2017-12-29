@@ -14,12 +14,14 @@ class RoleController extends BaseController
 
     private $role;
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         $this->role = new Role;
     }
 
-    public function index(){
+    public function index()
+    {
         $role_lists = Role::paginate(10);
 
         foreach($role_lists as &$value){
@@ -33,14 +35,16 @@ class RoleController extends BaseController
         return view('account.role_index', ['role_lists' => $role_lists]);
     }
 
-    public function create(){
+    public function create()
+    {
         $roles = Role::where('status',1)->get(['id','name']);
         $departmentList = $this->getSelectList('departments');
         $menu_lists = $this->getAllMenu(true);
         return view('account.role_create', ['menu_lists'=>$menu_lists,'roles'=>$roles, 'departmentList'=>$departmentList]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $data = [
             'name' =>$request->name,
             'pid' =>$request->pid,
@@ -48,14 +52,16 @@ class RoleController extends BaseController
             'menu_role_id' =>empty($request->menu_role_id) ? '' : implode(',', $request->menu_role_id)
         ];
         $rs = Role::insert($data);
-        if($rs){
+        if($rs)
+        {
             return $this->ajaxSuccess('新增角色成功！', url('/account/role'));
         }else{
             return $this->ajaxSuccess('新增角色失败！', url('/account/role/create'));
         }
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $lists = Role::find($id);
         $roles = Role::where('status',1)->get(['id','name']);
         $departmentList = $this->getSelectList('departments');
@@ -64,8 +70,8 @@ class RoleController extends BaseController
         return view('account.role_edit',['menu_lists'=>$menu_lists,'lists'=>$lists,'roles'=>$roles, 'departmentList'=>$departmentList]);
     }
 
-    public function update(Request $request){
-
+    public function update(Request $request)
+    {
         $data['name'] = $request->name;
         $data['pid'] = $request->pid;
         $data['status'] = $request->status;
@@ -77,8 +83,8 @@ class RoleController extends BaseController
 
     }
 
-    public function updateStatus(Request $request){
-
+    public function updateStatus(Request $request)
+    {
         if($request->id == session('user_id')){
             return $this->ajaxError('不允许操作当前登录用户！', url('/account/role'));
         }
@@ -93,7 +99,8 @@ class RoleController extends BaseController
         return $this->ajaxError('操作失败！', url('/account/role'));
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $rs = Role::destroy($id);
         if($rs){
             return $this->ajaxSuccess('删除角色成功！', url('/account/role'));
