@@ -37,9 +37,9 @@ class HouseController extends BaseController {
 	 */
 	public function save(Request $param) {
 		$houseData = Input::all();
-
 		//国家
 		$state = explode(',',$houseData['state']);
+		$province =explode(',',$houseData['province']);
 		//城市
 		$city = explode(',',$houseData['city']);
 		//实例化
@@ -91,11 +91,11 @@ class HouseController extends BaseController {
 			//房屋状态
 			'house_status' => $houseData['house_status'],
 			//国家
-			'state' => $houseData['state'],
+			'state' => $state[0],
 			//省份
-			'province' => $houseData['province'],
+			'province' => $province[0],
 			//城市
-			'city' => $houseData['city'],
+			'city' => $city[0],
 			//押金
 			'cash_pledge' => $houseData['cash_pledge'],
 			//预付款比例
@@ -350,6 +350,13 @@ class HouseController extends BaseController {
 		$data = DB::table('house_message')->select()->get('serial_number','house_location')->toArray();
 		$title = ['房源ID号','编号','房源位置','房源结构','房源价格','房源大小/平方','房源类型','房屋设备','关键字','房源简介','起租期','租期时长','状态','房东证件号','房源中介ID','国家','省','城市','周边信息','押金','预付款比例','结算方式'];
 		exportData($title,$data,'房源信息'.date('Y-m-d'));
+	}
+
+	/**
+	 *地图
+	 */
+	public function houseMap() {
+		return view('house.houseMap');
 	}
 
  }
