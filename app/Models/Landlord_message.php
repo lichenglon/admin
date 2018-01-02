@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Landlord_message extends Base
 {
-	protected $table = 'landlord_message';//房东信息表
+	protected $table = 'landlord_message';//房源信息表
 }

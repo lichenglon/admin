@@ -93,8 +93,6 @@ Route::group(['prefix'=>'balance'],function(){
 Route::group(['prefix'=>'house'],function() {
     $controller = 'House\HouseController@';
     $typeController = 'House\TypeController@';
-    #房源列表
-    Route::get('houseLister',$controller.'houseLister');
     #房源添加表单
     Route::get('houseAdd',$controller.'houseAdd');
     #房源添加表单提交
@@ -123,12 +121,8 @@ Route::group(['prefix'=>'house'],function() {
     Route::any('type/delete/{id}',$typeController.'delete');
     #修改
     Route::any('type/update',$typeController.'update');
-    #房源检索/类型
-    Route::post('houseLister/findType',$controller.'findType');
-    #房源检索/日期
-    Route::post('houseLister/');
-    #导出Excel
-    Route::get('houseLister/houseExcel',$controller.'houseExcel');
+    #房源检索/导出Excel/列表
+    Route::get('houseSearch',$controller.'houseSearch');
     #地图
     Route::get('houseLister/houseMap',$controller.'houseMap');
 });
@@ -150,6 +144,8 @@ Route::group(['prefix'=>'data_statement'],function() {
     $controller = 'Data_statement\DataController@';
     #柱形图
     Route::get('column',$controller.'column');
+    #折线图
+    Route::get('line',$controller.'line');
 });
 
 

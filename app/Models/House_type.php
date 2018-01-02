@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class House_type extends Base
 {
-	public $table = 'house_type';//房源类型表
+	public $table = 'house_type';
 
 	public function recursion($pid = 0, $num = 0) {
 		$optionStr = '';

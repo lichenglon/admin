@@ -13,17 +13,6 @@ use DB;
 use App\libraries\libs\pinyin;
 class HouseController extends BaseController {
 	/**
-	 * 房源列表
-	 */
-	public function houseLister() {
-		$houseType = new House_type();
-		$typeObject = $houseType->select('name')->get();
-		$houseMessage = new House_message();
-		$houseCount = $houseMessage->count();
-		$gather = $houseMessage->orderBy('msgid','desc')->paginate(100);
-		return view('house.houseLister',['houseObj'=>$gather,'typeObject'=>$typeObject,'houseCount'=>$houseCount]);
-	}
-	/**
 	 *房源添加
 	 */
 	public function houseAdd() {
@@ -101,7 +90,9 @@ class HouseController extends BaseController {
 			//预付款比例
 			'payment_proportion' => $houseData['payment_proportion'],
 			//结算方式
-			'knot_way' => $houseData['knot_way']
+			'knot_way' => $houseData['knot_way'],
+			//房源名称
+			'house_name' => $houseData['house_location'].'-'.$houseData['house_structure'].'-'.$houseData['house_price']
 		];
 		$houseId = $houseMessage->insertGetId($data);  //保存
 		//接收文件
@@ -162,7 +153,7 @@ class HouseController extends BaseController {
 		$typeObject = $houseType->select('name')->get();
 		$houseMessage = new House_message();
 		$houseCount = $houseMessage->count();
-		$gather = $houseMessage->orderBy('msgid','desc')->paginate(100);
+		$gather = $houseMessage->orderBy('msgid','desc')->paginate(16);
 		return view('house.updateList',['houseObj'=>$gather,'typeObject'=>$typeObject,'houseCount'=>$houseCount]);
 	}
 
@@ -256,7 +247,9 @@ class HouseController extends BaseController {
 			//预付款比例
 				'payment_proportion' => $houseData['payment_proportion'],
 			//结算方式
-				'knot_way' => $houseData['knot_way']
+				'knot_way' => $houseData['knot_way'],
+			//房源名称
+				'house_name' => $houseData['house_location'].'-'.$houseData['house_structure'].'-'.$houseData['house_price']
 		];
 		DB::table('house_message')->where('msgid', $msgId)->update($data);
 		$landlordDate = [
@@ -307,40 +300,66 @@ class HouseController extends BaseController {
 	}
 
 	/**
-	 *房源检索 类型
+	 *房源检索 + 列表
 	 *@param type
 	 */
-	public function findType(Request $request) {
-		$type = $request->type;
-		$houseType = new House_type();
-		$typeObject = $houseType->select('name')->get();
-		$houseMessage = new House_message();
-		$houseCount = $houseMessage->count();
-		$gather = $houseMessage->where('house_type',$type)->orderBy('msgid','desc')->paginate(100);
-		if(isset($request->hidden)){
-			return view('house.houseLister',['houseObj'=>$gather,'typeObject'=>$typeObject,'houseCount'=>$houseCount]);
-		} else {
-			return view('house.updateList',['houseObj'=>$gather,'typeObject'=>$typeObject,'houseCount'=>$houseCount]);
-		}
-	}
+	public function houseSearch(){
+		$type = Input::get('type') ? Input::get('type') : '%';
+		$serial_number = Input::get('serial_number') ? Input::get('serial_number') : '%';
+		$house_structure = Input::get('house_structure') ? Input::get('house_structure') : '%';
+		$house_price = Input::get('house_price') ? Input::get('house_price') : '%';
+		$house_location = Input::get('house_location') ? Input::get('house_location') : '%';
+		$house_keyword = Input::get('house_keyword') ? Input::get('house_keyword') : '%';
+		$find = Input::get('find') ? Input::get('find') : '';
+		$export = Input::get('export') ? Input::get('export') : '';
+		if($find) {
+			$gather = DB::table('house_message')->where('house_type','like',$type)
+					->where('serial_number','like','%'.$serial_number.'%')
+					->where('house_structure','like','%'.$house_structure.'%')
+					->where('house_price','like','%'.$house_price.'%')
+					->where('house_location','like','%'.$house_location.'%')
+					->where('house_keyword','like','%'.$house_keyword.'%')->paginate(16);
+			$typeObject = DB::table('house_type')->select('name')->get();
+			$houseCount = DB::table('house_message')->count();
+			return view('house.houseLister',['houseObj'=>$gather,
+			                                 'typeObject'=>$typeObject,
+			                                 'houseCount'=>$houseCount,
+			                                 'type'=>$type,
+			                                 'serial_number'=>$serial_number,
+			                                 'house_structure'=>$house_structure,
+			                                 'house_price'=>$house_price,
+			                                 'house_location'=>$house_location,
+			                                 'house_keyword'=>$house_keyword]);
+		}elseif($export) {
+			$gather = DB::table('house_message')->where('house_type','like',$type)
+					->where('serial_number','like',$serial_number)
+					->where('house_structure','like',$house_structure)
+					->where('house_price','like',$house_price)
+					->where('house_location','like',$house_location)
+					->where('house_keyword','like',$house_keyword)->get()->toArray();
+			$title = ['房源ID号','编号','房源位置','房源结构','房源价格','房源大小/平方','房源类型','房屋设备','关键字','房源简介','起租期','租期时长','状态','房东证件号','房源中介ID','国家','省','城市','周边信息','押金','预付款比例','结算方式'];
+			exportData($title,$gather,'房源信息'.date('Y-m-d'));
+		}else{
+			$gather = DB::table('house_message')->where('house_type','like',$type)
+					->where('serial_number','like','%'.$serial_number.'%')
+					->where('house_structure','like','%'.$house_structure.'%')
+					->where('house_price','like','%'.$house_price.'%')
+					->where('house_location','like','%'.$house_location.'%')
+					->where('house_keyword','like','%'.$house_keyword.'%')->paginate(16);
+			$typeObject = DB::table('house_type')->select('name')->get();
+			$houseCount = DB::table('house_message')->count();
+			return view('house.houseLister',['houseObj'=>$gather,
+			                                 'typeObject'=>$typeObject,
+			                                 'houseCount'=>$houseCount,
+			                                 'type'=>$type,
+			                                 'serial_number'=>$serial_number,
+			                                 'house_structure'=>$house_structure,
+			                                 'house_price'=>$house_price,
+			                                 'house_location'=>$house_location,
+			                                 'house_keyword'=>$house_keyword]);
 
-	/**
-	 *房源检索 日期
-	 *@param date
-	 */
-	public function findDate(Request $request) {
-		$rise = $request->rise;
-		$duration = $request->duration;
-		$houseType = new House_type();
-		$typeObject = $houseType->select('name')->get();
-		$houseMessage = new House_message();
-		$houseCount = $houseMessage->count();
-		$gather = $houseMessage->where('house_rise',$rise)->where('house_duration',$duration)->orderBy('msgid','desc')->paginate(100);
-		if(isset($request->hidden)){
-			return view('house.houseLister',['houseObj'=>$gather,'typeObject'=>$typeObject,'houseCount'=>$houseCount]);
-		} else {
-			return view('house.updateList',['houseObj'=>$gather,'typeObject'=>$typeObject,'houseCount'=>$houseCount]);
 		}
+
 	}
 
 	/**

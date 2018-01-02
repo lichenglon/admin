@@ -12,37 +12,34 @@
 
 			<div class="Hui-article">
 				<article class="cl pd-20">
-
-					<div class="cl pd-5 bg-1 bk-gray mt-20">
-
-						<span class="select-box inline">
-							<form action="{{url('house/houseLister/findType')}}" method="post" id="typeSubmit">
+					<form action="{{url('house/houseSearch')}}" method="get">
+						<span class="select-box inline" style="width:100%;">
 								{{ csrf_field() }}
-								<input type="hidden" name="hidden" value="1">
-								<select name="type" class="select" id="findType">
-									<option value="0">分类</option>
-									@foreach($typeObject as $value)
-									<option value="{{$value->name}}">{{$value->name}}</option>
-									@endforeach
-								</select>
-							</form>
-						</span>
-						当前页面检索
-						<input type="text" name="" id="searching" placeholder="Please enter the content you want to search" style="width:350px" class="input-text">
-
-						<form action="{{url('house/houseLister/findDate')}}" method="post" id="dateSubmit" style="display:inline-block">
-							{{ csrf_field() }}
 							<input type="hidden" name="hidden" value="1">
-						日期范围：
-							<input type="text" id="rise" name="rise" value="" class="input-text" style="width:120px;"/>
-							-
-							<input type="text" id="duration" name="duration" value="" class="input-text" style="width:120px;">
-							<input type="button" value="确定" id="findDate">
-						</form>
+							<select name="type" class="select" id="findType">
+								<option value="">分类</option>
+								@foreach($typeObject as $value)
+									<option value="{{$value->name}}">{{$value->name}}</option>
+								@endforeach
+							</select>
+							<input type="text" class="input-text" value="@if($serial_number != '%'){{$serial_number}}@endif" placeholder="房源编号" maxlength="255" name="serial_number" style="width:150px;">
+							<input type="text" class="input-text" value="@if($house_structure != '%'){{$house_structure}}@endif" placeholder="房源结构" maxlength="255" name="house_structure" style="width:150px;">
+							<input type="number" class="input-text" value="@if($house_price != '%'){{$house_price}}@endif" placeholder="价格" maxlength="255" name="house_price" style="width:150px;">
+							<input type="text" class="input-text" value="@if($house_location != '%'){{$house_location}}@endif" placeholder="房源位置" maxlength="255" name="house_location" style="width:250px;">
+                            <input type="text" class="input-text" value="@if($house_keyword != '%'){{$house_keyword}}@endif" placeholder="关键字" maxlength="255" name="house_keyword" style="width:250px;">
 
-						<span class="r"><a href="{{ url('house/houseLister/houseExcel') }}" class="btn btn-default">导出EXCEL</a>共有数据：<strong>{{$houseCount}}</strong> 条</span>
+							<input type="submit" class="btn btn-default" name="find" value="确定">
+							<input type="submit" class="btn btn-default" name="export" value="导出Excel">
 
-					</div>
+							<span class="r">
+							共有数据：<strong>{{$houseCount}}</strong> 条
+						</span>
+                        </span>
+					</form>
+					{{--<div class="cl pd-5 bg-1 bk-gray mt-20">
+
+
+					</div>--}}
 					<div class="mt-20">
 						<table class="table table-border table-bordered table-bg table-hover table-sort">
 							<thead>
@@ -78,7 +75,6 @@
 									</td>
 							    </tr>
 							@endforeach
-
 							</tbody>
 						</table>
 					</div>
@@ -109,18 +105,6 @@
 						$("table tr:not('#theader')").show();
 					}
 				});
-			});
-			//分类搜索表单提交
-			$("select#findType").change(function(){
-				$("#typeSubmit").submit();
-			});
-			//日期搜索
-			$('#findDate').click(function(){
-				var rise = $('#rise').val();
-				var duration = $('#duration').val();
-				if(rise != '' && duration != ''){
-					$('#dateSubmit').submit();
-				}
 			});
 		</script>
 		<script>

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class House_image extends Base
 {
-	protected $table = 'house_image';//房源信息图片表
+	protected $table = 'house_image';//房源信息表
 }
