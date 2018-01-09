@@ -10,6 +10,8 @@ class HomeController extends BaseController
 {
     //
     public function index(){
+        //echo '<pre>';
+        //var_dump(Session::all());
         return view('home');
     }
 

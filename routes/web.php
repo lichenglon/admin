@@ -122,7 +122,7 @@ Route::group(['prefix'=>'house'],function() {
     #修改
     Route::any('type/update',$typeController.'update');
     #房源检索/导出Excel/列表
-    Route::get('houseSearch',$controller.'houseSearch');
+    Route::get('houseLister',$controller.'houseLister');
     #地图
     Route::get('houseLister/houseMap',$controller.'houseMap');
 });
@@ -146,6 +146,13 @@ Route::group(['prefix'=>'data_statement'],function() {
     Route::get('column',$controller.'column');
     #折线图
     Route::get('line',$controller.'line');
+});
+
+//帮助手册
+Route::group(['prefix'=>'helpHandbook'],function() {
+    $controller = 'helpHandbook\ManualController@';
+    #用户添加帮助手册
+    Route::get('help',$controller.'help');
 });
 
 

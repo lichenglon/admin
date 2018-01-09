@@ -41,7 +41,6 @@ class AccountController extends BaseController
             $value->parse_status = isset($this->account_status[$value->status]) ? $this->account_status[$value->status] : '未知';
         }
         $roleList = $this->getSelectList('roles');
-
         return view('account.account_index', ['account_lists' => $account_lists, 'roleList'=>$roleList]);
     }
 
@@ -100,9 +99,11 @@ class AccountController extends BaseController
     public function updateStatus(Request $request){
 
         if($request->id == session('user_id')){
-            return $this->ajaxError('不允许操作当前登录用户！', url('/account/role'));
+            return $this->ajaxError('不允许操作当前登录用户！');
         }
-        
+        if($request->id == '1'){
+            return $this->ajaxError('不允许修改管理员！');
+        }
         $data['status'] = !$request->status;
 
         $rs = Account::where('id', $request->id)
@@ -114,6 +115,10 @@ class AccountController extends BaseController
     }
 
     public function destroy($id){
+        if($id == '1'){
+            return $this->ajaxError('不能删除管理员！', url('/account/user'));
+        }
+
         $rs = Account::destroy($id);
         if($rs){
             return $this->ajaxSuccess('删除账号成功！', url('/account/user'));
@@ -121,7 +126,4 @@ class AccountController extends BaseController
         return $this->ajaxError('删除账号失败！', url('/account/user'));
     }
 
-    public function userExcel() {
-
-    }
 }
