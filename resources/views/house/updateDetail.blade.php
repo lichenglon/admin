@@ -400,26 +400,26 @@
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">选择图片：</label>
-                        <div class="formControls col-xs-8 col-sm-9">
-                            <a href="javascript:;" class="a-upload" style="width:15%;height:30px;">
-                                <input type="file" name="upload[]" id="myFile" multiple="multiple"/><span>点击这里上传文件</span>
-                            </a>
-                            <div class="img_div"></div>
+                            <label class="form-label col-xs-4 col-sm-2">选择图片：</label>
+                            <div class="formControls col-xs-8 col-sm-9">
+                                <a href="javascript:;" class="a-upload" style="width:15%;height:30px;">
+                                    <input type="file" name="upload[]" id="myFile" multiple="multiple"/><span>点击这里上传文件</span>
+                                </a>
+                                <div class="img_div"></div>
 
-                            <div class="shade" onclick="javascript:closeShade()">
-                                <div class="">
-                                    <span class="text_span"></span>
+                                <div class="shade" onclick="javascript:closeShade()">
+                                    <div class="">
+                                        <span class="text_span"></span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="shadeImg" onclick="javascript:closeShadeImg()">
-                                <div class="">
-                                    <img class="showImg" src=""/>
+                                <div class="shadeImg" onclick="javascript:closeShadeImg()">
+                                    <div class="">
+                                        <img class="showImg" src=""/>
+                                    </div>
                                 </div>
-                            </div>
 
-                        </div>
+                            </div>
                     </div>
 
                     <div class="row cl">
