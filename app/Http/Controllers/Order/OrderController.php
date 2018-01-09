@@ -28,7 +28,8 @@ class OrderController extends BaseController
         '3' => '订单驳回',
         '4' => '订单确认',
         '5' => '订单取消',
-        '6' => '合同上传'
+        '6' => '合同上传',
+        '7' => '未付款'
     ];
     /**
      * Display a listing of the resource.
