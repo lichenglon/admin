@@ -7,7 +7,7 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Account;
 class RoleController extends BaseController
 {
     public $role_status = ['禁用','启用'];
@@ -85,8 +85,8 @@ class RoleController extends BaseController
 
     public function updateStatus(Request $request)
     {
-        if($request->id == session('user_id')){
-            return $this->ajaxError('不允许操作当前登录用户！', url('/account/role'));
+        if($request->id == '15'){
+            return $this->ajaxError('不允许操作管理员', url('/account/role'));
         }
 
         $data['status'] = !$request->status;
@@ -94,6 +94,8 @@ class RoleController extends BaseController
         $rs = Role::where('id', $request->id)
             ->update($data);
         if($rs){
+            $account = new Account();
+            $account->where('role_id',$request->id)->update($data);
             return $this->ajaxSuccess('操作成功！', url('/account/role'));
         }
         return $this->ajaxError('操作失败！', url('/account/role'));
@@ -101,11 +103,25 @@ class RoleController extends BaseController
 
     public function destroy($id)
     {
-        $rs = Role::destroy($id);
-        if($rs){
-            return $this->ajaxSuccess('删除角色成功！', url('/account/role'));
+        $pname = Role::where('pid',$id)->first();
+        if(is_object($pname)){
+            return $this->ajaxError('删除角色失败！请先删除子级', url('/account/role'));
+        }else{
+            if($id == '15'){
+                return $this->ajaxError('删除角色失败！不能删除管理员', url('/account/role'));
+            }else{
+                $rs = Role::destroy($id);
+                if($rs){
+                    $account = new Account();
+                    $account->where('role_id',$id)->update(['status'=>'0']);
+                    return $this->ajaxSuccess('删除角色成功！', url('/account/role'));
+                }
+            }
+
         }
         return $this->ajaxError('删除角色失败！', url('/account/role'));
+
+
     }
 
 

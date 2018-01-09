@@ -41,12 +41,9 @@
                                 <option value="name" @if(Request::get('keyword_type') == 'name') {{ Request::get('keyword_type')  }} @endif>姓名</option>
                             </select>
                             <input type="text" class="form-control" name="keyword" value="{{ Request::get('keyword') }}" placeholder="">
-
-                        </div>
-                        <div class="col-sm-2">
                             <input name="search" type="submit" class="btn btn-default" value="搜索">
-                            <button type="reset" class="btn btn-default">重置</button>
                         </div>
+
 
                     </div>
 

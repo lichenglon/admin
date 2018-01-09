@@ -12,12 +12,12 @@
 
 			<div class="Hui-article">
 				<article class="cl pd-20">
-					<form action="{{url('house/houseSearch')}}" method="get">
+					<form action="{{url('house/houseLister')}}" method="get">
 						<span class="select-box inline" style="width:100%;">
 								{{ csrf_field() }}
 							<input type="hidden" name="hidden" value="1">
 							<select name="type" class="select" id="findType">
-								<option value="">分类</option>
+								<option value="%">分类</option>
 								@foreach($typeObject as $value)
 									<option value="{{$value->name}}">{{$value->name}}</option>
 								@endforeach
@@ -95,17 +95,7 @@
 
 	@section('js')
 		<script>
-			//当前页面检索
-			$(function(){
-				$("#searching").keyup(function(){
-					var txt=$("#searching").val();
-					if($.trim(txt)!=""){
-						$("table tr:not('#theader')").hide().filter(":contains('"+txt+"')").show();
-					}else{
-						$("table tr:not('#theader')").show();
-					}
-				});
-			});
+			document.getElementById('findType').value='{{$type}}';
 		</script>
 		<script>
 			//常规用法 日期

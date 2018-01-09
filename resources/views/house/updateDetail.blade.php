@@ -2,7 +2,6 @@
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{asset('house/css/H-ui.min.css')}}" />
-    <link href="{{asset('house/region/chosen.min.css')}}" rel='stylesheet'>
     <style type="text/css">
 
         .shade {
@@ -108,14 +107,16 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">详细位置：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" name="house_location" id="" placeholder="广东省深圳市宝安区西乡街道56栋33号" value="{{$houseMsg->house_location}}" class="input-text">
+                            <input type="text" name="house_location" id="house_location" placeholder="广东省深圳市宝安区西乡街道56栋33号" value="{{$houseMsg->house_location}}" class="input-text">
                         </div>
+                        <span id="house_locationMsg"></span>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">房源结构：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" name="house_structure" id="" placeholder="平面" value="{{$houseMsg->house_structure}}" class="input-text">
+                            <input type="text" name="house_structure" id="house_structure" placeholder="平面" value="{{$houseMsg->house_structure}}" class="input-text">
                         </div>
+                        <span id="house_structureMsg"></span>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">周边信息：</label>
@@ -163,22 +164,24 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">房源价格：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="number" name="house_price" id="" placeholder="" value="{{$houseMsg->house_price}}"  min="0.0" step="0.1"class="input-text" style="width:95%;">元
+                            <input type="number" name="house_price" id="house_price" placeholder="" value="{{$houseMsg->house_price}}"  min="0.0" step="0.1"class="input-text" style="width:95%;">元
                         </div>
+                        <span id="house_priceMsg"></span>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">房源大小：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="number" name="house_size" id="" placeholder="" value="{{$houseMsg->house_size}}"  min="0.0" step="0.1"class="input-text" style="width:95%;">平方
+                            <input type="number" name="house_size" id="house_size" placeholder="" value="{{$houseMsg->house_size}}"  min="0.0" step="0.1"class="input-text" style="width:95%;">平方
                         </div>
+                        <span id="house_sizeMsg"></span>
                     </div>
 
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">押金：</label>
                         <div class="formControls col-xs-8 col-sm-9"  style="width:45%;">
-                            <input type="number" name="cash_pledge" id="house_size" placeholder="" value="{{$houseMsg->cash_pledge}}"  min="1" class="input-text" style="width:95%;">平方
+                            <input type="number" name="cash_pledge" id="cash_pledge" placeholder="" value="{{$houseMsg->cash_pledge}}"  min="1" class="input-text" style="width:95%;">平方
                         </div>
-                        <span id=""></span>
+                        <span id="cash_pledgeMsg"></span>
                     </div>
 
                     <div class="row cl">
@@ -209,36 +212,50 @@
                             <?php
                                 if(empty($houseMsg->house_facility)){
                                     $equipment = array();
+                                    $washing = in_array('洗衣机',$equipment);//洗衣机
+                                    $air = in_array('空调',$equipment);//空调
+                                    $heating = in_array('暖气',$equipment);//暖气
+                                    $bed = in_array('床',$equipment);//床
+                                    $kitchen = in_array('厨房',$equipment);//厨房
+                                    $closet = in_array('衣柜',$equipment);//衣柜
+                                    $refrigerator = in_array('冰箱',$equipment);//冰箱
                                 }else{
                                     $equipment = explode(',',$houseMsg->house_facility);
+                                    $washing = in_array('洗衣机',$equipment);//洗衣机
+                                    $air = in_array('空调',$equipment);//空调
+                                    $heating = in_array('暖气',$equipment);//暖气
+                                    $bed = in_array('床',$equipment);//床
+                                    $kitchen = in_array('厨房',$equipment);//厨房
+                                    $closet = in_array('衣柜',$equipment);//衣柜
+                                    $refrigerator = in_array('冰箱',$equipment);//冰箱
                                 }
                             ?>
                             <div class="check-box">
-                                <input name="house_facility[]" @if(isset($equipment['0'])) checked="checked" @endif value='洗衣机' type="checkbox" id="checkbox-1">
+                                <input name="house_facility[]" @if($washing) checked="checked" @endif value='洗衣机' type="checkbox" id="checkbox-1">
                                 <label for="checkbox-1">洗衣机</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_facility[]" @if(isset($equipment['1'])) checked="checked" @endif value='空调' type="checkbox" id="checkbox-2">
+                                <input name="house_facility[]" @if($air) checked="checked" @endif value='空调' type="checkbox" id="checkbox-2">
                                 <label for="checkbox-2">空调</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_facility[]" @if(isset($equipment['2'])) checked="checked" @endif value='暖气' type="checkbox" id="checkbox-3">
+                                <input name="house_facility[]" @if($heating) checked="checked" @endif value='暖气' type="checkbox" id="checkbox-3">
                                 <label for="checkbox-3">暖气</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_facility[]" @if(isset($equipment['3'])) checked="checked" @endif value='床' type="checkbox" id="checkbox-4">
+                                <input name="house_facility[]" @if($bed) checked="checked" @endif value='床' type="checkbox" id="checkbox-4">
                                 <label for="checkbox-4">床</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_facility[]" @if(isset($equipment['4'])) checked="checked" @endif value='厨房' type="checkbox" id="checkbox-5">
+                                <input name="house_facility[]" @if($kitchen) checked="checked" @endif value='厨房' type="checkbox" id="checkbox-5">
                                 <label for="checkbox-5">厨房</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_facility[]" @if(isset($equipment['5'])) checked="checked" @endif value='衣柜' type="checkbox" id="checkbox-6">
+                                <input name="house_facility[]" @if($closet) checked="checked" @endif value='衣柜' type="checkbox" id="checkbox-6">
                                 <label for="checkbox-6">衣柜</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_facility[]" @if(isset($equipment['6'])) checked="checked" @endif value='冰箱' type="checkbox" id="checkbox-7">
+                                <input name="house_facility[]" @if($refrigerator) checked="checked" @endif value='冰箱' type="checkbox" id="checkbox-7">
                                 <label for="checkbox-7">冰箱</label>
                             </div>
                         </div>
@@ -246,21 +263,21 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">关键字：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" name="house_keyword" id="" placeholder="多个关键字用英文逗号隔开，限10个关键字" value="{{$houseMsg->house_keyword}}" maxlength="10" class="input-text">
+                            <input type="text" name="house_keyword" id="house_keyword" placeholder="多个关键字用英文逗号隔开，限10个关键字" value="{{$houseMsg->house_keyword}}" maxlength="10" class="input-text">
                         </div>
+                        <span id="house_keywordMsg"></span>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">房源简介：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <textarea name="house_brief" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符">{{$houseMsg->house_brief}}</textarea>
-                            <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+                            <textarea name="house_brief" id="house_brief" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符">{{$houseMsg->house_brief}}</textarea>
                         </div>
+                        <span id="house_briefMsg"></span>
                     </div>
 
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">租期时长：</label>
                         <div class="formControls col-xs-8 col-sm-9 skin-minimal">
-
                             <div class="check-box">
                                 <input type="text" name="house_rise" id="house_rise" placeholder="" value="{{$houseMsg->house_rise}}" class="input-text" style="display:inline-block">
                             </div>
@@ -309,26 +326,30 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">房东姓名：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" name="landlord_name" value="{{$houseMsg->landlord_name}}" id="datemin" class="input-text Wdate" style="width:220px;">
+                            <input type="text" name="landlord_name" value="{{$houseMsg->landlord_name}}" id="landlord_name" class="input-text Wdate" style="width:220px;">
                         </div>
+                        <span id="landlord_nameMsg"></span>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">房东证件号：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" name="landlord_identity" value="{{$houseMsg->landlord_identity}}" id="datemin" class="input-text Wdate" style="width:220px;">
+                            <input type="text" name="landlord_identity" value="{{$houseMsg->landlord_identity}}" id="landlord_identity" class="input-text Wdate" style="width:220px;">
                         </div>
+                        <span id="landlord_identityMsg"></span>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">房东邮箱：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" name="landlord_email" value="{{$houseMsg->landlord_email}}" id="datemin" class="input-text Wdate" style="width:220px;">
+                            <input type="text" name="landlord_email" value="{{$houseMsg->landlord_email}}" id="landlord_email" class="input-text Wdate" style="width:220px;">
                         </div>
+                        <span id="landlord_emailMsg"></span>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">房东电话：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" name="landlord_phone" value="{{$houseMsg->landlord_phone}}" id="datemin" class="input-text Wdate" style="width:220px;">
+                            <input type="text" name="landlord_phone" value="{{$houseMsg->landlord_phone}}" id="landlord_phone" class="input-text Wdate" style="width:220px;">
                         </div>
+                        <span id="landlord_phoneMsg"></span>
                     </div>
 
                     <div class="row cl">
@@ -403,7 +424,7 @@
 
                     <div class="row cl">
                         <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-                            <a href="javascript:document.getElementById('SUBMIT').submit();"><button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button></a>
+                            <button class="btn btn-primary radius" type="submit" id="verification">保存并提交审核</button>
                             <a href="javascript:window.history.go(-1);"><button class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button></a>
                         </div>
                     </div>
@@ -417,6 +438,7 @@
 @stop
 
 @section('js')
+
     {{--日期用--}}
     <script type="text/javascript" src="{{asset('house/laydate/laydate.js')}}" ></script>
     <script>

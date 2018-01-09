@@ -87,7 +87,7 @@
             <hr>
             <div class="row">
                 <div class="col-sm-4">
-                    <a href="{{ url('account/department') }}" type="button" class="btn btn-default">取消</a>
+                    <a href="javascript:window.history.go(-1);" type="button" class="btn btn-default">取消</a>
                     <button type="submit" class="btn btn-primary js-ajax-submit">确定</button>
                 </div>
 
