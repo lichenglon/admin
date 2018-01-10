@@ -39,10 +39,9 @@
 
                 @if(!empty($values['sub']))
 
-
                     <li class="treeview">
                         <a href="{{ $values['url'] }}"><i class="fa {{ $values['icon'] }}"></i> <span>{{ $values['name'] }}</span>
-            <span class="pull-right-container">
+              <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                         </a>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App;
 
 class BaseController extends Controller
 {
@@ -13,6 +14,16 @@ class BaseController extends Controller
 
     public function __construct()
     {
+        //var_dump(Session::get('lang'));
+        if(Session::get('lang'))
+        {
+            App::setLocale(Session::get('lang'));
+
+        }
+        else
+        {
+            App::setLocale(Session::get('en'));
+        }
         $this->middleware(function($request,$next){
 
             $user_info = $request->session()->get('user_info');
