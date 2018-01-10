@@ -39,7 +39,8 @@ class UsersController extends Controller {
 				Session::put('user_id',$userInfo->id);
 				Session::put('user_info',$userInfo->toArray());
 				Session::save();
-				ajax_success('登录成功');
+				ajax_success();
+
 			}
 		}
 		return view('users.login');

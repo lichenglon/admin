@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Nation extends Base
 {
-	protected $table = 'nation';//国家表
+	protected $table = 'nation';
 }

@@ -416,6 +416,11 @@
                 $(".date_checkbox").change(function (){
                     if(this.checked){
                         $(this).next().next().removeProp('disabled');
+                        $(this).next().next().val('1');
+                        var timeVal = $(this).next().next().val();
+                        var val = $(this).val()+' '+timeVal;
+                        $(this).val(val);
+
                     }else{
                         $(this).next().next().prop('disabled',true);
                         $(this).next().next().val('');
@@ -425,9 +430,12 @@
 
             $(function (){
                 $(".information").blur(function (){
+                    var checkbox = $(this).prev().prev();
                     var timeVal = $(this).val();
-                    var val = $(this).prev().prev().val()+' '+timeVal;
-                    $(this).prev().prev().val(val);
+                    var val = checkbox.val();
+                    var arr=val.split(" ");
+                    var str = arr[0];
+                    checkbox.val(str+' '+timeVal);
                 });
             });
 
@@ -532,7 +540,7 @@
             }
 
             $("#verification").click(function(){
-                if ($(".ok").length==9){
+                if ($(".ok").length==9 || $(".ok").length==10){
                     if(window.confirm('亲！请确认好地区喔 往后不得更改')){
                         document.getElementById('SUBMIT').submit();
                     }

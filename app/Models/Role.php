@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class Role extends Base
 {
-      //权限表
+
 //    public $table = 'admin_roles';
 
 }

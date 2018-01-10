@@ -5,11 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-
+use App;
 class HomeController extends BaseController
 {
     //
     public function index(){
+        $locale = isset($_GET['lang']) ? $_GET['lang'] : false;
+        if($locale)
+        {
+            if(Session::get('lang'))
+            {
+                Session::forget('lang');
+                Session::put('lang', $locale);
+            }
+            else
+            {
+                Session::put('lang', $locale);
+            }
+        }
+        //var_dump(Session::get('lang'));
         return view('home');
     }
 

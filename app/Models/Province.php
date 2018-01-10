@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Province extends Base
 {
-	protected $table = 'province';//省份表
+	protected $table = 'province';
 }

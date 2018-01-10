@@ -13,7 +13,7 @@
 
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 
-                <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
+                {{--<h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
                     <span style="line-height:34px;">搜索</span>
                     <div style="float:right;">
                         <button type="button" class="btn btn-default">搜索</button>
@@ -36,13 +36,12 @@
                         </select>
                         <input type="text" class="form-control" placeholder="Text input">
                     </div>
-                </div>
+                </div>--}}
 
                 <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
                     <span style="line-height:34px;">角色列表</span>
                     <div style="float:right;">
                         <a href="/account/role/create" type="button" class="btn btn-default">新增角色</a>
-                        <button type="button" class="btn btn-default">导出EXCEL</button>
                     </div>
                 </h4>
 

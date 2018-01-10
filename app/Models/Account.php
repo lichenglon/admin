@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class Account extends Base
 {
-   //权限用户表
-   /*public $table = 'admin_accounts';
+
+//    public $table = 'admin_accounts';
 
 
-    public function getDepartmentIdAttribute($value){
+    /*public function getDepartmentIdAttribute($value){
         return DB::table('ADMIN_DEPARTMENTS')->where('id',$value)->value('name');
     }
 
