@@ -72,7 +72,8 @@ $(function(){
 		}
 		$.post("{{asset('users/login')}}",data,function(msg){
 			if(msg.status == 1){
-				$('.tips_error').html('登录成功');
+//				$('.tips_error').html('登录成功');
+				$('.tips_error').html();
 				window.location.href = "{{asset('/')}}";
 			}else{
 				$('.tips_error').html(msg.info);
