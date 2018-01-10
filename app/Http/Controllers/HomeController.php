@@ -19,6 +19,7 @@ class HomeController extends BaseController
         base64_upload('images','image',function($data) use(&$file_path){
             $file_path = curl_upfile($data[0]);
         });
+
         return $this->ajaxSuccess('图片上传成功','',$file_path);
     }
 
@@ -29,6 +30,7 @@ class HomeController extends BaseController
      */
     public function upload(Request $request){
         $file = $request->file('file');
+
         if($file->isValid()){
             $ext = ['jpeg','jpg','gif','gpeg','png'];
             if(in_array( strtolower($file->extension()),$ext)) {

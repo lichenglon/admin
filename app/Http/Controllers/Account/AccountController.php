@@ -21,6 +21,7 @@ class AccountController extends BaseController
     public function index(Request $request){
         $where = [];
         if(isset($request->search)){
+
             //判断权限
             if(!empty($request->role_id)){
                 $where['role_id'] = $request->role_id;
