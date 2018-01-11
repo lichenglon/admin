@@ -51,7 +51,8 @@ class RoleController extends BaseController
             'name' =>$request->name,
             'pid' =>$request->pid,
             'status' =>$request->status,
-            'menu_role_id' =>empty($request->menu_role_id) ? '' : implode(',', $request->menu_role_id)
+            'menu_role_id' =>empty($request->menu_role_id) ? '' : implode(',', $request->menu_role_id),
+            'create_time' => date('Y-m-d H:i:s')
         ];
         $rs = Role::insert($data);
         if($rs)

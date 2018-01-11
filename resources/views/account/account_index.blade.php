@@ -61,18 +61,18 @@
 
                 <div class="row" style="margin-bottom:10px;">
                     <div class="col-sm-9">
-                        <label><b>排序：</b></label>
+                        <label><b>@lang('account.The_sorting')：</b></label>
                         <select class="form-control">
-                            <option value="创建时间升序">创建时间升序</option>
-                            <option value="创建时间降序">创建时间降序</option>
+                            <option value="创建时间升序">@lang('account.Create_time_ascending')</option>
+                            <option value="创建时间降序">@lang('account.Create_time_descending')</option>
                         </select>
-                        <label><b>每页显示：</b></label>
+                        <label><b>@lang('account.Each_page_shows')：</b></label>
                         <select class="form-control">
                             <option selected="" value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
                             <option value="100">100</option>
-                        </select>条
+                        </select>@lang('account.strip')
                     </div>
                 </div>
 
@@ -86,39 +86,39 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
-                                    style="width: 40px;">序号
+                                    style="width: 90px;">@lang('account.Serial_number')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Browser: activate to sort column ascending" style="width: 223px;">
-                                    姓名
+                                    @lang('account.name')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending" style="width: 205px;">
-                                    账号
+                                    @lang('account.account')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
-                                    用户角色
+                                    @lang('account.User_roles')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
-                                    区域
+                                    @lang('account.area')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
-                                    联系方式
+                                    @lang('account.contact')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
-                                    启用状态
+                                    @lang('account.enabled')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
-                                    创建时间
+                                    @lang('account.Creation_time')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
-                                    操作
+                                    @lang('account.operation')
                                 </th>
                             </tr>
                             </thead>
@@ -138,10 +138,10 @@
                                     <td>{{ date('Y-m-d H:i:s',$value->create_time) }}</td>
                                     <td><span>
                                         <a href="{{ url('account/user/updateStatus',['id'=>$value->id,'status'=>$value->status]) }}" class="layer-get">
-                                            @if($value->status) 停用 @else 启用 @endif
+                                            @if($value->status) @lang('account.disable') @else @lang('account.Enable') @endif
                                         </a>&nbsp;
-                                        <a href="{{ url('account/user/'.$value->id.'/edit') }}">编辑</a>&nbsp;
-                                        <a href="{{ url('account/user',['id'=>$value->id]) }}" token="{{ csrf_token() }}" class="layer-delete">删除</a>
+                                        <a href="{{ url('account/user/'.$value->id.'/edit') }}">@lang('account.The_editor')</a>&nbsp;
+                                        <a href="{{ url('account/user',['id'=>$value->id]) }}" token="{{ csrf_token() }}" class="layer-delete">@lang('account.delete')</a>
                                     </span></td>
 
                                 </tr>
