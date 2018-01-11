@@ -40,14 +40,14 @@
                 @if(!empty($values['sub']))
 
                     <li class="treeview">
-                        <a href="{{ $values['url'] }}"><i class="fa {{ $values['icon'] }}"></i> <span>{{ $values['name'] }}</span>
+                        <a href="{{ $values['url'] }}"><i class="fa {{ $values['icon'] }}"></i> <span>@if(Session::get('lang') == 'en') {{$values['en_name']}} @else {{$values['name']}} @endif</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                         </a>
                         <ul class="treeview-menu">
                             @foreach($values['sub'] as $child_values)
-                                <li class="li_diy_menu"><a href="{{url($child_values['url'])}}"><i class="fa fa-circle-o"></i>{{ $child_values['name'] }}</a></li>
+                                <li class="li_diy_menu"><a href="{{url($child_values['url'])}}"><i class="fa fa-circle-o"></i>@if(Session::get('lang') == 'en'){{ $child_values['en_name'] }} @else {{$child_values['name']}} @endif</a></li>
                             @endforeach
 
                         </ul>
@@ -55,7 +55,7 @@
 
                 @else
 
-                    <li class="li_diy_menu"><a href="{{ $values['url'] }}"><i class="fa {{ $values['icon'] }}"></i> <span>{{ $values['name'] }}</span></a></li>
+                    <li class="li_diy_menu"><a href="{{ $values['url'] }}"><i class="fa {{ $values['icon'] }}"></i> <span>@if(Session::get('lang') == 'en'){{ $values['en_name'] }}@else {{$values['name']}} @endif</span></a></li>
 
                 @endif
 
@@ -67,9 +67,9 @@
 
 
             <li class="header">标签</li>
-            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>重要</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>警告</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>消息</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>@lang('layouts_aside.significance')</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>@lang('layouts_aside.Notice')</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>@lang('layouts_aside.news')</span></a></li>
 
 
 

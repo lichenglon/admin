@@ -23,7 +23,6 @@ class HomeController extends BaseController
                 Session::put('lang', $locale);
             }
         }
-        //var_dump(Session::get('lang'));
         return view('home');
     }
 
