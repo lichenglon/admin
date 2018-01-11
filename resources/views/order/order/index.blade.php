@@ -18,17 +18,22 @@
 
                 <form action="{{ url('order/order') }}" method="post">
                     {{ csrf_field() }}
-                    <h4 class="bg-info" style="padding:10px; font-size:14px;">搜索</h4>
+
+
+                    <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
+                        <span style="line-height:34px;">列表</span>
+                        <div style="float:right;">
+                            <a href="{{ url('order/order/exportOrderData') }}" type="button" class="btn btn-default">导出EXCEL</a>
+                        </div>
+                    </h4>
                     <div class="row">
                         <div class="col-sm-2">
                             <label><b>订单状态：</b></label>
                             <select class="form-control" name="status">
                                 <option value="">不限</option>
-                                {{--@foreach($orderStatus as $key => $val)
-
-                                    <option value="{{ $key }}" @if(isset($_REQUEST['status']) && $_REQUEST['status'] === (string)$key) selected @endif>{{ $val }}</option>
-
-                                @endforeach--}}
+                                @foreach($order_status as $k=>$v)
+                                    <option value="{{ $k }}">{{ $orderStatus[$k] }}</option>
+                                @endforeach
                             </select>
 
                         </div>
@@ -43,7 +48,7 @@
                             <label><b>关键词搜索</b></label>
                             <select class="form-control" name="keyword_type">
                                 <option value="tbuy_order.order_id" @if(isset($_REQUEST['keyword_type']) && $_REQUEST['keyword_type'] == 'order_id') selected @endif>订单ID</option>
-                                <option value="tbuy_order.order_no" @if(isset($_REQUEST['keyword_type']) && $_REQUEST['keyword_type'] == 'order_no') selected @endif>订单No</option>
+                                <option value="tbuy_order.order_no" @if(isset($_REQUEST['keyword_type']) && $_REQUEST['keyword_type'] == 'order_no') selected @endif>订单编号</option>
                             </select>
                             <input type="text" class="form-control" name="keyword" value="{{ $_REQUEST['keyword'] or '' }}" placeholder="">
 
@@ -55,16 +60,6 @@
                     </div>
 
 
-
-
-                </form>
-
-                <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
-                    <span style="line-height:34px;">列表</span>
-                    <div style="float:right;">
-                        <a href="{{ url('order/order/exportOrderData') }}" type="button" class="btn btn-default">导出EXCEL</a>
-                    </div>
-                </h4>
 
                 <div class="row" style="margin-bottom:10px;">
                     <div class="col-sm-9">
@@ -149,7 +144,7 @@
 
                 {{ $data->appends($_REQUEST)->links() }}
 
-
+                </form>
             </div>
         </div>
         <!-- /.box-body -->
