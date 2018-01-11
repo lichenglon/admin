@@ -24,12 +24,13 @@ class OrderController extends BaseController
     //订单状态
     public $orderStatus = [
         '1' => '未审核',
-        '2' => '审核中',
-        '3' => '订单驳回',
-        '4' => '订单确认',
-        '5' => '订单取消',
-        '6' => '合同上传',
-        '7' => '未付款'
+        '2' => '审核通过',
+        '3' => '审核未通过',
+        '4' => '订单提交',
+        '5' => '订单驳回',
+        '6' => '订单确认',
+        '7' => '订单取消',
+        '8' => '订单完成'
     ];
     /**
      * Display a listing of the resource.
@@ -68,10 +69,7 @@ class OrderController extends BaseController
         }*/
 
         $order_list = DB::table('order')->where($where)->orderBy('order_id', 'desc')->paginate(20);
-
-
-
-        return view('order.order.index',['data'=>$order_list,'order_status'=>$order_status]);
+        return view('order.order.index',['data'=>$order_list,'order_status'=>$order_status,'orderStatus'=>$this->orderStatus]);
     }
 
 

@@ -15,15 +15,16 @@
                     <form action="{{url('house/houseCheck')}}" method="post">
 
                         <span>国家地区：</span>
-                            <select id="country" class="dept_select input-text" name="state" style="width:100px;">
+                            <select id="country" class="dept_select input-text" name="state" style="width:120px;">
                                 <option value="">请选择</option>
                             @foreach($nationArr as $nation)
-                                    <option value="{{$nation->chinese_n_name}},{{$nation->english_n_name}},{{$nation->abbreviation}},{{$nation->n_ID}}">{{$nation->chinese_n_name}}</option>
+                                <option value="{{$nation->chinese_n_name}},{{$nation->english_n_name}},{{$nation->abbreviation}},{{$nation->n_ID}}">{{$nation->chinese_n_name}}</option>
                             @endforeach
                             </select>
-                            <select id="province" class="dept_select input-text"  name="province" style="width:100px;"></select>
-                            <select id="city" class="dept_select input-text" name="city" style="width:100px;"></select>
-                            <input type="submit" class="btn btn-default" name="search" value="搜索">
+                            <select id="province" class="dept_select input-text"  name="province" style="width:120px;"></select>
+                            <select id="city" class="dept_select input-text" name="city" style="width:120px;"></select>
+                        {{--<input type="text" class="input-text" value="@if($house_keyword != '%'){{$house_keyword}}@endif" placeholder="请输入关键字" name="house_keyword" style="width:250px;">--}}
+                        <input type="submit" class="btn btn-default" name="search" value="搜索">
 
                     <div class="mt-20">
                         <table class="table table-border table-bordered table-bg table-hover table-sort">
@@ -44,7 +45,9 @@
                             </tr>
                             </thead>
                             <tbody>
+
                             @foreach($result as $k=>$v)
+                                @if($v->chk_sta == 1 || $v->chk_sta == 3)
                                 <tr class="text-c">
                                     <td>{{ $v->house_type }}</td>
                                     <td>{{ $v->msgid }}</td>
@@ -61,8 +64,6 @@
                                             <label>审核通过 <input name="chk_sta" type="radio" value="2" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('2','{{$v->msgid}}')}" /></label>
                                             &nbsp;&nbsp;
                                             <label>审核不通过<input name="chk_sta" type="radio" value="3" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('3','{{$v->msgid}}')}" /></label>
-                                        @elseif($v->chk_sta == 2)
-                                            审核通过
                                         @elseif($v->chk_sta == 3)
                                             审核不通过
                                         @endif
@@ -70,8 +71,9 @@
                                     <td>
                                         <a href="{{ url('house/updateList/detail',['id'=>$v->msgid]) }}">修改房源</a>
                                     </td>
-                            @endforeach
                                 </tr>
+                                @endif
+                            @endforeach
 
                             </tbody>
                         </table>
@@ -144,7 +146,6 @@
                         var english_p_name = re[i]['english_p_name'];
 
                         country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+objContry+'</option>';
-                        //country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+objContry+'&nbsp;&nbsp;&nbsp;'+english_p_name+'</option>';
                     }
 
                     $("#province").html(country);
@@ -163,7 +164,6 @@
                                 var english_c_name = re[i]['english_c_name'];
                                 var number = re[i]['number'];
                                 country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'</option>';
-                                //country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'&nbsp;&nbsp;&nbsp;'+english_c_name+'</option>';
                             }
                             $("#city").html(country);
                             document.getElementById('city').value = "@if(isset($city)){{$city}}@endif";
@@ -192,7 +192,6 @@
                         var english_p_name = re[i]['english_p_name'];
 
                         country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+objContry+'</option>';
-                        //country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+objContry+'&nbsp;&nbsp;&nbsp;'+english_p_name+'</option>';
                     }
 
                     $("#province").html(country);
@@ -237,7 +236,6 @@
                         var p_ID = re[i]['p_ID'];
                         var english_p_name = re[i]['english_p_name'];
                         country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+objContry+'</option>';
-                        //country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+objContry+'&nbsp;&nbsp;&nbsp;'+english_p_name+'</option>';
                     }
                     $("#province").html(country);
                     var val = $("#province").val();
@@ -280,7 +278,6 @@
                         var english_c_name = re[i]['english_c_name'];
                         var number = re[i]['number'];
                         country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'</option>';
-                        //country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'&nbsp;&nbsp;&nbsp;'+english_c_name+'</option>';
                     }
                     $("#city").html(country);
 

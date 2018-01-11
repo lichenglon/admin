@@ -53,6 +53,7 @@
 								<th width="">房屋设备</th>
 								<th width="">房源位置</th>
 								<th width="">租期时长</th>
+								<th width="">关键字</th>
 								<th width="">房源状态</th>
 								<th>审核状态</th>
 								<th width="">操作</th>
@@ -70,6 +71,7 @@
 									<td><?php $equipment = explode(',',$val->house_facility); foreach ($equipment as $value){ echo $value.'&nbsp;&nbsp;&nbsp;'; }?></td>
 									<td class="text-l"><a href="{{url('house/houseLister/houseMap')}}"><u style="cursor:pointer" class="text-primary" title="查看">{{$val->house_location}}</u></a></td>
 									<td>{{$val->house_rise}}<b style="font-size:15px;">~</b>{{$val->house_duration}}</td>
+									<td width="">{{ $val->house_keyword }}</td>
 									<td class="td-status"><span class="label label-success radius">{{$val->house_status}}</span></td>
 									<td>
 										@if($val->chk_sta == 1)
