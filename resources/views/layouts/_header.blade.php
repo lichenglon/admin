@@ -90,8 +90,8 @@
             url:"{{url('/')}}",
             data:'lang='+lang,
             type:'get',
-            success:function (re) {
-                alert(re);
+            success:function () {
+                location.reload();
             }
         })
     }

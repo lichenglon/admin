@@ -11,6 +11,7 @@ class HomeController extends BaseController
     //
     public function index(){
         $locale = isset($_GET['lang']) ? $_GET['lang'] : false;
+
         if($locale)
         {
             if(Session::get('lang'))
