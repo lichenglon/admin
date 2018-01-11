@@ -99,14 +99,16 @@ Route::group(['prefix'=>'house'],function() {
     Route::post('houseAdd/save',$controller.'save');
     #房源更新列表
     Route::get('updateList',$controller.'updateList');
-    #房源更新详细列举
+
+    #修改房源界面
     Route::get('updateList/detail/{id}',$controller.'detail');
+    #房源信息修改表单提交
+    Route::post('updateList/uSave',$controller.'uSave');
+
     #Ajax请求删除图片
     Route::get('updateList/del',$controller.'del');
     #Ajax请求获取省份市区
     Route::get('updateList/region',$controller.'region');
-    #房源信息修改表单提交
-    Route::post('updateList/uSave',$controller.'uSave');
     #房源详细信息
     Route::get('houseLister/detail/{id}',$controller.'houseDetail');
     #房源类型
@@ -117,14 +119,21 @@ Route::group(['prefix'=>'house'],function() {
     Route::post('type/add/save',$typeController.'save');
     #房源分类部分
     Route::any('type/tree',$typeController.'tree');
-    #删除
+    #删除类型
     Route::any('type/delete/{id}',$typeController.'delete');
-    #修改
+    #修改类型
     Route::any('type/update',$typeController.'update');
     #房源检索/导出Excel/列表
     Route::get('houseLister',$controller.'houseLister');
     #地图
     Route::get('houseLister/houseMap',$controller.'houseMap');
+
+    #房源审核
+    Route::get('houseCheck',$controller.'houseCheck');
+    #修改审核状态
+    Route::get('houseCheck/isCheck',$controller.'isCheck');
+    #审核日志
+    Route::get('operateLog',$controller.'operateLog');
 });
 //国家地区城市添加
 Route::group(['prefix'=>'nation'],function() {

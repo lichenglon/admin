@@ -12,11 +12,11 @@
 
                 <form action="{{ url('account/user') }}" method="post">
                     {{ csrf_field() }}
-                    <h4 class="bg-info" style="padding:10px; font-size:14px;">账号搜索</h4>
+                    <h4 class="bg-info" style="padding:10px; font-size:14px;">@lang('account.Account_search')</h4>
                     <div class="row">
 
                         <div class="col-sm-2">
-                            <label><b>用户角色：</b> </label>
+                            <label><b>@lang('account.User_roles')：</b> </label>
                             <select class="form-control" name="role_id">
                                 <option value="0">不限</option>
                                 @foreach($roleList as $values)
@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="col-sm-2">
-                            <label><b>启用状态：</b></label>
+                            <label><b>@lang('account.enabled')：</b></label>
                             <select class="form-control" name="status">
                                 <option value="">不限</option>
                                 <option value="1" @if(isset($_REQUEST['status']) && $_REQUEST['status'] == '1') selected @endif>启用</option>
@@ -36,12 +36,12 @@
 
                         </div>
                         <div class="col-sm-5">
-                            <label><b>关键词搜索</b></label>
+                            <label><b>@lang('account.Keyword_search')</b></label>
                             <select class="form-control" name="keyword_type">
                                 <option value="name" @if(Request::get('keyword_type') == 'name') {{ Request::get('keyword_type')  }} @endif>姓名</option>
                             </select>
                             <input type="text" class="form-control" name="keyword" value="{{ Request::get('keyword') }}" placeholder="">
-                            <input name="search" type="submit" class="btn btn-default" value="搜索">
+                            <input name="search" type="submit" class="btn btn-default" value="@lang('account.search')">
                         </div>
 
 
@@ -50,11 +50,11 @@
                 </form>
 
                 <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
-                    <span style="line-height:34px;">业务人员列表</span>
+                    <span style="line-height:34px;">@lang('account.List_of_business_people')</span>
                     <div style="float:right;">
 
                         {{--<button type="button" class="btn btn-default">导出EXCEL</button>--}}
-                        <a href="/account/user/create" type="button" class="btn btn-default">新增账号</a>
+                        <a href="/account/user/create" type="button" class="btn btn-default">@lang('account.New_account')</a>
                     </div>
                 </h4>
 

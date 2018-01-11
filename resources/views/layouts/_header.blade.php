@@ -2,11 +2,11 @@
 <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="/" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>@lang('message.layouts_header.Intermediary_system')</b></span>
+        <span class="logo-mini"><b>@lang('layouts_aside.Intermediate')</b></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>@lang('message.layouts_header.Intermediary_management_system')</b></span>
+        <span class="logo-lg"><b>@lang('layouts_aside.Room_source')</b></span>
     </a>
 
     <!-- Header Navbar -->
@@ -90,7 +90,11 @@
             url:"{{url('/')}}",
             data:'lang='+lang,
             type:'get',
+<<<<<<< HEAD
             success:function () {
+=======
+            success:function (re) {
+>>>>>>> f4008ff3b02210c737bb77b1d5c5c1da4b99a8e9
                 location.reload();
             }
         })

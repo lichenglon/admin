@@ -53,7 +53,8 @@
 								<th width="">房屋设备</th>
 								<th width="">房源位置</th>
 								<th width="">租期时长</th>
-								<th width="">状态</th>
+								<th width="">房源状态</th>
+								<th>审核状态</th>
 								<th width="">操作</th>
 							</tr>
 							</thead>
@@ -70,6 +71,15 @@
 									<td class="text-l"><a href="{{url('house/houseLister/houseMap')}}"><u style="cursor:pointer" class="text-primary" title="查看">{{$val->house_location}}</u></a></td>
 									<td>{{$val->house_rise}}<b style="font-size:15px;">~</b>{{$val->house_duration}}</td>
 									<td class="td-status"><span class="label label-success radius">{{$val->house_status}}</span></td>
+									<td>
+										@if($val->chk_sta == 1)
+											未审核
+										@elseif($val->chk_sta == 2)
+											审核通过
+										@elseif($val->chk_sta == 3)
+											审核不通过
+										@endif
+									</td>
 									<td class="f-14 td-manage">
 										<a style="text-decoration:none" class="ml-5" href="{{url('house/houseLister/detail',['id'=>$val->msgid])}}" title="详细信息">详细信息</a>
 									</td>

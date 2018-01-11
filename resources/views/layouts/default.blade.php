@@ -54,12 +54,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                {{ $__current_menu__->name or '' }}
-                <small>Optional description</small>
+                @if(Session::get('lang') == 'en'){{ $__current_menu__->en_name or '' }}@else{{ $__current_menu__->name or '' }}@endif
+                <small>Huashi Hengtong</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> {{ $__parent_menu__->name or '' }}</a></li>
-                <li class="active">{{ $__current_menu__->name or '' }}</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i>@if(Session::get('lang') == 'en'){{ $__parent_menu__->en_name or '' }}@else{{ $__parent_menu__->name or '' }}@endif</a></li>
+                <li class="active">@if(Session::get('lang') == 'en'){{ $__current_menu__->en_name or '' }}@else{{ $__current_menu__->name or '' }}@endif</li>
             </ol>
         </section>
         <!-- Main content -->

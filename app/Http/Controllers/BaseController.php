@@ -14,17 +14,28 @@ class BaseController extends Controller
 
     public function __construct()
     {
+<<<<<<< HEAD
         //var_dump(Session::get('lang'));
 
+=======
+>>>>>>> f4008ff3b02210c737bb77b1d5c5c1da4b99a8e9
         $this->middleware(function($request,$next){
             if(Session::get('lang'))
             {
                 App::setLocale(Session::get('lang'));
+<<<<<<< HEAD
+=======
+
+>>>>>>> f4008ff3b02210c737bb77b1d5c5c1da4b99a8e9
             }
             else
             {
                 App::setLocale(Session::get('en'));
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> f4008ff3b02210c737bb77b1d5c5c1da4b99a8e9
             $user_info = $request->session()->get('user_info');
             //没登录返回登录页
             if(empty($user_info['id'])){

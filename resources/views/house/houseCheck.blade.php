@@ -10,36 +10,12 @@
         <div class="box-body">
 
 
-            <div class="Hui-article">
+            <div class="Hui-article"  style="height:625px">
                 <article class="cl pd-20">
-                    <form action="{{url('house/houseSearch')}}" method="get">
-						<span class="select-box inline" style="width:100%;">
-								{{ csrf_field() }}
-                            <input type="hidden" name="hidden" value="1">
-							<select name="type" class="select" id="findType">
-                                <option value="">分类</option>
-                                @foreach($typeObject as $value)
-                                    <option value="{{$value->name}}">{{$value->name}}</option>
-                                @endforeach
-                            </select>
-							<input type="text" class="input-text" value="@if($serial_number != '%'){{$serial_number}}@endif" placeholder="房源编号" maxlength="255" name="serial_number" style="width:150px;">
-							<input type="text" class="input-text" value="@if($house_structure != '%'){{$house_structure}}@endif" placeholder="房源结构" maxlength="255" name="house_structure" style="width:150px;">
-							<input type="number" class="input-text" value="@if($house_price != '%'){{$house_price}}@endif" placeholder="价格" maxlength="255" name="house_price" style="width:150px;">
-							<input type="text" class="input-text" value="@if($house_location != '%'){{$house_location}}@endif" placeholder="房源位置" maxlength="255" name="house_location" style="width:250px;">
-                            <input type="text" class="input-text" value="@if($house_keyword != '%'){{$house_keyword}}@endif" placeholder="关键字" maxlength="255" name="house_keyword" style="width:250px;">
 
-							<input type="submit" class="btn btn-default" name="find" value="确定">
-							<input type="submit" class="btn btn-default" name="export" value="导出Excel">
-
-							<span class="r">
-							共有数据：<strong>{{$houseCount}}</strong> 条
-						</span>
-                        </span>
-                    </form>
-                    {{--<div class="cl pd-5 bg-1 bk-gray mt-20">
-
-
-                    </div>--}}
+                    <span class="r">共有数据：<strong>{{$total}}</strong> 条</span>
+                    <form action="{{url('house/houseCheck')}}" method="get">
+                    {{--<div class="cl pd-5 bg-1 bk-gray mt-20"></div>--}}
                     <div class="mt-20">
                         <table class="table table-border table-bordered table-bg table-hover table-sort">
                             <thead>
@@ -50,43 +26,62 @@
                                 <th width="">房源结构</th>
                                 <th width="">房源价格</th>
                                 <th width="">房源大小</th>
-                                <th width="">房屋设备</th>
+                                {{--<th width="">房屋设备</th>--}}
                                 <th width="">房源位置</th>
                                 <th width="">租期时长</th>
-                                <th width="">状态</th>
+                                {{--<th width="">房源状态</th>--}}
+                                <th>审核状态</th>
                                 <th width="">操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($houseObj as $key => $val)
+                            @foreach($result as $k=>$v)
                                 <tr class="text-c">
-                                    <td>{{$val->house_type}}</td>
-                                    <td>{{$val->msgid}}</td>
-                                    <td class="text-l"><a href="{{url('house/houseLister/detail',['id'=>$val->msgid])}}"><u style="cursor:pointer" class="text-primary" title="查看">{{$val->serial_number}}</u></a></td>
-                                    <td>{{$val->house_structure}}</td>
-                                    <td>{{$val->house_price}}</td>
-                                    <td><span>{{$val->house_size}}</span> /平方</td>
-                                    <td><?php $equipment = explode(',',$val->house_facility); foreach ($equipment as $value){ echo $value.'&nbsp;&nbsp;&nbsp;'; }?></td>
-                                    <td class="text-l"><a href="{{url('house/houseLister/houseMap')}}"><u style="cursor:pointer" class="text-primary" title="查看">{{$val->house_location}}</u></a></td>
-                                    <td>{{$val->house_rise}}<b style="font-size:15px;">~</b>{{$val->house_duration}}</td>
-                                    <td class="td-status"><span class="label label-success radius">{{$val->house_status}}</span></td>
-                                    <td class="f-14 td-manage">
-                                        <a style="text-decoration:none" class="ml-5" href="{{url('house/houseLister/detail',['id'=>$val->msgid])}}" title="详细信息">详细信息</a>
+                                    <td>{{ $v->house_type }}</td>
+                                    <td>{{ $v->msgid }}</td>
+                                    <td><a href="{{url('house/houseLister/detail',['id'=>$v->msgid])}}"><u style="cursor:pointer" class="text-primary" title="查看">{{$v->serial_number}}</u></a></td>
+                                    <td>{{ $v->house_structure }}</td>
+                                    <td>{{ $v->house_price }}</td>
+                                    <td>{{ $v->house_size }} 平方</td>
+                                    {{--<td>{{ $v->house_facility }}</td>--}}
+                                    <td>{{ $v->house_location }}</td>
+                                    <td>{{ $v->house_rise }}</td>
+                                    {{--<td>{{ $v->house_status }}</td>--}}
+                                    <td>
+                                        @if($v->chk_sta == 1)
+                                            <label>审核通过 <input name="chk_sta" type="radio" value="2" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('2','{{$v->msgid}}')}" /></label>
+                                            &nbsp;&nbsp;
+                                            <label>审核不通过<input name="chk_sta" type="radio" value="3" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('3','{{$v->msgid}}')}" /></label>
+                                        @elseif($v->chk_sta == 2)
+                                            审核通过
+                                        @elseif($v->chk_sta == 3)
+                                            审核不通过
+                                        @endif
                                     </td>
-                                </tr>
+                                    <td>
+                                        <a href="{{ url('house/updateList/detail',['id'=>$v->msgid]) }}">修改房源</a>
+                                    </td>
                             @endforeach
+                                </tr>
+
                             </tbody>
                         </table>
                     </div>
+                    </form>
                 </article>
             </div>
-            <!-- 分页 -->
-            @if (!empty($houseObj))
+            @if (!empty($result))
                 <div class="page_list">
-                    {{$houseObj->appends(Request::input())->links()}}
+                    {{$result->appends(Request::input())->links()}}
+                    <div style="display:inline-block; margin-bottom:25px;">
+                        <span class="r">共有数据：<strong>{{$total}}</strong> 条</span>
+                    </div>
                 </div>
             @endif
+        </div>
 
+
+    </div>
         </div>
     </div>
 
@@ -94,19 +89,7 @@
 @stop
 
 @section('js')
-    <script>
-        //当前页面检索
-        $(function(){
-            $("#searching").keyup(function(){
-                var txt=$("#searching").val();
-                if($.trim(txt)!=""){
-                    $("table tr:not('#theader')").hide().filter(":contains('"+txt+"')").show();
-                }else{
-                    $("table tr:not('#theader')").show();
-                }
-            });
-        });
-    </script>
+
     <script>
         //常规用法 日期
         laydate.render({
@@ -115,6 +98,23 @@
         laydate.render({
             elem: '#duration'
         });
+    </script>
+
+    <script>
+        function isCheck(number,msgid){
+            $.ajax({
+                url:"{{url('house/houseCheck/isCheck')}}",
+                data: 'chk_sta='+number+'&msgid='+msgid,
+                type: 'get',
+                success: function(re){
+                    if(re == '1'){
+                        location.reload();
+                    }else{
+                        alert('审核失败');
+                    }
+                }
+            })
+        }
     </script>
 @stop
 
