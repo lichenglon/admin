@@ -142,6 +142,8 @@ class HouseController extends BaseController {
 						$houseImage->save();
 					}
 				}
+
+
 				//更新操作日志
 				$id = Session::get('user_id');
 				$operate_name = DB::table('accounts')->where('id',$id)->value('name');
@@ -331,7 +333,7 @@ class HouseController extends BaseController {
 		}
 	}
 	/**
-	 *房源信息修改
+	 *房源信息修改提交
 	 */
 	public function uSave(Request $param) {
 		$msgId = $param->msgId;
@@ -599,16 +601,48 @@ class HouseController extends BaseController {
 	 */
 	public function houseCheck()
 	{
-		$total = DB::table('house_message')
-				->where('chk_sta','1')
-				->Orwhere('chk_sta','3')
-				->count();
+		//搜索国家框数据
+		$nationArr = DB::table('nation')->get();
+		//判断是否接收到搜索值
+		if(!empty($_REQUEST['state']) && !empty($_REQUEST['province']) && !empty($_REQUEST['city']))
+		{
 
-		$result = DB::table('house_message')
-				->where('chk_sta','1')
-				->Orwhere('chk_sta','3')
-				->paginate(10);
-		return view('house.houseCheck',['result'=>$result,'total'=>$total]);
+			$state = explode(',',$_REQUEST['state']);
+			$province = explode(',',$_REQUEST['province']);
+			$city = explode(',',$_REQUEST['city']);
+			//计算房源总数量
+			$total = DB::table('house_message')
+					->where('chk_sta','1')
+					->Orwhere('chk_sta','3')
+					->where('state',$state[0])
+					->where('province',$province[0])
+					->where('city',$city[0])
+					->count();
+			//获得房源信息
+			$result = DB::table('house_message')
+					->where('chk_sta','1')
+					->Orwhere('chk_sta','3')
+					->where('state',$state[0])
+					->where('province',$province[0])
+					->where('city',$city[0])
+					->paginate(10);
+			//返回结果
+			return view('house.houseCheck',['result'=>$result,
+			                                'total'=>$total,
+			                                'nationArr'=>$nationArr,
+			                                'state'=>$_REQUEST['state'],
+			                                'province'=>$_REQUEST['province'],
+			                                'city'=>$_REQUEST['city']
+			]);
+
+		}else{
+			//计算未审核和审核不通过的房源总数量
+			$total = DB::table('house_message')->where('chk_sta','1')->Orwhere('chk_sta','3')->count();
+			//获得所有房源信息
+			$result = DB::table('house_message')->where('chk_sta','1')->Orwhere('chk_sta','3')->paginate(10);
+			//返回页面结果
+			return view('house.houseCheck',['result'=>$result,'total'=>$total,'nationArr'=>$nationArr]);
+		}
 
 	}
 
@@ -616,34 +650,31 @@ class HouseController extends BaseController {
 	public function isCheck(){
 		if($_GET['chk_sta'] && $_GET['msgid'])
 		{
+			//接收审核状态
 			$chk_sta = $_GET['chk_sta'];
+			//接收ID
 			$msgid = (int)$_GET['msgid'];
-			$result = DB::table('house_message')
-					->where('msgid',$msgid)
-					->update(['chk_sta'=>$chk_sta]);
-
+			//数据库更改状态
+			$result = DB::table('house_message')->where('msgid',$msgid)->update(['chk_sta'=>$chk_sta]);
+			//判断并返回
 			if($result){
 				return '1';
-			} else{
-				return '0';
-			}
+			}else{
+				return '0';}
 		}
 	}
 
-	/**
-	 * 操作日志
-	 */
+	//操作日志
 	public function operateLog()
 	{
+		//判断如果接收到了搜索的时间参数，
 		if(!empty($_REQUEST['stime']) && !empty($_REQUEST['etime']))
 		{
+			//接收开始时间和结束时间，并转化为时间戳
 			$stime = strtotime($_REQUEST['stime'].' 00:00:00');
 			$etime = strtotime($_REQUEST['etime'].' 23:59:59');
-
-			$total = DB::table('operate_log')
-					->whereBetween('operate_time',[$stime,$etime])
-					->count();
-
+			//查询总条数
+			$total = DB::table('operate_log')->whereBetween('operate_time',[$stime,$etime])->count();
 			$result = DB::table('operate_log')
 					->whereBetween('operate_time',[$stime,$etime])
 					->orderBy('operate_time', 'desc')
@@ -651,6 +682,7 @@ class HouseController extends BaseController {
 			return view('house.operateLog',['result'=>$result,'total'=>$total,'stime'=>$_REQUEST['stime'],'etime'=>$_REQUEST['etime'],]);
 			exit();
 		}else{
+			//如果没有接收到时间参数直接显示全部数据
 			$total = DB::table('operate_log')->count();
 			$result = DB::table('operate_log')
 					->orderBy('operate_time', 'desc')

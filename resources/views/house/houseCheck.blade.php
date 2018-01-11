@@ -12,10 +12,19 @@
 
             <div class="Hui-article"  style="height:625px">
                 <article class="cl pd-20">
+                    <form action="{{url('house/houseCheck')}}" method="post">
 
-                    <span class="r">共有数据：<strong>{{$total}}</strong> 条</span>
-                    <form action="{{url('house/houseCheck')}}" method="get">
-                    {{--<div class="cl pd-5 bg-1 bk-gray mt-20"></div>--}}
+                        <span>国家地区：</span>
+                            <select id="country" class="dept_select input-text" name="state" style="width:100px;">
+                                <option value="">请选择</option>
+                            @foreach($nationArr as $nation)
+                                    <option value="{{$nation->chinese_n_name}},{{$nation->english_n_name}},{{$nation->abbreviation}},{{$nation->n_ID}}">{{$nation->chinese_n_name}}</option>
+                            @endforeach
+                            </select>
+                            <select id="province" class="dept_select input-text"  name="province" style="width:100px;"></select>
+                            <select id="city" class="dept_select input-text" name="city" style="width:100px;"></select>
+                            <input type="submit" class="btn btn-default" name="search" value="搜索">
+
                     <div class="mt-20">
                         <table class="table table-border table-bordered table-bg table-hover table-sort">
                             <thead>
@@ -101,6 +110,7 @@
     </script>
 
     <script>
+        //审核状态的更改
         function isCheck(number,msgid){
             $.ajax({
                 url:"{{url('house/houseCheck/isCheck')}}",
@@ -115,6 +125,172 @@
                 }
             })
         }
+
+        @if(isset($province) && isset($city))
+        {
+            document.getElementById('country').value = "@if(isset($state)){{$state}}@endif";
+            var val = $("#country").val();
+            var arr=val.split(",");
+            var p_nation_ID = arr[3];
+            $.ajax({
+                url:"{{url('house/updateList/region')}}",
+                data:'p_nation_ID='+p_nation_ID,
+                type:'get',
+                success:function (re) {
+                    var country = '';
+                    for(var i = 0;i < re.length; i++) {
+                        var objContry = re[i]['chinese_p_name'];
+                        var p_ID = re[i]['p_ID'];
+                        var english_p_name = re[i]['english_p_name'];
+
+                        country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+objContry+'</option>';
+                        //country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+objContry+'&nbsp;&nbsp;&nbsp;'+english_p_name+'</option>';
+                    }
+
+                    $("#province").html(country);
+                    document.getElementById('province').value = "@if(isset($province)){{$province}}@endif";
+                    var val = $("#province").val();
+                    var arr=val.split(",");
+                    var c_province_ID = arr[2];
+                    $.ajax({
+                        url:"{{url('house/updateList/region')}}",
+                        data:'c_province_ID='+c_province_ID,
+                        type:'get',
+                        success:function (re) {
+                            var country = '';
+                            for(var i = 0;i < re.length; i++) {
+                                var objContry = re[i]['chinese_c_name'];
+                                var english_c_name = re[i]['english_c_name'];
+                                var number = re[i]['number'];
+                                country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'</option>';
+                                //country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'&nbsp;&nbsp;&nbsp;'+english_c_name+'</option>';
+                            }
+                            $("#city").html(country);
+                            document.getElementById('city').value = "@if(isset($city)){{$city}}@endif";
+                        }
+                    });
+                }
+            })
+
+
+        }
+        @else
+
+        window.onload=function(){
+            var val = $("#country").val();
+            var arr=val.split(",");
+            var p_nation_ID = arr[3];
+            $.ajax({
+                url:"{{url('house/updateList/region')}}",
+                data:'p_nation_ID='+p_nation_ID,
+                type:'get',
+                success:function (re) {
+                    var country = '';
+                    for(var i = 0;i < re.length; i++) {
+                        var objContry = re[i]['chinese_p_name'];
+                        var p_ID = re[i]['p_ID'];
+                        var english_p_name = re[i]['english_p_name'];
+
+                        country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+objContry+'</option>';
+                        //country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+objContry+'&nbsp;&nbsp;&nbsp;'+english_p_name+'</option>';
+                    }
+
+                    $("#province").html(country);
+                    var val = $("#province").val();
+                    var arr=val.split(",");
+                    var c_province_ID = arr[2];
+                    $.ajax({
+                        url:"{{url('house/updateList/region')}}",
+                        data:'c_province_ID='+c_province_ID,
+                        type:'get',
+                        success:function (re) {
+                            var country = '';
+                            for(var i = 0;i < re.length; i++) {
+                                var objContry = re[i]['chinese_c_name'];
+                                var english_c_name = re[i]['english_c_name'];
+                                var number = re[i]['number'];
+                                country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'</option>';
+                                //country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'&nbsp;&nbsp;&nbsp;'+english_c_name+'</option>';
+                            }
+                            $("#city").html(country);
+
+                        }
+                    });
+                }
+            })
+        }
+        @endif
+
+        //
+        $("select#country").change(function(){
+            var val = $("#country").val();
+            var arr=val.split(",");
+            var p_nation_ID = arr[3];
+            $.ajax({
+                url:"{{url('house/updateList/region')}}",
+                data:'p_nation_ID='+p_nation_ID,
+                type:'get',
+                success:function (re) {
+                    var country = '';
+                    for(var i = 0;i < re.length; i++) {
+                        var objContry = re[i]['chinese_p_name'];
+                        var p_ID = re[i]['p_ID'];
+                        var english_p_name = re[i]['english_p_name'];
+                        country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+objContry+'</option>';
+                        //country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+objContry+'&nbsp;&nbsp;&nbsp;'+english_p_name+'</option>';
+                    }
+                    $("#province").html(country);
+                    var val = $("#province").val();
+                    var arr=val.split(",");
+                    var c_province_ID = arr[2];
+                    $.ajax({
+                        url:"{{url('house/updateList/region')}}",
+                        data:'c_province_ID='+c_province_ID,
+                        type:'get',
+                        success:function (re) {
+                            var country = '';
+                            for(var i = 0;i < re.length; i++) {
+                                var objContry = re[i]['chinese_c_name'];
+                                var english_c_name = re[i]['english_c_name'];
+                                var number = re[i]['number'];
+                                country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'</option>';
+                                //country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'&nbsp;&nbsp;&nbsp;'+english_c_name+'</option>';
+                            }
+                            $("#city").html(country);
+
+                        }
+                    })
+                }
+            })
+        });
+
+        //
+        $("select#province").change(function(){
+            var val = $("#province").val();
+            var arr=val.split(",");
+            var c_province_ID = arr[2];
+            $.ajax({
+                url:"{{url('house/updateList/region')}}",
+                data:'c_province_ID='+c_province_ID,
+                type:'get',
+                success:function (re) {
+                    var country = '';
+                    for(var i = 0;i < re.length; i++) {
+                        var objContry = re[i]['chinese_c_name'];
+                        var english_c_name = re[i]['english_c_name'];
+                        var number = re[i]['number'];
+                        country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'</option>';
+                        //country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'&nbsp;&nbsp;&nbsp;'+english_c_name+'</option>';
+                    }
+                    $("#city").html(country);
+
+                }
+            })
+        });
+
+        document.getElementById('country').value = "@if(isset($state)){{$state}}@endif"
+
+
     </script>
 @stop
 
