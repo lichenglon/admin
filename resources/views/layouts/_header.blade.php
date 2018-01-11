@@ -90,11 +90,7 @@
             url:"{{url('/')}}",
             data:'lang='+lang,
             type:'get',
-<<<<<<< HEAD
-            success:function () {
-=======
             success:function (re) {
->>>>>>> f4008ff3b02210c737bb77b1d5c5c1da4b99a8e9
                 location.reload();
             }
         })
