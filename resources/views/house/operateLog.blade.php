@@ -13,7 +13,7 @@
                         <div class="Hui-article" style="height:625px;">
                                 <article class="cl pd-20">
 
-                                        <form action="{{url('house/operateLog')}}" method="get">
+                                        <form action="{{url('house/operateLog')}}" method="post">
                                                 <span>操作时间：</span>
                                                 <div class="check-box">
                                                         <input type="text" name="stime" id="stime" class="input-text" value="@if(!empty($stime)){{$stime}}@endif"  style="display:inline-block"/>

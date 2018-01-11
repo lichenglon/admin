@@ -129,11 +129,11 @@ Route::group(['prefix'=>'house'],function() {
     Route::get('houseLister/houseMap',$controller.'houseMap');
 
     #房源审核
-    Route::get('houseCheck',$controller.'houseCheck');
+    Route::any('houseCheck',$controller.'houseCheck');
     #修改审核状态
     Route::get('houseCheck/isCheck',$controller.'isCheck');
     #审核日志
-    Route::get('operateLog',$controller.'operateLog');
+    Route::any('operateLog',$controller.'operateLog');
 });
 //国家地区城市添加
 Route::group(['prefix'=>'nation'],function() {
