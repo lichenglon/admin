@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Account;
+use Illuminate\Support\Facades\Session;
+
 class RoleController extends BaseController
 {
     public $role_status = ['禁用','启用'];
@@ -54,6 +56,18 @@ class RoleController extends BaseController
         $rs = Role::insert($data);
         if($rs)
         {
+            //更新操作日志
+            $id = Session::get('user_id');
+            $operate_name = DB::table('accounts')->where('id',$id)->value('name');
+            $operate = "新增了角色，角色名为：".$request->name;
+            $operate_log = [
+                'operate' => $operate,
+                'operate_name' => $operate_name,
+                'operate_time' => time()
+            ];
+
+            DB::table('operate_log')->insert($operate_log);
+
             return $this->ajaxSuccess('新增角色成功！', url('/account/role'));
         }else{
             return $this->ajaxSuccess('新增角色失败！', url('/account/role/create'));
@@ -79,6 +93,19 @@ class RoleController extends BaseController
 
         Role::where('id', $request->id)->update($data);
 
+        //更新操作日志
+        $id = Session::get('user_id');
+        $operate_name = DB::table('accounts')->where('id',$id)->value('name');
+        $operate = "更新了角色权限，角色名为：".$request->name;
+        $operate_log = [
+            'operate' => $operate,
+            'operate_name' => $operate_name,
+            'operate_time' => time()
+        ];
+
+        DB::table('operate_log')->insert($operate_log);
+
+
         return $this->ajaxSuccess('编辑角色成功！', url('/account/role'));
 
     }
@@ -96,6 +123,20 @@ class RoleController extends BaseController
         if($rs){
             $account = new Account();
             $account->where('role_id',$request->id)->update($data);
+
+            //更新操作日志
+            $id = Session::get('user_id');
+            $operate_name = DB::table('accounts')->where('id',$id)->value('name');
+            $name2 = DB::table('roles')->where('id',$request->id)->value('name');
+            $operate = "更新了角色状态，角色名为：".$name2;
+            $operate_log = [
+                'operate' => $operate,
+                'operate_name' => $operate_name,
+                'operate_time' => time()
+            ];
+
+            DB::table('operate_log')->insert($operate_log);
+
             return $this->ajaxSuccess('操作成功！', url('/account/role'));
         }
         return $this->ajaxError('操作失败！', url('/account/role'));
@@ -110,10 +151,26 @@ class RoleController extends BaseController
             if($id == '15'){
                 return $this->ajaxError('删除角色失败！不能删除管理员', url('/account/role'));
             }else{
+
+                $name2 = DB::table('roles')->where('id',$id)->value('name');
                 $rs = Role::destroy($id);
                 if($rs){
                     $account = new Account();
                     $account->where('role_id',$id)->update(['status'=>'0']);
+
+                    //更新操作日志
+                    $uid = Session::get('user_id');
+                    $operate_name = DB::table('accounts')->where('id',$uid)->value('name');
+
+                    $operate = "删除了角色，角色名为：".$name2;
+                    $operate_log = [
+                        'operate' => $operate,
+                        'operate_name' => $operate_name,
+                        'operate_time' => time()
+                    ];
+
+                    DB::table('operate_log')->insert($operate_log);
+
                     return $this->ajaxSuccess('删除角色成功！', url('/account/role'));
                 }
             }

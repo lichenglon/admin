@@ -6,7 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Session;
 class AccountController extends BaseController
 {
     public $account_status = ['禁用','启用'];
@@ -21,6 +21,7 @@ class AccountController extends BaseController
     public function index(Request $request){
         $where = [];
         if(isset($request->search)){
+
             //判断权限
             if(!empty($request->role_id)){
                 $where['role_id'] = $request->role_id;
@@ -67,6 +68,21 @@ class AccountController extends BaseController
 
         $rs = Account::insert($data);
         if($rs){
+
+            //更新操作日志
+            $id = Session::get('user_id');
+
+            $operate_name = DB::table('accounts')->where('id',$id)->value('name');
+            $operate = "新增了用户，账号为：".$request->name;
+            $operate_log = [
+                'operate' => $operate,
+                'operate_name' => $operate_name,
+                'operate_time' => time()
+            ];
+
+            DB::table('operate_log')->insert($operate_log);
+
+
             return $this->ajaxSuccess('新增账号成功！', url('/account/user'));
         }else{
             return $this->ajaxSuccess('新增账号失败！', url('/account/user/create'));
@@ -92,6 +108,18 @@ class AccountController extends BaseController
         Account::where('id', $request->id)
             ->update($data);
 
+
+        //更新操作日志
+        $id = Session::get('user_id');
+        $operate_name = DB::table('accounts')->where('id',$id)->value('name');
+        $operate = "更新了用户，账号为:".$request->name;
+        $operate_log = [
+            'operate' => $operate,
+            'operate_name' => $operate_name,
+            'operate_time' => time()
+        ];
+        DB::table('operate_log')->insert($operate_log);
+
         return $this->ajaxSuccess('编辑账号成功！', url('/account/user'));
 
     }
@@ -109,18 +137,49 @@ class AccountController extends BaseController
         $rs = Account::where('id', $request->id)
             ->update($data);
         if($rs){
+
+            //更新操作日志
+            $id = Session::get('user_id');
+            $operate_name = DB::table('accounts')->where('id',$id)->value('name');
+            $account = DB::table('accounts')->where('id',$request->id)->value('name');
+            $operate = "更新了用户状态，账号为：".$account;
+            $operate_log = [
+                'operate' => $operate,
+                'operate_name' => $operate_name,
+                'operate_time' => time()
+            ];
+
+            DB::table('operate_log')->insert($operate_log);
+
             return $this->ajaxSuccess('操作成功！', url('/account/user'));
         }
         return $this->ajaxError('操作失败！', url('/account/user'));
     }
 
     public function destroy($id){
+
+        $account = DB::table('accounts')->where('id',$id)->value('name');
+
         if($id == '1'){
             return $this->ajaxError('不能删除管理员！', url('/account/user'));
         }
 
         $rs = Account::destroy($id);
         if($rs){
+
+            //更新操作日志
+            $uid = Session::get('user_id');
+            $operate_name = DB::table('accounts')->where('id',$uid)->value('name');
+
+            $operate = "删除了账号，账号为：".$account;
+            $operate_log = [
+                'operate' => $operate,
+                'operate_name' => $operate_name,
+                'operate_time' => time()
+            ];
+
+            DB::table('operate_log')->insert($operate_log);
+
             return $this->ajaxSuccess('删除账号成功！', url('/account/user'));
         }
         return $this->ajaxError('删除账号失败！', url('/account/user'));
