@@ -66,15 +66,15 @@
                 <!-- Control Sidebar Toggle Button -->
                 <li>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span>语言切换</span>
+                        <span>@lang('layouts_aside.Language_switching')</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="javascript:setLocale('cl');" class="btn btn-default btn-flat">中文</a>
+                                <a href="javascript:setLocale('cl');" class="btn btn-default btn-flat">@lang('layouts_aside.Chinese')</a>
                             </div>
                             <div class="pull-right">
-                                <a href="javascript:setLocale('en');" class="btn btn-default btn-flat">English</a>
+                                <a href="javascript:setLocale('en');" class="btn btn-default btn-flat">@lang('layouts_aside.English')</a>
                             </div>
                         </li>
                     </ul>

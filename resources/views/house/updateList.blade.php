@@ -17,22 +17,22 @@
 								{{ csrf_field() }}
                             <input type="hidden" name="hidden" value="1">
 							<select name="type" class="select" id="findType">
-                                <option value="%">分类</option>
+                                <option value="%">@lang('house_translate.classification')</option>
                                 @foreach($typeObject as $value)
                                     <option value="{{$value->name}}">{{$value->name}}</option>
                                 @endforeach
                             </select>
-							<input type="text" class="input-text" value="@if($serial_number != '%'){{$serial_number}}@endif" placeholder="房源编号" maxlength="255" name="serial_number" style="width:150px;">
-							<input type="text" class="input-text" value="@if($house_structure != '%'){{$house_structure}}@endif" placeholder="房源结构" maxlength="255" name="house_structure" style="width:150px;">
-							<input type="number" class="input-text" value="@if($house_price != '%'){{$house_price}}@endif" placeholder="价格" maxlength="255" name="house_price" style="width:150px;">
-							<input type="text" class="input-text" value="@if($house_location != '%'){{$house_location}}@endif" placeholder="房源位置" maxlength="255" name="house_location" style="width:250px;">
-                            <input type="text" class="input-text" value="@if($house_keyword != '%'){{$house_keyword}}@endif" placeholder="关键字" maxlength="255" name="house_keyword" style="width:250px;">
+							<input type="text" class="input-text" value="@if($serial_number != '%'){{$serial_number}}@endif" placeholder="@lang('house_translate.Room_number')" maxlength="255" name="serial_number" style="width:150px;">
+							<input type="text" class="input-text" value="@if($house_structure != '%'){{$house_structure}}@endif" placeholder="@lang('house_translate.Housing_structure')" maxlength="255" name="house_structure" style="width:150px;">
+							<input type="number" class="input-text" value="@if($house_price != '%'){{$house_price}}@endif" placeholder="@lang('house_translate.Housing_prices')" maxlength="255" name="house_price" style="width:150px;">
+							<input type="text" class="input-text" value="@if($house_location != '%'){{$house_location}}@endif" placeholder="@lang('house_translate.Housing_location')" maxlength="255" name="house_location" style="width:250px;">
+                            <input type="text" class="input-text" value="@if($house_keyword != '%'){{$house_keyword}}@endif" placeholder="@lang('house_translate.The_keyword')" maxlength="255" name="house_keyword" style="width:250px;">
 
-							<input type="submit" class="btn btn-default" name="find" value="确定">
-							<input type="submit" class="btn btn-default" name="export" value="导出Excel">
+							<input type="submit" class="btn btn-default" name="find" value="@lang('house_translate.determine')">
+							<input type="submit" class="btn btn-default" name="export" value="@lang('house_translate.Export_Excel')">
 
 							<span class="r">
-							共有数据：<strong>{{$houseCount}}</strong> 条
+							@lang('house_translate.Common_data')：<strong>{{$houseCount}}</strong> @lang('house_translate.strip')
 						</span>
                         </span>
                     </form>
@@ -41,24 +41,23 @@
                         <table class="table table-border table-bordered table-bg table-hover table-sort">
                             <thead>
                             <tr class="text-c" id="theader">
-                                <th width="25"><input type="checkbox" name="" value=""></th>
-                                <th width="">ID</th>
-                                <th width="">房源编号</th>
-                                <th width="">房源结构</th>
-                                <th width="">房源价格</th>
-                                <th width="">房源大小</th>
-                                <th width="">房屋设备</th>
-                                <th width="">房源位置</th>
-                                <th width="">租期时长</th>
-                                <th width="">状态</th>
-                                <th width="">操作</th>
+                                <th>@lang('house_translate.classification')</th>
+                                <th width="">@lang('house_translate.Room_number')</th>
+                                <th width="">@lang('house_translate.Housing_structure')</th>
+                                <th width="">@lang('house_translate.Housing_prices')</th>
+                                <th width="">@lang('house_translate.Housing_size')</th>
+                                <th width="">@lang('house_translate.House_equipment')</th>
+                                <th width="">@lang('house_translate.Housing_location')</th>
+                                <th width="">@lang('house_translate.The_lease_time')</th>
+                                <th width="">@lang('house_translate.The_keyword')</th>
+                                <th width="">@lang('house_translate.state')</th>
+                                <th width="">@lang('house_translate.operation')</th>
                             </tr>
                             </thead>
                             <tbody>
                            @foreach($houseObj as $key => $val)
                                 <tr class="text-c">
-                                    <td><input type="checkbox" value="{{$val->msgid}}" name=""></td>
-                                    <td>{{$val->msgid}}</td>
+                                    <td>{{$val->house_type}}</td>
                                     <td class="text-l"><a href="{{url('house/houseLister/detail',['id'=>$val->msgid])}}"><u style="cursor:pointer" class="text-primary" title="查看">{{$val->serial_number}}</u></a></td>
                                     <td>{{$val->house_structure}}</td>
                                     <td>{{$val->house_price}}</td>
@@ -66,9 +65,10 @@
                                     <td><?php $equipment = explode(',',$val->house_facility); foreach ($equipment as $value){ echo $value.'&nbsp;&nbsp;&nbsp;'; }?></td>
                                     <td class="text-l"><u style="cursor:pointer" class="text-primary" title="查看">{{$val->house_location}}</u></td>
                                     <td>{{$val->house_rise}}<b style="font-size:15px;">~</b>{{$val->house_duration}}</td>
+                                    <td>{{$val->house_keyword}}</td>
                                     <td class="td-status"><span class="label label-success radius">{{$val->house_status}}</span></td>
                                     <td class="f-14 td-manage">
-                                        <a style="text-decoration:none" class="ml-5" href="{{url('house/updateList/detail',['id'=>$val->msgid])}}" title="更新房源">更新房源</a>
+                                        <a style="text-decoration:none" class="ml-5" href="{{url('house/updateList/detail',['id'=>$val->msgid])}}" title="更新房源">@lang('house_translate.Update_the_housing')</a>
                                     </td>
                                 </tr>
                             @endforeach
