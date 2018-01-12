@@ -60,7 +60,7 @@ class OrderController extends BaseController
             }
             if(!empty($kwd_k) && !empty($kwd_v))
             {
-                $where[] = [$kwd_k, 'like', '%'.$kwd_v.'%'];
+                $where[] = ['order.'.$kwd_k, 'like', '%'.$kwd_v.'%'];
             }
         }
         //判断是否导出excel
@@ -90,7 +90,7 @@ class OrderController extends BaseController
         $title = ['订单号','日期','租客姓名','房源编号','房源名称','房源位置','价格','租期','签约时间','签约地点','订单状态','房屋评价','中介评价'];
         exportData($title,$data,'房源信息'.date('Y-m-d'));
     }
-    
+
     //订单详情
     public function detail($id) {
         $result = DB::table('order')->where('order_id', $id)->join('house_message','order.house_id','=','msgid')->first();

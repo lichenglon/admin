@@ -147,7 +147,8 @@ class HouseController extends BaseController {
 				//更新操作日志
 				$id = Session::get('user_id');
 				$operate_name = DB::table('accounts')->where('id',$id)->value('name');
-				$operate = "新增了房源，编号为：".$serial_number;
+				$operate = "add a new house information , the number is ".$serial_number;
+				//$operate = "新增了房源，编号为：".$serial_number;
 				$operate_log = [
 						'operate' => $operate,
 						'operate_name' => $operate_name,
@@ -163,7 +164,8 @@ class HouseController extends BaseController {
 				//更新操作日志
 				$id = Session::get('user_id');
 				$operate_name = DB::table('accounts')->where('id',$id)->value('name');
-				$operate = "新增了房源，编号为：".$serial_number;
+				$operate = "add a new house information , the number is ".$serial_number;
+				//$operate = "新增了房源，编号为：".$serial_number;
 				$operate_log = [
 						'operate' => $operate,
 						'operate_name' => $operate_name,
@@ -384,7 +386,8 @@ class HouseController extends BaseController {
 		$id = Session::get('user_id');
 		$operate_name = DB::table('accounts')->where('id',$id)->value('name');
 		$serial_number = DB::table('house_message')->where('msgid',$msgId)->value('serial_number');
-		$operate = "更新了房源，编号为：".$serial_number;
+		$operate = "modify a house's infomation , the number is ".$serial_number;
+		//$operate = "更新了房源，编号为：".$serial_number;
 		$operate_log = [
 				'operate' => $operate,
 				'operate_name' => $operate_name,
