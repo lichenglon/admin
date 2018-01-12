@@ -24,13 +24,12 @@ class OrderController extends BaseController
     //订单状态
     public $orderStatus = [
         '1' => '未审核',
-        '2' => '审核通过',
-        '3' => '审核未通过',
-        '4' => '订单提交',
-        '5' => '订单驳回',
-        '6' => '订单确认',
-        '7' => '订单取消',
-        '8' => '订单完成'
+        '2' => '审核中',
+        '3' => '订单驳回',
+        '4' => '订单确认',
+        '5' => '订单取消',
+        '6' => '合同上传',
+        '7' => '未付款'
     ];
     /**
      * Display a listing of the resource.
@@ -40,36 +39,51 @@ class OrderController extends BaseController
     public function index(Request $request)
     {
 
-        $order_status = $this->getOrderStatus();
+        $status_all = $this->getOrderStatus();
+        $status = $request->input('status');
+
         $where = [];
+
+
+//        $where['order_status'] = $status;
+
         /*$pay_status = $request->input('pay_status');
         $status = $request->input('status');
         $order_no = $request->input('order_no');
-        unset($_REQUEST['_token']);
+        unset($_REQUEST['_token']);*/
         //搜索
+        $status = $request->input('status');
+        echo $status;
+
         if(isset($request->search)){
+            if(!empty($_REQUEST['status'])){
+                $where['order_status'] = $_REQUEST['status'];
+            }
 
-            if(!empty($order_no)){
-                $where['tbuy_order.order_no'] = $order_no;
-            }
-            if(!empty($status)){
-                $where['tbuy_order_details.status'] = $status;
-            }
-            if($request->is_balance !== null){
-                $where['tbuy_order_details.is_balance'] = $request->is_balance ;
-            }
-            if($pay_status != ''){
-                $where['tbuy_order.status'] = $pay_status;
-            }
-            if(!empty($request->keyword)){
-                $where[] = [$request->keyword_type, 'like', '%'.$request->keyword.'%'];
-            }
-            $where[] = ['create_time', '>=', $request->begin_time];
-            $where[] = ['create_time', '<=', $request->end_time];
-        }*/
+//            if(!empty($order_no)){
+//                $where['tbuy_order.order_no'] = $order_no;
+//            }
+//            if(!empty($status)){
+//                $where['tbuy_order_details.status'] = $status;
+//            }
+//            if($request->is_balance !== null){
+//                $where['tbuy_order_details.is_balance'] = $request->is_balance ;
+//            }
+//            if($pay_status != ''){
+//                $where['tbuy_order.status'] = $pay_status;
+//            }
+//            if(!empty($request->keyword)){
+//                $where[] = [$request->keyword_type, 'like', '%'.$request->keyword.'%'];
+//            }
+//            $where[] = ['create_time', '>=', $request->begin_time];
+//            $where[] = ['create_time', '<=', $request->end_time];
+        }
 
-        $order_list = DB::table('order')->where($where)->orderBy('order_id', 'desc')->paginate(20);
-        return view('order.order.index',['data'=>$order_list,'order_status'=>$order_status,'orderStatus'=>$this->orderStatus]);
+        $total = DB::table('order')->where($where)->orderBy('order_id', 'desc')->count();
+        $order_list = DB::table('order')->where($where)->orderBy('order_id', 'desc')->paginate(10);
+
+        return view('order.order.index',['data'=>$order_list, 'total'=>$total, 'status_all'=>$status_all, 'orderStatus'=>$this->orderStatus, 'a_status'=>$status]);
+
     }
 
 

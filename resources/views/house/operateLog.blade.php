@@ -16,11 +16,11 @@
                                         <form action="{{url('house/operateLog')}}" method="post">
                                                 <span>操作时间：</span>
                                                 <div class="check-box">
-                                                        <input type="text" name="stime" id="stime" class="input-text" value="@if(!empty($stime)){{$stime}}@endif"  style="display:inline-block"/>
+                                                        <input type="text" name="stime" id="stime" class="form-control" value="@if(!empty($stime)){{$stime}}@endif"  style="display:inline-block"/>
                                                 </div>
                                                 -
                                                 <div class="check-box">
-                                                        <input type="text" name="etime" id="etime"  value="@if(!empty($etime)){{$etime}}@endif"  class="input-text"/>
+                                                        <input type="text" name="etime" id="etime" class="form-control" value="@if(!empty($etime)){{$etime}}@endif" />
                                                 </div>
                                                 <input type="submit" class="btn btn-default" name="search" value="搜索">
 

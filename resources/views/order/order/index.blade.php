@@ -18,10 +18,8 @@
 
                 <form action="{{ url('order/order') }}" method="post">
                     {{ csrf_field() }}
-
-
                     <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
-                        <span style="line-height:34px;">列表</span>
+                        <span style="line-height:34px;">订单列表</span>
                         <div style="float:right;">
                             <a href="{{ url('order/order/exportOrderData') }}" type="button" class="btn btn-default">导出EXCEL</a>
                         </div>
@@ -29,21 +27,23 @@
                     <div class="row">
                         <div class="col-sm-2">
                             <label><b>订单状态：</b></label>
-                            <select class="form-control" name="status">
+                            <select class="form-control" name="status" id="status">
                                 <option value="">不限</option>
-                                @foreach($order_status as $k=>$v)
-                                    <option value="{{ $k }}">{{ $orderStatus[$k] }}</option>
+                                @foreach($status_all as $k=>$v)
+                                    <option value="{{$k}}">{{$v}}</option>
                                 @endforeach
                             </select>
-
                         </div>
 
                         <div class="col-sm-4">
                             <label><b>下单时间：</b> </label>
-                            <input type="text" name="begin_time"  class="form-control" id="begin_time" value="@if(isset($_REQUEST['begin_time'])) {{ $_REQUEST['begin_time'] }} @else 2014-09-19 00:00:00  @endif">
-                            &nbsp; 至&nbsp;
-                            <input type="text" name="end_time"  class="form-control" id="end_time" value="@if(isset($_REQUEST['end_time'])) {{ $_REQUEST['end_time'] }} @else {{ date('Y-m-d H:i:s') }}  @endif">
+                            {{--<input type="text" name="begin_time"  class="form-control" id="begin_time" value="@if(isset($_REQUEST['begin_time'])) {{ $_REQUEST['begin_time'] }} @else 2014-09-19 00:00:00  @endif">--}}
+                            <input type="text" name="stime" id="stime" class="form-control" value="@if(!empty($stime)){{$stime}}@endif" />
+                            &nbsp;&nbsp;至&nbsp;&nbsp;
+                            <input type="text" name="etime" id="etime" class="form-control" value="@if(!empty($etime)){{$etime}}@endif"/>
+                            {{--<input type="text" name="end_time"  class="form-control" id="end_time" value="@if(isset($_REQUEST['end_time'])) {{ $_REQUEST['end_time'] }} @else {{ date('Y-m-d H:i:s') }}  @endif">--}}
                         </div>
+
                         <div class="col-sm-4">
                             <label><b>关键词搜索</b></label>
                             <select class="form-control" name="keyword_type">
@@ -58,32 +58,10 @@
                             <button type="reset" class="btn btn-default">重置</button>
                         </div>
                     </div>
-
-
-
                 <div class="row" style="margin-bottom:10px;">
-                    <div class="col-sm-9">
-                        <label><b>排序：</b></label>
-                        <select class="form-control">
-                            <option value="创建时间升序">创建时间升序</option>
-                            <option value="创建时间降序">创建时间降序</option>
-                        </select>
-                        <label><b>每页显示：</b></label>
-                        <select class="form-control">
-                            <option selected="" value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>条
-
-                        <span class="r" style="margin-left:20px;">共有数据：<strong>{{$data->total()}}</strong> 条</span>
-                    </div>
-
                 </div>
-
                 {{ $data->appends($_REQUEST)->links() }}
-
-                <div class="row">
+                <div class="row" style="height:600px;">
                     <div class="col-sm-12">
                         <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
                                aria-describedby="example1_info">
@@ -124,15 +102,15 @@
                                     <td class="sorting_1">{{ $value->order_no }}</td>
                                     <td>{{ $value->name }}</td>
                                     <td>{{ $value->tel }}</td>
-                                    <td>{{ $order_status[$value->order_status] }}</td>
+                                    <td>{{ $orderStatus[$value->order_status] }}</td>
                                     <td>{{ $value->order_remark }}</td>
-                                    <td >
-                                        @if($value->order_status == 1)
-                                            <a href="{{ url('order/order/after_sale',[$value->order_id]) }}" target="dialog" width="600px" height="450px;">审核</a>
-                                        @endif
-                                            &nbsp;|&nbsp;
-                                        <a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">查看详情</a>
-                                    </td>
+                                    {{--<td >--}}
+                                        {{--@if($value->order_status == 1)--}}
+                                            {{--<a href="{{ url('order/order/after_sale',[$value->order_id]) }}" target="dialog" width="600px" height="450px;">审核</a>--}}
+                                        {{--@endif--}}
+                                            {{--&nbsp;|&nbsp;--}}
+                                        {{--<a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">查看详情</a>--}}
+                                    {{--</td>--}}
                                 </tr>
                             @endforeach
 
@@ -141,9 +119,14 @@
                         </table>
                     </div>
                 </div>
-
-                {{ $data->appends($_REQUEST)->links() }}
-
+                    @if (!empty($data))
+                        <div class="page_list">
+                            {{$data->appends(Request::input())->links()}}
+                            <div style="display:inline-block; margin-bottom:25px;">
+                                <span class="r">共有数据：<strong>{{$total}}</strong> 条</span>
+                            </div>
+                        </div>
+                    @endif
                 </form>
             </div>
         </div>
@@ -157,23 +140,17 @@
 
     <script>
 
-        //时间插件初始化
-        jeDate({
-            dateCell:"#begin_time",
-            format:"YYYY-MM-DD hh:mm:ss",
-            isinitVal:true,
-            isTime:true, //isClear:false,
-            minDate:"2014-09-19 00:00:00",
+        //常规用法 日期
+        laydate.render({
+            elem: '#stime'
         });
-        jeDate({
-            dateCell:"#end_time",
-            format:"YYYY-MM-DD hh:mm:ss",
-            isinitVal:true,
-            isTime:true, //isClear:false,
-            minDate:"2014-09-19 00:00:00",
+        laydate.render({
+            elem: '#etime'
         });
-    </script>
 
+        //锁定搜索栏订单状态
+        document.getElementById('status').value = "@if(isset($a_status)){{$a_status}}@endif"
+    </script>
     @stop
 
 

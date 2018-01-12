@@ -109,9 +109,7 @@
         laydate.render({
             elem: '#duration'
         });
-    </script>
 
-    <script>
         //审核状态的更改
         function isCheck(number,msgid){
             $.ajax({
