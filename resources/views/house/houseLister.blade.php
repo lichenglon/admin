@@ -7,7 +7,7 @@
 @section('content')
 
 	<div class="box">
-		<div class="box-body">
+		<div class="box-body" style="height:750px">
 
 
 			<div class="Hui-article">
@@ -16,20 +16,31 @@
 						<span class="select-box inline" style="width:100%;">
 								{{ csrf_field() }}
 							<input type="hidden" name="hidden" value="1">
-							<select name="type" class="select" id="findType">
-								<option value="%">@lang('house_translate.classification')</option>
+
+							<select name="type" class="input-text" id="findType" style="width:80px;">
+								<option value="%">分类</option>
+
 								@foreach($typeObject as $value)
 									<option value="{{$value->name}}">{{$value->name}}</option>
 								@endforeach
 							</select>
-							<input type="text" class="input-text" value="@if($serial_number != '%'){{$serial_number}}@endif" placeholder="@lang('house_translate.Room_number')" maxlength="255" name="serial_number" style="width:150px;">
-							<input type="text" class="input-text" value="@if($house_structure != '%'){{$house_structure}}@endif" placeholder="@lang('house_translate.Housing_structure')" maxlength="255" name="house_structure" style="width:150px;">
-							<input type="number" class="input-text" value="@if($house_price != '%'){{$house_price}}@endif" placeholder="@lang('house_translate.Housing_prices')" maxlength="255" name="house_price" style="width:150px;">
-							<input type="text" class="input-text" value="@if($house_location != '%'){{$house_location}}@endif" placeholder="@lang('house_translate.Housing_location')" maxlength="255" name="house_location" style="width:250px;">
-                            <input type="text" class="input-text" value="@if($house_keyword != '%'){{$house_keyword}}@endif" placeholder="@lang('house_translate.The_keyword')" maxlength="255" name="house_keyword" style="width:250px;">
 
-							<input type="submit" class="btn btn-default" name="find" value="@lang('house_translate.determine')">
-							<input type="submit" class="btn btn-default" name="export" value="@lang('house_translate.Export_Excel')">
+							&nbsp;&nbsp;
+							<select name="search_k" class="input-text" id="search_k" style="width:150px;">
+								<option value="%">请选择</option>
+								<option value="serial_number">房源编号</option>
+								<option value="house_structure">房源结构</option>
+								<option value="house_price">价格</option>
+								<option value="house_location">房源位置</option>
+								<option value="house_keyword">关键字</option>
+							</select>
+							&nbsp;
+							<input type="text" name="search_v" class="input-text" id="search_v" style="width:180px;"/>
+
+							&nbsp;&nbsp;
+							<input type="submit" class="btn btn-default" name="find" value="确定">
+
+							<input type="submit" class="btn btn-default" name="export" value="导出Excel">
 
 							<span class="r">
 							@lang('house_translate.Common_data')：<strong>{{$houseCount}}</strong> @lang('house_translate.strip')
@@ -106,8 +117,9 @@
 	@section('js')
 		<script>
 			document.getElementById('findType').value='{{$type}}';
-		</script>
-		<script>
+			document.getElementById('search_k').value='{{$search_k}}';
+			document.getElementById('search_v').value='@if($search_v != "%"){{$search_v}}@endif';
+
 			//常规用法 日期
 			laydate.render({
 				elem: '#rise'

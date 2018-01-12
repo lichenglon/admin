@@ -63,11 +63,11 @@ Route::group(['prefix'=>'order'],function(){
     Route::any('order/store', 'Order\OrderController@store');
     Route::any('order/exportOrderData', 'Order\OrderController@exportOrderData');
     Route::any('order/ship/{id}', 'Order\OrderController@ship');
-    Route::any('order/{id}', 'Order\OrderController@show');
     Route::any('order/detail/{id}','Order\OrderController@detail');
-    #Excel导出
-    Route::any('order/detail/excel/{id}','Order\OrderController@detail_excel');
-
+    #订单详情Excel导出
+    Route::any('order/detail_excel/{id}','Order\OrderController@detail_excel');
+    #订单列表Excel导出
+    Route::any('order/order_excel','Order\OrderController@order_excel');
 
     Route::any('order/after_sale/{id}', 'Order\OrderController@afterSale');
 

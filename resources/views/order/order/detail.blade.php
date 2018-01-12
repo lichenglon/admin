@@ -17,7 +17,7 @@
                 <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
                     <span style="line-height:34px;"><a href="{{ url('order/order') }}" >订单列表</a> - 订单详情</span>
                     <div style="float:right;">
-                        <a href="{{ url('order/order/detail/excel',['id'=>$result->order_id]) }}" type="button" class="btn btn-default">导出EXCEL</a>
+                        <a href="{{ url('order/order/detail_excel',['id'=>$result->order_id]) }}" type="button" class="btn btn-default">导出EXCEL</a>
                     </div>
                 </h4>
                 {{--{{ $data->appends($_REQUEST)->links() }}--}}
