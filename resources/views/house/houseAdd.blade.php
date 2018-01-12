@@ -96,7 +96,7 @@
                     {{ csrf_field() }}
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>房源类型：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Housing_types')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <span class="select-box">
 				                <select name="house_type" class="select">
@@ -107,7 +107,7 @@
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>国家城市：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.National_city')：</label>
                         <div class="formControls col-xs-8 col-sm-9">
                             <select id="country" class="dept_select"  name="state">
                                 @foreach($nationArr as $nation)
@@ -124,7 +124,7 @@
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>详细位置：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Detailed_location')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="text" class="input-text" value="" placeholder="南山区泰邦科技大厦2308" maxlength="255" id="house_location" name="house_location" >
                         </div>
@@ -132,126 +132,126 @@
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>房源结构：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Housing_structure')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="text" name="house_structure" id="house_structure" placeholder="户型 大小" maxlength="100" value="" class="input-text">
                         </div>
                         <span id="house_structureMsg"></span>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">周边信息：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.surrounding_information')：</label>
                         <div class="formControls col-xs-8 col-sm-9"  style="width:45%;">
                             <div class="check-box">
                                 <input name="peripheral_information[]" value='超市' type="checkbox" class="date_checkbox" id="peripheral-1">
-                                <label for="peripheral-1">超市</label>
-                                <input type="number" name="" id="supermarket" disabled="disabled" placeholder="" value="" min="0" max="300" class="input-text information">/分钟
+                                <label for="peripheral-1">@lang('house_translate.supermarket')</label>
+                                <input type="number" name="" id="supermarket" disabled="disabled" placeholder="" value="" min="0" max="300" class="input-text information">/@lang('house_translate.Minute')
                             </div>
                             <div class="check-box">
                                 <input name="peripheral_information[]" value='中餐馆' type="checkbox" class="date_checkbox" id="peripheral-2">
-                                <label for="peripheral-2">中&nbsp;餐&nbsp;馆</label>&nbsp;
-                                <input type="number" name="" id="cr" disabled="disabled" placeholder="" value="" min="0" max="300" class="input-text information">/分钟
+                                <label for="peripheral-2">@lang('house_translate.Chinese_restaurant')</label>&nbsp;
+                                <input type="number" name="" id="cr" disabled="disabled" placeholder="" value="" min="0" max="300" class="input-text information">/@lang('house_translate.Minute')
                             </div>
                             <br>
                             <div class="check-box">
                                 <input name="peripheral_information[]" value='警局' type="checkbox" class="date_checkbox" id="peripheral-3">
-                                <label for="peripheral-3">警局</label>
-                                <input type="number" name="" id="cr" disabled="disabled" placeholder="" value="" min="0" max="300" class="input-text information">/分钟
+                                <label for="peripheral-3">@lang('house_translate.The_police_station')</label>
+                                <input type="number" name="" id="cr" disabled="disabled" placeholder="" value="" min="0" max="300" class="input-text information">/@lang('house_translate.Minute')
                             </div>
                             <div class="check-box">
                                 <input name="peripheral_information[]" value='公共交通' type="checkbox" class="date_checkbox" id="peripheral-4">
-                                <label for="peripheral-4">公共交通</label>
-                                <input type="number" name="" id="cr" disabled="disabled" placeholder="" value="" min="0" max="300" class="input-text information">/分钟
+                                <label for="peripheral-4">@lang('house_translate.Public_transport')</label>
+                                <input type="number" name="" id="cr" disabled="disabled" placeholder="" value="" min="0" max="300" class="input-text information">/@lang('house_translate.Minute')
                             </div>
                         </div>
                     </div>
 
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>房源价格：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Housing_prices')：</label>
                         <div class="formControls col-xs-8 col-sm-9"  style="width:45%;">
-                            <input type="number" name="house_price" id="house_price" placeholder="" value=""  min="1" class="input-text" style="width:95%;">元
+                            <input type="number" name="house_price" id="house_price" placeholder="" value=""  min="1" class="input-text" style="width:100%;">
                         </div>
                         <span id="house_priceMsg"></span>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>房源大小：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Housing_size')：</label>
                         <div class="formControls col-xs-8 col-sm-9"  style="width:45%;">
-                            <input type="number" name="house_size" id="house_size" placeholder="" value="20"  min="1" class="input-text" style="width:95%;">平方
+                            <input type="number" name="house_size" id="house_size" placeholder="" value="20"  min="1" class="input-text" style="width:100%;">
                         </div>
                         <span id="house_sizeMsg"></span>
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>押金：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.deposit')：</label>
                         <div class="formControls col-xs-8 col-sm-9"  style="width:45%;">
-                            <input type="number" name="cash_pledge" id="cash_pledge" placeholder="" value=""  min="1" class="input-text" style="width:95%;">平方
+                            <input type="number" name="cash_pledge" id="cash_pledge" placeholder="" value=""  min="1" class="input-text" style="width:100%;">
                         </div>
                         <span id="cash_pledgeMsg"></span>
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>预付款比例：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Prepayment_ratio')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <span class="select-box">
 				                <select name="payment_proportion" class="select">
-                                    <option value="一押一租">一押一租</option>
+                                    <option value="一押一租">@lang('house_translate.One_lease_and_one_rent')</option>
                                 </select>
 				            </span>
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>结算方式：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.The_method_of_payment')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <span class="select-box">
 				                <select name="knot_way" class="select">
-                                    <option value="月结">月结</option>
-                                    <option value="季结">季结</option>
+                                    <option value="月结">@lang('house_translate.Monthly')</option>
+                                    <option value="季结">@lang('house_translate.Quarterly_settlement')</option>
                                 </select>
 				            </span>
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房屋设备：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.House_equipment')：</label>
                         <div class="formControls col-xs-8 col-sm-9 skin-minimal">
                             <div class="check-box">
                                 <input name="house_facility[]" value='洗衣机' type="checkbox" id="checkbox-1">
-                                <label for="checkbox-1">洗衣机</label>
+                                <label for="checkbox-1">@lang('house_translate.Washing_machine')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_facility[]" value='空调' type="checkbox" id="checkbox-2">
-                                <label for="checkbox-2">空调</label>
+                                <label for="checkbox-2">@lang('house_translate.Air_conditioning')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_facility[]" value='暖气' type="checkbox" id="checkbox-3">
-                                <label for="checkbox-3">暖气</label>
+                                <label for="checkbox-3">@lang('house_translate.The_heating')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_facility[]" value='床' type="checkbox" id="checkbox-4">
-                                <label for="checkbox-4">床</label>
-                            </div>
+                                <label for="checkbox-4">@lang('house_translate.The_bed')</label>
+                            </div>@if(Session::get('lang') == 'en')<br>@endif
                             <div class="check-box">
                                 <input name="house_facility[]" value='厨房' type="checkbox" id="checkbox-5">
-                                <label for="checkbox-5">厨房</label>
+                                <label for="checkbox-5">@lang('house_translate.The_kitchen')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_facility[]" value='衣柜' type="checkbox" id="checkbox-6">
-                                <label for="checkbox-6">衣柜</label>
+                                <label for="checkbox-6">@lang('house_translate.The_wardrobe')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_facility[]" value='冰箱' type="checkbox" id="checkbox-7">
-                                <label for="checkbox-7">冰箱</label>
+                                <label for="checkbox-7">@lang('house_translate.The_refrigerator')</label>
                             </div>
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>关键字：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.The_keyword')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="text" name="house_keyword" id="house_keyword" placeholder="多个关键字用英文逗号隔开，限10个关键字" value="" maxlength="10" class="input-text">
                         </div>
                         <span id="house_keywordMsg"></span>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>房源简介：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Introduction_of_housing')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <textarea name="house_brief" id="house_brief" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符"></textarea>
                         </div>
@@ -259,77 +259,77 @@
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">租期时长：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_lease_time')：</label>
                         <div class="formControls col-xs-8 col-sm-9 skin-minimal">
 
                             <div class="check-box">
                                 <input type="text" name="house_rise" id="house_rise" placeholder="" value="" class="input-text" style="display:inline-block">
                             </div>
-                            <span>起租期</span>
+                            <span>@lang('house_translate.The_lease_period')</span>
                             <div class="check-box">
                                 <input type="text" name="house_duration" id="house_duration" class="input-text Wdate">
                             </div>
-                            <span>最长租期</span>
+                            <span>@lang('house_translate.The_longest_leases')</span>
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房屋状态：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Home_state')：</label>
                         <div class="formControls col-xs-8 col-sm-9 skin-minimal">
 
                             <div class="check-box">
                                 <input name="house_status" value="预租" checked="true" type="radio" id="radio-1">
-                                <label for="radio-1">预租</label>
+                                <label for="radio-1">@lang('house_translate.Rent_in_advance')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_status" value="已锁定" type="radio" id="radio-2">
-                                <label for="radio-2">已锁定</label>
+                                <label for="radio-2">@lang('house_translate.Has_been_locked')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_status" value="已出租" type="radio" id="radio-4">
-                                <label for="radio-4">已出租</label>
-                            </div>
+                                <label for="radio-4">@lang('house_translate.Have_been_leased')</label>
+                            </div>@if(Session::get('lang') == 'en')<br>@endif
                             <div class="check-box">
                                 <input name="house_status" value="配置中" type="radio" id="radio-5">
-                                <label for="radio-5">配置中</label>
+                                <label for="radio-5">@lang('house_translate.In_the_configuration')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_status" value="停租" type="radio" id="radio-6">
-                                <label for="radio-6">停租</label>
+                                <label for="radio-6">@lang('house_translate.Off_hire')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_status" value="冻结" type="radio" id="radio-7">
-                                <label for="radio-7">冻结</label>
+                                <label for="radio-7">@lang('house_translate.freeze')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_status" value="暂停出租" type="radio" id="radio-8">
-                                <label for="radio-8">暂停出租</label>
+                                <label for="radio-8">@lang('house_translate.Suspension_of_rent')</label>
                             </div>
 
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>房东姓名：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.The_landlord_name')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="text" name="landlord_name" id="landlord_name" class="input-text Wdate">
                         </div>
                         <span id="landlord_nameMsg"></span>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>房东证件号：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Landlord_id_number')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="text" name="landlord_identity" id="landlord_identity" class="input-text Wdate">
                         </div>
                         <span id="landlord_identityMsg"></span>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房东邮箱：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_landlord_email')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="text" name="landlord_email" id="landlord_email" class="input-text Wdate">
                         </div>
                         <span id="landlord_emailMsg"></span>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>房东电话：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.The_landlord_telephone')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="text" name="landlord_phone" id="landlord_phone" class="input-text Wdate">
                         </div>
@@ -337,31 +337,31 @@
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房东性别：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_landlord_gender')：</label>
                         <div class="formControls col-xs-8 col-sm-9 skin-minimal">
 
                             <div class="check-box">
                                 <input name="landlord_sex" value="男" checked="true" type="radio" id="radioTwo-1">
-                                <label for="radioTwo-1">男</label>
+                                <label for="radioTwo-1">@lang('house_translate.boy')</label>
                             </div>
                             <div class="check-box">
                                 <input name="landlord_sex" value="女" type="radio" id="radioTwo-2">
-                                <label for="radioTwo-2">女</label>
+                                <label for="radioTwo-2">@lang('house_translate.girl')</label>
                             </div>
                             <div class="check-box">
-                                <input name="landlord_sex" value="未知" type="radio" id="radioTwo-3">
-                                <label for="radioTwo-3">未知</label>
+                                <input name="landlord_sex" value="保密" type="radio" id="radioTwo-3">
+                                <label for="radioTwo-3">@lang('house_translate.secrecy')</label>
                             </div>
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>房东联系地址：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Address_of_landlord')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="text" name="landlord_site" id="landlord_site" class="input-text Wdate">
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房东备注：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_landlord_note')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <textarea name="landlord_remark" id="landlord_remark" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符"></textarea>
                         </div>
@@ -370,10 +370,10 @@
 
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">选择图片：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Choose_picture')：</label>
                         <div class="formControls col-xs-8 col-sm-9">
-                            <a href="javascript:;" class="a-upload" style="width:15%;height:30px;">
-                                <input type="file" name="upload[]" id="myFile" multiple="multiple"/><span>点击这里上传文件</span>
+                            <a href="javascript:;" class="a-upload" style="width:21%;height:30px;">
+                                <input type="file" name="upload[]" id="myFile" multiple="multiple"/><span>@lang('house_translate.Click_here_to_upload_the_file')</span>
                             </a>
                                <div class="img_div"></div>
 
@@ -395,8 +395,8 @@
 
                     <div class="row cl">
                         <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-                            <button class="btn btn-primary radius" type="button" id="verification">保存并提交审核</button>
-                            <a href="javascript:window.history.go(-1);"><button class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button></a>
+                            <button class="btn btn-primary radius" type="button" id="verification">@lang('house_translate.Save_and_submit_the_audit')</button>
+                            <a href="javascript:window.history.go(-1);"><button class="btn btn-default radius" type="button">&nbsp;&nbsp;@lang('house_translate.cancel')&nbsp;&nbsp;</button></a>
                         </div>
                     </div>
                 </form>

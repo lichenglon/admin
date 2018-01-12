@@ -4,7 +4,7 @@
 	<dt class="cf">
 	<form action="{{url('house/type/update')}}" method="post">
 		<div class="btn-toolbar opt-btn cf">
-			<a class="layer-delete" href="{{ url('house/type/delete',['id'=>$values['id']]) }}">删除</a>
+			<a class="layer-delete" href="{{ url('house/type/delete',['id'=>$values['id']]) }}">@lang('house_translate.delete')</a>
 		</div>
 		<div class="fold"><i></i></div>
 		<div class="order">{{ $values['id'] }}</div>

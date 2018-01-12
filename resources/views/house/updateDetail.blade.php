@@ -94,7 +94,7 @@
                     <input type="hidden" value="{{$houseMsg->msgid}}" name="msgId">
                     <input type="hidden" value="{{$houseMsg->landid}}" name="landId">
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>房源类型：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Housing_types')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                         <span class="select-box">
 				            <select name="house_type" class="select" id="houseTypeVal">
@@ -105,71 +105,105 @@
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">详细位置：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Detailed_location')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="text" name="house_location" id="house_location" placeholder="广东省深圳市宝安区西乡街道56栋33号" value="{{$houseMsg->house_location}}" class="input-text">
                         </div>
                         <span id="house_locationMsg"></span>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房源结构：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Housing_structure')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" name="house_structure" id="house_structure" placeholder="平面" value="{{$houseMsg->house_structure}}" class="input-text">
+                            <input type="text" name="house_structure" id="house_structure" placeholder="两房一厅" value="{{$houseMsg->house_structure}}" class="input-text">
                         </div>
                         <span id="house_structureMsg"></span>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">周边信息：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.surrounding_information')：</label>
                         <div class="formControls col-xs-8 col-sm-9"  style="width:45%;">
                             <?php
-                                $rimMessage = $houseMsg->rim_message ? explode(',',$houseMsg->rim_message) : "";
+                                $rimMessage = $houseMsg->rim_message ? explode(',',$houseMsg->rim_message) : '';
+                                //var_dump($rimMessage);
                                 //取步行时间
                                 if(is_array($rimMessage)){
-                                    list(,$supermarket) = isset($rimMessage[0]) ? explode(' ',$rimMessage[0]) : '';
-                                    list(,$Chinese) = isset($rimMessage[1]) ? explode(' ',$rimMessage[1]) : '';
-                                    list(,$police) = isset($rimMessage[2]) ? explode(' ',$rimMessage[2]) : '';
-                                    list(,$public) = isset($rimMessage[3]) ? explode(' ',$rimMessage[3]) : '';
+                                    //$arr = [];
+                                    foreach($rimMessage as $v){
+                                        if(strstr($v, '超市') !== false){
+                                            $supermarket = explode(' ',$v);
+                                        }elseif(strstr($v, '中餐馆') !== false){
+                                            $Chinese = explode(' ',$v);
+                                        }elseif(strstr($v, '警局') !== false){
+                                            $police = explode(' ',$v);
+                                        }elseif(strstr($v, '公共交通') !== false){
+                                            $public = explode(' ',$v);
+                                        }
+
+                                    }
+
                                 } else {
                                     $supermarket = '';
                                     $Chinese = '';
                                     $police = '';
                                     $public = '';
                                 }
-
                             ?>
                             <div class="check-box">
-                                <input name="peripheral_information[]" value='超市 {{$supermarket}}' @if(isset($rimMessage[0])) checked="checked" @endif type="checkbox" class="date_checkbox" id="peripheral-1">
-                                <label for="peripheral-1">超市</label>
-                                <input type="number" name="" id="supermarket" @if(!isset($rimMessage[0])) disabled="disabled" @endif  value="{{$supermarket}}" min="1" max="300" class="input-text information">/分钟
+                                @if(isset($supermarket) && is_array($supermarket))
+                                    <input name="peripheral_information[]" value='超市 {{$supermarket[1]}}' checked="checked" type="checkbox" class="date_checkbox" id="peripheral-1">
+                                    <label for="peripheral-1">@lang('house_translate.supermarket')</label>
+                                    <input type="number" name="" id="supermarket"  value="{{$supermarket[1]}}" min="1" max="300" class="input-text information">/@lang('house_translate.Minute')
+                                @else
+                                    <input name="peripheral_information[]" value='超市 ' type="checkbox" class="date_checkbox" id="peripheral-1">
+                                    <label for="peripheral-1">@lang('house_translate.supermarket')</label>
+                                    <input type="number" name="" id="supermarket"  disabled="disabled"  min="1" max="300" class="input-text information">/@lang('house_translate.Minute')
+                                @endif
                             </div>
                             <div class="check-box">
-                                <input name="peripheral_information[]" value='中餐馆 {{$Chinese}}' @if(isset($rimMessage[1])) checked="checked" @endif type="checkbox" class="date_checkbox" id="peripheral-2">
-                                <label for="peripheral-2">中&nbsp;餐&nbsp;馆</label>&nbsp;
-                                <input type="number" name=""  @if(!isset($rimMessage[1])) disabled="disabled" @endif value="{{$Chinese}}" min="1" max="300" class="input-text information">/分钟
+                                @if(isset($Chinese) && is_array($Chinese))
+                                    <input name="peripheral_information[]" value='中餐馆 {{$Chinese[1]}}' checked="checked"  type="checkbox" class="date_checkbox" id="peripheral-2">
+                                    <label for="peripheral-2">@lang('house_translate.Chinese_restaurant')</label>&nbsp;
+                                    <input type="number" name="" value="{{$Chinese[1]}}" min="1" max="300" class="input-text information">/@lang('house_translate.Minute')
+                                @else
+                                    <input name="peripheral_information[]" value='中餐馆 ' type="checkbox" class="date_checkbox" id="peripheral-2">
+                                    <label for="peripheral-2">@lang('house_translate.Chinese_restaurant')</label>&nbsp;
+                                    <input type="number" name=""  disabled="disabled" value="" min="1" max="300" class="input-text information">/@lang('house_translate.Minute')
+                                @endif
                             </div>
                             <br>
                             <div class="check-box">
-                                <input name="peripheral_information[]" value='警局 {{$police}}' @if(isset($rimMessage[2])) checked="checked" @endif type="checkbox" class="date_checkbox" id="peripheral-3">
-                                <label for="peripheral-3">警局</label>
-                                <input type="number" name=""  @if(!isset($rimMessage[2])) disabled="disabled" @endif value="{{$police}}" min="0" max="300" class="input-text information">/分钟
+                                @if(isset($police) && is_array($police))
+                                    <input name="peripheral_information[]" value='警局 {{$police[1]}}' checked="checked" type="checkbox" class="date_checkbox" id="peripheral-3">
+                                    <label for="peripheral-3">@lang('house_translate.The_police_station')</label>
+                                    <input type="number" name="" value="{{$police[1]}}" min="0" max="300" class="input-text information">/@lang('house_translate.Minute')
+                                @else
+                                    <input name="peripheral_information[]" value='警局 ' type="checkbox" class="date_checkbox" id="peripheral-3">
+                                    <label for="peripheral-3">@lang('house_translate.The_police_station')</label>
+                                    <input type="number" name=""  disabled="disabled"  value="" min="0" max="300" class="input-text information">/@lang('house_translate.Minute')
+                                @endif
                             </div>
                             <div class="check-box">
-                                <input name="peripheral_information[]" value='公共交通 {{$public}}' @if(isset($rimMessage[3])) checked="checked" @endif type="checkbox" class="date_checkbox" id="peripheral-4">
-                                <label for="peripheral-4">公共交通</label>
-                                <input type="number" name="" @if(!isset($rimMessage[3])) disabled="disabled" @endif value="{{$public}}" min="1" max="300" class="input-text information">/分钟
+                                @if(isset($public) && is_array($public))
+                                    <input name="peripheral_information[]" value='公共交通 {{$public[1]}}' checked="checked" type="checkbox" class="date_checkbox" id="peripheral-4">
+                                    <label for="peripheral-4">@lang('house_translate.Public_transport')</label>
+                                    <input type="number" name="" value="{{$public[1]}}" min="1" max="300" class="input-text information">/@lang('house_translate.Minute')
+                                @else
+                                    <input name="peripheral_information[]" value='公共交通 '  type="checkbox" class="date_checkbox" id="peripheral-4">
+                                    <label for="peripheral-4">@lang('house_translate.Public_transport')</label>
+                                    <input type="number" name=""  disabled="disabled" value="" min="1" max="300" class="input-text information">/@lang('house_translate.Minute')
+                                @endif
                             </div>
                         </div>
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房源价格：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Housing_prices')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="number" name="house_price" id="house_price" placeholder="" value="{{$houseMsg->house_price}}"  min="0.0" step="0.1"class="input-text" style="width:95%;">元
                         </div>
                         <span id="house_priceMsg"></span>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房源大小：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Housing_size')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="number" name="house_size" id="house_size" placeholder="" value="{{$houseMsg->house_size}}"  min="0.0" step="0.1"class="input-text" style="width:95%;">平方
                         </div>
@@ -177,7 +211,7 @@
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">押金：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.deposit')：</label>
                         <div class="formControls col-xs-8 col-sm-9"  style="width:45%;">
                             <input type="number" name="cash_pledge" id="cash_pledge" placeholder="" value="{{$houseMsg->cash_pledge}}"  min="1" class="input-text" style="width:95%;">平方
                         </div>
@@ -185,29 +219,29 @@
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>预付款比例：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Prepayment_ratio')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <span class="select-box">
 				                <select name="payment_proportion" class="select" id="payment_proportion">
-                                    <option value="一押一租">一押一租</option>
+                                    <option value="一押一租">@lang('house_translate.One_lease_and_one_rent')</option>
                                 </select>
 				            </span>
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>结算方式：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.The_method_of_payment')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <span class="select-box">
 				                <select name="knot_way" class="select" id="knot_way">
-                                    <option value="月结">月结</option>
-                                    <option value="季结">季结</option>
+                                    <option value="月结">@lang('house_translate.Monthly')</option>
+                                    <option value="季结">@lang('house_translate.Quarterly_settlement')</option>
                                 </select>
 				            </span>
                         </div>
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房屋设备：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.House_equipment')：</label>
                         <div class="formControls col-xs-8 col-sm-9 skin-minimal">
                             <?php
                                 if(empty($houseMsg->house_facility)){
@@ -232,43 +266,43 @@
                             ?>
                             <div class="check-box">
                                 <input name="house_facility[]" @if($washing) checked="checked" @endif value='洗衣机' type="checkbox" id="checkbox-1">
-                                <label for="checkbox-1">洗衣机</label>
+                                <label for="checkbox-1">@lang('house_translate.Washing_machine')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_facility[]" @if($air) checked="checked" @endif value='空调' type="checkbox" id="checkbox-2">
-                                <label for="checkbox-2">空调</label>
+                                <label for="checkbox-2">@lang('house_translate.Air_conditioning')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_facility[]" @if($heating) checked="checked" @endif value='暖气' type="checkbox" id="checkbox-3">
-                                <label for="checkbox-3">暖气</label>
+                                <label for="checkbox-3">@lang('house_translate.The_heating')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_facility[]" @if($bed) checked="checked" @endif value='床' type="checkbox" id="checkbox-4">
-                                <label for="checkbox-4">床</label>
-                            </div>
+                                <label for="checkbox-4">@lang('house_translate.The_bed')</label>
+                            </div>@if(Session::get('lang') == 'en')<br>@endif
                             <div class="check-box">
                                 <input name="house_facility[]" @if($kitchen) checked="checked" @endif value='厨房' type="checkbox" id="checkbox-5">
-                                <label for="checkbox-5">厨房</label>
+                                <label for="checkbox-5">@lang('house_translate.The_kitchen')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_facility[]" @if($closet) checked="checked" @endif value='衣柜' type="checkbox" id="checkbox-6">
-                                <label for="checkbox-6">衣柜</label>
+                                <label for="checkbox-6">@lang('house_translate.The_wardrobe')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_facility[]" @if($refrigerator) checked="checked" @endif value='冰箱' type="checkbox" id="checkbox-7">
-                                <label for="checkbox-7">冰箱</label>
+                                <label for="checkbox-7">@lang('house_translate.The_refrigerator')</label>
                             </div>
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">关键字：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_keyword')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="text" name="house_keyword" id="house_keyword" placeholder="多个关键字用英文逗号隔开，限10个关键字" value="{{$houseMsg->house_keyword}}" maxlength="10" class="input-text">
                         </div>
                         <span id="house_keywordMsg"></span>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房源简介：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Introduction_of_housing')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <textarea name="house_brief" id="house_brief" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符">{{$houseMsg->house_brief}}</textarea>
                         </div>
@@ -276,76 +310,76 @@
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">租期时长：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_lease_time')：</label>
                         <div class="formControls col-xs-8 col-sm-9 skin-minimal">
                             <div class="check-box">
                                 <input type="text" name="house_rise" id="house_rise" placeholder="" value="{{$houseMsg->house_rise}}" class="input-text" style="display:inline-block">
                             </div>
-                            <span>起租期</span>
+                            <span>@lang('house_translate.The_lease_period')</span>
                             <div class="check-box">
                                 <input type="text" name="house_duration" id="house_duration" value="{{$houseMsg->house_duration}}" class="input-text Wdate">
                             </div>
-                            <span>最长租期</span>
+                            <span>@lang('house_translate.The_longest_leases')</span>
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房屋状态：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Home_state')：</label>
                         <div class="formControls col-xs-8 col-sm-9 skin-minimal">
 
                             <div class="check-box">
                                 <input name="house_status" @if($houseMsg->house_status == '预租') checked="true" @endif value="预租" type="radio" id="radio-1">
-                                <label for="radio-1">预租</label>
+                                <label for="radio-1">@lang('house_translate.Rent_in_advance')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_status" @if($houseMsg->house_status == '已锁定') checked="true" @endif value="已锁定" type="radio" id="radio-2">
-                                <label for="radio-2">已锁定</label>
+                                <label for="radio-2">@lang('house_translate.Has_been_locked')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_status" @if($houseMsg->house_status == '已出租') checked="true" @endif value="已出租" type="radio" id="radio-4">
-                                <label for="radio-4">已出租</label>
-                            </div>
+                                <label for="radio-4">@lang('house_translate.Have_been_leased')</label>
+                            </div>@if(Session::get('lang') == 'en')<br>@endif
                             <div class="check-box">
                                 <input name="house_status" @if($houseMsg->house_status == '配置中') checked="true" @endif value="配置中" type="radio" id="radio-5">
-                                <label for="radio-5">配置中</label>
+                                <label for="radio-5">@lang('house_translate.In_the_configuration')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_status" @if($houseMsg->house_status == '停租') checked="true" @endif value="停租" type="radio" id="radio-6">
-                                <label for="radio-6">停租</label>
+                                <label for="radio-6">@lang('house_translate.Off_hire')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_status" @if($houseMsg->house_status == '冻结') checked="true" @endif value="冻结" type="radio" id="radio-7">
-                                <label for="radio-7">冻结</label>
+                                <label for="radio-7">@lang('house_translate.freeze')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_status" @if($houseMsg->house_status == '暂停出租') checked="true" @endif value="暂停出租" type="radio" id="radio-8">
-                                <label for="radio-8">暂停出租</label>
+                                <label for="radio-8">@lang('house_translate.Suspension_of_rent')</label>
                             </div>
 
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房东姓名：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_landlord_name')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="text" name="landlord_name" value="{{$houseMsg->landlord_name}}" id="landlord_name" class="input-text Wdate" style="width:220px;">
                         </div>
                         <span id="landlord_nameMsg"></span>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房东证件号：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Landlord_id_number')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="text" name="landlord_identity" value="{{$houseMsg->landlord_identity}}" id="landlord_identity" class="input-text Wdate" style="width:220px;">
                         </div>
                         <span id="landlord_identityMsg"></span>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房东邮箱：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_landlord_email')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="text" name="landlord_email" value="{{$houseMsg->landlord_email}}" id="landlord_email" class="input-text Wdate" style="width:220px;">
                         </div>
                         <span id="landlord_emailMsg"></span>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房东电话：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_landlord_telephone')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="text" name="landlord_phone" value="{{$houseMsg->landlord_phone}}" id="landlord_phone" class="input-text Wdate" style="width:220px;">
                         </div>
@@ -353,37 +387,37 @@
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房东性别：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_landlord_gender')：</label>
                         <div class="formControls col-xs-8 col-sm-9 skin-minimal">
 
                             <div class="check-box">
                                 <input name="landlord_sex" @if($houseMsg->landlord_sex == '男') checked="true" @endif value="男" type="radio" id="radioTwo-1">
-                                <label for="radioTwo-1">男</label>
+                                <label for="radioTwo-1">@lang('house_translate.boy')</label>
                             </div>
                             <div class="check-box">
                                 <input name="landlord_sex" @if($houseMsg->landlord_sex == '女') checked="true" @endif value="女" type="radio" id="radioTwo-2">
-                                <label for="radioTwo-2">女</label>
+                                <label for="radioTwo-2">@lang('house_translate.girl')</label>
                             </div>
                             <div class="check-box">
-                                <input name="landlord_sex" @if($houseMsg->landlord_sex == '未知') checked="true" @endif value="未知" type="radio" id="radioTwo-3">
-                                <label for="radioTwo-3">未知</label>
+                                <input name="landlord_sex" @if($houseMsg->landlord_sex == '保密') checked="true" @endif value="保密" type="radio" id="radioTwo-3">
+                                <label for="radioTwo-3">@lang('house_translate.secrecy')</label>
                             </div>
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房东联系地址：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Address_of_landlord')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="text" name="landlord_site" value="{{$houseMsg->landlord_site}}" id="datemin" class="input-text Wdate">
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">房东备注：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_landlord_note')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <textarea name="landlord_remark" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符">{{$houseMsg->landlord_remark}}</textarea>
                         </div>
                     </div>
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">图片操作：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Picture_operation')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <table>
                                 @foreach($imgArr as $value)
@@ -391,7 +425,7 @@
 
                                     <td>
                                         <img style="width:80px; height:120px;" src="{{asset('./uploads')}}/{{$value->house_imagename}}" alt="">
-                                        <a href="javascript:delimage({{$value->imgid}});" >删除此图片</a>
+                                        <a href="javascript:delimage({{$value->imgid}});" >@lang('house_translate.Delete_this_picture')</a>
                                     </td>
 
                                 </tr>
@@ -400,10 +434,10 @@
                         </div>
                     </div>
                     <div class="row cl">
-                            <label class="form-label col-xs-4 col-sm-2">选择图片：</label>
+                            <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Choose_picture')：</label>
                             <div class="formControls col-xs-8 col-sm-9">
-                                <a href="javascript:;" class="a-upload" style="width:15%;height:30px;">
-                                    <input type="file" name="upload[]" id="myFile" multiple="multiple"/><span>点击这里上传文件</span>
+                                <a href="javascript:;" class="a-upload" style="width:21%;height:30px;">
+                                    <input type="file" name="upload[]" id="myFile" multiple="multiple"/><span>@lang('house_translate.Click_here_to_upload_the_file')</span>
                                 </a>
                                 <div class="img_div"></div>
 
@@ -472,9 +506,14 @@
             $(".date_checkbox").change(function (){
                 if(this.checked){
                     $(this).next().next().removeProp('disabled');
+                    $(this).next().next().val('1');
+                    var timeVal = $(this).next().next().val();
+                    var val = $(this).val()+timeVal;
+                    $(this).val(val);
                 }else{
                     $(this).next().next().prop('disabled',true);
                     $(this).next().next().val('');
+                    $(this).val('');
                 }
             })
         });

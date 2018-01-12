@@ -18,31 +18,19 @@
                 <!-- 表格列表 -->
         <div class="tb-unit posr">
             <div class="tb-unit-bar" style="overflow: hidden;">
-                <a class="btn all-fold" href="javascript:;" style="float:left;">全部折叠</a>
-                <a class="btn all-open" href="javascript:;" style="float:left; margin-right:30px;">全部打开</a>
-                <a class="btn" href="{{ url('house/type/add') }}" style="float:left; margin-right:30px;">添加类型</a>
-                {{--<form action="{{ url('category/column') }}" method="post">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <label>状态：</label>
-                    <select name="status">
-                        <option value="-1">不限</option>
-                        <option value="0" @if(isset($_REQUEST['status']) && $_REQUEST['status'] == 0) selected @endif>禁用</option>
-                        <option value="1" @if(isset($_REQUEST['status']) && $_REQUEST['status'] == 1) selected @endif>启用</option>
-                        <option value="2" @if(isset($_REQUEST['status']) && $_REQUEST['status'] == 2) selected @endif>删除</option>
-                    </select>
-                    <label>分类名字：<input type="text" name="class_name" class="text" style="height:30px;" value="@if(isset($_REQUEST['class_name'])){{ $_REQUEST['class_name'] }}@endif"></label>
-                    <input type="submit" class="btn" value="查询" name="search" style="margin-left:20px;">
-                    <a href="{{ url('category/column') }}" class="btn">显示全部</a>
-                </form>--}}
+                <a class="btn all-fold" href="javascript:;" style="float:left;">@lang('house_translate.All_folding')</a>
+                <a class="btn all-open" href="javascript:;" style="float:left; margin-right:30px;">@lang('house_translate.All_open')</a>
+                <a class="btn" href="{{ url('house/type/add') }}" style="float:left; margin-right:30px;">@lang('house_translate.Add_type')</a>
+
 
             </div>
 
             <div class="category">
                 <div class="hd cf">
-                    <div class="fold">折叠</div>
+                    <div class="fold">@lang('house_translate.folding')</div>
                     <div class="order">ID</div>
-                    <div class="order">排序</div>
-                    <div class="order" style="    width: 200px; text-align: left;">名称</div>
+                    <div class="order">@lang('house_translate.The_sorting')</div>
+                    <div class="order" style="    width: 200px; text-align: left;">@lang('house_translate.name')</div>
                 </div>
                 @include('house.type.tree', ['tree' => $tree])
             </div>

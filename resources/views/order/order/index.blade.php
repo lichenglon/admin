@@ -10,85 +10,48 @@
     @endif
 
     <div class="box">
-
-        <!-- /.box-header -->
         <div class="box-body">
-
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-
                 <form action="{{ url('order/order') }}" method="post">
-                    {{ csrf_field() }}
-                    <h4 class="bg-info" style="padding:10px; font-size:14px;">搜索</h4>
-                    <div class="row">
-                        <div class="col-sm-2">
+                    <span class="select-box inline" style="width:100%;">
+                        {{ csrf_field() }}
+
+                        {{--<h4 class="bg-info" style="padding-top:10px; padding-bottom:10px; font-size:14px; overflow:hidden;">
+                            <span style="line-height:34px;">订单列表</span>
+                            <div style="float:right;"><a href="{{ url('order/order/exportOrderData') }}" type="button" class="btn btn-default">导出EXCEL</a></div>
+                        </h4>--}}
+
+                        <div class="row" style="padding:20px;">
                             <label><b>订单状态：</b></label>
-                            <select class="form-control" name="status">
+                            <select class="form-control" name="status" id="status">
                                 <option value="">不限</option>
-                                {{--@foreach($orderStatus as $key => $val)
-
-                                    <option value="{{ $key }}" @if(isset($_REQUEST['status']) && $_REQUEST['status'] === (string)$key) selected @endif>{{ $val }}</option>
-
-                                @endforeach--}}
-                            </select>
-
-                        </div>
-
-                        <div class="col-sm-4">
+                                @foreach($status_all as $k=>$v)
+                                    <option value="{{$k}}">{{$v}}</option>
+                                @endforeach
+                            </select>&nbsp;&nbsp;&nbsp;&nbsp;
                             <label><b>下单时间：</b> </label>
-                            <input type="text" name="begin_time"  class="form-control" id="begin_time" value="@if(isset($_REQUEST['begin_time'])) {{ $_REQUEST['begin_time'] }} @else 2014-09-19 00:00:00  @endif">
-                            &nbsp; 至&nbsp;
-                            <input type="text" name="end_time"  class="form-control" id="end_time" value="@if(isset($_REQUEST['end_time'])) {{ $_REQUEST['end_time'] }} @else {{ date('Y-m-d H:i:s') }}  @endif">
-                        </div>
-                        <div class="col-sm-4">
-                            <label><b>关键词搜索</b></label>
-                            <select class="form-control" name="keyword_type">
-                                <option value="tbuy_order.order_id" @if(isset($_REQUEST['keyword_type']) && $_REQUEST['keyword_type'] == 'order_id') selected @endif>订单ID</option>
-                                <option value="tbuy_order.order_no" @if(isset($_REQUEST['keyword_type']) && $_REQUEST['keyword_type'] == 'order_no') selected @endif>订单No</option>
+                            <input type="text" name="stime" id="stime" class="form-control" value="" />&nbsp;&nbsp;至&nbsp;&nbsp;
+                            <input type="text" name="etime" id="etime" class="form-control" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label><b>关键词搜索</b></label>&nbsp;&nbsp;
+                            <select class="form-control" name="kwd_k" id="kwd_k">
+                                <option value="">请选择</option>
+                                <option value="order_no">订单编号</option>
+                                {{--<option value="u_name">下单人</option>--}}
+                                <option value="name">租客姓名</option>
+                                <option value="tel">租客手机号码</option>
                             </select>
-                            <input type="text" class="form-control" name="keyword" value="{{ $_REQUEST['keyword'] or '' }}" placeholder="">
-
+                            <input type="text" class="form-control" name="kwd_v" id="kwd_v" value="" placeholder="">&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input name="search" type="submit" class="btn btn-default" value="搜索">&nbsp;&nbsp;
+                            <button type="reset" class="btn btn-default">重置</button>&nbsp;&nbsp;
+                            <input name="excel" type="submit" class="btn btn-default" value="导出Excel">
+                            {{--<div style="float:right;"><a href="{{ url('order/order/order_excel') }}" class="btn btn-default">导出EXCEL</a></div>--}}
                         </div>
-                        <div class="col-sm-2">
-                            <input name="search" type="submit" class="btn btn-default" value="搜索">
-                            <button type="reset" class="btn btn-default">重置</button>
-                        </div>
-                    </div>
-
-
-
-
+                    </span>
                 </form>
-
-                <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
-                    <span style="line-height:34px;">列表</span>
-                    <div style="float:right;">
-                        <a href="{{ url('order/order/exportOrderData') }}" type="button" class="btn btn-default">导出EXCEL</a>
-                    </div>
-                </h4>
-
-                <div class="row" style="margin-bottom:10px;">
-                    <div class="col-sm-9">
-                        <label><b>排序：</b></label>
-                        <select class="form-control">
-                            <option value="创建时间升序">创建时间升序</option>
-                            <option value="创建时间降序">创建时间降序</option>
-                        </select>
-                        <label><b>每页显示：</b></label>
-                        <select class="form-control">
-                            <option selected="" value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>条
-
-                        <span class="r" style="margin-left:20px;">共有数据：<strong>{{$data->total()}}</strong> 条</span>
-                    </div>
-
-                </div>
+                {{--<div class="row" style="margin-bottom:10px;"></div>--}}
 
                 {{ $data->appends($_REQUEST)->links() }}
-
-                <div class="row">
+                <div class="row" style="height:600px;">
                     <div class="col-sm-12">
                         <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
                                aria-describedby="example1_info">
@@ -97,26 +60,34 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
-                                    style="width: 50px;">订单号
+                                    style="width:20%;">订单号
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Browser: activate to sort column ascending" style="width: 223px;">
+                                    aria-label="Browser: activate to sort column ascending" style="width:10%;">
                                     下单人
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Platform(s): activate to sort column ascending" style="width: 322px;">
-                                    电话
+                                    aria-label="Platform(s): activate to sort column ascending" style="width:10%;">
+                                    租客姓名
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
+                                    aria-label="Platform(s): activate to sort column ascending" style="width:10%;">
+                                    租客手机号码
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="Platform(s): activate to sort column ascending" style="width:15%;">
+                                    下单时间
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="CSS grade: activate to sort column ascending" style="width:10%;">
                                     订单状态
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
+                                    aria-label="CSS grade: activate to sort column ascending" style="width:15%;">
                                     备注信息
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
+                                    aria-label="CSS grade: activate to sort column ascending" style="width:10%;">
                                     操作
                                 </th>
                             </tr>
@@ -127,17 +98,19 @@
 
                                 <tr role="row">
                                     <td class="sorting_1">{{ $value->order_no }}</td>
+                                    <td>{{ $value->u_name }}</td>
                                     <td>{{ $value->name }}</td>
                                     <td>{{ $value->tel }}</td>
-                                    <td>{{ $order_status[$value->order_status] }}</td>
+                                    <td>{{ date('Y-m-d H:i:s',$value->creat_time) }}</td>
+                                    <td>{{ $orderStatus[$value->order_status] }}</td>
                                     <td>{{ $value->order_remark }}</td>
-                                    <td >
-                                        @if($value->order_status == 1)
-                                            <a href="{{ url('order/order/after_sale',[$value->order_id]) }}" target="dialog" width="600px" height="450px;">审核</a>
-                                        @endif
-                                            &nbsp;|&nbsp;
-                                        <a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">查看详情</a>
-                                    </td>
+                                    {{--<td >--}}
+                                        {{--@if($value->order_status == 1)--}}
+                                            {{--<a href="{{ url('order/order/after_sale',[$value->order_id]) }}" target="dialog" width="600px" height="450px;">审核</a>--}}
+                                        {{--@endif--}}
+                                            {{--&nbsp;|&nbsp;--}}
+                                        {{--<a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">查看详情</a>--}}
+                                    {{--</td>--}}
                                 </tr>
                             @endforeach
 
@@ -146,13 +119,16 @@
                         </table>
                     </div>
                 </div>
-
-                {{ $data->appends($_REQUEST)->links() }}
-
-
+                    @if (!empty($data))
+                        <div class="page_list">
+                            {{$data->appends(Request::input())->links()}}
+                            <div style="display:inline-block; margin-bottom:25px;">
+                                <span class="r">共有数据：<strong>{{$total}}</strong> 条</span>
+                            </div>
+                        </div>
+                    @endif
             </div>
         </div>
-        <!-- /.box-body -->
     </div>
 
 
@@ -161,24 +137,18 @@
 @section('js')
 
     <script>
+        //常规用法 日期
+        laydate.render({elem: '#stime'});
+        laydate.render({elem: '#etime'});
+        //锁定搜索栏订单状态
+        document.getElementById('status').value="@if(isset($a_status)){{$a_status}}@endif"
+        document.getElementById('stime').value="@if(isset($stime)){{$stime}}@endif"
+        document.getElementById('etime').value="@if(isset($etime)){{$etime}}@endif"
+        document.getElementById('kwd_k').value="@if(isset($kwd_k)){{$kwd_k}}@endif"
+        document.getElementById('kwd_v').value="@if(isset($kwd_v)){{$kwd_v}}@endif"
 
-        //时间插件初始化
-        jeDate({
-            dateCell:"#begin_time",
-            format:"YYYY-MM-DD hh:mm:ss",
-            isinitVal:true,
-            isTime:true, //isClear:false,
-            minDate:"2014-09-19 00:00:00",
-        });
-        jeDate({
-            dateCell:"#end_time",
-            format:"YYYY-MM-DD hh:mm:ss",
-            isinitVal:true,
-            isTime:true, //isClear:false,
-            minDate:"2014-09-19 00:00:00",
-        });
+
     </script>
-
     @stop
 
 

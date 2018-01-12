@@ -13,16 +13,16 @@
                         <div class="Hui-article" style="height:625px;">
                                 <article class="cl pd-20">
 
-                                        <form action="{{url('house/operateLog')}}" method="get">
-                                                <span>操作时间：</span>
+                                        <form action="{{url('house/operateLog')}}" method="post">
+                                                <span>@lang('house_translate.Operation_time')：</span>
                                                 <div class="check-box">
-                                                        <input type="text" name="stime" id="stime" class="input-text" value="@if(!empty($stime)){{$stime}}@endif"  style="display:inline-block"/>
+                                                        <input type="text" name="stime" id="stime" class="form-control" value="@if(!empty($stime)){{$stime}}@endif"  style="display:inline-block"/>
                                                 </div>
                                                 -
                                                 <div class="check-box">
-                                                        <input type="text" name="etime" id="etime"  value="@if(!empty($etime)){{$etime}}@endif"  class="input-text"/>
+                                                        <input type="text" name="etime" id="etime" class="form-control" value="@if(!empty($etime)){{$etime}}@endif" />
                                                 </div>
-                                                <input type="submit" class="btn btn-default" name="search" value="搜索">
+                                                <input type="submit" class="btn btn-default" name="search" value="@lang('house_translate.search')">
 
 
                                                 <div class="mt-20">
@@ -31,9 +31,9 @@
                                                                 <tr class="text-c" id="theader">
 
                                                                         {{--<th width="">ID</th>--}}
-                                                                        <th width="">用户名</th>
-                                                                        <th width="">更新日志</th>
-                                                                        <th width="">日期</th>
+                                                                        <th width="">@lang('house_translate.User_name')</th>
+                                                                        <th width="">@lang('house_translate.Update_log')</th>
+                                                                        <th width="">@lang('house_translate.Date')</th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -58,7 +58,7 @@
                                 <div class="page_list">
                                         {{$result->appends(Request::input())->links()}}
                                         <div style="display:inline-block; margin-bottom:25px;">
-                                        <span class="r">共有数据：<strong>{{$total}}</strong> 条</span>
+                                        <span class="r">@lang('house_translate.Common_data')：<strong>{{$total}}</strong> @lang('house_translate.strip')</span>
                                         </div>
                                 </div>
                         @endif

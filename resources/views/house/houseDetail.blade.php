@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="box">
-        &nbsp;&nbsp;<a href="javascript:window.history.go(-1);"><button name="" id="" class="btn btn-success">返回上一级</button></a>
+        &nbsp;&nbsp;<a href="javascript:window.history.go(-1);"><button name="" id="" class="btn btn-success">@lang('house_translate.Return_to_the_upper_level')</button></a>
         <div class="box-body">
             <div class="row">
 
@@ -18,7 +18,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">房源编号
+                                style="width: 18%; font-size:15px;">@lang('house_translate.Room_number')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="8"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -29,7 +29,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">地区
+                                style="width: 18%; font-size:15px;">@lang('house_translate.National_city')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="8"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -40,7 +40,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">周边信息
+                                style="width: 18%; font-size:15px;">@lang('house_translate.surrounding_information')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -51,7 +51,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">位置
+                                style="width: 18%; font-size:15px;">@lang('house_translate.Detailed_location')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -64,7 +64,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">结构
+                                style="width: 18%; font-size:15px;">@lang('house_translate.Housing_structure')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -77,7 +77,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">价格
+                                style="width: 18%; font-size:15px;">@lang('house_translate.Housing_prices')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -89,7 +89,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">大小
+                                style="width: 18%; font-size:15px;">@lang('house_translate.Housing_size')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -102,7 +102,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">押金
+                                style="width: 18%; font-size:15px;">@lang('house_translate.deposit')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -114,7 +114,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">预付款比
+                                style="width: 18%; font-size:15px;">@lang('house_translate.Prepayment_ratio')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -127,7 +127,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">结算方式
+                                style="width: 18%; font-size:15px;">@lang('house_translate.The_method_of_payment')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -140,7 +140,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">设备
+                                style="width: 18%; font-size:15px;">@lang('house_translate.House_equipment')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -153,7 +153,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">关键字
+                                style="width: 18%; font-size:15px;">@lang('house_translate.The_keyword')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -165,7 +165,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">房源简介
+                                style="width: 18%; font-size:15px;">@lang('house_translate.Introduction_of_housing')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -177,7 +177,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">起租期
+                                style="width: 18%; font-size:15px;">@lang('house_translate.The_lease_period')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -189,7 +189,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">租期时长
+                                style="width: 18%; font-size:15px;">@lang('house_translate.The_longest_leases')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -201,7 +201,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">房屋状态
+                                style="width: 18%; font-size:15px;">@lang('house_translate.Home_state')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -213,7 +213,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">房东姓名
+                                style="width: 18%; font-size:15px;">@lang('house_translate.The_landlord_name')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -225,7 +225,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">房东证件号
+                                style="width: 18%; font-size:15px;">@lang('house_translate.Landlord_id_number')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -237,7 +237,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">房东邮箱
+                                style="width: 18%; font-size:15px;">@lang('house_translate.The_landlord_email')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -249,7 +249,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">房东电话
+                                style="width: 18%; font-size:15px;">@lang('house_translate.The_landlord_telephone')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -261,7 +261,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">房东性别
+                                style="width: 18%; font-size:15px;">@lang('house_translate.The_landlord_gender')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -273,7 +273,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">房东联系地址
+                                style="width: 18%; font-size:15px;">@lang('house_translate.Address_of_landlord')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -285,7 +285,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 200px; font-size:15px;">房东备注
+                                style="width: 18%; font-size:15px;">@lang('house_translate.The_landlord_note')
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
@@ -297,7 +297,7 @@
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
-                                style="font-size:15px; text-align:center;line-height:300px;">图片
+                                style="font-size:15px; text-align:center;line-height:300px;">@lang('house_translate.picture')
                             </th>
 
 

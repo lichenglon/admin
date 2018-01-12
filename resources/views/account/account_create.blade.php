@@ -14,57 +14,57 @@
         <!-- /.box-header -->
         <div class="box-body">
             <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
-                <span style="line-height:34px;">新增账号</span>
+                <span style="line-height:34px;">@lang('account.New_account')</span>
             </h4>
             <form action="{{ url('account/user/store') }}" method="post" class="js-ajax-form form-horizontal">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">姓名：</label>
+                    <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.name')：</label>
                     <div class="col-sm-4">
                         <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">账号：</label>
+                    <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.account')：</label>
                     <div class="col-sm-4">
                         <input type="text" name="username" class="form-control" id="inputEmail3" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">密码：</label>
+                    <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.password')：</label>
                     <div class="col-sm-4">
                         <input type="text" name="passwd" class="form-control" id="inputEmail3" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">联系方式：</label>
+                    <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.contact')：</label>
                     <div class="col-sm-4">
                         <input type="text" name="tel" class="form-control" id="inputEmail3" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">区域：</label>
+                    <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.area')：</label>
                     <div class="col-sm-4">
                         <input type="text" name="area" class="form-control" id="inputEmail3" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">账号状态：</label>
+                    <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.enabled')：</label>
                     <div class="col-sm-4">
                         <select class="form-control" name="status">
-                            <option value="1">启用</option>
-                            <option value="0">不启用</option>
+                            <option value="1">@lang('account.Enable')</option>
+                            <option value="0">@lang('account.disable')</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">选择角色：</label>
+                    <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.Choice_of_roles')：</label>
                     <div class="col-sm-4">
                         <select class="form-control" name="role_id">
 
                             @if(empty($roleList))
-                                <option value="0">无</option>
+                                <option value="0">@lang('account.nothing')</option>
                             @endif
 
                             @foreach($roleList as $values)
@@ -76,8 +76,8 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <a href="javascript:window.history.go(-1);" type="button" class="btn btn-default">取消</a>
-                        <button type="submit" class="btn btn-primary js-ajax-submit">确定</button>
+                        <a href="javascript:window.history.go(-1);" type="button" class="btn btn-default">@lang('account.cancel')</a>
+                        <button type="submit" class="btn btn-primary js-ajax-submit">@lang('account.Determine')</button>
                     </div>
                 </div>
 
