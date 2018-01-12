@@ -27,7 +27,15 @@ return [
 	'Enable'                         => 'Enable',                      //启用
 	'The_editor'                     => 'Editor',                      //编辑
 	'delete'                         => 'Delete',                      //删除
+	//新增账号
+	'password'                      => 'Password',                     //密码
+	'Choice_of_roles'               => 'Choice of roles',              //选择角色
+	'nothing'                       => 'Nothing',                      //无
+	'cancel'                        => 'Cancel',                       //取消
+	'Determine'                     => 'Determine',                    //确定
 
+	//编辑账号
+	'edit_account'                  => 'Edit account',                 //编辑账号
 
 	//角色列表
 	'The_role_list'                  => 'The role list',               //角色列表
@@ -36,4 +44,13 @@ return [
 	'A_status'                       => 'A status',                    //角色状态
 	'Role_department'                => 'Role department',             //角色所属部门
 	'Upper_level'                    => 'Upper level',                 //上一级角色
+
+	//菜单列表
+	'All_folding'               => 'All folding',                   //全部折叠
+	'All_open'                  => 'All open',                      //全部打开
+	'Add_menu'                  => 'Add menu',                      //添加类型
+	'folding'                   => 'folding',                       //折叠
+	'The_sorting'               => 'The sorting',                   //排序
+	'name'                      => 'Name',                          //名称
+	'delete'                    => 'Delete',                        //删除
 ];

@@ -6,7 +6,7 @@
 				<div class="btn-toolbar opt-btn cf">
 					{{--<a title="分类详情" target='dialog' width="80%" height="80%" offset="100,100" btn="取消" href="{{ url('category/column/show',['id'=>$values['id']]) }}">查看</a>--}}
 {{--					<a title="编辑" href="{{ url('category/column/edit',['id'=>$values['id'],'class_name'=>isset($_REQUEST['name']) ?$_REQUEST['name']:'']) }}">编辑</a>--}}
-					<a class="layer-delete" href="{{ url('category/menu/destroy',['id'=>$values['id']]) }}">删除</a>
+					<a class="layer-delete" href="{{ url('category/menu/destroy',['id'=>$values['id']]) }}">@lang('account.delete')</a>
 				</div>
 				<div class="fold"><i></i></div>
 				<div class="order">{{ $values['id'] }}</div>

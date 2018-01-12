@@ -8,7 +8,7 @@ return [
 	'Add_type'                  => 'Add type',                      //添加类型
 	'folding'                   => 'folding',                       //折叠
 	'The_sorting'               => 'The sorting',                   //排序
-	'name'                      => 'Name',                  //名称
+	'name'                      => 'Name',                          //名称
 	'delete'                    => 'Delete',                        //删除
 
 	//房源添加
@@ -63,7 +63,49 @@ return [
 	'Address_of_landlord'       => 'Address of landlord',           //房东联系地址
 	'The_landlord_note'         => 'The landlord note',             //房东备注
 	'Choose_picture'            => 'Choose picture',                //选择图片
+	'picture'                   => 'Picture',                       //图片
 	'Click_here_to_upload_the_file' => 'Click here to upload the file',        //点击这里上传文件
 	'Save_and_submit_the_audit' => 'Save and submit the audit',     //保存并提交审核
 	'cancel'                    => 'Cancel',                        //取消
+
+	//房源列表
+	'Housing_list'              => 'Housing list',                  //房源列表
+	'classification'            => 'Classification',                //分类
+	'Room_number'               => 'Room number',                   //房源编号
+	//'Housing_structure'         => 'Housing structure',             //房源结构
+	'The_price'                 => 'The price',                     //价格
+	'Housing_location'          => 'Housing location',              //房源位置
+	//'The_keyword'               => 'The keyword',                   //关键字
+	//'Housing_size'              => 'Housing size',                  //房源大小
+	'Building_equipment'        => 'Building equipment',            //房屋设备
+	//'The_lease_time'            => 'The lease time',                //租期时长
+	'state'                     => 'State',                         //状态
+	'operation'                 => 'Operation',                     //操作
+	'Common_data'               => 'Common data',                   //共有数据
+	'strip'                     => 'Strip',                         //条
+	'The_detailed_information'  => 'Detail message',      //详细信息
+	'determine'                 => 'Determine',                     //确定
+	'Export_Excel'              => 'Export Excel',                  //导出Exce
+	'Audit_status'              => 'Audit status',                  //审核状态
+
+	//更新房源
+	'Update_the_housing'        => 'Update housing',            //更新房源
+	'Picture_operation'         => 'Picture operation',         //图片操作
+	'Delete_this_picture'       => 'Delete this picture',       //删除此图片
+
+	//房源审核
+	'Housing_audit'             => 'Housing audit',             //房源审核
+	'search'                    => 'Search',                    //搜索
+	'type'                      => 'Type',                      //类型
+	'adopt'                     => 'Adopt',                     //通过
+	'Not_through'               => 'Not through',               //不通过
+
+	//操作日志
+	'Operation_time'            => 'Operation time',            //操作时间
+	'User_name'                 => 'User name',                 //用户名
+	'Update_log'                => 'Update log',                //更新日志
+	'Date'                      => 'Date',                      //日期
+
+	//房源详细信息
+	'Return_to_the_upper_level' => 'Return to the upper level', //返回上一级
 ];

@@ -470,13 +470,13 @@ class HouseController extends BaseController {
 						->where('house_type', 'like', $type)
 						->where($search_k,'like','%'.$search_v.'%')
 						->orderBy('msgid', 'desc')
-						->paginate(16);
+						->paginate(10);
 			}else{
 				$gather = DB::table('house_message')
 						->where('chk_sta','2')
 						->where('house_type', 'like', $type)
 						->orderBy('msgid', 'desc')
-						->paginate(16);
+						->paginate(10);
 			}
 
 
@@ -576,7 +576,7 @@ class HouseController extends BaseController {
 			$gather = DB::table('house_message')
 					->where('chk_sta','2')
 					->orderBy('msgid', 'desc')
-					->paginate(16);
+					->paginate(10);
 
 /*			$gather = DB::table('house_message')
 					->where('chk_sta','2')

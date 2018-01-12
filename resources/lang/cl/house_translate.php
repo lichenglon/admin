@@ -63,7 +63,50 @@ return [
 		'Address_of_landlord'       => '房东联系地址',
 		'The_landlord_note'         => '房东备注',
 		'Choose_picture'            => '选择图片',
+		'picture'                   => '图片',
 		'Click_here_to_upload_the_file' => '点击这里上传文件',
 		'Save_and_submit_the_audit' => '保存并提交审核',
 		'cancel'                    => '取消',
+
+	//房源列表
+		'Housing_list'              => '房源列表',
+		'classification'            => '分类',
+		'Room_number'               => '房源编号',
+	//'Housing_structure'         => '房源结构',
+		'The_price'                 => '价格',
+		'Housing_location'          => '房源位置',
+	//'The_keyword'               => '关键字',
+	//'Housing_size'              => '房源大小',
+		'Building_equipment'        => '房屋设备',
+	//'The_lease_time'            => '租期时长',
+		'state'                     => '状态',
+		'operation'                 => '操作',
+		'Common_data'               => '共有数据',
+		'strip'                     => '条',
+		'The_detailed_information'  => '详细信息',
+		'determine'                 => '确定',
+		'Export_Excel'              => '导出Exce',
+		'Audit_status'              => '审核状态',
+
+	//更新房源
+		'Update_the_housing'        => '更新房源',
+		'Picture_operation'         => '图片操作',
+		'Delete_this_picture'       => '删除此图片',
+
+	//房源审核
+		'Housing_audit'             => '房源审核',
+		'search'                    => '搜索',
+		'type'                      => '类型',
+		'adopt'                     => '通过',
+		'Not_through'               => '不通过',
+
+	//操作日志
+		'Operation_time'            => '操作时间',
+		'User_name'                 => '用户名',
+		'Update_log'                => '更新日志',
+		'Date'                      => '日期',
+
+	//房源详细列表
+		'Return_to_the_upper_level' => '返回上一级',
+
 ];

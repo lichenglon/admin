@@ -142,23 +142,23 @@
                         <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.surrounding_information')：</label>
                         <div class="formControls col-xs-8 col-sm-9"  style="width:45%;">
                             <div class="check-box">
-                                <input name="peripheral_information[]" value='@lang('house_translate.supermarket')' type="checkbox" class="date_checkbox" id="peripheral-1">
+                                <input name="peripheral_information[]" value='超市' type="checkbox" class="date_checkbox" id="peripheral-1">
                                 <label for="peripheral-1">@lang('house_translate.supermarket')</label>
                                 <input type="number" name="" id="supermarket" disabled="disabled" placeholder="" value="" min="0" max="300" class="input-text information">/@lang('house_translate.Minute')
                             </div>
                             <div class="check-box">
-                                <input name="peripheral_information[]" value='@lang('house_translate.Chinese_restaurant')' type="checkbox" class="date_checkbox" id="peripheral-2">
+                                <input name="peripheral_information[]" value='中餐馆' type="checkbox" class="date_checkbox" id="peripheral-2">
                                 <label for="peripheral-2">@lang('house_translate.Chinese_restaurant')</label>&nbsp;
                                 <input type="number" name="" id="cr" disabled="disabled" placeholder="" value="" min="0" max="300" class="input-text information">/@lang('house_translate.Minute')
                             </div>
                             <br>
                             <div class="check-box">
-                                <input name="peripheral_information[]" value='@lang('house_translate.The_police_station')' type="checkbox" class="date_checkbox" id="peripheral-3">
+                                <input name="peripheral_information[]" value='警局' type="checkbox" class="date_checkbox" id="peripheral-3">
                                 <label for="peripheral-3">@lang('house_translate.The_police_station')</label>
                                 <input type="number" name="" id="cr" disabled="disabled" placeholder="" value="" min="0" max="300" class="input-text information">/@lang('house_translate.Minute')
                             </div>
                             <div class="check-box">
-                                <input name="peripheral_information[]" value='@lang('house_translate.Public_transport')' type="checkbox" class="date_checkbox" id="peripheral-4">
+                                <input name="peripheral_information[]" value='公共交通' type="checkbox" class="date_checkbox" id="peripheral-4">
                                 <label for="peripheral-4">@lang('house_translate.Public_transport')</label>
                                 <input type="number" name="" id="cr" disabled="disabled" placeholder="" value="" min="0" max="300" class="input-text information">/@lang('house_translate.Minute')
                             </div>
@@ -194,7 +194,7 @@
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <span class="select-box">
 				                <select name="payment_proportion" class="select">
-                                    <option value="@lang('house_translate.One_lease_and_one_rent')">@lang('house_translate.One_lease_and_one_rent')</option>
+                                    <option value="一押一租">@lang('house_translate.One_lease_and_one_rent')</option>
                                 </select>
 				            </span>
                         </div>
@@ -214,31 +214,31 @@
                         <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.House_equipment')：</label>
                         <div class="formControls col-xs-8 col-sm-9 skin-minimal">
                             <div class="check-box">
-                                <input name="house_facility[]" value='@lang('house_translate.Washing_machine')' type="checkbox" id="checkbox-1">
+                                <input name="house_facility[]" value='洗衣机' type="checkbox" id="checkbox-1">
                                 <label for="checkbox-1">@lang('house_translate.Washing_machine')</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_facility[]" value='@lang('house_translate.Air_conditioning')' type="checkbox" id="checkbox-2">
+                                <input name="house_facility[]" value='空调' type="checkbox" id="checkbox-2">
                                 <label for="checkbox-2">@lang('house_translate.Air_conditioning')</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_facility[]" value='@lang('house_translate.The_heating')' type="checkbox" id="checkbox-3">
+                                <input name="house_facility[]" value='暖气' type="checkbox" id="checkbox-3">
                                 <label for="checkbox-3">@lang('house_translate.The_heating')</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_facility[]" value='@lang('house_translate.The_bed')' type="checkbox" id="checkbox-4">
+                                <input name="house_facility[]" value='床' type="checkbox" id="checkbox-4">
                                 <label for="checkbox-4">@lang('house_translate.The_bed')</label>
                             </div>@if(Session::get('lang') == 'en')<br>@endif
                             <div class="check-box">
-                                <input name="house_facility[]" value='@lang('house_translate.The_kitchen')' type="checkbox" id="checkbox-5">
+                                <input name="house_facility[]" value='厨房' type="checkbox" id="checkbox-5">
                                 <label for="checkbox-5">@lang('house_translate.The_kitchen')</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_facility[]" value='@lang('house_translate.The_wardrobe')' type="checkbox" id="checkbox-6">
+                                <input name="house_facility[]" value='衣柜' type="checkbox" id="checkbox-6">
                                 <label for="checkbox-6">@lang('house_translate.The_wardrobe')</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_facility[]" value='@lang('house_translate.The_refrigerator')' type="checkbox" id="checkbox-7">
+                                <input name="house_facility[]" value='冰箱' type="checkbox" id="checkbox-7">
                                 <label for="checkbox-7">@lang('house_translate.The_refrigerator')</label>
                             </div>
                         </div>
@@ -277,31 +277,31 @@
                         <div class="formControls col-xs-8 col-sm-9 skin-minimal">
 
                             <div class="check-box">
-                                <input name="house_status" value="@lang('house_translate.Rent_in_advance')" checked="true" type="radio" id="radio-1">
+                                <input name="house_status" value="预租" checked="true" type="radio" id="radio-1">
                                 <label for="radio-1">@lang('house_translate.Rent_in_advance')</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_status" value="@lang('house_translate.Has_been_locked')" type="radio" id="radio-2">
+                                <input name="house_status" value="已锁定" type="radio" id="radio-2">
                                 <label for="radio-2">@lang('house_translate.Has_been_locked')</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_status" value="@lang('house_translate.Have_been_leased')" type="radio" id="radio-4">
+                                <input name="house_status" value="已出租" type="radio" id="radio-4">
                                 <label for="radio-4">@lang('house_translate.Have_been_leased')</label>
                             </div>@if(Session::get('lang') == 'en')<br>@endif
                             <div class="check-box">
-                                <input name="house_status" value="@lang('house_translate.In_the_configuration')" type="radio" id="radio-5">
+                                <input name="house_status" value="配置中" type="radio" id="radio-5">
                                 <label for="radio-5">@lang('house_translate.In_the_configuration')</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_status" value="@lang('house_translate.Off_hire')" type="radio" id="radio-6">
+                                <input name="house_status" value="停租" type="radio" id="radio-6">
                                 <label for="radio-6">@lang('house_translate.Off_hire')</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_status" value="@lang('house_translate.freeze')" type="radio" id="radio-7">
+                                <input name="house_status" value="冻结" type="radio" id="radio-7">
                                 <label for="radio-7">@lang('house_translate.freeze')</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_status" value="@lang('house_translate.Suspension_of_rent')" type="radio" id="radio-8">
+                                <input name="house_status" value="暂停出租" type="radio" id="radio-8">
                                 <label for="radio-8">@lang('house_translate.Suspension_of_rent')</label>
                             </div>
 
@@ -341,15 +341,15 @@
                         <div class="formControls col-xs-8 col-sm-9 skin-minimal">
 
                             <div class="check-box">
-                                <input name="landlord_sex" value="@lang('house_translate.boy')" checked="true" type="radio" id="radioTwo-1">
+                                <input name="landlord_sex" value="男" checked="true" type="radio" id="radioTwo-1">
                                 <label for="radioTwo-1">@lang('house_translate.boy')</label>
                             </div>
                             <div class="check-box">
-                                <input name="landlord_sex" value="@lang('house_translate.girl')" type="radio" id="radioTwo-2">
+                                <input name="landlord_sex" value="女" type="radio" id="radioTwo-2">
                                 <label for="radioTwo-2">@lang('house_translate.girl')</label>
                             </div>
                             <div class="check-box">
-                                <input name="landlord_sex" value="@lang('house_translate.secrecy')" type="radio" id="radioTwo-3">
+                                <input name="landlord_sex" value="保密" type="radio" id="radioTwo-3">
                                 <label for="radioTwo-3">@lang('house_translate.secrecy')</label>
                             </div>
                         </div>

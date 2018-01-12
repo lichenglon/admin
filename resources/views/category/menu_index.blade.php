@@ -25,20 +25,20 @@
     <!-- 表格列表 -->
     <div class="tb-unit posr">
         <div class="tb-unit-bar" style="overflow: hidden;">
-            <a class="btn all-fold" href="javascript:;" style="float:left;">全部折叠</a>
-            <a class="btn all-open" href="javascript:;" style="float:left; margin-right:30px;">全部打开</a>
-            <a class="btn" href="{{ url('category/menu/create') }}" style="float:left; margin-right:30px;">添加菜单</a>
+            <a class="btn all-fold" href="javascript:;" style="float:left;">@lang('account.All_folding')</a>
+            <a class="btn all-open" href="javascript:;" style="float:left; margin-right:30px;">@lang('account.All_open')</a>
+            <a class="btn" href="{{ url('category/menu/create') }}" style="float:left; margin-right:30px;">@lang('account.Add_menu')</a>
 
 
         </div>
         
         <div class="category">
             <div class="hd cf">
-                <div class="fold">折叠</div>
+                <div class="fold">@lang('account.folding')</div>
                 <div class="order">ID</div>
-                <div class="order">排序</div>
-                <div class="order">状态</div>
-                <div class="order" style="    width: 200px; text-align: left;">名称</div>
+                <div class="order">@lang('account.The_sorting')</div>
+                <div class="order"></div>
+                <div class="order" style="    width: 200px; text-align: left;">@lang('account.name')</div>
                 <div class="order">URL</div>
             </div>
             @include('category.tree_menu', ['tree' => $tree])
