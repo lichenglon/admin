@@ -86,10 +86,10 @@
                                     aria-label="CSS grade: activate to sort column ascending" style="width:15%;">
                                     备注信息
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                {{--<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width:10%;">
                                     操作
-                                </th>
+                                </th>--}}
                             </tr>
                             </thead>
                             <tbody>

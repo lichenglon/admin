@@ -490,9 +490,9 @@
                 $landlord_remarkMsg=$('#landlord_remarkMsg');
 
             /**/
-            onblurr($house_location,$house_locationMsg,/^[\u4e00-\u9fa5\w ]{2,16}$/,"Can't be empty",'格式错误');
+            onblurr($house_location,$house_locationMsg,/^[\u4e00-\u9fa5\w ]{2,1000}$/,"Can't be empty",'格式错误');
 
-            onblurr($house_structure,$house_structureMsg,/^[\u4e00-\u9fa5\w ]{2,16}$/,"Can't be empty",'格式错误');
+            onblurr($house_structure,$house_structureMsg,/^[\u4e00-\u9fa5\w ]{2,1000}$/,"Can't be empty",'格式错误');
 
             onblurr($house_size,$house_sizeMsg,/[0-9]/,"Can't be empty",'格式错误');
 
@@ -500,11 +500,11 @@
 
             onblurr($cash_pledge,$cash_pledgeMsg,/[0-9]/,"Can't be empty",'格式错误');//押金
 
-            onblurr($house_keyword,$house_keywordMsg,/[\u4e00-\u9fa5\w ]{2,16}$/,"Can't be empty",'格式错误');
+            onblurr($house_keyword,$house_keywordMsg,/[\u4e00-\u9fa5\w ]{2,1000}$/,"Can't be empty",'格式错误');
 
-            onblurr($house_brief,$house_briefMsg,/[\u4e00-\u9fa5\w ]{2,16}/,"Can't be empty",'格式错误');
+            onblurr($house_brief,$house_briefMsg,/[\u4e00-\u9fa5\w ]{2,1000}/,"Can't be empty",'格式错误');
 
-            onblurr($landlord_name,$landlord_nameMsg,/[\u4e00-\u9fa5\w ]{2,16}/,"Can't be empty",'格式错误');
+            onblurr($landlord_name,$landlord_nameMsg,/[\u4e00-\u9fa5\w ]{2,1000}/,"Can't be empty",'格式错误');
 
             onblurr($landlord_identity,$landlord_identityMsg,/[0-9]/,"Can't be empty",'格式错误');
 

@@ -10,6 +10,11 @@ return [
 	'The_sorting'               => 'The sorting',                   //排序
 	'name'                      => 'Name',                          //名称
 	'delete'                    => 'Delete',                        //删除
+	'New_classification'        => 'New classification',            //新增分类
+	'Upper_class_classification'=> 'Upper class classification',    //上一级分类
+	'Classification_name'       => 'Classification name',           //分类名称
+	'nothing'                   => 'Nothing',                       //无
+	'Determine'                 => 'Determine',                     //确定
 
 	//房源添加
 	'Housing_add'               => 'Housing add',                   //房源添加
@@ -87,6 +92,7 @@ return [
 	'determine'                 => 'Determine',                     //确定
 	'Export_Excel'              => 'Export Excel',                  //导出Exce
 	'Audit_status'              => 'Audit status',                  //审核状态
+	'Please_choose'             => 'Please choose',                 //请选择
 
 	//更新房源
 	'Update_the_housing'        => 'Update housing',            //更新房源
