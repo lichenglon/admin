@@ -91,6 +91,22 @@ class OrderController extends BaseController
         exportData($title,$data,'房源信息'.date('Y-m-d'));
     }
 
+    //审核状态更改
+    public function isCheck(){
+        if($_GET['order_status'] && $_GET['order_id'])
+        {
+            //接收审核状态
+            $order_status = $_GET['order_status'];
+            //接收ID
+            $order_id = (int)$_GET['order_id'];
+            //数据库更改状态
+            $result = DB::table('order')->where('order_id',$order_id)->update(['order_status'=>$order_status]);
+            //判断并返回
+            if($result){return '1';}else{return '0';}}
+    }
+
+
+
     //订单详情
     public function detail($id) {
         $result = DB::table('order')->where('order_id', $id)->join('house_message','order.house_id','=','msgid')->first();

@@ -95,23 +95,28 @@
                             <tbody>
 
                             @foreach($data as $key => $value)
-
+                                @if($value->order_status == 1 || $value->order_status == 2 || $value->order_status == 3 || $value->order_status == 4 || $value->order_status == 6)
                                 <tr role="row">
-                                    <td class="sorting_1">{{ $value->order_no }}</td>
+                                    <td class="sorting_1"><a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">{{ $value->order_no }}</a></td>
                                     <td>{{ $value->u_name }}</td>
                                     <td>{{ $value->name }}</td>
                                     <td>{{ $value->tel }}</td>
                                     <td>{{ date('Y-m-d H:i:s',$value->creat_time) }}</td>
                                     <td>{{ $orderStatus[$value->order_status] }}</td>
                                     <td>{{ $value->order_remark }}</td>
-                                    {{--<td >--}}
-                                        {{--@if($value->order_status == 1)--}}
-                                            {{--<a href="{{ url('order/order/after_sale',[$value->order_id]) }}" target="dialog" width="600px" height="450px;">审核</a>--}}
+                                    <td >
+                                        {{--@if($value->order_status == 1)
+                                            <label>审核通过<input name="order_status" type="radio" value="8" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('8','{{$value->order_id}}')}" /></label>
+                                            &nbsp;&nbsp;
+                                            <label>审核不通过<input name="order_status" type="radio" value="3" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('3','{{$value->order_id}}')}" /></label>
+                                        @else--}}
+                                            <a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">查看详情</a>
                                         {{--@endif--}}
-                                            {{--&nbsp;|&nbsp;--}}
-                                        {{--<a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">查看详情</a>--}}
-                                    {{--</td>--}}
+
+
+                                    </td>
                                 </tr>
+                                @endif
                             @endforeach
 
                             </tbody>
@@ -147,6 +152,22 @@
         document.getElementById('kwd_k').value="@if(isset($kwd_k)){{$kwd_k}}@endif"
         document.getElementById('kwd_v').value="@if(isset($kwd_v)){{$kwd_v}}@endif"
 
+
+        //审核状态的更改
+        function isCheck(number,order_id){
+            $.ajax({
+                url:"{{url('order/order/isCheck')}}",
+                data: 'order_statuss='+number+'&order_id='+order_id,
+                type: 'get',
+                success: function(re){
+                    if(re == '1'){
+                        location.reload();
+                    }else{
+                        alert('审核失败');
+                    }
+                }
+            })
+        }
 
     </script>
     @stop
