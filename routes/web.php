@@ -68,8 +68,9 @@ Route::group(['prefix'=>'order'],function(){
     Route::any('order/detail_excel/{id}','Order\OrderController@detail_excel');
     #订单列表Excel导出
     Route::any('order/order_excel','Order\OrderController@order_excel');
-
+    Route::get('order/isCheck', 'Order\OrderController@isCheck');
     Route::any('order/after_sale/{id}', 'Order\OrderController@afterSale');
+    Route::any('');
 
 
 //    Route::resource('order', 'Order\OrderController');

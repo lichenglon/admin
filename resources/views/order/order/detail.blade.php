@@ -17,7 +17,7 @@
                 <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
                     <span style="line-height:34px;"><a href="{{ url('order/order') }}" >订单列表</a> - 订单详情</span>
                     <div style="float:right;">
-                        <a href="{{ url('order/order/detail_excel',['id'=>$result->order_id]) }}" type="button" class="btn btn-default">导出EXCEL</a>
+                        {{--<a href="{{ url('order/order/detail_excel',['id'=>$result->order_id]) }}" type="button" class="btn btn-default">导出EXCEL</a>--}}
                     </div>
                 </h4>
                 {{--{{ $data->appends($_REQUEST)->links() }}--}}
@@ -53,7 +53,13 @@
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 150px;">
                                     身份证照片
                                 </th>
-                                <td>{{ $result->renter_idcard }}</td>
+                                <td>
+                                    @if(!empty($result->renter_idcard1))
+                                        <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" name='pic1' src="{{asset('./uploads')}}/{{$result->renter_idcard1}}" alt="" />
+                                    @elseif(!empty($result->renter_idcard2))
+                                        <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" name='pic1' src="{{asset('./uploads')}}/{{$result->renter_idcard2}}" alt="" />
+                                    @endif
+                                </td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
@@ -62,21 +68,31 @@
                                     style="width: 140px;">
                                     护照照片
                                 </th>
-                                <td>{{ $result->renter_passport }}</td>
+                                <td>
+                                    @if(!empty($result->renter_passport))
+                                        <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" name='pic1' src="{{asset('./uploads')}}/{{$result->renter_passport}}" alt="" />
+                                    @else
+                                    @endif
+                                </td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Browser: activate to sort column ascending" style="width: 150px;">
                                     学生证照片
                                 </th>
-                                <td>{{ $result->stu_idcard }}</td>
+                                <td>
+                                    @if(!empty($result->stu_idcard))
+                                        <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" name='pic1' src="{{asset('./uploads')}}/{{$result->stu_idcard}}" alt="" />
+                                    @else
+                                    @endif
+                                </td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending" style="width: 322px;">
                                     房源编号
                                 </th>
-                                <td>{{ $result->house_no }}</td>
+                                <td>{{ $result->serial_number }}</td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
@@ -90,7 +106,7 @@
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 120px;">
                                     房源位置
                                 </th>
-                                <td>{{ $result->house_position }}</td>
+                                <td>{{ $result->house_location }}</td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"

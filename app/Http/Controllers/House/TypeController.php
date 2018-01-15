@@ -36,6 +36,18 @@ class TypeController extends BaseController {
 
 		$rs = House_type::insert($data);
 		if($rs){
+			//更新操作日志
+			$id = Session::get('user_id');
+			$operate_name = DB::table('accounts')->where('id',$id)->value('name');
+			$operate = "add a new house type , is ".$data['name'];
+			//$operate = "新增了房源类型，编号为：".$serial_number;
+			$operate_log = [
+					'operate' => $operate,
+					'operate_name' => $operate_name,
+					'operate_time' => time()
+			];
+			DB::table('operate_log')->insert($operate_log);
+
 			return redirect('house/type')->with('success','添加分类成功！');
 		}else{
 			return redirect('house/type/add',['pid'=>$request->pid])->with('error','添加分类失败！');
@@ -45,8 +57,22 @@ class TypeController extends BaseController {
 	 *删除
 	 */
 	public function delete($id){
+		$type = DB::table('house_type')->where('id', $id)->value('name');
 		$rs = DB::table('house_type')->where('id', $id)->delete();
 		if($rs){
+			//更新操作日志
+			$id = Session::get('user_id');
+			$operate_name = DB::table('accounts')->where('id',$id)->value('name');
+			$operate = "delete a house type , is ".$type;
+			//$operate = "删除了一个房源类型，编号为：".$serial_number;
+			$operate_log = [
+					'operate' => $operate,
+					'operate_name' => $operate_name,
+					'operate_time' => time()
+			];
+			DB::table('operate_log')->insert($operate_log);
+
+
 			return $this->ajaxSuccess('删除分类成功！', url('house/type'));
 		}
 		return $this->ajaxError('删除分类失败！', url('house/type'));
@@ -59,6 +85,17 @@ class TypeController extends BaseController {
 			$data = ['sort_number'=>$request->sort_number, 'name'=>$request->name];
 			$rs = DB::table('house_type')->where('id',$request->id)->update($data);
 			if($rs){
+				//更新操作日志
+				$id = Session::get('user_id');
+				$operate_name = DB::table('accounts')->where('id',$id)->value('name');
+				$operate = "modify a house type , is ".$data['name'];
+				//$operate = "更新了一个房源类型，编号为：".$serial_number;
+				$operate_log = [
+						'operate' => $operate,
+						'operate_name' => $operate_name,
+						'operate_time' => time()
+				];
+				DB::table('operate_log')->insert($operate_log);
 				return $this->ajaxSuccess('编辑成功!');
 			}else{
 				return $this->ajaxError('编辑失败!');

@@ -73,7 +73,8 @@ class AccountController extends BaseController
             $id = Session::get('user_id');
 
             $operate_name = DB::table('accounts')->where('id',$id)->value('name');
-            $operate = "新增了用户，账号为：".$request->name;
+            $operate = "add a new account , is ".$request->name;
+            //$operate = "新增了用户，账号为：".$request->name;
             $operate_log = [
                 'operate' => $operate,
                 'operate_name' => $operate_name,
@@ -112,7 +113,8 @@ class AccountController extends BaseController
         //更新操作日志
         $id = Session::get('user_id');
         $operate_name = DB::table('accounts')->where('id',$id)->value('name');
-        $operate = "更新了用户，账号为:".$request->name;
+        $operate = "modify a account's information , is ".$request->name;
+        //$operate = "更新了用户，账号为:".$request->name;
         $operate_log = [
             'operate' => $operate,
             'operate_name' => $operate_name,
@@ -142,7 +144,8 @@ class AccountController extends BaseController
             $id = Session::get('user_id');
             $operate_name = DB::table('accounts')->where('id',$id)->value('name');
             $account = DB::table('accounts')->where('id',$request->id)->value('name');
-            $operate = "更新了用户状态，账号为：".$account;
+            $operate = "modify a account's status , is ".$request->name;
+            //$operate = "更新了用户状态，账号为：".$account;
             $operate_log = [
                 'operate' => $operate,
                 'operate_name' => $operate_name,
@@ -170,8 +173,8 @@ class AccountController extends BaseController
             //更新操作日志
             $uid = Session::get('user_id');
             $operate_name = DB::table('accounts')->where('id',$uid)->value('name');
-
-            $operate = "删除了账号，账号为：".$account;
+            $operate = "delete a account , is   ".$account;
+            //$operate = "删除了账号，账号为：".$account;
             $operate_log = [
                 'operate' => $operate,
                 'operate_name' => $operate_name,

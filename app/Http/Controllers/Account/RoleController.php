@@ -60,7 +60,8 @@ class RoleController extends BaseController
             //更新操作日志
             $id = Session::get('user_id');
             $operate_name = DB::table('accounts')->where('id',$id)->value('name');
-            $operate = "新增了角色，角色名为：".$request->name;
+            $operate = "add a new role , is ".$request->name;
+            //$operate = "新增了角色，角色名为：".$request->name;
             $operate_log = [
                 'operate' => $operate,
                 'operate_name' => $operate_name,
@@ -97,7 +98,8 @@ class RoleController extends BaseController
         //更新操作日志
         $id = Session::get('user_id');
         $operate_name = DB::table('accounts')->where('id',$id)->value('name');
-        $operate = "更新了角色权限，角色名为：".$request->name;
+        $operate = "modify a role's authority , is ".$request->name;
+        //$operate = "更新了角色权限，角色名为：".$request->name;
         $operate_log = [
             'operate' => $operate,
             'operate_name' => $operate_name,
@@ -129,7 +131,8 @@ class RoleController extends BaseController
             $id = Session::get('user_id');
             $operate_name = DB::table('accounts')->where('id',$id)->value('name');
             $name2 = DB::table('roles')->where('id',$request->id)->value('name');
-            $operate = "更新了角色状态，角色名为：".$name2;
+            $operate = "modify a role's status , is ".$name2;
+            //$operate = "更新了角色状态，角色名为：".$name2;
             $operate_log = [
                 'operate' => $operate,
                 'operate_name' => $operate_name,
@@ -162,8 +165,8 @@ class RoleController extends BaseController
                     //更新操作日志
                     $uid = Session::get('user_id');
                     $operate_name = DB::table('accounts')->where('id',$uid)->value('name');
-
-                    $operate = "删除了角色，角色名为：".$name2;
+                    $operate = "delete a role , is ".$name2;
+                    //$operate = "删除了角色，角色名为：".$name2;
                     $operate_log = [
                         'operate' => $operate,
                         'operate_name' => $operate_name,
