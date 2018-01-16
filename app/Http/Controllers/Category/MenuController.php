@@ -37,7 +37,7 @@ class MenuController extends BaseController
         $menu_list = [];
 
         if($pid == 0){
-            $menu_list = DB::table('menus')->where('pid',0)->orderBy('sort_number')->get(['id','name']);
+            $menu_list = DB::table('menus')->where('pid',0)->orderBy('sort_number')->get(['id','name','en_name']);
         }else{
             $parent_cate = DB::table('menus')->where('id',$pid)->first();
         }

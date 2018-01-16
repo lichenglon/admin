@@ -21,7 +21,7 @@
 
 
         <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
-            <span style="line-height:34px;">新增分类</span>
+            <span style="line-height:34px;">@lang('account.New_menu')</span>
         </h4>
 
         @if (session('error'))
@@ -32,48 +32,49 @@
         <form action="{{ url('category/menu/store') }}" method="post" class="form-horizontal form-submit" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">上一级菜单：</label>
+                <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.Upper_level_menu')：</label>
                 <div class="col-sm-4" style="padding-top:7px;">
                     @if(!empty($menu_list))
+
                         <select class="form-control" name="pid">
-                            <option value="0">无</option>
+                            <option value="0">@lang('account.nothing')</option>
                             @foreach($menu_list as $val)
-                                <option value="{{ $val->id }}">{{ $val->name }}</option>
+                                <option value="{{ $val->id }}">@if(Session::get('lang') == 'en') {{ $val->en_name }} @else {{$val->name}} @endif</option>
                             @endforeach
                         </select>
 
                         @else
 
                         <input type="hidden" name="pid" value="{{ $parent_cate->id or 0 }}">
-                        {{ $parent_cate->name or '' }}
+                        @if(Session::get('en')) {{ $parent_cate->en_name or '' }} @else {{ $parent_cate->name or '' }} @endif
 
                     @endif
 
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">状态：</label>
+                <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.state')：</label>
                 <div class="col-sm-4">
                     <select class="form-control" name="status">
-                        <option value="1">启用</option>
-                        <option value="0">禁用</option>
+                        <option value="1">@lang('account.Enable')</option>
+                        <option value="0">@lang('account.disable')</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">菜单排序：</label>
+                <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.menu_sort')：</label>
                 <div class="col-sm-4">
                     <input type="text" name="sort_number" class="form-control" id="inputEmail3" value="0">
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">菜单名称：<span style="color:red">*</span></label>
+                <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.Menu_name')：<span style="color:red">*</span></label>
                 <div class="col-sm-4">
                     <input type="text" name="name" required id="class_name" class="form-control" id="inputEmail3" placeholder="">
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">菜单URL：</label>
+                <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.menu')URL：</label>
                 <div class="col-sm-4">
                     <input type="text" name="url" class="form-control" id="inputEmail3" placeholder="">
                 </div>
@@ -82,8 +83,8 @@
             <div class="row">
                 <div class="col-sm-4">
 
-                    <a href="javascript:window.history.go(-1)" type="button" class="btn btn-default">取消</a>
-                    <button type="submit" class="btn btn-primary js-ajax-submit">确定</button>
+                    <a href="javascript:window.history.go(-1)" type="button" class="btn btn-default">@lang('account.cancel')</a>
+                    <button type="submit" class="btn btn-primary js-ajax-submit">@lang('account.Determine')</button>
                 </div>
             </div>
 

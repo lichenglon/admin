@@ -10,6 +10,10 @@ return [
 		'The_sorting'               => '排序',
 		'name'                      => '名称',
 		'delete'                    => '删除',
+		'New_classification'        => '新增分类',
+		'Upper_class_classification'=> '上一级分类',
+		'Classification_name'       => '分类名称',
+	    'nothing'                   => '无',
 
 	//房源添加
 		'Housing_add'               => '房源添加',
@@ -67,6 +71,7 @@ return [
 		'Click_here_to_upload_the_file' => '点击这里上传文件',
 		'Save_and_submit_the_audit' => '保存并提交审核',
 		'cancel'                    => '取消',
+		'Determine'                 => '确定',
 
 	//房源列表
 		'Housing_list'              => '房源列表',
@@ -87,6 +92,7 @@ return [
 		'determine'                 => '确定',
 		'Export_Excel'              => '导出Exce',
 		'Audit_status'              => '审核状态',
+		'Please_choose'             => '请选择',
 
 	//更新房源
 		'Update_the_housing'        => '更新房源',

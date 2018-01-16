@@ -17,8 +17,8 @@
 								{{ csrf_field() }}
 							<input type="hidden" name="hidden" value="1">
 
-							<select name="type" class="input-text" id="findType" style="width:80px;">
-								<option value="%">分类</option>
+							<select name="type" class="input-text" id="findType" style="width:8%;">
+								<option value="%">@lang('house_translate.classification')</option>
 
 								@foreach($typeObject as $value)
 									<option value="{{$value->name}}">{{$value->name}}</option>
@@ -26,21 +26,21 @@
 							</select>
 
 							&nbsp;&nbsp;
-							<select name="search_k" class="input-text" id="search_k" style="width:150px;">
-								<option value="%">请选择</option>
-								<option value="serial_number">房源编号</option>
-								<option value="house_structure">房源结构</option>
-								<option value="house_price">价格</option>
-								<option value="house_location">房源位置</option>
-								<option value="house_keyword">关键字</option>
+							<select name="search_k" class="input-text" id="search_k" style="width:10%;">
+								<option value="%">@lang('house_translate.Please_choose')</option>
+								<option value="serial_number">@lang('house_translate.Room_number')</option>
+								<option value="house_structure">@lang('house_translate.Housing_structure')</option>
+								<option value="house_price">@lang('house_translate.The_price')</option>
+								<option value="house_location">@lang('house_translate.Housing_location')</option>
+								<option value="house_keyword">@lang('house_translate.The_keyword')</option>
 							</select>
 							&nbsp;
-							<input type="text" name="search_v" class="input-text" id="search_v" style="width:180px;"/>
+							<input type="text" name="search_v" class="input-text" id="search_v" style="width:15%;"/>
 
 							&nbsp;&nbsp;
-							<input type="submit" class="btn btn-default" name="find" value="确定">
+							<input type="submit" class="btn btn-default" name="find" value="@lang('house_translate.Determine')">
 
-							<input type="submit" class="btn btn-default" name="export" value="导出Excel">
+							<input type="submit" class="btn btn-default" name="export" value="@lang('house_translate.Export_Excel')">
 
 							<span class="r">
 							@lang('house_translate.Common_data')：<strong>{{$houseCount}}</strong> @lang('house_translate.strip')
@@ -64,7 +64,7 @@
 								<th width="">@lang('house_translate.Housing_location')</th>
 								<th width="">@lang('house_translate.The_lease_time')</th>
 								<th width="">@lang('house_translate.The_keyword')</th>
-								<th width="">@lang('house_translate.state')</th>
+								<th width="">@lang('house_translate.Home_state')</th>
 								<th>@lang('house_translate.Audit_status')</th>
 								<th width="">@lang('house_translate.operation')</th>
 							</tr>
