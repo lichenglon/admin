@@ -70,7 +70,7 @@ return [
 	'Choose_picture'            => 'Choose picture',                //选择图片
 	'picture'                   => 'Picture',                       //图片
 	'Click_here_to_upload_the_file' => 'Click here to upload the file',        //点击这里上传文件
-	'Save_and_submit_the_audit' => 'Save and submit the audit',     //保存并提交审核
+	'Save_and_submit_the_audit' => 'Submit',                        //提交
 	'cancel'                    => 'Cancel',                        //取消
 
 	//房源列表

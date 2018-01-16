@@ -39,7 +39,7 @@ class RoleController extends BaseController
 
     public function create()
     {
-        $roles = Role::where('status',1)->get(['id','name']);
+        $roles = Role::get(['id','name']);
         $departmentList = $this->getSelectList('departments');
         $menu_lists = $this->getAllMenu(true);
         return view('account.role_create', ['menu_lists'=>$menu_lists,'roles'=>$roles, 'departmentList'=>$departmentList]);

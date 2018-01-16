@@ -69,7 +69,7 @@ return [
 		'Choose_picture'            => '选择图片',
 		'picture'                   => '图片',
 		'Click_here_to_upload_the_file' => '点击这里上传文件',
-		'Save_and_submit_the_audit' => '保存并提交审核',
+		'Save_and_submit_the_audit' => '提交',
 		'cancel'                    => '取消',
 		'Determine'                 => '确定',
 

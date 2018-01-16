@@ -15,7 +15,7 @@
         <div class="box-body">
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
-                    <span style="line-height:34px;"><a href="{{ url('order/order') }}" >订单列表</a> - 订单详情</span>
+                    <span style="line-height:34px;"><a href="{{ url('order/order') }}" >@lang('order.Order_list')</a> - @lang('order.Order_details')</span>
                     <div style="float:right;">
                         {{--<a href="{{ url('order/order/detail_excel',['id'=>$result->order_id]) }}" type="button" class="btn btn-default">导出EXCEL</a>--}}
                     </div>
@@ -30,28 +30,28 @@
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Browser: activate to sort column ascending" style="width: 100px;">
-                                    订单号
+                                    @lang('order.Order_number')
                                 </th>
                                 <td class="sorting_1">{{ $result->order_no }}</td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending" style="width: 100px;">
-                                    日期
+                                    @lang('order.Date')
                                 </th>
                                 <td>{{ $result->creat_time }}</td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 120px;">
-                                    租客姓名
+                                    @lang('order.Tenant_name')
                                 </th>
                                 <td>{{ $result->name }}</td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 150px;">
-                                    身份证照片
+                                    @lang('order.Photo_of_ID_card')
                                 </th>
                                 <td>
                                     @if(!empty($result->renter_idcard1))
@@ -66,7 +66,7 @@
                                     aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
                                     style="width: 140px;">
-                                    护照照片
+                                    @lang('order.Passport_photo')
                                 </th>
                                 <td>
                                     @if(!empty($result->renter_passport))
@@ -78,7 +78,7 @@
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Browser: activate to sort column ascending" style="width: 150px;">
-                                    学生证照片
+                                    @lang('order.Student_card_photo')
                                 </th>
                                 <td>
                                     @if(!empty($result->stu_idcard))
@@ -90,21 +90,21 @@
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending" style="width: 322px;">
-                                    房源编号
+                                    @lang('order.Room_number')
                                 </th>
                                 <td>{{ $result->serial_number }}</td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 120px;">
-                                    房源名称
+                                    @lang('order.House_name')
                                 </th>
                                 <td>{{ $result->house_name }}</td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 120px;">
-                                    房源位置
+                                    @lang('order.Housing_location')
                                 </th>
                                 <td>{{ $result->house_location }}</td>
                             </tr>
@@ -113,35 +113,35 @@
                                     aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
                                     style="width: 80px;">
-                                    价格
+                                    @lang('order.Price')
                                 </th>
                                 <td>{{ $result->house_price }}</td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Browser: activate to sort column ascending" style="width: 120px;">
-                                    租期
+                                    @lang('order.Lease_term')
                                 </th>
                                 <td>{{ $result->rent_time }}</td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending" style="width: 150px;">
-                                    签约时间
+                                    @lang('order.Signing_time')
                                 </th>
-                                <td>{{ $result->sign_time }}</td>
+                                <td>{{ date('Y-m-d H:i:s', $result->sign_time) }}</td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 150px;">
-                                    签约地点
+                                    @lang('order.contracting_place')
                                 </th>
                                 <td>{{ $result->sign_position }}</td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending" style="width: 100px;">
-                                    订单状态
+                                    @lang('order.Order_status')
                                 </th>
                                 {{--<td>{{ $result->order_status }}</td>--}}
                                 <td>{{ $orderStatus[$result->order_status] }}</td>
@@ -149,21 +149,21 @@
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
-                                    合同
+                                    @lang('order.contract')
                                 </th>
                                 <td>{{ $result->contract }}</td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
-                                    评价
+                                    @lang('order.evaluate')
                                 </th>
                                 <td>{{ $result->house_eva }}</td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
-                                    <a href="{{ url('order/order') }}">返回订单列表</a>
+                                    <a href="{{ url('order/order') }}">@lang('order.Return_to_the_list_of_orders')</a>
                                 </th>
                             </tr>
                             </thead>

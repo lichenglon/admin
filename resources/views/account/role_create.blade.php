@@ -14,7 +14,7 @@
         <!-- /.box-header -->
         <div class="box-body">
 
-            <form action="{{ url('account/role/store') }}" method="post" class="js-ajax-form">
+            <form action="{{ url('account/role/store') }}" method="post" class="js-ajax-form" id="role_submit">
                 {{ csrf_field() }}
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
 
@@ -23,12 +23,16 @@
                 </h4>
                 <div class="row">
                     <div class="col-sm-4">
-                        <label><b>@lang('account.Character_name')：</b><input type="text" name="name" class="form-control" placeholder=""></label>
+                        <label>
+                            <b>@lang('account.Character_name')：</b>
+                            <input type="text" name="name" class="form-control" required placeholder="@lang('account.Character_name')">
+                            <span id="error_msg" style="font-size:15px; font-weight:400; color:red"></span>
+                        </label>
                     </div>
                     <div class="col-sm-4">
                         <label><b>@lang('account.Upper_level')：</b></label>
                         <select class="form-control" name="pid">
-                            <option value="0">@lang('account.nothing')</option>
+
                             @foreach($roles as $values)
 
                                 <option value="{{ $values->id }}">{{ $values->name }}</option>
@@ -105,7 +109,6 @@
 @stop
 
 @section('js')
-
     <script>
         $(function (){
 
