@@ -55,9 +55,10 @@
                                 </th>
                                 <td>
                                     @if(!empty($result->renter_idcard1))
-                                        <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" name='pic1' src="{{asset('./uploads')}}/{{$result->renter_idcard1}}" alt="" />
-                                    @elseif(!empty($result->renter_idcard2))
-                                        <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" name='pic1' src="{{asset('./uploads')}}/{{$result->renter_idcard2}}" alt="" />
+                                        <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" name='pic1' src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_idcard1}}" alt="" />
+                                    @elseif(!empty($result->renter_idcard2))0.
+
+                                        <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" name='pic1' src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_idcard2}}" alt="" />
                                     @endif
                                 </td>
                             </tr>
@@ -70,7 +71,7 @@
                                 </th>
                                 <td>
                                     @if(!empty($result->renter_passport))
-                                        <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" name='pic1' src="{{asset('./uploads')}}/{{$result->renter_passport}}" alt="" />
+                                        <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" name='pic1' src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_passport}}" alt="" />
                                     @else
                                     @endif
                                 </td>
@@ -82,7 +83,7 @@
                                 </th>
                                 <td>
                                     @if(!empty($result->stu_idcard))
-                                        <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" name='pic1' src="{{asset('./uploads')}}/{{$result->stu_idcard}}" alt="" />
+                                        <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" name='pic1' src="{{HOUSE_SERVER_PATH}}uploads/{{$result->stu_idcard}}" alt="" />
                                     @else
                                     @endif
                                 </td>
