@@ -54,7 +54,6 @@ return [
 	'Has_been_locked'           => 'Has been locked',               //已锁定
 	'Have_been_leased'          => 'Have been leased',              //已出租
 	'In_the_configuration'      => 'In the configuration',          //配置中
-	'Off_hire'                  => 'Off hire',                      //停租
 	'freeze'                    => 'freeze',                        //冻结
 	'Suspension_of_rent'        => 'Suspension of rent',            //暂停出租
 	'The_landlord_name'         => 'The landlord\'s name',          //房东姓名
@@ -72,6 +71,18 @@ return [
 	'Click_here_to_upload_the_file' => 'Click here to upload the file',        //点击这里上传文件
 	'Save_and_submit_the_audit' => 'Submit',                        //提交
 	'cancel'                    => 'Cancel',                        //取消
+	'room'                      => 'Room',                          //房
+	'hall'                      => 'Hall',                          //厅
+	'kitchen'                   => 'Kitchen',                       //厨
+	'toilet'                    => 'Toilet',                        //卫
+	'and'                       => 'And',                           //押
+	'pay'                       => 'Pay',                           //付
+	'Weeks'                     => 'Weeks"',                        //周结
+	'Weeks2'                    => 'Weeks',                         //周
+	'Square_meters'             => '㎡',                            //平方米
+	'The_pound'                 => 'The pound',                     //英镑
+	'The_dollar'                => 'The dollar',                    //美元
+	'The_yuan'                  => 'The yuan',                      //人民币
 
 	//房源列表
 	'Housing_list'              => 'Housing list',                  //房源列表
@@ -88,14 +99,14 @@ return [
 	'operation'                 => 'Operation',                     //操作
 	'Common_data'               => 'Common data',                   //共有数据
 	'strip'                     => 'Strip',                         //条
-	'The_detailed_information'  => 'Detail message',      //详细信息
+	'The_detailed_information'  => 'Detail',             //详细信息
 	'determine'                 => 'Determine',                     //确定
 	'Export_Excel'              => 'Export Excel',                  //导出Exce
 	'Audit_status'              => 'Audit status',                  //审核状态
 	'Please_choose'             => 'Please choose',                 //请选择
 
 	//更新房源
-	'Update_the_housing'        => 'Update housing',            //更新房源
+	'Update_the_housing'        => 'Update',                    //更新房源
 	'Picture_operation'         => 'Picture operation',         //图片操作
 	'Delete_this_picture'       => 'Delete this picture',       //删除此图片
 
@@ -105,6 +116,7 @@ return [
 	'type'                      => 'Type',                      //类型
 	'adopt'                     => 'Adopt',                     //通过
 	'Not_through'               => 'Not through',               //不通过
+	'Not_audit'                 => 'Not audit',                 //未审核
 
 	//操作日志
 	'Operation_time'            => 'Operation time',            //操作时间

@@ -32,9 +32,9 @@ Route::group(['prefix'=>'account'],function(){
     Route::post('user/store', 'Account\AccountController@store');
     Route::get('user/updateStatus/{id}/{status}','Account\AccountController@updateStatus');
     //部门
-    Route::resource('department','Account\DepartmentController');
+    /*Route::resource('department','Account\DepartmentController');
     Route::post('department/store', 'Account\DepartmentController@store');
-    Route::get('department/updateStatus/{id}/{status}','Account\DepartmentController@updateStatus');
+    Route::get('department/updateStatus/{id}/{status}','Account\DepartmentController@updateStatus');*/
     //角色
     Route::resource('role', 'Account\RoleController');
     Route::post('role/store', 'Account\RoleController@store');
@@ -98,18 +98,16 @@ Route::group(['prefix'=>'house'],function() {
     Route::get('houseAdd',$controller.'houseAdd');
     #房源添加表单提交
     Route::post('houseAdd/save',$controller.'save');
-    #房源更新列表
-    Route::get('updateList',$controller.'updateList');
 
     #修改房源界面
-    Route::get('updateList/detail/{id}',$controller.'detail');
+    Route::get('houseLister/update/{id}',$controller.'update');
     #房源信息修改表单提交
-    Route::post('updateList/uSave',$controller.'uSave');
+    Route::post('houseLister/uSave',$controller.'uSave');
 
     #Ajax请求删除图片
     Route::get('updateList/del',$controller.'del');
     #Ajax请求获取省份市区
-    Route::get('updateList/region',$controller.'region');
+    Route::get('houseLister/region',$controller.'region');
     #房源详细信息
     Route::get('houseLister/detail/{id}',$controller.'houseDetail');
     #房源类型
