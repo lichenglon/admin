@@ -70,7 +70,7 @@ Route::group(['prefix'=>'order'],function(){
     Route::any('order/order_excel','Order\OrderController@order_excel');
     Route::get('order/isCheck', 'Order\OrderController@isCheck');
     Route::any('order/after_sale/{id}', 'Order\OrderController@afterSale');
-    Route::any('');
+    Route::any('order/check/{id}','Order\OrderController@check');
 
 
 //    Route::resource('order', 'Order\OrderController');
