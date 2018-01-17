@@ -53,7 +53,6 @@ return [
 		'Has_been_locked'           => '已锁定',
 		'Have_been_leased'          => '已出租',
 		'In_the_configuration'      => '配置中',
-		'Off_hire'                  => '停租',
 		'freeze'                    => '冻结',
 		'Suspension_of_rent'        => '暂停出租',
 		'The_landlord_name'         => '房东姓名',
@@ -72,6 +71,18 @@ return [
 		'Save_and_submit_the_audit' => '提交',
 		'cancel'                    => '取消',
 		'Determine'                 => '确定',
+		'room'                      => '房',
+		'hall'                      => '厅',
+		'kitchen'                   => '厨',
+		'toilet'                    => '卫',
+		'and'                       => '押',
+		'pay'                       => '付',
+		'Weeks'                     => '周结',
+		'Weeks2'                    => '周',
+		'Square_meters'             => '平米',
+		'The_pound'                 => '英镑',
+		'The_dollar'                => '美元',
+		'The_yuan'                  => '人民币',
 
 	//房源列表
 		'Housing_list'              => '房源列表',
@@ -105,7 +116,7 @@ return [
 		'type'                      => '类型',
 		'adopt'                     => '通过',
 		'Not_through'               => '不通过',
-
+		'Not_audit'                 => '未审核',
 	//操作日志
 		'Operation_time'            => '操作时间',
 		'User_name'                 => '用户名',

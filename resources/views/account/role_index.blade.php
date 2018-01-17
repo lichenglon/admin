@@ -21,7 +21,7 @@
                 </h4>
 
 
-                <div class="row" style="margin-bottom:10px;">
+                {{--<div class="row" style="margin-bottom:10px;">
                     <div class="col-sm-9">
 
                         <label><b>@lang('account.Each_page_shows')：</b></label>
@@ -32,7 +32,7 @@
                             <option value="100">100</option>
                         </select>@lang('account.strip')
                     </div>
-                </div>
+                </div>--}}
 
                 <div class="row">
                     <div class="col-sm-12">
@@ -78,7 +78,7 @@
                                 <tr role="row">
                                     {{--<td class="sorting_1">{{ $value->id }}</td>--}}
                                     <td>{{ $value->name }}</td>
-                                    <td>{{ $value->parse_status }}</td>
+                                    <td>@if(!$value->status) @lang('account.disable') @else @lang('account.Enable') @endif</td>
                                     <td>{{ $value->department_name }}</td>
                                     <td>{{ $value->parent_depart_name or '无' }}</td>
                                    {{-- <td>{{ $value->create_time }}</td>--}}

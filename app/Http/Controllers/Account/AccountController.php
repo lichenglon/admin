@@ -7,6 +7,7 @@ use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Input;
 class AccountController extends BaseController
 {
     public $account_status = ['禁用','启用'];
@@ -47,13 +48,20 @@ class AccountController extends BaseController
 
     //添加用户
     public function create(){
+
         $roles = Account::where('status',1)->get(['id','name']);
         $departmentList = $this->getSelectList('departments');
         $roleList = $this->getSelectList('roles');
-        return view('account.account_create', ['roles'=>$roles, 'departmentList'=>$departmentList,'roleList'=>$roleList]);
+        $nationArr = DB::table('nation')->get();
+        return view('account.account_create', ['roles'=>$roles, 'departmentList'=>$departmentList,'roleList'=>$roleList,'nationArr'=>$nationArr]);
     }
 
     public function store(Request $request){
+        //国家
+       /* $state = explode(',',$request->state);
+        $province =explode(',',$request->province);
+        //城市
+        $city = explode(',',$request->city);*/
         $data = [
             'name' => $request->name,
             'username' => $request->username,
@@ -64,8 +72,13 @@ class AccountController extends BaseController
             'role_id' => $request->role_id,
             'create_time' => time(),
             'update_time' => time(),
+            'state'       => '',
+            'en_state'    => '',
+            'province'    => '',
+            'en_province' => '',
+            'city'        => '',
+            'en_city'     => '',
         ];
-
         $rs = Account::insert($data);
         if($rs){
 

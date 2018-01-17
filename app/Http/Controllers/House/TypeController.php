@@ -23,17 +23,16 @@ class TypeController extends BaseController {
 	 *房源类型添加表单
 	 */
 	public function add() {
-		$houseType = new House_type();
-		$optionStr = $houseType->recursion();
-		return view('house/type/add',['optionStr'=>$optionStr]);
+
+		return view('house/type/add');
 	}
 	/**
 	 *房源类型表单提交
 	 */
 	public function save(Request $request){
 		$data = $request->input();
+		$data['pid'] = '0';
 		unset($data['_token']);
-
 		$rs = House_type::insert($data);
 		if($rs){
 			//更新操作日志
@@ -50,7 +49,7 @@ class TypeController extends BaseController {
 
 			return redirect('house/type')->with('success','添加分类成功！');
 		}else{
-			return redirect('house/type/add',['pid'=>$request->pid])->with('error','添加分类失败！');
+			return redirect('house/type/add')->with('error','添加分类失败！');
 		}
 	}
 	/**

@@ -26,25 +26,26 @@
                     type: 'column'
                 },
                 title: {
-                    text: '高级响应式图表'
+                    text: '@lang("data_statement.Growth_rate_of_rental_housing")'
                 },
                 subtitle: {
-                    text: '请点击按钮查看坐标轴变化'
+                    text: '@lang("data_statement.Slide_the_mouse_over_the_bar_to_view_the_growth_rate")'
                 },
                 xAxis: {
-                    categories: ['一月', '二月', '三月', '四月', '五月', '六月',
-                        '七月', '八月', '九月', '十月', '十一月', '十二月']
+                    categories: ['@lang("data_statement.In_January")', '@lang("data_statement.In_February")', '@lang("data_statement.In_march")', '@lang("data_statement.April")',
+                        '@lang("data_statement.In_may")', '@lang("data_statement.In_June")', '@lang("data_statement.In_July")', '@lang("data_statement.In_August")',
+                        '@lang("data_statement.September")', '@lang("data_statement.October")', '@lang("data_statement.In_November")', '@lang("data_statement.December")']
                 },
                 yAxis: {
                     labels: {
                         x: -15
                     },
                     title: {
-                        text: '项目'
+                        text: '@lang("data_statement.housing")'
                     }
                 },
                 series: [{
-                    name: '销售',
+                    name: '@lang("data_statement.Rental_growth")',
                     data: [434, 523, 345, 785, 565, 843, 726, 590, 665, 434, 312, 432]
                 }],
                 responsive: {
@@ -57,7 +58,7 @@
                             xAxis: {
                                 labels: {
                                     formatter: function () {
-                                        return this.value.replace('月', '')
+                                        return this.value.replace('月', '131')
                                     }
                                 }
                             },

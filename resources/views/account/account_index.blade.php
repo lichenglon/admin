@@ -38,7 +38,7 @@
                         <div class="col-sm-5">
                             <label><b>@lang('account.Keyword_search')</b></label>
                             <select class="form-control" name="keyword_type">
-                                <option value="name" @if(Request::get('keyword_type') == 'name') {{ Request::get('keyword_type')  }} @endif>姓名</option>
+                                <option value="name" @if(Request::get('keyword_type') == 'name') {{ Request::get('keyword_type')  }} @endif>@lang('account.name')</option>
                             </select>
                             <input type="text" class="form-control" name="keyword" value="{{ Request::get('keyword') }}" placeholder="">
                             <input name="search" type="submit" class="btn btn-default" value="@lang('account.search')">
@@ -125,7 +125,7 @@
                             <tbody>
 
                             @foreach($account_lists as $value)
-
+                                @if($value->username != 'root')
                                 <tr role="row">
                                     <td><input type="checkbox" name="" class="ids" id=""></td>
                                     {{--<td class="sorting_1">{{ $value->id }}</td>--}}
@@ -134,7 +134,7 @@
                                     <td>{{ $value->parse_role_id }}</td>
                                     <td>{{ $value->area }}</td>
                                     <td>{{ $value->tel }}</td>
-                                    <td>{{ $value->parse_status }}</td>
+                                    <td>@if(!$value->status) @lang('account.disable') @else @lang('account.Enable') @endif</td>
                                     <td>{{ date('Y-m-d H:i:s',$value->create_time) }}</td>
                                     <td><span>
                                         <a href="{{ url('account/user/updateStatus',['id'=>$value->id,'status'=>$value->status]) }}" class="layer-get">
@@ -143,9 +143,8 @@
                                         <a href="{{ url('account/user/'.$value->id.'/edit') }}">@lang('account.The_editor')</a>&nbsp;
                                         <a href="{{ url('account/user',['id'=>$value->id]) }}" token="{{ csrf_token() }}" class="layer-delete">@lang('account.delete')</a>
                                     </span></td>
-
                                 </tr>
-
+                                @endif
                             @endforeach
 
 

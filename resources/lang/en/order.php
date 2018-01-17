@@ -37,5 +37,15 @@ return [
 	'contract'                  => 'Contract',              //合同
 	'evaluate'                  => 'Evaluate',              //评价
 	'Return_to_the_list_of_orders'  => 'Return to the list of orders', //返回订单列表
+	//订单状态
+	'Order_not_paid'            => 'Order not paid',        //订单未付款
+	'Order_not_reviewed'        => 'Order not reviewed',    //订单未审核
+	'Order_audit'               => 'Order audit',           //订单审核中
+	'approved'                  => 'Approved',              //审核已通过
+	'Order_is_rejected'         => 'Order is rejected',     //订单驳回
+	'Order_confirmed'           => 'Order confirmed',       //订单已确认
+	'The_contract_has_been_uploaded' => 'The contract has been uploaded.',//合同已上传
+	'Order_completed'           => 'Order completed',       //订单已完成
+	'Order_cancellation'        => 'Order cancellation',    //订单取消
 
 ];
