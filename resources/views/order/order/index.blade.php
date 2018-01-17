@@ -95,7 +95,7 @@
                             <tbody>
 
                             @foreach($data as $key => $value)
-                                @if($value->order_status == 1 || $value->order_status == 2 || $value->order_status == 3 || $value->order_status == 4 || $value->order_status == 6)
+                                @if($value->order_status != 1 ||($value->order_status != 7))
                                 <tr role="row">
                                     <td class="sorting_1"><a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">{{ $value->order_no }}</a></td>
                                     <td>{{ $value->u_name }}</td>
@@ -105,14 +105,17 @@
                                     <td>{{ $orderStatus[$value->order_status] }}</td>
                                     <td>{{ $value->order_remark }}</td>
                                     <td >
-                                        {{--@if($value->order_status == 1)
+
+
+
+                                       {{-- @if($value->order_status == 1)
                                             <label>审核通过<input name="order_status" type="radio" value="8" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('8','{{$value->order_id}}')}" /></label>
                                             &nbsp;&nbsp;
                                             <label>审核不通过<input name="order_status" type="radio" value="3" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('3','{{$value->order_id}}')}" /></label>
                                         @else--}}
                                             <a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">@lang('order.View_the_details')</a>
-                                        {{--@endif--}}
 
+                                       {{-- @endif--}}
 
                                     </td>
                                 </tr>
