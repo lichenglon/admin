@@ -106,16 +106,16 @@
                                     <td>{{ $value->order_remark }}</td>
                                     <td >
 
-                                      
 
-                                        @if($value->order_status == 1)
+
+                                       {{-- @if($value->order_status == 1)
                                             <label>审核通过<input name="order_status" type="radio" value="8" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('8','{{$value->order_id}}')}" /></label>
                                             &nbsp;&nbsp;
                                             <label>审核不通过<input name="order_status" type="radio" value="3" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('3','{{$value->order_id}}')}" /></label>
-                                        @else
+                                        @else--}}
                                             <a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">@lang('order.View_the_details')</a>
 
-                                        @endif
+                                       {{-- @endif--}}
 
                                     </td>
                                 </tr>
