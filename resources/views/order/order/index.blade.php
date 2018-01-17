@@ -26,7 +26,7 @@
                             <select class="form-control" name="status" id="status">
                                 <option value="">@lang('order.Unlimited')</option>
                                 @foreach($status_all as $k=>$v)
-                                    <option value="{{$k}}">{{$v}}</option>
+                                    <option value="{{ $v->id }}">@if(Session::get('lang') == 'en') {{$v->en_order_status}} @else {{ $v->order_status }} @endif</option>
                                 @endforeach
                             </select>&nbsp;&nbsp;&nbsp;&nbsp;
                             <label><b>@lang('order.Order_time')：</b> </label>
@@ -95,14 +95,34 @@
                             <tbody>
 
                             @foreach($data as $key => $value)
-                                @if($value->order_status != 1 ||($value->order_status != 7))
+                                @if($value->order_status != 1 || ($value->order_status != 7))
                                 <tr role="row">
                                     <td class="sorting_1"><a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">{{ $value->order_no }}</a></td>
                                     <td>{{ $value->u_name }}</td>
                                     <td>{{ $value->name }}</td>
                                     <td>{{ $value->tel }}</td>
                                     <td>{{ date('Y-m-d H:i:s',$value->creat_time) }}</td>
-                                    <td>{{ $orderStatus[$value->order_status] }}</td>
+                                    <td>
+                                        @if($value->order_status == '1')
+                                            @lang('order.Order_not_paid')
+                                        @elseif($value->order_status == '2')
+                                            @lang('order.Order_not_reviewed')
+                                        @elseif($value->order_status == '3')
+                                            @lang('order.Order_audit')
+                                        @elseif($value->order_status == '4')
+                                            @lang('order.approved')
+                                        @elseif($value->order_status == '5')
+                                            @lang('order.Order_is_rejected')
+                                        @elseif($value->order_status == '6')
+                                            @lang('order.Order_confirmed')
+                                        @elseif($value->order_status == '7')
+                                            @lang('order.The_contract_has_been_uploaded')
+                                        @elseif($value->order_status == '8')
+                                            @lang('order.Order_completed')
+                                        @elseif($value->order_status == '9')
+                                            @lang('order.Order_cancellation')
+                                        @endif
+                                    </td>
                                     <td>{{ $value->order_remark }}</td>
                                     <td >
 

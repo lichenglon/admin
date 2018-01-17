@@ -39,7 +39,7 @@ class OrderController extends BaseController
         $where = [];
 
         //订单状态值
-        $status_all = $this->getOrderStatus();
+        $status_all = DB::table('order_status')->get();
 
         //接收搜索值
         $status = $request->input('status');

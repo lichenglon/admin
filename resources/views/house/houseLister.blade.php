@@ -72,7 +72,14 @@
 								<tr class="text-c">
 									<td>{{$val->house_type}}</td>
 									<td class="text-l"><a href="{{url('house/houseLister/detail',['id'=>$val->msgid])}}"><u style="cursor:pointer" class="text-primary" title="查看">{{$val->serial_number}}</u></a></td>
-									<td>{{$val->house_structure}}</td>
+									<?php
+										$house_structure = explode(',', $val->house_structure)
+									?>
+									<td>{{ $house_structure[0] }} @lang('house_translate.room')
+										{{ $house_structure[1] }} @lang('house_translate.hall')
+										{{ $house_structure[2] }} @lang('house_translate.kitchen')
+										{{ $house_structure[3] }} @lang('house_translate.toilet')
+									</td>
 									<td>{{$val->house_price}}</td>
 									<td><span>{{$val->house_size}}</span> /@lang('house_translate.Square_meters')</td>
 									<td><?php $equipment = explode(',',$val->house_facility); foreach ($equipment as $value){ echo $value.'&nbsp;&nbsp;&nbsp;'; }?></td>
