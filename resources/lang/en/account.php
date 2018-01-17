@@ -36,6 +36,7 @@ return [
 
 	//编辑账号
 	'edit_account'                  => 'Edit account',                 //编辑账号
+	'password'                      => 'Password',                     //密码
 
 	//角色列表
 	'The_role_list'                  => 'The role list',               //角色列表

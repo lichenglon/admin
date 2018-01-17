@@ -97,15 +97,15 @@ class AccountController extends BaseController
     }
 
     public function update(Request $request){
-
+        $data['passwd'] = md5($request->password);
         $data['name'] = $request->name;
         $data['username'] = $request->username;
         $data['status'] = $request->status;
         $data['role_id'] = $request->role_id;
         $data['tel'] = $request->tel;
         $data['area'] = $request->area;
+        $data['passwd'] = md5($request->password);
         $data['update_time'] = time();
-
         Account::where('id', $request->id)
             ->update($data);
 

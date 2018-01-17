@@ -22,28 +22,28 @@
                         </h4>--}}
 
                         <div class="row" style="padding:20px;">
-                            <label><b>订单状态：</b></label>
+                            <label><b>@lang('order.Order_status')：</b></label>
                             <select class="form-control" name="status" id="status">
-                                <option value="">不限</option>
+                                <option value="">@lang('order.Unlimited')</option>
                                 @foreach($status_all as $k=>$v)
                                     <option value="{{$k}}">{{$v}}</option>
                                 @endforeach
                             </select>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label><b>下单时间：</b> </label>
-                            <input type="text" name="stime" id="stime" class="form-control" value="" />&nbsp;&nbsp;至&nbsp;&nbsp;
+                            <label><b>@lang('order.Order_time')：</b> </label>
+                            <input type="text" name="stime" id="stime" class="form-control" value="" />&nbsp;&nbsp;@lang('order.to')&nbsp;&nbsp;
                             <input type="text" name="etime" id="etime" class="form-control" value=""/>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label><b>关键词搜索</b></label>&nbsp;&nbsp;
+                            <label><b>@lang('order.Keyword_search')</b></label>&nbsp;&nbsp;
                             <select class="form-control" name="kwd_k" id="kwd_k">
-                                <option value="">请选择</option>
-                                <option value="order_no">订单编号</option>
+                                <option value="">@lang('order.Please_choose')</option>
+                                <option value="order_no">@lang('order.Order_number')</option>
                                 {{--<option value="u_name">下单人</option>--}}
-                                <option value="name">租客姓名</option>
-                                <option value="tel">租客手机号码</option>
+                                <option value="name">@lang('order.Tenant_name')</option>
+                                <option value="tel">@lang('order.Tenant_phone')</option>
                             </select>
                             <input type="text" class="form-control" name="kwd_v" id="kwd_v" value="" placeholder="">&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input name="search" type="submit" class="btn btn-default" value="搜索">&nbsp;&nbsp;
-                            <button type="reset" class="btn btn-default">重置</button>&nbsp;&nbsp;
-                            <input name="excel" type="submit" class="btn btn-default" value="导出Excel">
+                            <input name="search" type="submit" class="btn btn-default" value="@lang('order.search')">&nbsp;&nbsp;
+                            <button type="reset" class="btn btn-default">@lang('order.Reset')</button>&nbsp;&nbsp;
+                            <input name="excel" type="submit" class="btn btn-default" value="@lang('order.export_excel')">
                             {{--<div style="float:right;"><a href="{{ url('order/order/order_excel') }}" class="btn btn-default">导出EXCEL</a></div>--}}
                         </div>
                     </span>
@@ -60,36 +60,36 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
-                                    style="width:20%;">订单号
+                                    style="width:20%;">@lang('order.Order_number')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Browser: activate to sort column ascending" style="width:10%;">
-                                    下单人
+                                    @lang('order.Single_person')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending" style="width:10%;">
-                                    租客姓名
+                                    @lang('order.Tenant_name')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending" style="width:10%;">
-                                    租客手机号码
+                                    @lang('order.Tenant_phone')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending" style="width:15%;">
-                                    下单时间
+                                    @lang('order.Order_time')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width:10%;">
-                                    订单状态
+                                    @lang('order.Order_status')
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width:15%;">
-                                    备注信息
+                                    @lang('order.Remark_information')
                                 </th>
-                                {{--<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width:10%;">
-                                    操作
-                                </th>--}}
+                                    @lang('order.operation')
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -105,14 +105,17 @@
                                     <td>{{ $orderStatus[$value->order_status] }}</td>
                                     <td>{{ $value->order_remark }}</td>
                                     <td >
-                                        {{--@if($value->order_status == 1)--}}
-                                            {{--<label>审核通过<input name="order_status" type="radio" value="8" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('8','{{$value->order_id}}')}" /></label>--}}
-                                            {{--&nbsp;&nbsp;--}}
-                                            {{--<label>审核不通过<input name="order_status" type="radio" value="3" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('3','{{$value->order_id}}')}" /></label>--}}
-                                        {{--@else--}}
-                                            <a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">查看详情</a>
-                                        {{--@endif--}}
 
+                                      
+
+                                        @if($value->order_status == 1)
+                                            <label>审核通过<input name="order_status" type="radio" value="8" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('8','{{$value->order_id}}')}" /></label>
+                                            &nbsp;&nbsp;
+                                            <label>审核不通过<input name="order_status" type="radio" value="3" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('3','{{$value->order_id}}')}" /></label>
+                                        @else
+                                            <a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">@lang('order.View_the_details')</a>
+
+                                        @endif
 
                                     </td>
                                 </tr>

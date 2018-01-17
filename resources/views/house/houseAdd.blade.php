@@ -293,10 +293,6 @@
                                 <label for="radio-5">@lang('house_translate.In_the_configuration')</label>
                             </div>
                             <div class="check-box">
-                                <input name="house_status" value="停租" type="radio" id="radio-6">
-                                <label for="radio-6">@lang('house_translate.Off_hire')</label>
-                            </div>
-                            <div class="check-box">
                                 <input name="house_status" value="冻结" type="radio" id="radio-7">
                                 <label for="radio-7">@lang('house_translate.freeze')</label>
                             </div>

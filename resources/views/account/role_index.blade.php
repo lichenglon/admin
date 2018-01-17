@@ -40,11 +40,11 @@
                                aria-describedby="example1_info">
                             <thead>
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                {{--<th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
                                     style="width: 66px;">@lang('account.Serial_number')
-                                </th>
+                                </th>--}}
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Browser: activate to sort column ascending" style="width: 223px;">
                                     @lang('account.Character_name')
@@ -61,10 +61,10 @@
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
                                     @lang('account.Upper_level')
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                {{--<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
                                     @lang('account.Creation_time')
-                                </th>
+                                </th>--}}
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
                                     @lang('account.operation')
@@ -76,12 +76,12 @@
                             @foreach($role_lists as $value)
 
                                 <tr role="row">
-                                    <td class="sorting_1">{{ $value->id }}</td>
+                                    {{--<td class="sorting_1">{{ $value->id }}</td>--}}
                                     <td>{{ $value->name }}</td>
                                     <td>{{ $value->parse_status }}</td>
                                     <td>{{ $value->department_name }}</td>
                                     <td>{{ $value->parent_depart_name or '无' }}</td>
-                                    <td>{{ $value->create_time }}</td>
+                                   {{-- <td>{{ $value->create_time }}</td>--}}
                                     <td><span>
                                         <a href="{{ url('account/role/updateStatus',['id'=>$value->id,'status'=>$value->status]) }}" class="layer-get">
                                             @if($value->status) @lang('account.disable') @else @lang('account.Enable') @endif
