@@ -292,7 +292,7 @@ class HouseController extends BaseController {
 			//结算方式
 				'knot_way' => $houseData['knot_way'],
 			//房源名称
-				'house_name' => $houseData['house_location'],
+				'house_name' => $houseData['house_name'],
 			//审核状态
 				'chk_sta' => '1',
 			//房源价格货币计算方式
@@ -480,41 +480,6 @@ class HouseController extends BaseController {
 			]);
 		}
 
-	}
-
-	/**
-	 *导出 Excel
-	 */
-	public function houseExcel() {
-		$data = DB::table('house_message')
-				->select()
-				->get('serial_number','house_location')
-				->toArray();
-		$title = [
-						'房源ID号',
-						'编号',
-						'房源位置',
-						'房源结构',
-						'房源价格',
-						'房源大小/平方',
-						'房源类型',
-						'房屋设备',
-						'关键字',
-						'房源简介',
-						'起租期',
-						'租期时长',
-						'状态',
-						'房东证件号',
-						'房源中介ID',
-						'国家',
-						'省',
-						'城市',
-						'周边信息',
-						'押金',
-						'预付款比例',
-						'结算方式'
-				];
-		exportData($title,$data,'房源信息'.date('Y-m-d'));
 	}
 
 	/**

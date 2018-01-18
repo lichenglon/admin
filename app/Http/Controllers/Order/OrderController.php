@@ -82,7 +82,7 @@ class OrderController extends BaseController
         }
 
         $total = DB::table('order')->where($where)->orderBy('order_id', 'desc')->count();
-        $order_list = DB::table('order')->where($where)->join('accounts','order.uid','=','id')->select('order.*','accounts.name as u_name')->orderBy('order_id', 'desc')->paginate(10);
+        $order_list = DB::table('order')->where($where)->orderBy('order_id', 'desc')->paginate(10);
         return view('order.order.index', ['data'=>$order_list, 'total'=>$total, 'status_all'=>$status_all, 'orderStatus'=>$this->orderStatus, 'a_status'=>$status, 'stime' => $stime, 'etime' => $etime, 'kwd_k' => $kwd_k, 'kwd_v' =>$kwd_v]);
 
     }

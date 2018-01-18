@@ -66,10 +66,7 @@
                                     aria-label="Browser: activate to sort column ascending" style="width:10%;">
                                     @lang('order.Single_person')
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Platform(s): activate to sort column ascending" style="width:10%;">
-                                    @lang('order.Tenant_name')
-                                </th>
+                                
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Platform(s): activate to sort column ascending" style="width:10%;">
                                     @lang('order.Tenant_phone')
@@ -98,7 +95,6 @@
                                 @if($value->order_status != 1 || ($value->order_status != 7))
                                 <tr role="row">
                                     <td class="sorting_1"><a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">{{ $value->order_no }}</a></td>
-                                    <td>{{ $value->u_name }}</td>
                                     <td>{{ $value->name }}</td>
                                     <td>{{ $value->tel }}</td>
                                     <td>{{ date('Y-m-d H:i:s',$value->creat_time) }}</td>
