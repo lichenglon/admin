@@ -83,7 +83,7 @@
 									<td>{{$val->house_price}}</td>
 									<td><span>{{$val->house_size}}</span> /@lang('house_translate.Square_meters')</td>
 									<td><?php $equipment = explode(',',$val->house_facility); foreach ($equipment as $value){ echo $value.'&nbsp;&nbsp;&nbsp;'; }?></td>
-									<td class="text-l"><a href="{{url('house/houseLister/houseMap')}}"><u style="cursor:pointer" class="text-primary" title="查看">{{$val->house_location}}</u></a></td>
+									<td class="text-l"><a href="{{url('house/houseLister/houseMap')}}"><u style="cursor:pointer" class="text-primary" title="查看"><?php echo mb_substr($val->house_location,0,20,'utf-8');?>..........</u></a></td>
 									<td>{{$val->house_rise}}<b style="font-size:15px;">~</b>{{$val->house_duration}} /@lang('house_translate.Weeks2')</td>
 									<td class="td-status">
 										<span class="label label-success radius">

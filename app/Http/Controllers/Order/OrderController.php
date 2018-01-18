@@ -82,7 +82,7 @@ class OrderController extends BaseController
         }
 
         $total = DB::table('order')->where($where)->orderBy('order_id', 'desc')->count();
-        $order_list = DB::table('order')->where($where)->join('accounts','order.uid','=','id')->select('order.*','accounts.name as u_name')->orderBy('order_id', 'desc')->paginate(10);
+        $order_list = DB::table('order')->where($where)->orderBy('order_id', 'desc')->paginate(10);
         return view('order.order.index', ['data'=>$order_list, 'total'=>$total, 'status_all'=>$status_all, 'orderStatus'=>$this->orderStatus, 'a_status'=>$status, 'stime' => $stime, 'etime' => $etime, 'kwd_k' => $kwd_k, 'kwd_v' =>$kwd_v]);
 
     }
@@ -93,7 +93,25 @@ class OrderController extends BaseController
         exportData($title,$data,'房源信息'.date('Y-m-d'));
     }
 
-    //审核状态更改
+    //审核订单页面
+    public function check($id){
+        DB::table('order')->where('order_id',$id)->update(['order_status'=>'3']);
+        $result = DB::table('order')->where('order_id', $id)->join('house_message','order.house_id','=','msgid')->first();
+        return view("order.order.check",['result'=>$result,'orderStatus'=>$this->orderStatus]);
+    }
+    //审核订单提交
+    public function saveChk($id){
+        if($_REQUEST['order_status'] == '4'){
+            DB::table('order')->where('order_id',$id)->update(['order_status'=>'4']);
+        }
+        if($_REQUEST['order_status'] == '5'){
+            DB::table('order')->where('order_id',$id)->update(['order_status'=>'5','reject_reason'=>$_REQUEST['reject_reason']]);
+        }
+        return redirect('order/order');
+    }
+    
+
+    //审核状态更改,他已经废了。
     public function isCheck(){
         if($_GET['order_status'] && $_GET['order_id'])
         {

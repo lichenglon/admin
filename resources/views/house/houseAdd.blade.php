@@ -124,17 +124,17 @@
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Detailed_location')：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Housing_name')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" class="input-text" value="" placeholder="南山区泰邦科技大厦2308" required maxlength="3000" id="house_location" name="house_location" >
+                            <input type="text" class="input-text" value="" placeholder="房源名称" required maxlength="3000" id="house_location" name="house_name" >
                         </div>
                         <span id="house_locationMsg"></span>
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Housing_name')：</label>
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Detailed_location')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" class="input-text" value="" placeholder="房源名称" required maxlength="3000" id="house_location" name="house_name" >
+                            <input type="text" class="input-text" value="" placeholder="南山区泰邦科技大厦2308" required maxlength="3000" id="house_location" name="house_location" >
                         </div>
                         <span id="house_locationMsg"></span>
                     </div>
