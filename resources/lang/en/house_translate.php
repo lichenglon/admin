@@ -17,6 +17,7 @@ return [
 	'Determine'                 => 'Determine',                     //确定
 
 	//房源添加
+	'Housing_name'              => 'Housing name',                  //房源名称
 	'Housing_add'               => 'Housing add',                   //房源添加
 	'Housing_types'             => 'Housing types',                 //房源类型
 	'National_city'             => 'National city',                 //国家城市

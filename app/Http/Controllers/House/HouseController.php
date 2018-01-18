@@ -380,11 +380,6 @@ class HouseController extends BaseController {
 		$search_k = Input::get('search_k') ? Input::get('search_k') : '%';
 		$search_v = Input::get('search_v') ? Input::get('search_v') : '%';
 		$type = Input::get('type') ? Input::get('type') : '%';
-/*		$serial_number = Input::get('serial_number') ? Input::get('serial_number') : '%';
-		$house_structure = Input::get('house_structure') ? Input::get('house_structure') : '%';
-		$house_price = Input::get('house_price') ? Input::get('house_price') : '%';
-		$house_location = Input::get('house_location') ? Input::get('house_location') : '%';
-		$house_keyword = Input::get('house_keyword') ? Input::get('house_keyword') : '%';*/
 		$find = Input::get('find') ? Input::get('find') : '';
 		$export = Input::get('export') ? Input::get('export') : '';
 		if($find){
@@ -405,17 +400,6 @@ class HouseController extends BaseController {
 			}
 
 
-/*			$gather = DB::table('house_message')
-					->where('chk_sta','2')
-					->where('house_type', 'like', $type)
-					->where('serial_number', 'like', '%'.$serial_number.'%')
-					->where('house_structure', 'like', '%'.$house_structure.'%')
-					->where('house_price', 'like', '%'.$house_price.'%')
-					->where('house_location', 'like', '%'.$house_location.'%')
-					->where('house_keyword', 'like', '%'.$house_keyword.'%')
-					->orderBy('msgid', 'desc')
-					->paginate(16);*/
-
 			$typeObject = DB::table('house_type')
 					->select('name')
 					->get();
@@ -429,11 +413,6 @@ class HouseController extends BaseController {
 					'typeObject'      => $typeObject,
 					'houseCount'      => $houseCount,
 					'type'            => $type,
-/*					'serial_number'   => $serial_number,
-					'house_structure' => $house_structure,
-					'house_price'     => $house_price,
-					'house_location'  => $house_location,
-					'house_keyword'   => $house_keyword*/
 			]);
 		}elseif($export){
 
@@ -444,11 +423,6 @@ class HouseController extends BaseController {
 						->where('house_type', 'like', $type)
 						->where($search_k,'like','%'.$search_v.'%')
 						->select('serial_number', 'house_location', 'house_structure', 'house_price', 'house_size', 'house_type', 'house_facility', 'house_rise', 'house_duration', 'house_status', 'state', 'province', 'city', 'rim_message', 'cash_pledge', 'payment_proportion', 'knot_way')
-						/*->where('serial_number', 'like', $serial_number)
-						->where('house_structure', 'like', $house_structure)
-						->where('house_price', 'like', $house_price)
-						->where('house_location', 'like', $house_location)
-						->where('house_keyword', 'like', $house_keyword)*/
 						->orderBy('msgid', 'desc')
 						->get()
 						->toArray();
@@ -461,20 +435,6 @@ class HouseController extends BaseController {
 						->get()
 						->toArray();
 			}
-
-
-			/*$gather = DB::table('house_message')
-					->where('chk_sta','2')
-					->where('house_type', 'like', $type)
-					->select('serial_number', 'house_location', 'house_structure', 'house_price', 'house_size', 'house_type', 'house_facility', 'house_rise', 'house_duration', 'house_status', 'state', 'province', 'city', 'rim_message', 'cash_pledge', 'payment_proportion', 'knot_way')
-					->where('serial_number', 'like', $serial_number)
-					->where('house_structure', 'like', $house_structure)
-					->where('house_price', 'like', $house_price)
-					->where('house_location', 'like', $house_location)
-					->where('house_keyword', 'like', $house_keyword)
-					->orderBy('msgid', 'desc')
-					->get()
-					->toArray();*/
 
 			$title = [
 					'编号',
@@ -503,16 +463,6 @@ class HouseController extends BaseController {
 					->orderBy('msgid', 'desc')
 					->paginate(10);
 
-/*			$gather = DB::table('house_message')
-					->where('chk_sta','2')
-					->where('house_type', 'like', $type)
-					->where('serial_number', 'like', '%'.$serial_number.'%')
-					->where('house_structure', 'like', '%'.$house_structure.'%')
-					->where('house_price', 'like', '%'.$house_price.'%')
-					->where('house_location', 'like', '%'.$house_location.'%')
-					->where('house_keyword', 'like', '%'.$house_keyword.'%')
-					->orderBy('msgid', 'desc')
-					->paginate(16);*/
 
 			$typeObject = DB::table('house_type')
 					->select('name')
@@ -527,11 +477,6 @@ class HouseController extends BaseController {
 					'typeObject'      => $typeObject,
 					'houseCount'      => $houseCount,
 					'type'            => $type,
-/*					'serial_number'   => $serial_number,
-					'house_structure' => $house_structure,
-					'house_price'     => $house_price,
-					'house_location'  => $house_location,
-					'house_keyword'   => $house_keyword*/
 			]);
 		}
 
