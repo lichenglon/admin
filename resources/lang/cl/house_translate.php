@@ -16,6 +16,7 @@ return [
 	    'nothing'                   => '无',
 
 	//房源添加
+		'Housing_name'              => '房源名称',
 		'Housing_add'               => '房源添加',
 		'Housing_types'             => '房源类型',
 		'National_city'             => '国家城市',

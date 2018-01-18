@@ -132,6 +132,14 @@
                     </div>
 
                     <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Housing_name')：</label>
+                        <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
+                            <input type="text" class="input-text" value="" placeholder="房源名称" required maxlength="3000" id="house_location" name="house_name" >
+                        </div>
+                        <span id="house_locationMsg"></span>
+                    </div>
+
+                    <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Housing_structure')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="number" name="room"  max="100" min="0" value="1" class="input-text"> @lang('house_translate.room')
@@ -488,7 +496,7 @@
                 $landlord_remarkMsg=$('#landlord_remarkMsg');
 
             /**/
-            onblurr($house_location,$house_locationMsg,/^[\u4e00-\u9fa5\w \d,，.'"]{2,1000}$/,"Can't be empty",'格式错误');
+            onblurr($house_location,$house_locationMsg,/^[\u4e00-\u9fa5\w \d,，.'"-]{2,1000}$/,"Can't be empty",'格式错误');
 
             onblurr($house_structure,$house_structureMsg,/^[\u4e00-\u9fa5\w \d,，.'"]{2,1000}$/,"Can't be empty",'格式错误');
 

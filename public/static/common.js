@@ -175,7 +175,7 @@
     })
     
     /**
-     * 商品关联信息删除操作
+     * 关联信息删除操作
      * @author liuwei
      * @dateTime 2015-12-29T10:57:16+0800
      * @param    {[type]}                 ){                                   var title [description]
@@ -200,7 +200,7 @@
                     if (data.status==1) {
                         message = message === undefined ? '操作成功！' : message;
                         if (data.url) {
-                            layer.msg(message + ' 页面即将自动跳转~', {icon: 1});
+                            layer.msg(message + '', {icon: 1});
                             setTimeout(function () {
                                 location.href = data.url;
                             }, 1000);
