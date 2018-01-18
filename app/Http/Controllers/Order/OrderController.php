@@ -93,7 +93,25 @@ class OrderController extends BaseController
         exportData($title,$data,'房源信息'.date('Y-m-d'));
     }
 
-    //审核状态更改
+    //审核订单页面
+    public function check($id){
+        DB::table('order')->where('order_id',$id)->update(['order_status'=>'3']);
+        $result = DB::table('order')->where('order_id', $id)->join('house_message','order.house_id','=','msgid')->first();
+        return view("order.order.check",['result'=>$result,'orderStatus'=>$this->orderStatus]);
+    }
+    //审核订单提交
+    public function saveChk($id){
+        if($_REQUEST['order_status'] == '4'){
+            DB::table('order')->where('order_id',$id)->update(['order_status'=>'4']);
+        }
+        if($_REQUEST['order_status'] == '5'){
+            DB::table('order')->where('order_id',$id)->update(['order_status'=>'5','reject_reason'=>$_REQUEST['reject_reason']]);
+        }
+        return redirect('order/order');
+    }
+    
+
+    //审核状态更改,他已经废了。
     public function isCheck(){
         if($_GET['order_status'] && $_GET['order_id'])
         {

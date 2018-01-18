@@ -92,7 +92,13 @@
                             <tbody>
 
                             @foreach($data as $key => $value)
-                                @if($value->order_status != 1 || ($value->order_status != 7))
+
+                                
+                                @if($value->order_status == '2' || $value->order_status == '3' || $value->order_status == '4' || $value->order_status == '5' || $value->order_status == '6' || $value->order_status == '7' || $value->order_status == '8' || ($value->order_status == '9' && $value->qx_reason != '' ))
+                                
+
+                                
+
                                 <tr role="row">
                                     <td class="sorting_1"><a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">{{ $value->order_no }}</a></td>
                                     <td>{{ $value->name }}</td>
@@ -124,14 +130,15 @@
 
 
 
-                                       {{-- @if($value->order_status == 1)
-                                            <label>审核通过<input name="order_status" type="radio" value="8" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('8','{{$value->order_id}}')}" /></label>
+                                        @if($value->order_status == 2 || $value->order_status == 3)
+                                            <a href="{{ url('order/order/check',['id'=>$value->order_id]) }}" target="">去审核</a>
+                                           {{-- <label>审核通过<input name="order_status" type="radio" value="8" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('4','{{$value->order_id}}')}" /></label>
                                             &nbsp;&nbsp;
-                                            <label>审核不通过<input name="order_status" type="radio" value="3" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('3','{{$value->order_id}}')}" /></label>
-                                        @else--}}
+                                            <label>审核不通过<input name="order_status" type="radio" value="3" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('5','{{$value->order_id}}')}" /></label>--}}
+                                        @else
                                             <a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">@lang('order.View_the_details')</a>
 
-                                       {{-- @endif--}}
+                                        @endif
 
                                     </td>
                                 </tr>
