@@ -18,8 +18,8 @@
                 <!-- 表格列表 -->
         <div class="tb-unit posr">
             <div class="tb-unit-bar" style="overflow: hidden;">
-                <a class="btn all-fold" href="javascript:;" style="float:left;">@lang('house_translate.All_folding')</a>
-                <a class="btn all-open" href="javascript:;" style="float:left; margin-right:30px;">@lang('house_translate.All_open')</a>
+                {{--<a class="btn all-fold" href="javascript:;" style="float:left;">@lang('house_translate.All_folding')</a>
+                <a class="btn all-open" href="javascript:;" style="float:left; margin-right:30px;">@lang('house_translate.All_open')</a>--}}
                 <a class="btn" href="{{ url('house/type/add') }}" style="float:left; margin-right:30px;">@lang('house_translate.Add_type')</a>
 
 
@@ -27,7 +27,7 @@
 
             <div class="category">
                 <div class="hd cf">
-                    <div class="fold">@lang('house_translate.folding')</div>
+                    <div class="fold"></div>
                     <div class="order">ID</div>
                     <div class="order">@lang('house_translate.The_sorting')</div>
                     <div class="order" style="    width: 200px; text-align: left;">@lang('house_translate.name')</div>

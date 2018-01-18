@@ -10,8 +10,13 @@ return [
 		'The_sorting'               => '排序',
 		'name'                      => '名称',
 		'delete'                    => '删除',
+		'New_classification'        => '新增分类',
+		'Upper_class_classification'=> '上一级分类',
+		'Classification_name'       => '分类名称',
+	    'nothing'                   => '无',
 
 	//房源添加
+		'Housing_name'              => '房源名称',
 		'Housing_add'               => '房源添加',
 		'Housing_types'             => '房源类型',
 		'National_city'             => '国家城市',
@@ -49,7 +54,6 @@ return [
 		'Has_been_locked'           => '已锁定',
 		'Have_been_leased'          => '已出租',
 		'In_the_configuration'      => '配置中',
-		'Off_hire'                  => '停租',
 		'freeze'                    => '冻结',
 		'Suspension_of_rent'        => '暂停出租',
 		'The_landlord_name'         => '房东姓名',
@@ -65,8 +69,21 @@ return [
 		'Choose_picture'            => '选择图片',
 		'picture'                   => '图片',
 		'Click_here_to_upload_the_file' => '点击这里上传文件',
-		'Save_and_submit_the_audit' => '保存并提交审核',
+		'Save_and_submit_the_audit' => '提交',
 		'cancel'                    => '取消',
+		'Determine'                 => '确定',
+		'room'                      => '房',
+		'hall'                      => '厅',
+		'kitchen'                   => '厨',
+		'toilet'                    => '卫',
+		'and'                       => '押',
+		'pay'                       => '付',
+		'Weeks'                     => '周结',
+		'Weeks2'                    => '周',
+		'Square_meters'             => '平米',
+		'The_pound'                 => '英镑',
+		'The_dollar'                => '美元',
+		'The_yuan'                  => '人民币',
 
 	//房源列表
 		'Housing_list'              => '房源列表',
@@ -87,6 +104,7 @@ return [
 		'determine'                 => '确定',
 		'Export_Excel'              => '导出Exce',
 		'Audit_status'              => '审核状态',
+		'Please_choose'             => '请选择',
 
 	//更新房源
 		'Update_the_housing'        => '更新房源',
@@ -99,7 +117,7 @@ return [
 		'type'                      => '类型',
 		'adopt'                     => '通过',
 		'Not_through'               => '不通过',
-
+		'Not_audit'                 => '未审核',
 	//操作日志
 		'Operation_time'            => '操作时间',
 		'User_name'                 => '用户名',

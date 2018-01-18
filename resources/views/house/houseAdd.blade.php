@@ -126,7 +126,15 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Detailed_location')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" class="input-text" value="" placeholder="南山区泰邦科技大厦2308" maxlength="255" id="house_location" name="house_location" >
+                            <input type="text" class="input-text" value="" placeholder="南山区泰邦科技大厦2308" required maxlength="3000" id="house_location" name="house_location" >
+                        </div>
+                        <span id="house_locationMsg"></span>
+                    </div>
+
+                    <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Housing_name')：</label>
+                        <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
+                            <input type="text" class="input-text" value="" placeholder="房源名称" required maxlength="3000" id="house_location" name="house_name" >
                         </div>
                         <span id="house_locationMsg"></span>
                     </div>
@@ -134,9 +142,11 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Housing_structure')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" name="house_structure" id="house_structure" placeholder="户型 大小" maxlength="100" value="" class="input-text">
+                            <input type="number" name="room"  max="100" min="0" value="1" class="input-text"> @lang('house_translate.room')
+                            <input type="number" name="hall"  max="100" min="0" value="1" class="input-text"> @lang('house_translate.hall')
+                            <input type="number" name="kitchen"  max="100" min="0" value="0" class="input-text"> @lang('house_translate.kitchen')
+                            <input type="number" name="toilet"  max="100" min="0" value="0" class="input-text"> @lang('house_translate.toilet')
                         </div>
-                        <span id="house_structureMsg"></span>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.surrounding_information')：</label>
@@ -169,14 +179,19 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Housing_prices')：</label>
                         <div class="formControls col-xs-8 col-sm-9"  style="width:45%;">
-                            <input type="number" name="house_price" id="house_price" placeholder="" value=""  min="1" class="input-text" style="width:100%;">
+                            <input type="number" name="house_price" id="house_price" placeholder="" value=""  min="1" class="input-text" style="width:69%;">
+                            <select name="price_currency" id="price_currency" class="input-text" style="width:20%;">
+                                <option value="英镑,The pound">@lang('house_translate.The_pound')</option>
+                                <option value="美元,The dollar">@lang('house_translate.The_dollar')</option>
+                                <option value="人民币,The yuan">@lang('house_translate.The_yuan')</option>
+                            </select>
                         </div>
                         <span id="house_priceMsg"></span>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Housing_size')：</label>
                         <div class="formControls col-xs-8 col-sm-9"  style="width:45%;">
-                            <input type="number" name="house_size" id="house_size" placeholder="" value="20"  min="1" class="input-text" style="width:100%;">
+                            <input type="number" name="house_size" id="house_size" placeholder="" value="20"  min="1" class="input-text" style="width:90%;"> /@lang('house_translate.Square_meters')
                         </div>
                         <span id="house_sizeMsg"></span>
                     </div>
@@ -184,20 +199,22 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.deposit')：</label>
                         <div class="formControls col-xs-8 col-sm-9"  style="width:45%;">
-                            <input type="number" name="cash_pledge" id="cash_pledge" placeholder="" value=""  min="1" class="input-text" style="width:100%;">
+                            <input type="number" name="cash_pledge" id="cash_pledge" placeholder="" value=""  min="1" class="input-text" style="width:69%;">
+                            <select name="deposit_currency" id="deposit_currency" class="input-text" style="width:20%;">
+                                <option value="英镑,The pound">@lang('house_translate.The_pound')</option>
+                                <option value="美元,The dollar">@lang('house_translate.The_dollar')</option>
+                                <option value="人民币,The yuan">@lang('house_translate.The_yuan')</option>
+                            </select>
                         </div>
                         <span id="cash_pledgeMsg"></span>
                     </div>
 
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Prepayment_ratio')：</label>
-                        <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <span class="select-box">
-				                <select name="payment_proportion" class="select">
-                                    <option value="一押一租">@lang('house_translate.One_lease_and_one_rent')</option>
-                                </select>
-				            </span>
-                        </div>
+                            <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
+                                @lang('house_translate.and') <input type="number" name="and" max="100" min="0" value="1" class="input-text">
+                                @lang('house_translate.pay') <input type="number" name="pay" max="100" min="0" value="1" class="input-text">
+                            </div>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.The_method_of_payment')：</label>
@@ -206,6 +223,7 @@
 				                <select name="knot_way" class="select">
                                     <option value="月结">@lang('house_translate.Monthly')</option>
                                     <option value="季结">@lang('house_translate.Quarterly_settlement')</option>
+                                    <option value="周结">@lang('house_translate.Weeks')</option>
                                 </select>
 				            </span>
                         </div>
@@ -243,33 +261,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.The_keyword')：</label>
-                        <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" name="house_keyword" id="house_keyword" placeholder="多个关键字用英文逗号隔开，限10个关键字" value="" maxlength="10" class="input-text">
-                        </div>
-                        <span id="house_keywordMsg"></span>
-                    </div>
+
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Introduction_of_housing')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <textarea name="house_brief" id="house_brief" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符"></textarea>
+                            <textarea name="house_brief" id="house_brief" cols="" rows="" class="textarea"  placeholder=""></textarea>
                         </div>
                         <span id="house_briefMsg"></span>
                     </div>
 
                     <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_lease_time')：</label>
+                        <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_lease_period')：</label>
                         <div class="formControls col-xs-8 col-sm-9 skin-minimal">
-
                             <div class="check-box">
                                 <input type="text" name="house_rise" id="house_rise" placeholder="" value="" class="input-text" style="display:inline-block">
                             </div>
-                            <span>@lang('house_translate.The_lease_period')</span>
-                            <div class="check-box">
-                                <input type="text" name="house_duration" id="house_duration" class="input-text Wdate">
-                            </div>
                             <span>@lang('house_translate.The_longest_leases')</span>
+                            <div class="check-box" style="width:27%;">
+                                <input type="number" min="0" max="1000000" value="1" name="house_duration" class="input-text Wdate" style="width:40%;"> /@lang('house_translate.Weeks2')
+                            </div>
                         </div>
                     </div>
                     <div class="row cl">
@@ -291,10 +301,6 @@
                             <div class="check-box">
                                 <input name="house_status" value="配置中" type="radio" id="radio-5">
                                 <label for="radio-5">@lang('house_translate.In_the_configuration')</label>
-                            </div>
-                            <div class="check-box">
-                                <input name="house_status" value="停租" type="radio" id="radio-6">
-                                <label for="radio-6">@lang('house_translate.Off_hire')</label>
                             </div>
                             <div class="check-box">
                                 <input name="house_status" value="冻结" type="radio" id="radio-7">
@@ -363,7 +369,7 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_landlord_note')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <textarea name="landlord_remark" id="landlord_remark" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符"></textarea>
+                            <textarea name="landlord_remark" id="landlord_remark" cols="" rows="" class="textarea"  placeholder=""></textarea>
                         </div>
                         <span id="landlord_remarkMsg"></span>
                     </div>
@@ -490,9 +496,9 @@
                 $landlord_remarkMsg=$('#landlord_remarkMsg');
 
             /**/
-            onblurr($house_location,$house_locationMsg,/^[\u4e00-\u9fa5\w ]{2,16}$/,"Can't be empty",'格式错误');
+            onblurr($house_location,$house_locationMsg,/^[\u4e00-\u9fa5\w \d,，.'"-]{2,1000}$/,"Can't be empty",'格式错误');
 
-            onblurr($house_structure,$house_structureMsg,/^[\u4e00-\u9fa5\w ]{2,16}$/,"Can't be empty",'格式错误');
+            onblurr($house_structure,$house_structureMsg,/^[\u4e00-\u9fa5\w \d,，.'"]{2,1000}$/,"Can't be empty",'格式错误');
 
             onblurr($house_size,$house_sizeMsg,/[0-9]/,"Can't be empty",'格式错误');
 
@@ -500,13 +506,13 @@
 
             onblurr($cash_pledge,$cash_pledgeMsg,/[0-9]/,"Can't be empty",'格式错误');//押金
 
-            onblurr($house_keyword,$house_keywordMsg,/[\u4e00-\u9fa5\w ]{2,16}$/,"Can't be empty",'格式错误');
+            onblurr($house_keyword,$house_keywordMsg,/[\u4e00-\u9fa5\w ]{2,1000}$/,"Can't be empty",'格式错误');
 
-            onblurr($house_brief,$house_briefMsg,/[\u4e00-\u9fa5\w ]{2,16}/,"Can't be empty",'格式错误');
+            onblurr($house_brief,$house_briefMsg,/[\u4e00-\u9fa5\w ]{2,1000}/,"Can't be empty",'格式错误');
 
-            onblurr($landlord_name,$landlord_nameMsg,/[\u4e00-\u9fa5\w ]{2,16}/,"Can't be empty",'格式错误');
+            onblurr($landlord_name,$landlord_nameMsg,/[\u4e00-\u9fa5\w \d,，.'"]{2,1000}/,"Can't be empty",'格式错误');
 
-            onblurr($landlord_identity,$landlord_identityMsg,/[0-9]/,"Can't be empty",'格式错误');
+            onblurr($landlord_identity,$landlord_identityMsg,/^[0-9]\w{5,1000}$/,"Can't be empty",'格式错误');
 
             onblurr($landlord_phone,$landlord_phoneMsg, /^1(3|4|5|7|8)\d{9}$/,"Can't be empty",'格式错误');
 
@@ -540,7 +546,7 @@
             }
 
             $("#verification").click(function(){
-                if ($(".ok").length==9 || $(".ok").length==10){
+                if ($(".ok").length==7 || $(".ok").length==8){
                     if(window.confirm('亲！请确认好地区喔 往后不得更改')){
                         document.getElementById('SUBMIT').submit();
                     }
@@ -575,7 +581,7 @@
                 var arr=val.split(",");
                 var p_nation_ID = arr[3];
                 $.ajax({
-                    url:"{{url('house/updateList/region')}}",
+                    url:"{{url('house/houseLister/region')}}",
                     data:'p_nation_ID='+p_nation_ID,
                     type:'get',
                     success:function (re) {
@@ -591,7 +597,7 @@
                         var arr=val.split(",");
                         var c_province_ID = arr[2];
                         $.ajax({
-                            url:"{{url('house/updateList/region')}}",
+                            url:"{{url('house/houseLister/region')}}",
                             data:'c_province_ID='+c_province_ID,
                             type:'get',
                             success:function (re) {
@@ -614,7 +620,7 @@
                 var arr=val.split(",");
                 var p_nation_ID = arr[3];
                 $.ajax({
-                    url:"{{url('house/updateList/region')}}",
+                    url:"{{url('house/houseLister/region')}}",
                     data:'p_nation_ID='+p_nation_ID,
                     type:'get',
                     success:function (re) {
@@ -630,7 +636,7 @@
                         var arr=val.split(",");
                         var c_province_ID = arr[2];
                         $.ajax({
-                            url:"{{url('house/updateList/region')}}",
+                            url:"{{url('house/houseLister/region')}}",
                             data:'c_province_ID='+c_province_ID,
                             type:'get',
                             success:function (re) {
@@ -653,7 +659,7 @@
                 var arr=val.split(",");
                 var c_province_ID = arr[2];
                 $.ajax({
-                    url:"{{url('house/updateList/region')}}",
+                    url:"{{url('house/houseLister/region')}}",
                     data:'c_province_ID='+c_province_ID,
                     type:'get',
                     success:function (re) {
@@ -781,6 +787,11 @@
                 $(".shadeImg").fadeOut(500);
             }
         </script>
-
+        <script>
+            $('select#price_currency').change(function (){
+                var price_currencyVal = $('select#price_currency').val();
+                document.getElementById('deposit_currency').value = price_currencyVal;
+            })
+        </script>
     @stop
 

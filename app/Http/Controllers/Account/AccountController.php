@@ -7,6 +7,7 @@ use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Input;
 class AccountController extends BaseController
 {
     public $account_status = ['禁用','启用'];
@@ -47,13 +48,20 @@ class AccountController extends BaseController
 
     //添加用户
     public function create(){
+
         $roles = Account::where('status',1)->get(['id','name']);
         $departmentList = $this->getSelectList('departments');
         $roleList = $this->getSelectList('roles');
-        return view('account.account_create', ['roles'=>$roles, 'departmentList'=>$departmentList,'roleList'=>$roleList]);
+        $nationArr = DB::table('nation')->get();
+        return view('account.account_create', ['roles'=>$roles, 'departmentList'=>$departmentList,'roleList'=>$roleList,'nationArr'=>$nationArr]);
     }
 
     public function store(Request $request){
+        //国家
+       /* $state = explode(',',$request->state);
+        $province =explode(',',$request->province);
+        //城市
+        $city = explode(',',$request->city);*/
         $data = [
             'name' => $request->name,
             'username' => $request->username,
@@ -64,8 +72,13 @@ class AccountController extends BaseController
             'role_id' => $request->role_id,
             'create_time' => time(),
             'update_time' => time(),
+            'state'       => '',
+            'en_state'    => '',
+            'province'    => '',
+            'en_province' => '',
+            'city'        => '',
+            'en_city'     => '',
         ];
-
         $rs = Account::insert($data);
         if($rs){
 
@@ -73,7 +86,8 @@ class AccountController extends BaseController
             $id = Session::get('user_id');
 
             $operate_name = DB::table('accounts')->where('id',$id)->value('name');
-            $operate = "新增了用户，账号为：".$request->name;
+            $operate = "add a new account , is ".$request->name;
+            //$operate = "新增了用户，账号为：".$request->name;
             $operate_log = [
                 'operate' => $operate,
                 'operate_name' => $operate_name,
@@ -96,15 +110,15 @@ class AccountController extends BaseController
     }
 
     public function update(Request $request){
-
+        $data['passwd'] = md5($request->password);
         $data['name'] = $request->name;
         $data['username'] = $request->username;
         $data['status'] = $request->status;
         $data['role_id'] = $request->role_id;
         $data['tel'] = $request->tel;
         $data['area'] = $request->area;
+        $data['passwd'] = md5($request->password);
         $data['update_time'] = time();
-
         Account::where('id', $request->id)
             ->update($data);
 
@@ -112,7 +126,8 @@ class AccountController extends BaseController
         //更新操作日志
         $id = Session::get('user_id');
         $operate_name = DB::table('accounts')->where('id',$id)->value('name');
-        $operate = "更新了用户，账号为:".$request->name;
+        $operate = "modify a account's information , is ".$request->name;
+        //$operate = "更新了用户，账号为:".$request->name;
         $operate_log = [
             'operate' => $operate,
             'operate_name' => $operate_name,
@@ -142,7 +157,8 @@ class AccountController extends BaseController
             $id = Session::get('user_id');
             $operate_name = DB::table('accounts')->where('id',$id)->value('name');
             $account = DB::table('accounts')->where('id',$request->id)->value('name');
-            $operate = "更新了用户状态，账号为：".$account;
+            $operate = "modify a account's status , is ".$request->name;
+            //$operate = "更新了用户状态，账号为：".$account;
             $operate_log = [
                 'operate' => $operate,
                 'operate_name' => $operate_name,
@@ -170,8 +186,8 @@ class AccountController extends BaseController
             //更新操作日志
             $uid = Session::get('user_id');
             $operate_name = DB::table('accounts')->where('id',$uid)->value('name');
-
-            $operate = "删除了账号，账号为：".$account;
+            $operate = "delete a account , is   ".$account;
+            //$operate = "删除了账号，账号为：".$account;
             $operate_log = [
                 'operate' => $operate,
                 'operate_name' => $operate_name,

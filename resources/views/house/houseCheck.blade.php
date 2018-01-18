@@ -67,7 +67,9 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ url('house/updateList/detail',['id'=>$v->msgid]) }}">@lang('house_translate.Update_the_housing')</a>
+                                        <a href="{{ url('house/houseLister/update',['id'=>$v->msgid]) }}">@lang('house_translate.Update_the_housing')</a>
+                                        &nbsp;||&nbsp;
+                                        <a href="{{ url('house/houseLister/detail',['id'=>$v->msgid]) }}">@lang('house_translate.The_detailed_information')</a>
                                     </td>
                                 </tr>
                                 @endif
@@ -131,35 +133,36 @@
             var arr=val.split(",");
             var p_nation_ID = arr[3];
             $.ajax({
-                url:"{{url('house/updateList/region')}}",
+                url:"{{url('house/houseLister/region')}}",
                 data:'p_nation_ID='+p_nation_ID,
                 type:'get',
                 success:function (re) {
                     var country = '';
                     for(var i = 0;i < re.length; i++) {
-                        var objContry = @if(Session::get('lang') == 'en')re[i]['english_p_name']@else re[i]['chinese_p_name'] @endif;
+                        var objContry = re[i]['chinese_p_name'];
                         var p_ID = re[i]['p_ID'];
                         var english_p_name = re[i]['english_p_name'];
 
-                        country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+objContry+'</option>';
+                        country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+@if(Session::get('lang') == 'en') english_p_name; @else objContry @endif;+'</option>';
                     }
 
                     $("#province").html(country);
                     document.getElementById('province').value = "@if(isset($province)){{$province}}@endif";
+
                     var val = $("#province").val();
                     var arr=val.split(",");
                     var c_province_ID = arr[2];
                     $.ajax({
-                        url:"{{url('house/updateList/region')}}",
+                        url:"{{url('house/houseLister/region')}}",
                         data:'c_province_ID='+c_province_ID,
                         type:'get',
                         success:function (re) {
                             var country = '';
                             for(var i = 0;i < re.length; i++) {
-                                var objContry = @if(Session::get('lang') == 'en')re[i]['english_c_name']@else re[i]['chinese_c_name'] @endif;
+                                var objContry = re[i]['chinese_c_name'];
                                 var english_c_name = re[i]['english_c_name'];
                                 var number = re[i]['number'];
-                                country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'</option>';
+                                country += '<option value="'+objContry+','+english_c_name+','+number+'">'+@if(Session::get('lang') == 'en') english_c_name; @else objContry @endif;+'</option>';
                             }
                             $("#city").html(country);
                             document.getElementById('city').value = "@if(isset($city)){{$city}}@endif";
@@ -177,17 +180,17 @@
             var arr=val.split(",");
             var p_nation_ID = arr[3];
             $.ajax({
-                url:"{{url('house/updateList/region')}}",
+                url:"{{url('house/houseLister/region')}}",
                 data:'p_nation_ID='+p_nation_ID,
                 type:'get',
                 success:function (re) {
                     var country = '';
                     for(var i = 0;i < re.length; i++) {
-                        var objContry = @if(Session::get('lang') == 'en') re[i]['english_p_name'] @else re[i]['chinese_p_name'] @endif;
+                        var objContry = re[i]['chinese_p_name'];
                         var p_ID = re[i]['p_ID'];
                         var english_p_name = re[i]['english_p_name'];
 
-                        country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+objContry+'</option>';
+                        country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+@if(Session::get('lang') == 'en') english_p_name; @else objContry @endif;+'</option>';
                     }
 
                     $("#province").html(country);
@@ -195,16 +198,16 @@
                     var arr=val.split(",");
                     var c_province_ID = arr[2];
                     $.ajax({
-                        url:"{{url('house/updateList/region')}}",
+                        url:"{{url('house/houseLister/region')}}",
                         data:'c_province_ID='+c_province_ID,
                         type:'get',
                         success:function (re) {
                             var country = '';
                             for(var i = 0;i < re.length; i++) {
-                                var objContry = @if(Session::get('lang') == 'en')re[i]['english_c_name']@else re[i]['chinese_c_name'] @endif;
+                                var objContry = re[i]['chinese_c_name'];
                                 var english_c_name = re[i]['english_c_name'];
                                 var number = re[i]['number'];
-                                country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'</option>';
+                                country += '<option value="'+objContry+','+english_c_name+','+number+'">'+@if(Session::get('lang') == 'en') english_c_name; @else objContry @endif;+'</option>';
                                 //country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'&nbsp;&nbsp;&nbsp;'+english_c_name+'</option>';
                             }
                             $("#city").html(country);
@@ -222,32 +225,32 @@
             var arr=val.split(",");
             var p_nation_ID = arr[3];
             $.ajax({
-                url:"{{url('house/updateList/region')}}",
+                url:"{{url('house/houseLister/region')}}",
                 data:'p_nation_ID='+p_nation_ID,
                 type:'get',
                 success:function (re) {
                     var country = '';
                     for(var i = 0;i < re.length; i++) {
-                        var objContry = @if(Session::get('lang') == 'en') re[i]['english_p_name'] @else re[i]['chinese_p_name'] @endif;
+                        var objContry = re[i]['chinese_p_name'];
                         var p_ID = re[i]['p_ID'];
                         var english_p_name = re[i]['english_p_name'];
-                        country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+objContry+'</option>';
+                        country += '<option value="'+objContry+','+english_p_name+','+p_ID+'">'+@if(Session::get('lang') == 'en') english_p_name; @else objContry @endif;+'</option>';
                     }
                     $("#province").html(country);
                     var val = $("#province").val();
                     var arr=val.split(",");
                     var c_province_ID = arr[2];
                     $.ajax({
-                        url:"{{url('house/updateList/region')}}",
+                        url:"{{url('house/houseLister/region')}}",
                         data:'c_province_ID='+c_province_ID,
                         type:'get',
                         success:function (re) {
                             var country = '';
                             for(var i = 0;i < re.length; i++) {
-                                var objContry = @if(Session::get('lang') == 'en')re[i]['english_c_name']@else re[i]['chinese_c_name'] @endif;
+                                var objContry = re[i]['chinese_c_name'];
                                 var english_c_name = re[i]['english_c_name'];
                                 var number = re[i]['number'];
-                                country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'</option>';
+                                country += '<option value="'+objContry+','+english_c_name+','+number+'">'+@if(Session::get('lang') == 'en') english_c_name; @else objContry @endif;+'</option>';
                                 //country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'&nbsp;&nbsp;&nbsp;'+english_c_name+'</option>';
                             }
                             $("#city").html(country);
@@ -264,16 +267,16 @@
             var arr=val.split(",");
             var c_province_ID = arr[2];
             $.ajax({
-                url:"{{url('house/updateList/region')}}",
+                url:"{{url('house/houseLister/region')}}",
                 data:'c_province_ID='+c_province_ID,
                 type:'get',
                 success:function (re) {
                     var country = '';
                     for(var i = 0;i < re.length; i++) {
-                        var objContry = @if(Session::get('lang') == 'en')re[i]['english_c_name']@else re[i]['chinese_c_name'] @endif;
+                        var objContry = re[i]['chinese_c_name'];
                         var english_c_name = re[i]['english_c_name'];
                         var number = re[i]['number'];
-                        country += '<option value="'+objContry+','+english_c_name+','+number+'">'+objContry+'</option>';
+                        country += '<option value="'+objContry+','+english_c_name+','+number+'">'+@if(Session::get('lang') == 'en') english_c_name; @else objContry @endif;+'</option>';
                     }
                     $("#city").html(country);
 

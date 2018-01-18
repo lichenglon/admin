@@ -1,4 +1,3 @@
-
 @foreach($tree as $values)
 <dl class="cate-item">
 	<dt class="cf">

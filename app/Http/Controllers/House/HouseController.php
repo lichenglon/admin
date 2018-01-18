@@ -31,6 +31,11 @@ class HouseController extends BaseController {
 		$province =explode(',',$houseData['province']);
 		//城市
 		$city = explode(',',$houseData['city']);
+		//房源价格计算方式
+		$price_currency = explode(',',$houseData['price_currency']);
+		//房源押金计算方式
+		$deposit_currency = explode(',',$houseData['deposit_currency']);
+
 		//实例化
 		$houseMessage = new House_message();
 		//查找数据
@@ -67,21 +72,19 @@ class HouseController extends BaseController {
 			//房源位置
 			'house_location' => $houseData['house_location'],
 			//房源结构
-			'house_structure' => $houseData['house_structure'],
+			'house_structure' => $houseData['room'].','.$houseData['hall'].','.$houseData['kitchen'].','.$houseData['toilet'],
 			//房源价格
 			'house_price' => $houseData['house_price'],
 			//房源大小
 			'house_size' => $houseData['house_size'],
 			//房源类型
 			'house_type' => $houseData['house_type'],
-			//房源关键字
-			'house_keyword' => $houseData['house_keyword'],
 			//房源简介
 			'house_brief' => $houseData['house_brief'],
 			//起租期
 			'house_rise' => $houseData['house_rise'] ? $houseData['house_rise'] : date('Y-m-d'),
 			//最长租期
-			'house_duration' => $houseData['house_duration'] ? $houseData['house_duration'] : date('Y-m-d'),
+			'house_duration' => $houseData['house_duration'],
 			//房屋状态
 			'house_status' => $houseData['house_status'],
 			//国家
@@ -93,11 +96,19 @@ class HouseController extends BaseController {
 			//押金
 			'cash_pledge' => $houseData['cash_pledge'],
 			//预付款比例
-			'payment_proportion' => $houseData['payment_proportion'],
+			'payment_proportion' => $houseData['and'].','.$houseData['pay'],
 			//结算方式
 			'knot_way' => $houseData['knot_way'],
 			//房源名称
-			'house_name' => $houseData['house_location'].'-'.$houseData['house_structure']
+			'house_name' => $houseData['house_location'],
+			//房源价格货币计算方式
+			'price_currency' => $price_currency[0],
+			//房源价格英文货币计算方式
+			'en_price_currency' => $price_currency[1],
+			//房源押金货币计算方式
+			'deposit_currency' => $deposit_currency[0],
+			//房源押金英文货币计算方式
+			'en_deposit_currency' => $deposit_currency[1],
 		];
 		$houseId = $houseMessage->insertGetId($data);  //保存
 		//接收文件
@@ -147,7 +158,8 @@ class HouseController extends BaseController {
 				//更新操作日志
 				$id = Session::get('user_id');
 				$operate_name = DB::table('accounts')->where('id',$id)->value('name');
-				$operate = "新增了房源，编号为：".$serial_number;
+				$operate = "add a new house information , the number is ".$serial_number;
+				//$operate = "新增了房源，编号为：".$serial_number;
 				$operate_log = [
 						'operate' => $operate,
 						'operate_name' => $operate_name,
@@ -163,7 +175,8 @@ class HouseController extends BaseController {
 				//更新操作日志
 				$id = Session::get('user_id');
 				$operate_name = DB::table('accounts')->where('id',$id)->value('name');
-				$operate = "新增了房源，编号为：".$serial_number;
+				$operate = "add a new house information , the number is ".$serial_number;
+				//$operate = "新增了房源，编号为：".$serial_number;
 				$operate_log = [
 						'operate' => $operate,
 						'operate_name' => $operate_name,
@@ -179,107 +192,11 @@ class HouseController extends BaseController {
 			echo "<script>alert('添加失败');history.go(-1);</script>";
 		}
 	}
-	/**
-	 *房源更新列表
-	 */
-	public function updateList() {
-		$type = Input::get('type') ? Input::get('type') : '%';
-		$serial_number = Input::get('serial_number') ? Input::get('serial_number') : '%';
-		$house_structure = Input::get('house_structure') ? Input::get('house_structure') : '%';
-		$house_price = Input::get('house_price') ? Input::get('house_price') : '%';
-		$house_location = Input::get('house_location') ? Input::get('house_location') : '%';
-		$house_keyword = Input::get('house_keyword') ? Input::get('house_keyword') : '%';
-		$find = Input::get('find') ? Input::get('find') : '';
-		$export = Input::get('export') ? Input::get('export') : '';
-
-		if($find) {
-			$gather = DB::table('house_message')->where('house_type','like',$type)
-					->where('serial_number','like','%'.$serial_number.'%')
-					->where('house_structure','like','%'.$house_structure.'%')
-					->where('house_price','like','%'.$house_price.'%')
-					->where('house_location','like','%'.$house_location.'%')
-					->where('house_keyword','like','%'.$house_keyword.'%')
-					->orderBy('msgid','desc')
-					->paginate(16);
-
-
-			$typeObject = DB::table('house_type')->select('name')->get();
-			$houseCount = DB::table('house_message')->count();
-			return view('house.updateList',['houseObj'=>$gather,
-			                                 'typeObject'=>$typeObject,
-			                                 'houseCount'=>$houseCount,
-			                                 'type'=>$type,
-			                                 'serial_number'=>$serial_number,
-			                                 'house_structure'=>$house_structure,
-			                                 'house_price'=>$house_price,
-			                                 'house_location'=>$house_location,
-			                                 'house_keyword'=>$house_keyword]);
-		}elseif($export) {
-			$gather = DB::table('house_message')->where('house_type','like',$type)
-					->select('serial_number','house_location','house_structure','house_price','house_size','house_type','house_facility','house_rise','house_duration','house_status','state','province','city','rim_message','cash_pledge','payment_proportion','knot_way')
-					->where('serial_number','like',$serial_number)
-					->where('house_structure','like',$house_structure)
-					->where('house_price','like',$house_price)
-					->where('house_location','like',$house_location)
-					->where('house_keyword','like',$house_keyword)
-					->orderBy('msgid','desc')
-					->get()
-					->toArray();
-
-			$title = [
-					'编号',
-					'房源位置',
-					'房源结构',
-					'房源价格',
-					'房源大小/平方',
-					'房源类型',
-					'房屋设备',
-					'起租期',
-					'租期时长',
-					'状态',
-					'国家',
-					'省',
-					'城市',
-					'周边信息',
-					'押金',
-					'预付款比例',
-					'结算方式'
-			];
-
-			exportData($title,$gather,'房源信息'.date('Y-m-d'));
-		}else{
-
-			$gather = DB::table('house_message')
-					->where('house_type','like',$type)
-					->where('serial_number','like','%'.$serial_number.'%')
-					->where('house_structure','like','%'.$house_structure.'%')
-					->where('house_price','like','%'.$house_price.'%')
-					->where('house_location','like','%'.$house_location.'%')
-					->where('house_keyword','like','%'.$house_keyword.'%')
-					->orderBy('msgid','desc')
-					->paginate(16);
-
-			$typeObject = DB::table('house_type')->select('name')->get();
-			$houseCount = DB::table('house_message')->count();
-
-			return view('house.updateList',[
-					'houseObj'=>$gather,
-					'typeObject'=>$typeObject,
-					'houseCount'=>$houseCount,
-					'type'=>$type,
-					'serial_number'=>$serial_number,
-					'house_structure'=>$house_structure,
-					'house_price'=>$house_price,
-					'house_location'=>$house_location,
-					'house_keyword'=>$house_keyword
-			]);
-		}
-	}
 
 	/**
 	 *房源修改详细页
 	 */
-	public function detail($id) {
+	public function update($id) {
 
 		$houseType = new House_type();
 		$optionStr = $houseType->showOptionGetName();
@@ -339,7 +256,10 @@ class HouseController extends BaseController {
 		$msgId = $param->msgId;
 		$landId = $param->landId;
 		$houseData = Input::all();
-
+		//房源价格计算方式
+		$price_currency = explode(',',$houseData['price_currency']);
+		//房源押金计算方式
+		$deposit_currency = explode(',',$houseData['deposit_currency']);
 		$data = [
 			//周边信息
 				'rim_message' => isset($houseData['peripheral_information']) ? implode(',',$houseData['peripheral_information']) : '',
@@ -350,33 +270,39 @@ class HouseController extends BaseController {
 			//房源位置
 				'house_location' => $houseData['house_location'],
 			//房源结构
-				'house_structure' => $houseData['house_structure'],
+				'house_structure' => $houseData['room'].','.$houseData['hall'].','.$houseData['kitchen'].','.$houseData['toilet'],
 			//房源价格
 				'house_price' => $houseData['house_price'],
 			//房源大小
 				'house_size' => $houseData['house_size'],
 			//房源类型
 				'house_type' => $houseData['house_type'],
-			//房源关键字
-				'house_keyword' => $houseData['house_keyword'],
 			//房源简介
 				'house_brief' => $houseData['house_brief'],
 			//起租期
 				'house_rise' => $houseData['house_rise'] ? $houseData['house_rise'] : date('Y-m-d'),
 			//最长租期
-				'house_duration' => $houseData['house_duration'] ? $houseData['house_duration'] : date('Y-m-d'),
+				'house_duration' => $houseData['house_duration'],
 			//房屋状态
 				'house_status' => $houseData['house_status'],
 			//押金
 				'cash_pledge' => $houseData['cash_pledge'],
 			//预付款比例
-				'payment_proportion' => $houseData['payment_proportion'],
+				'payment_proportion' => $houseData['and'].','.$houseData['pay'],
 			//结算方式
 				'knot_way' => $houseData['knot_way'],
 			//房源名称
-				'house_name' => $houseData['house_location'].'-'.$houseData['house_structure'].'-'.$houseData['house_price'],
+				'house_name' => $houseData['house_location'],
 			//审核状态
-				'chk_sta' => '1'
+				'chk_sta' => '1',
+			//房源价格货币计算方式
+				'price_currency' => $price_currency[0],
+			//房源价格英文货币计算方式
+				'en_price_currency' => $price_currency[1],
+			//房源押金货币计算方式
+				'deposit_currency' => $deposit_currency[0],
+			//房源押金英文货币计算方式
+				'en_deposit_currency' => $deposit_currency[1],
 		];
 		DB::table('house_message')->where('msgid', $msgId)->update($data);
 
@@ -384,7 +310,8 @@ class HouseController extends BaseController {
 		$id = Session::get('user_id');
 		$operate_name = DB::table('accounts')->where('id',$id)->value('name');
 		$serial_number = DB::table('house_message')->where('msgid',$msgId)->value('serial_number');
-		$operate = "更新了房源，编号为：".$serial_number;
+		$operate = "modify a house's infomation , the number is ".$serial_number;
+		//$operate = "更新了房源，编号为：".$serial_number;
 		$operate_log = [
 				'operate' => $operate,
 				'operate_name' => $operate_name,
@@ -425,7 +352,8 @@ class HouseController extends BaseController {
 				}
 			}
 		}
-		return redirect('house/updateList/detail/'.$msgId)->with('success','更新成功！');
+
+		return redirect('house/houseCheck')->with('success','更新成功！');
 	}
 	/**
 	 *房源详细信息
@@ -452,11 +380,6 @@ class HouseController extends BaseController {
 		$search_k = Input::get('search_k') ? Input::get('search_k') : '%';
 		$search_v = Input::get('search_v') ? Input::get('search_v') : '%';
 		$type = Input::get('type') ? Input::get('type') : '%';
-/*		$serial_number = Input::get('serial_number') ? Input::get('serial_number') : '%';
-		$house_structure = Input::get('house_structure') ? Input::get('house_structure') : '%';
-		$house_price = Input::get('house_price') ? Input::get('house_price') : '%';
-		$house_location = Input::get('house_location') ? Input::get('house_location') : '%';
-		$house_keyword = Input::get('house_keyword') ? Input::get('house_keyword') : '%';*/
 		$find = Input::get('find') ? Input::get('find') : '';
 		$export = Input::get('export') ? Input::get('export') : '';
 		if($find){
@@ -477,17 +400,6 @@ class HouseController extends BaseController {
 			}
 
 
-/*			$gather = DB::table('house_message')
-					->where('chk_sta','2')
-					->where('house_type', 'like', $type)
-					->where('serial_number', 'like', '%'.$serial_number.'%')
-					->where('house_structure', 'like', '%'.$house_structure.'%')
-					->where('house_price', 'like', '%'.$house_price.'%')
-					->where('house_location', 'like', '%'.$house_location.'%')
-					->where('house_keyword', 'like', '%'.$house_keyword.'%')
-					->orderBy('msgid', 'desc')
-					->paginate(16);*/
-
 			$typeObject = DB::table('house_type')
 					->select('name')
 					->get();
@@ -501,11 +413,6 @@ class HouseController extends BaseController {
 					'typeObject'      => $typeObject,
 					'houseCount'      => $houseCount,
 					'type'            => $type,
-/*					'serial_number'   => $serial_number,
-					'house_structure' => $house_structure,
-					'house_price'     => $house_price,
-					'house_location'  => $house_location,
-					'house_keyword'   => $house_keyword*/
 			]);
 		}elseif($export){
 
@@ -516,11 +423,6 @@ class HouseController extends BaseController {
 						->where('house_type', 'like', $type)
 						->where($search_k,'like','%'.$search_v.'%')
 						->select('serial_number', 'house_location', 'house_structure', 'house_price', 'house_size', 'house_type', 'house_facility', 'house_rise', 'house_duration', 'house_status', 'state', 'province', 'city', 'rim_message', 'cash_pledge', 'payment_proportion', 'knot_way')
-						/*->where('serial_number', 'like', $serial_number)
-						->where('house_structure', 'like', $house_structure)
-						->where('house_price', 'like', $house_price)
-						->where('house_location', 'like', $house_location)
-						->where('house_keyword', 'like', $house_keyword)*/
 						->orderBy('msgid', 'desc')
 						->get()
 						->toArray();
@@ -533,20 +435,6 @@ class HouseController extends BaseController {
 						->get()
 						->toArray();
 			}
-
-
-			/*$gather = DB::table('house_message')
-					->where('chk_sta','2')
-					->where('house_type', 'like', $type)
-					->select('serial_number', 'house_location', 'house_structure', 'house_price', 'house_size', 'house_type', 'house_facility', 'house_rise', 'house_duration', 'house_status', 'state', 'province', 'city', 'rim_message', 'cash_pledge', 'payment_proportion', 'knot_way')
-					->where('serial_number', 'like', $serial_number)
-					->where('house_structure', 'like', $house_structure)
-					->where('house_price', 'like', $house_price)
-					->where('house_location', 'like', $house_location)
-					->where('house_keyword', 'like', $house_keyword)
-					->orderBy('msgid', 'desc')
-					->get()
-					->toArray();*/
 
 			$title = [
 					'编号',
@@ -575,16 +463,6 @@ class HouseController extends BaseController {
 					->orderBy('msgid', 'desc')
 					->paginate(10);
 
-/*			$gather = DB::table('house_message')
-					->where('chk_sta','2')
-					->where('house_type', 'like', $type)
-					->where('serial_number', 'like', '%'.$serial_number.'%')
-					->where('house_structure', 'like', '%'.$house_structure.'%')
-					->where('house_price', 'like', '%'.$house_price.'%')
-					->where('house_location', 'like', '%'.$house_location.'%')
-					->where('house_keyword', 'like', '%'.$house_keyword.'%')
-					->orderBy('msgid', 'desc')
-					->paginate(16);*/
 
 			$typeObject = DB::table('house_type')
 					->select('name')
@@ -599,11 +477,6 @@ class HouseController extends BaseController {
 					'typeObject'      => $typeObject,
 					'houseCount'      => $houseCount,
 					'type'            => $type,
-/*					'serial_number'   => $serial_number,
-					'house_structure' => $house_structure,
-					'house_price'     => $house_price,
-					'house_location'  => $house_location,
-					'house_keyword'   => $house_keyword*/
 			]);
 		}
 

@@ -15,7 +15,7 @@
 
 
         <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
-            <span style="line-height:34px;">新增分类</span>
+            <span style="line-height:34px;">新增菜单</span>
         </h4>
 
         @if (session('error'))

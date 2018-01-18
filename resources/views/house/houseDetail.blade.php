@@ -59,16 +59,21 @@
                             </td>
 
                         </tr>
-
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
                                 aria-sort="ascending"
                                 aria-label="Rendering engine: activate to sort column descending"
                                 style="width: 18%; font-size:15px;">@lang('house_translate.Housing_structure')
                             </th>
+                            <?php
+                            $house_structure = explode(',',$houseMsg->house_structure)
+                            ?>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
-                                {{$houseMsg->house_structure}}
+                                {{ $house_structure[0] }} @lang('house_translate.room')
+                                {{ $house_structure[1] }} @lang('house_translate.hall')
+                                {{ $house_structure[2] }} @lang('house_translate.kitchen')
+                                {{ $house_structure[3] }} @lang('house_translate.toilet')
                             </td>
 
                         </tr>
@@ -81,7 +86,7 @@
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
-                                {{$houseMsg->house_price}}
+                                {{$houseMsg->house_price}} <span>/@if(Session::get('lang') == 'en') {{ $houseMsg->en_price_currency }} @else {{ $houseMsg->price_currency }} @endif</span>
                             </td>
 
                         </tr>
@@ -93,7 +98,7 @@
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
-                                {{$houseMsg->house_size}} <span>/平方</span>
+                                {{$houseMsg->house_size}} <span>/@lang('house_translate.Square_meters')</span>
                             </td>
 
                         </tr>
@@ -106,7 +111,7 @@
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
-                                {{$houseMsg->cash_pledge}} <span>/元</span>
+                                {{$houseMsg->cash_pledge}} <span>/@if(Session::get('lang') == 'en') {{ $houseMsg->en_deposit_currency }} @else {{ $houseMsg->deposit_currency }} @endif</span>
                             </td>
 
                         </tr>
@@ -116,9 +121,13 @@
                                 aria-label="Rendering engine: activate to sort column descending"
                                 style="width: 18%; font-size:15px;">@lang('house_translate.Prepayment_ratio')
                             </th>
+                            <?php
+                            $payment_proportion = explode(',',$houseMsg->payment_proportion)
+                            ?>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
-                                {{$houseMsg->payment_proportion}}
+                                @lang('house_translate.and') {{$payment_proportion[0]}}
+                                @lang('house_translate.pay') {{$payment_proportion[1]}}
                             </td>
 
                         </tr>
@@ -149,17 +158,6 @@
 
                         </tr>
 
-                        <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="example1"
-                                aria-sort="ascending"
-                                aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 18%; font-size:15px;">@lang('house_translate.The_keyword')
-                            </th>
-                            <td class="sorting" tabindex="0" aria-controls="example1"
-                                aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
-                                {{$houseMsg->house_keyword}}
-                            </td>
-                        </tr>
 
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="example1"
@@ -193,7 +191,7 @@
                             </th>
                             <td class="sorting" tabindex="0" aria-controls="example1"
                                 aria-label="Browser: activate to sort column ascending" style="font-size:15px;">
-                                {{$houseMsg->house_duration}}
+                                {{$houseMsg->house_duration}} /@lang('house_translate.Weeks2')
                             </td>
                         </tr>
 

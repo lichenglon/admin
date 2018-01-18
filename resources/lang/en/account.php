@@ -36,6 +36,7 @@ return [
 
 	//编辑账号
 	'edit_account'                  => 'Edit account',                 //编辑账号
+	'password'                      => 'Password',                     //密码
 
 	//角色列表
 	'The_role_list'                  => 'The role list',               //角色列表
@@ -53,4 +54,14 @@ return [
 	'The_sorting'               => 'The sorting',                   //排序
 	'name'                      => 'Name',                          //名称
 	'delete'                    => 'Delete',                        //删除
+	'Upper_level_menu'          => 'Upper level menu',              //上一级菜单
+	'state'                     => 'State',                         //状态
+	'menu_sort'                 => 'Menu sort',                     //菜单排序
+	'Menu_name'                 => 'Menu name',                     //菜单名称
+	'menu'                      => 'Menu',                          //菜单
+	'New_menu'                  => 'New menu',                      //新增菜单
+
+	//新增角色
+	'Functional_permissions'    => 'Functional permissions',        //功能权限
+	'Select'                    => 'Select',                        //全选
 ];
