@@ -50,30 +50,20 @@
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="CSS grade: activate to sort column ascending" style="width: 150px;">
+                                    aria-label="Browser: activate to sort column ascending" style="width: 150px;">
                                     @lang('order.Photo_of_ID_card')
                                 </th>
-                                <td>
-                                    @if(!empty($result->renter_idcard1))
-                                        <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" name='pic1' src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_idcard1}}" alt="" />
-                                    @elseif(!empty($result->renter_idcard2))0.
-
-                                        <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" name='pic1' src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_idcard2}}" alt="" />
-                                    @endif
+                                <td class="sorting" tabindex="0" aria-controls="example1" aria-label="Browser: activate to sort column ascending">
+                                    <img width="200" height="200"  src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_idcard1}}" alt="">
+                                    <img width="200" height="200"  src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_idcard2}}" alt="">
                                 </td>
                             </tr>
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-sort="ascending"
-                                    aria-label="Rendering engine: activate to sort column descending"
-                                    style="width: 140px;">
+                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 140px;">
                                     @lang('order.Passport_photo')
                                 </th>
                                 <td>
-                                    @if(!empty($result->renter_passport))
-                                        <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" name='pic1' src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_passport}}" alt="" />
-                                    @else
-                                    @endif
+                                    <img width="200" height="200" src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_passport}}" alt="" />
                                 </td>
                             </tr>
                             <tr role="row">
@@ -82,10 +72,7 @@
                                     @lang('order.Student_card_photo')
                                 </th>
                                 <td>
-                                    @if(!empty($result->stu_idcard))
-                                        <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" name='pic1' src="{{HOUSE_SERVER_PATH}}uploads/{{$result->stu_idcard}}" alt="" />
-                                    @else
-                                    @endif
+                                    <img width="200" height="200" src="{{HOUSE_SERVER_PATH}}uploads/{{$result->stu_idcard}}" alt="" />
                                 </td>
                             </tr>
                             <tr role="row">

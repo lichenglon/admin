@@ -16,172 +16,152 @@
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                 <h4 class="bg-info" style="padding:5px 10px; font-size:14px; overflow:hidden;">
                     <span style="line-height:34px;"><a href="{{ url('order/order') }}" >@lang('order.Order_list')</a> - @lang('order.Order_details')</span>
-                    <div style="float:right;">
-                        {{--<a href="{{ url('order/order/detail_excel',['id'=>$result->order_id]) }}" type="button" class="btn btn-default">导出EXCEL</a>--}}
-                    </div>
                 </h4>
-                {{--{{ $data->appends($_REQUEST)->links() }}--}}
-
                 <div class="row">
                     <div class="col-sm-12">
-                        <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
-                               aria-describedby="example1_info">
+                        <form action="{{ url('order/order/saveChk',['order_id'=>$result->order_id]) }}" action="post">
+                        <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                             <thead>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Browser: activate to sort column ascending" style="width: 100px;">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 100px;">
                                     @lang('order.Order_number')
                                 </th>
                                 <td class="sorting_1">{{ $result->order_no }}</td>
                             </tr>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Platform(s): activate to sort column ascending" style="width: 100px;">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 100px;">
                                     @lang('order.Date')
                                 </th>
                                 <td>{{ $result->creat_time }}</td>
                             </tr>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="CSS grade: activate to sort column ascending" style="width: 120px;">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 120px;">
                                     @lang('order.Tenant_name')
                                 </th>
                                 <td>{{ $result->name }}</td>
                             </tr>
+
+
                             <tr role="row">
-                                <th rowspan="1" colspan="1">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 150px;">
                                     @lang('order.Photo_of_ID_card')
                                 </th>
-                                <td>
-                                    @if(!empty($result->renter_idcard1))
-                                        <img src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_idcard1}}" alt="" />
-                                    @elseif(!empty($result->renter_idcard2))0.
-
-                                    <img src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_idcard2}}" alt="" />
-                                    @endif
+                                <td class="sorting" tabindex="0" aria-controls="example1" aria-label="Browser: activate to sort column ascending">
+                                    <img width="200" height="200"  src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_idcard1}}" alt="">
+                                    <img width="200" height="200"  src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_idcard2}}" alt="">
                                 </td>
                             </tr>
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-sort="ascending"
-                                    aria-label="Rendering engine: activate to sort column descending"
-                                    style="width: 140px;">
+                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 140px;">
                                     @lang('order.Passport_photo')
                                 </th>
                                 <td>
-                                    @if(!empty($result->renter_passport))
-                                        <img width="50px" height="50px" src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_passport}}" alt="" />
-                                    @else
-                                    @endif
+                                    <img width="200" height="200" src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_passport}}" alt="" />
                                 </td>
                             </tr>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Browser: activate to sort column ascending" style="width: 150px;">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 150px;">
                                     @lang('order.Student_card_photo')
                                 </th>
-
                                 <td>
-                                    @if(!empty($result->stu_idcard))
-
-                                        <img width="50" height="50" src="{{HOUSE_SERVER_PATH}}uploads/{{$result->stu_idcard}}" alt="" />
-                                    @else
-                                    @endif
+                                    <img width="200" height="200" src="{{HOUSE_SERVER_PATH}}uploads/{{$result->stu_idcard}}" alt="" />
                                 </td>
                             </tr>
+
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Platform(s): activate to sort column ascending" style="width: 322px;">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 150px;">
                                     @lang('order.Room_number')
                                 </th>
                                 <td>{{ $result->serial_number }}</td>
                             </tr>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="CSS grade: activate to sort column ascending" style="width: 120px;">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 120px;">
                                     @lang('order.House_name')
                                 </th>
                                 <td>{{ $result->house_name }}</td>
                             </tr>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="CSS grade: activate to sort column ascending" style="width: 120px;">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 120px;">
                                     @lang('order.Housing_location')
                                 </th>
                                 <td>{{ $result->house_location }}</td>
                             </tr>
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-sort="ascending"
-                                    aria-label="Rendering engine: activate to sort column descending"
-                                    style="width: 80px;">
+                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 80px;">
                                     @lang('order.Price')
                                 </th>
                                 <td>{{ $result->house_price }}</td>
                             </tr>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Browser: activate to sort column ascending" style="width: 120px;">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 120px;">
                                     @lang('order.Lease_term')
                                 </th>
                                 <td>{{ $result->rent_time }}</td>
                             </tr>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Platform(s): activate to sort column ascending" style="width: 150px;">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 150px;">
                                     @lang('order.Signing_time')
                                 </th>
                                 <td>{{ date('Y-m-d H:i:s', $result->sign_time) }}</td>
                             </tr>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="CSS grade: activate to sort column ascending" style="width: 150px;">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 150px;">
                                     @lang('order.contracting_place')
                                 </th>
                                 <td>{{ $result->sign_position }}</td>
                             </tr>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="Platform(s): activate to sort column ascending" style="width: 100px;">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 100px;">
                                     @lang('order.Order_status')
                                 </th>
-                                {{--<td>{{ $result->order_status }}</td>--}}
                                 <td>{{ $orderStatus[$result->order_status] }}</td>
                             </tr>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
                                     @lang('order.contract')
                                 </th>
                                 <td>{{ $result->contract }}</td>
                             </tr>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
                                     @lang('order.evaluate')
                                 </th>
                                 <td>{{ $result->house_eva }}</td>
                             </tr>
+                            <tr role="row" aria-required="true">
+                                <th><label>审核通过&nbsp;&nbsp;&nbsp;<input type="radio" name="order_status"  class="order_status" onclick="javascript:isRej('4');" value="4"/></label></th>
+                                <th><label>审核不通过&nbsp;&nbsp;&nbsp;<input type="radio" name="order_status" class="order_status" onclick="javascript:isRej('5');" value="5"/></label></th>
+                            </tr>
+                             <tr role="row" id="rej" style="display:none;">
+                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
+                                     请选择审核不通过原因
+                                 </th>
+                                 <td>
+                                     <select name="reject_reason" id="">
+                                         <option value="1">房源已出租</option>
+                                         <option value="2">信息审核不通过 </option>
+                                         <option value="3">租期不合要求</option>
+                                     </select>
+                                 </td>
+                             </tr>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                    aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
+                                    <button>提交审核</button>
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
                                     <a href="{{ url('order/order') }}">@lang('order.Return_to_the_list_of_orders')</a>
                                 </th>
                             </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
+                        </form>
                     </div>
                 </div>
-
-
-
-
             </div>
         </div>
         <!-- /.box-body -->
     </div>
-
 
 @stop
 
@@ -204,6 +184,16 @@
             isTime:true, //isClear:false,
             minDate:"2014-09-19 00:00:00",
         });
+
+        function isRej(num)
+        {
+            if(num == '5'){
+                $('#rej').css('display','');
+            }
+            if(num == '4'){
+            $('#rej').css('display','none');
+            }
+        }
     </script>
 
 @stop

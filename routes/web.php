@@ -68,9 +68,14 @@ Route::group(['prefix'=>'order'],function(){
     Route::any('order/detail_excel/{id}','Order\OrderController@detail_excel');
     #订单列表Excel导出
     Route::any('order/order_excel','Order\OrderController@order_excel');
+    //审核状态更改，暂时不用
     Route::get('order/isCheck', 'Order\OrderController@isCheck');
+    //售后
     Route::any('order/after_sale/{id}', 'Order\OrderController@afterSale');
+    //审核订单
     Route::any('order/check/{id}','Order\OrderController@check');
+    //审核保存
+    Route::any('order/saveChk/{id?}','Order\OrderController@saveChk');
 
 
 //    Route::resource('order', 'Order\OrderController');
