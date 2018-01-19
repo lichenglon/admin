@@ -47,8 +47,8 @@
                                     @lang('order.Photo_of_ID_card')
                                 </th>
                                 <td class="sorting" tabindex="0" aria-controls="example1" aria-label="Browser: activate to sort column ascending">
-                                    <img width="200" height="200"  src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_idcard1}}" alt="">
-                                    <img width="200" height="200"  src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_idcard2}}" alt="">
+                                    <img width="300" height="150"  src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_idcard1}}" alt="">
+                                    <img width="300" height="150"  src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_idcard2}}" alt="">
                                 </td>
                             </tr>
                             <tr role="row">
@@ -56,15 +56,15 @@
                                     @lang('order.Passport_photo')
                                 </th>
                                 <td>
-                                    <img width="200" height="200" src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_passport}}" alt="" />
+                                    <img width="300" height="150" src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_passport}}" alt="" />
                                 </td>
                             </tr>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 150px;">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 100px;">
                                     @lang('order.Student_card_photo')
                                 </th>
                                 <td>
-                                    <img width="200" height="200" src="{{HOUSE_SERVER_PATH}}uploads/{{$result->stu_idcard}}" alt="" />
+                                    <img width="300" height="150" src="{{HOUSE_SERVER_PATH}}uploads/{{$result->stu_idcard}}" alt="" />
                                 </td>
                             </tr>
 
