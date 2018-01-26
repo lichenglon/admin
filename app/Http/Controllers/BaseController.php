@@ -14,6 +14,7 @@ class BaseController extends Controller
 
     public function __construct()
     {
+        //var_dump(Session::get('lang'));
 
         $this->middleware(function($request,$next){
             if(Session::get('lang'))
@@ -25,7 +26,6 @@ class BaseController extends Controller
                 Session::put('lang', 'en');
                 App::setLocale(Session::get('lang'));
             }
-
             $user_info = $request->session()->get('user_info');
             //没登录返回登录页
             if(empty($user_info['id'])){

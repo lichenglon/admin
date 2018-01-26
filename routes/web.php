@@ -168,6 +168,8 @@ Route::group(['prefix'=>'helpHandbook'],function() {
     Route::get('help',$controller.'help');
 });
 
+//用户反馈
+Route::any('user/feedback','User\FeedbackController@feedback');
 
 
 
