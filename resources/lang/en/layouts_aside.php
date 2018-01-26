@@ -10,4 +10,6 @@ return [
 	'Language_switching'                 => 'Language switching',                                   //语言切换
 	'Chinese'                            => 'Chinese',                                              //中文
 	'English'                            => 'English',                                              //英文
+	'The_main_navigation'                => 'The main navigation',                                  //主导航
+	'The_label'                          => 'The label',                                            //标签
 ];

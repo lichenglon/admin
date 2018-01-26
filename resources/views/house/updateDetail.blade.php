@@ -74,6 +74,69 @@
             background: rgba(0, 0, 0, 0.55);}
         .showImg{width: 400px; height: 500px; margin-top: 140px;}
     </style>
+    <style>
+        #real{
+            /*点击弹出模态框的图片*/
+            margin: 30px;
+            width: 250px;
+            border-radius:6px;
+        }
+        #real:hover{
+            opacity: 0.6;
+        }
+        #mo{
+            display: none;/*隐藏*/
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            top: 0px;
+            left: 0px;
+            z-index: 1;
+        }
+        #moimg{
+            display: block;
+            margin:25px auto;
+            width: 60%;
+            max-width: 750px;
+        }
+        #caption{
+            text-align: center;
+            margin: 15px auto;
+            width: 60%;
+            max-height: 750px;
+            font-size: 20px;
+            color:#ccc;
+        }
+        #moimg,#caption{
+            -webkit-animation: first 1s;
+            -o-animation: first 1s;
+            animation: first 1s;
+        }
+        @keyframes first{
+            from{transform: scale(0.1);}
+            to{transform: scale(1);}
+        }
+        .close{
+            font-size: 40px;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            right: 14%;
+            color:#f1f1f1;
+        }
+        .close:hover,
+        .close:focus{
+            color:#bbb;
+            cursor:pointer;
+        }
+        @media only screen and(max-width:750px ) {
+            #moimg{
+                width: 100%;
+            }
+        }
+    </style>
 @stop
 
 @section('content')
@@ -106,14 +169,14 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Housing_name')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" class="input-text" value="{{$houseMsg->house_name}}" placeholder="房源名称" required maxlength="3000" id="house_location" name="house_name" >
+                            <input type="text" class="input-text" value="{{$houseMsg->house_name}}" placeholder="" required="required" maxlength="3000" id="house_location" name="house_name" >
                         </div>
                         <span id="house_locationMsg"></span>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Detailed_location')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" name="house_location" id="house_location" placeholder="广东省深圳市宝安区西乡街道56栋33号" value="{{$houseMsg->house_location}}" class="input-text">
+                            <input type="text" name="house_location" id="house_location" placeholder="" required="required" value="{{$houseMsg->house_location}}" class="input-text">
                         </div>
                         <span id="house_locationMsg"></span>
                     </div>
@@ -209,7 +272,7 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Housing_prices')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="number" name="house_price" id="house_price" placeholder="" value="{{$houseMsg->house_price}}"  min="1" class="input-text" style="width:69%;">
+                            <input type="number" name="house_price" required="required" id="house_price" placeholder="" value="{{$houseMsg->house_price}}"  min="1" class="input-text" style="width:69%;">
                             <select name="price_currency" id="price_currency" class="input-text" style="width:20%;">
                                 <option value="英镑,The pound">@lang('house_translate.The_pound')</option>
                                 <option value="美元,The dollar">@lang('house_translate.The_dollar')</option>
@@ -221,7 +284,7 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Housing_size')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="number" name="house_size" id="house_size" placeholder="" value="{{$houseMsg->house_size}}"  min="0.0" step="0.1"class="input-text" style="width:90%;"> /@lang('house_translate.Square_meters')
+                            <input type="number" name="house_size" required="required" id="house_size" placeholder="" value="{{$houseMsg->house_size}}"  min="0.0" step="0.1"class="input-text" style="width:90%;"> /@lang('house_translate.Square_meters')
                         </div>
                         <span id="house_sizeMsg"></span>
                     </div>
@@ -229,7 +292,7 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.deposit')：</label>
                         <div class="formControls col-xs-8 col-sm-9"  style="width:45%;">
-                            <input type="number" name="cash_pledge" id="cash_pledge" placeholder="" value="{{$houseMsg->cash_pledge}}"  min="1" class="input-text" style="width:69%;">
+                            <input type="number" name="cash_pledge" required="required" id="cash_pledge" placeholder="" value="{{$houseMsg->cash_pledge}}"  min="1" class="input-text" style="width:69%;">
                             <select name="deposit_currency" id="deposit_currency" class="input-text" style="width:20%;">
                                 <option value="英镑,The pound">@lang('house_translate.The_pound')</option>
                                 <option value="美元,The dollar">@lang('house_translate.The_dollar')</option>
@@ -244,8 +307,8 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Prepayment_ratio')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            @lang('house_translate.and') <input type="number" name="and" max="100" min="0" value="{{$payment_proportion[0]}}" class="input-text">
-                            @lang('house_translate.pay') <input type="number" name="pay" max="100" min="0" value="{{$payment_proportion[1]}}" class="input-text">
+                            @lang('house_translate.and') <input type="number" name="and" required="required" max="100" min="0" value="{{$payment_proportion[0]}}" class="input-text">
+                            @lang('house_translate.pay') <input type="number" name="pay" required="required" max="100" min="0" value="{{$payment_proportion[1]}}" class="input-text">
                         </div>
                     </div>
 
@@ -320,7 +383,7 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Introduction_of_housing')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <textarea name="house_brief" id="house_brief" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符">{{$houseMsg->house_brief}}</textarea>
+                            <textarea name="house_brief" id="house_brief" cols="" rows="" required="required" class="textarea"  placeholder="">{{$houseMsg->house_brief}}</textarea>
                         </div>
                         <span id="house_briefMsg"></span>
                     </div>
@@ -371,14 +434,14 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_landlord_name')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" name="landlord_name" value="{{$houseMsg->landlord_name}}" id="landlord_name" class="input-text Wdate" style="width:220px;">
+                            <input type="text" name="landlord_name" required="required" value="{{$houseMsg->landlord_name}}" id="landlord_name" class="input-text Wdate" style="width:220px;">
                         </div>
                         <span id="landlord_nameMsg"></span>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Landlord_id_number')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" name="landlord_identity" value="{{$houseMsg->landlord_identity}}" id="landlord_identity" class="input-text Wdate" style="width:220px;">
+                            <input type="text" name="landlord_identity" required="required" value="{{$houseMsg->landlord_identity}}" id="landlord_identity" class="input-text Wdate" style="width:220px;">
                         </div>
                         <span id="landlord_identityMsg"></span>
                     </div>
@@ -392,7 +455,7 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_landlord_telephone')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" name="landlord_phone" value="{{$houseMsg->landlord_phone}}" id="landlord_phone" class="input-text Wdate" style="width:220px;">
+                            <input type="text" name="landlord_phone" required="required" value="{{$houseMsg->landlord_phone}}" id="landlord_phone" class="input-text Wdate" style="width:220px;">
                         </div>
                         <span id="landlord_phoneMsg"></span>
                     </div>
@@ -418,13 +481,13 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.Address_of_landlord')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" name="landlord_site" value="{{$houseMsg->landlord_site}}" id="datemin" class="input-text Wdate">
+                            <input type="text" name="landlord_site" required="required" value="{{$houseMsg->landlord_site}}" id="datemin" class="input-text Wdate">
                         </div>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_landlord_note')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <textarea name="landlord_remark" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符">{{$houseMsg->landlord_remark}}</textarea>
+                            <textarea name="landlord_remark" cols="" rows="" class="textarea"  placeholder="">{{$houseMsg->landlord_remark}}</textarea>
                         </div>
                     </div>
                     <div class="row cl">
@@ -435,7 +498,7 @@
                                 <tr id="tr_{{$value->imgid}}" style="display:inline-block; width:25%; height:25%; margin-right:5%;">
 
                                     <td>
-                                        <img  src="{{asset('./uploads')}}/{{$value->house_imagename}}" alt="">
+                                        <img style="cursor:pointer;" onclick="showImages('{{$value->imgid}}');" id="imgIdShow_{{$value->imgid}}" width="160" height="160" src="{{asset('./uploads')}}/{{$value->house_imagename}}" alt=""><br>
                                         <a href="javascript:delimage({{$value->imgid}});" >@lang('house_translate.Delete_this_picture')</a>
                                     </td>
 
@@ -479,10 +542,33 @@
 
         </div>
     </div>
+    <!--图片模态框 -->
+    <div class="motai" id="mo">
+        <span class="close" id="close">×</span>
+        <img class="motaiimg" id="moimg">
+        <div id="caption"></div>
+    </div>
 
 @stop
 
 @section('js')
+    {{--js点击图片弹出大图--}}
+    <script>
+        var motai=document.getElementById('mo');
+        var moimg=document.getElementById("moimg");
+        var caption=document.getElementById("caption");
+        function showImages(imgIdShow){
+            var realimg=document.getElementById("imgIdShow_"+imgIdShow);
+            console.log(realimg);
+            motai.style.display="block";
+            moimg.src=realimg.src;
+            caption.innerHTML=realimg.alt;
+        }
+        var span=document.getElementById("close");
+        span.onclick=function(){
+            motai.style.display="none";
+        }
+    </script>
 
     {{--日期用--}}
     <script type="text/javascript" src="{{asset('house/laydate/laydate.js')}}" ></script>

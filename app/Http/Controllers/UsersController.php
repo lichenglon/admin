@@ -36,7 +36,10 @@ class UsersController extends Controller {
 			if($md5_password != $userInfo->passwd){
 				ajax_error('密码不正确');
 			}else{
+
+				Session::put('Last_landing_time',date('Y-m-d H:i:s'));
 				Session::put('user_id',$userInfo->id);
+				unset($userInfo->passwd);
 				Session::put('user_info',$userInfo->toArray());
 				Session::save();
 				ajax_success();
@@ -50,6 +53,7 @@ class UsersController extends Controller {
 	 * 后台账号退出页面
 	 */
 	public function logout(){
+		Session::forget('Last_landing_time');
 		Session::forget('user_id');
 		Session::forget('user_info');
 		return redirect()->route('users/login');

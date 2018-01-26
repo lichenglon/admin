@@ -64,4 +64,14 @@ return [
 	//新增角色
 	'Functional_permissions'    => '功能权限',
 	'Select'                    => '全选',
+
+	//首页
+	'user_name'                 => '用户名',
+	'nickname'                  => '昵称',
+	'email'                     => '邮箱',
+	'Mobile_phone'              => '手机',
+	'Registration_time'         => '注册时间',
+	'Last_landing_time'         => '最后登陆时间',
+	'The_final_landing_IP'      => '最后登陆IP',
+	'normal'                    => '正常',
 ];
