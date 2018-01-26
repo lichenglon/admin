@@ -44,7 +44,6 @@
                             <input name="search" type="submit" class="btn btn-default" value="@lang('order.search')">&nbsp;&nbsp;
                             <button type="reset" class="btn btn-default">@lang('order.Reset')</button>&nbsp;&nbsp;
                             <input name="excel" type="submit" class="btn btn-default" value="@lang('order.export_excel')">
-                            {{--<div style="float:right;"><a href="{{ url('order/order/order_excel') }}" class="btn btn-default">导出EXCEL</a></div>--}}
                         </div>
                     </span>
                 </form>
@@ -64,6 +63,7 @@
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Browser: activate to sort column ascending" style="width:10%;">
+                                    {{--租客姓名--}}
                                     @lang('order.Single_person')
                                 </th>
 
