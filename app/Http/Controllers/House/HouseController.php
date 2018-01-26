@@ -28,7 +28,7 @@ class HouseController extends BaseController {
 		$houseData = Input::all();
 		//国家
 		$state = explode(',',$houseData['state']);
-		$province =explode(',',$houseData['province']);
+		$province = explode(',',$houseData['province']);
 		//城市
 		$city = explode(',',$houseData['city']);
 		//房源价格计算方式
@@ -382,6 +382,7 @@ class HouseController extends BaseController {
 		$type = Input::get('type') ? Input::get('type') : '%';
 		$find = Input::get('find') ? Input::get('find') : '';
 		$export = Input::get('export') ? Input::get('export') : '';
+
 		if($find){
 
 			if($search_k != '%' && $search_k != '%'){
@@ -391,6 +392,7 @@ class HouseController extends BaseController {
 						->where($search_k,'like','%'.$search_v.'%')
 						->orderBy('msgid', 'desc')
 						->paginate(10);
+
 			}else{
 				$gather = DB::table('house_message')
 						->where('chk_sta','2')

@@ -432,10 +432,10 @@
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <table>
                                 @foreach($imgArr as $value)
-                                <tr id="tr_{{$value->imgid}}">
+                                <tr id="tr_{{$value->imgid}}" style="display:inline-block; width:25%; height:25%; margin-right:5%;">
 
                                     <td>
-                                        <img style="width:80px; height:120px;" src="{{asset('./uploads')}}/{{$value->house_imagename}}" alt="">
+                                        <img  src="{{asset('./uploads')}}/{{$value->house_imagename}}" alt="">
                                         <a href="javascript:delimage({{$value->imgid}});" >@lang('house_translate.Delete_this_picture')</a>
                                     </td>
 

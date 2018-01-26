@@ -99,49 +99,49 @@
 
 
 
-                                <tr role="row">
-                                    <td class="sorting_1"><a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">{{ $value->order_no }}</a></td>
-                                    <td>{{ $value->name }}</td>
-                                    <td>{{ $value->tel }}</td>
-                                    <td>{{ date('Y-m-d H:i:s',$value->creat_time) }}</td>
-                                    <td>
-                                        @if($value->order_status == '1')
-                                            @lang('order.Order_not_paid')
-                                        @elseif($value->order_status == '2')
-                                            @lang('order.Order_not_reviewed')
-                                        @elseif($value->order_status == '3')
-                                            @lang('order.Order_audit')
-                                        @elseif($value->order_status == '4')
-                                            @lang('order.approved')
-                                        @elseif($value->order_status == '5')
-                                            @lang('order.Order_is_rejected')
-                                        @elseif($value->order_status == '6')
-                                            @lang('order.Order_confirmed')
-                                        @elseif($value->order_status == '7')
-                                            @lang('order.The_contract_has_been_uploaded')
-                                        @elseif($value->order_status == '8')
-                                            @lang('order.Order_completed')
-                                        @elseif($value->order_status == '9')
-                                            @lang('order.Order_cancellation')
-                                        @endif
-                                    </td>
-                                    <td>{{ $value->order_remark }}</td>
-                                    <td >
+                                    <tr role="row">
+                                        <td class="sorting_1"><a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">{{ $value->order_no }}</a></td>
+                                        <td>{{ $value->name }}</td>
+                                        <td>{{ $value->tel }}</td>
+                                        <td>{{ date('Y-m-d H:i:s',$value->creat_time) }}</td>
+                                        <td>
+                                            @if($value->order_status == '1')
+                                                @lang('order.Order_not_paid')
+                                            @elseif($value->order_status == '2')
+                                                @lang('order.Order_not_reviewed')
+                                            @elseif($value->order_status == '3')
+                                                @lang('order.Order_audit')
+                                            @elseif($value->order_status == '4')
+                                                @lang('order.approved')
+                                            @elseif($value->order_status == '5')
+                                                @lang('order.Order_is_rejected')
+                                            @elseif($value->order_status == '6')
+                                                @lang('order.Order_confirmed')
+                                            @elseif($value->order_status == '7')
+                                                @lang('order.The_contract_has_been_uploaded')
+                                            @elseif($value->order_status == '8')
+                                                @lang('order.Order_completed')
+                                            @elseif($value->order_status == '9')
+                                                @lang('order.Order_cancellation')
+                                            @endif
+                                        </td>
+                                        <td>{{ $value->order_remark }}</td>
+                                        <td >
 
 
 
-                                        @if($value->order_status == 2 || $value->order_status == 3)
-                                            <a href="{{ url('order/order/check',['id'=>$value->order_id]) }}" target="">去审核</a>
-                                           {{-- <label>审核通过<input name="order_status" type="radio" value="8" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('4','{{$value->order_id}}')}" /></label>
-                                            &nbsp;&nbsp;
-                                            <label>审核不通过<input name="order_status" type="radio" value="3" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('5','{{$value->order_id}}')}" /></label>--}}
-                                        @else
-                                            <a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">@lang('order.View_the_details')</a>
+                                            @if($value->order_status == 2 || $value->order_status == 3)
+                                                <a href="{{ url('order/order/check',['id'=>$value->order_id]) }}" target="">去审核</a>
+                                                {{-- <label>审核通过<input name="order_status" type="radio" value="8" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('4','{{$value->order_id}}')}" /></label>
+                                                 &nbsp;&nbsp;
+                                                 <label>审核不通过<input name="order_status" type="radio" value="3" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('5','{{$value->order_id}}')}" /></label>--}}
+                                            @else
+                                                <a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">@lang('order.View_the_details')</a>
 
-                                        @endif
+                                            @endif
 
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
                                 @endif
                             @endforeach
 
@@ -150,14 +150,14 @@
                         </table>
                     </div>
                 </div>
-                    @if (!empty($data))
-                        <div class="page_list">
-                            {{$data->appends(Request::input())->links()}}
-                            <div style="display:inline-block; margin-bottom:25px;">
-                                <span class="r">共有数据：<strong>{{$total}}</strong> 条</span>
-                            </div>
+                @if (!empty($data))
+                    <div class="page_list">
+                        {{$data->appends(Request::input())->links()}}
+                        <div style="display:inline-block; margin-bottom:25px;">
+                            <span class="r">共有数据：<strong>{{$total}}</strong> 条</span>
                         </div>
-                    @endif
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -196,6 +196,6 @@
         }
 
     </script>
-    @stop
+@stop
 
 
