@@ -14,34 +14,87 @@ use Illuminate\Http\Request;
 
 class FeedbackController extends BaseController{
 	public function feedback(Request $request){
+
 		$where = [];
 		$search = isset($request->search) ? $request->search : false;
-		$stime = isset($request->stime) ? $request->stime : '%';
-		$etime = isset($request->etime) ? $request->etime : '%';
+		$stime = isset($request->stime) ? $request->stime : false;
+		$etime = isset($request->etime) ? $request->etime : false;
 		$kwd_k = isset($request->kwd_k) ? $request->kwd_k : false;
 		$msg = isset($request->msg) ? $request->msg : '%';
 		if($kwd_k){
+
+			$where[] = [$kwd_k, 'like', '%'.$msg.'%'];
+		} else{
+			$where[] = ['yourname', 'like', '%'];
+		}
+		if($stime && $etime){
+
+			$where[] = ['time','>=',strtotime($stime.' 00:00:00')];
+			$where[] = ['time','<=',strtotime($etime.' 23:59:59')];
+		}
+
+		if($search){
+			$arr = DB::table('tb_email')->where($where)->paginate(5);
+		} else{
+			$arr = DB::table('tb_email')->paginate(5);
+		}
+
+		return view('user.feedback', [
+				'arr'   => $arr,
+				'total' => DB::table('tb_email')->count(),
+				'kwd_k' => $kwd_k,
+				'msg'   => $msg,
+				'stime' => $stime,
+				'etime' => $etime
+		]);
+
+
+
+	}
+
+		/*$where = [];
+		$wheredate = [];
+		$wheredates = [];
+		$stimeDate = date('Y-m-d H:i:s',$request->stime);
+		$etimeDate = date('Y-m-d H:i:s',$request->etime);
+		$kwd_k = isset($request->kwd_k) ? $request->kwd_k : false;
+		$search = isset($request->search) ? $request->search : false;
+		$msg = isset($request->msg) ? $request->msg : '%';
+		$stime = isset($stimeDate) ? $stimeDate : '%';
+		$etime = isset($etimeDate) ? $etimeDate : '%';
+		if($kwd_k){
 			$where[] = [$kwd_k,'like','%'.$msg.'%'];
+			$wheredate[] = ['time','>',strtotime($stime)];
+			$wheredates[] = ['time','<',strtotime($etime)];
 		}else{
 			$where[] = ['yourname','like','%'];
 		}
-		if($search )
+
+		if($search)
 		{
-			$arr = DB::table('tb_email')->where('time','like',$stime)
-										 ->where('time','like',$etime)
-										 ->where($where)
-										 ->paginate(5);
+			$arr = DB::table('tb_email')->where($where)
+					->where('time','>',$wheredate)
+					->orWhere('time','<',$wheredates)
+					->paginate(5);
 		}else{
 			$arr = DB::table('tb_email')->paginate(5);
 		}
+		if(!empty($arr)){
+			foreach($arr as $value ){
+				$value->time = date('Y-m-d H:i:d',$value->time);
+				$arr[] =$value;
+			}
+
+		}
+
 		return view('user.feedback',[
-										'arr' => $arr ,
-										'total'=>DB::table('tb_email')->count(),
-										'kwd_k' => $kwd_k,
-										'msg' => $msg,
-										'stime'=>$stime,
-										'etime'=>$etime
-									]);
+				'arr' => $arr,
+				'total'=>DB::table('tb_email')->count(),
+				'kwd_k' => $kwd_k,
+				'msg' => $msg,
+				'stime'=>$stime,
+				'etime'=>$etime
+		]);*/
 
 
 
@@ -75,6 +128,6 @@ class FeedbackController extends BaseController{
 				 'total'=>DB::table('tb_email')->count(),
 
 			]);*/
-	}
+
 
 }

@@ -8,7 +8,7 @@
     <div class="box">
         <div class="box-body">
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                <form action="{{ url('user/feedback') }}" method="post">
+                <form action="{{ url('user/feedback') }}" method="post" id="SUBMIT">
                     <span class="select-box inline" style="width:100%;">
                         {{ csrf_field() }}
 
@@ -18,22 +18,23 @@
                         </h4>--}}
 
                         <div class="row" style="padding:20px;">
-
                             <label><b>关键词搜索</b></label>&nbsp;&nbsp;
-                            <select class="form-control" name="kwd_k" id="kwd_k">.
+                            <select class="form-control" name="kwd_k" id="kwd_k">
                                 <option value="">请选择</option>
                                 <option value="yourname">姓名</option>
                                 <option value="email">邮箱地址</option>
                                 <option value="phonenumber">电话号码</option>
                                 <option value="message">详细信息</option>
                             </select>
-                            <input type="text" class="form-control" name="msg" value="@if($msg != '%'){{$msg}}@endif" placeholder="">&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="text" class="form-control" name="msg" id="msg" value="" placeholder="">&nbsp;&nbsp;&nbsp;&nbsp;
+
+
                             <label><b>提交日期：</b> </label>
-                            <input type="text" name="stime" id="stime" class="form-control" value="@if($stime != '%'){{$stime}}@endif" />&nbsp;&nbsp;至&nbsp;&nbsp;
-                            <input type="text" name="etime" id="etime" class="form-control" value="@if($etime != '%'){{$etime}}@endif"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="text" name="stime" id="stime" class="form-control" value="" placeholder="" />&nbsp;&nbsp;至&nbsp;&nbsp;
+                            <input type="text" name="etime" id="etime" class="form-control" value="" placeholder=""/>&nbsp;&nbsp;&nbsp;&nbsp;
 
                             <input name="search" type="submit" class="btn btn-default" id="seek" value="搜索">&nbsp;&nbsp;
-                            <button type="reset" class="btn btn-default" onclick="reset()">重置</button>&nbsp;&nbsp;
+                            <button type="reset" value="1233" class="btn btn-default" name="username" id="reset" >@lang('order.Reset')</button>&nbsp;&nbsp;
                         </div>
                     </span>
                 </form>
@@ -76,7 +77,7 @@
                                         <td>{{$value->yourname}}</td>
                                         <td>{{$value->email}}</td>
                                         <td>{{$value->phonenumber}}</td>
-                                        <td>{{$value->time}}</td>
+                                        <td>{{date('Y-m-d H:i:s',$value->time)}}</td>
                                         <td>{{$value->message}}</td>
                                     </tr>
                                     @endforeach
@@ -102,23 +103,43 @@
 @stop
 
 @section('js')
-
+    {{--<script>
+        $('#reset').click(function(){
+            var username = document.getElementById('reset').value;
+            $.ajax({
+                url:'{{url('user/feedback')}}',
+                data:'username='+username,
+                type:'get',
+                success:function(msg){
+                    location.reload()
+                }
+            })
+        })
+    </script>--}}
 
     <script>
-        document.getElementById('kwd_k').value="@if($kwd_k != '%'){{$kwd_k}}@endif"
 
-       //时间选择器
-        laydate.render({
-            elem: '#stime'
-            ,type: 'datetime'
-        });
-        laydate.render({
-            elem: '#etime'
-            ,type: 'datetime'
-        });
+        //时间选择器
+        laydate.render({elem: '#stime'});
+        laydate.render({elem: '#etime'});
+
+        document.getElementById('kwd_k').value="@if($kwd_k != '%'){{$kwd_k}}@endif";
+        document.getElementById('msg').value="@if($msg != '%'){{$msg}}@endif";
+        document.getElementById('stime').value="@if($stime != '%'){{$stime}}@endif";
+        document.getElementById('etime').value="@if($etime != '%'){{$etime}}@endif";
 
 
     </script>
+    <script>
+        $('#reset').click(function(){
+            document.getElementById('kwd_k').value="";
+            document.getElementById('msg').value="";
+            document.getElementById('stime').value="";
+            document.getElementById('etime').value="";
+            document.getElementById('SUBMIT').submit();
+        })
+    </script>
+
 @stop
 
 
