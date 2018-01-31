@@ -34,7 +34,7 @@
                             <input type="text" name="etime" id="etime" class="form-control" value="" placeholder=""/>&nbsp;&nbsp;&nbsp;&nbsp;
 
                             <input name="search" type="submit" class="btn btn-default" id="seek" value="搜索">&nbsp;&nbsp;
-                            <button type="reset" value="1233" class="btn btn-default" name="username" id="reset" >@lang('order.Reset')</button>&nbsp;&nbsp;
+                            <button type="reset"  class="btn btn-default" name="username" id="reset" >@lang('order.Reset')</button>&nbsp;&nbsp;
                         </div>
                     </span>
                 </form>
@@ -103,14 +103,15 @@
 @stop
 
 @section('js')
-    {{--<script>
+ {{--   <script>
         $('#reset').click(function(){
             var username = document.getElementById('reset').value;
             $.ajax({
                 url:'{{url('user/feedback')}}',
                 data:'username='+username,
-                type:'get',
+                type:'post',
                 success:function(msg){
+                    alert(username);
                     location.reload()
                 }
             })
