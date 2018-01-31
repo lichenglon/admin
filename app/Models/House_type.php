@@ -63,4 +63,5 @@ class House_type extends Base
 		}
 		return $array;
 	}
+
 }
