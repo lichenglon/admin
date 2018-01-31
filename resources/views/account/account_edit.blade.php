@@ -52,6 +52,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.email')：</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="email" value="{{ $lists->email }}" class="form-control" id="inputEmail3" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.area')：</label>
                     <div class="col-sm-4">
                         <input type="text" name="area" value="{{ $lists->area }}"  class="form-control" id="inputEmail3" placeholder="">

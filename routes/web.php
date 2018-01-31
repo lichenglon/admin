@@ -110,7 +110,7 @@ Route::group(['prefix'=>'house'],function() {
     Route::post('houseLister/uSave',$controller.'uSave');
 
     #Ajax请求删除图片
-    Route::get('updateList/del',$controller.'del');
+    Route::get('houseLister/del',$controller.'del');
     #Ajax请求获取省份市区
     Route::get('houseLister/region',$controller.'region');
     #房源详细信息

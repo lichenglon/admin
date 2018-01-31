@@ -43,6 +43,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.email')：</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="email" class="form-control" id="inputEmail3" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.area')：</label>
                     <div class="col-sm-4">
                         <input type="text" name="area" class="form-control" id="inputEmail3" placeholder="">
@@ -73,13 +79,14 @@
 
                         </select>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <a href="javascript:window.history.go(-1);" type="button" class="btn btn-default">@lang('account.cancel')</a>
-                        <button type="submit" class="btn btn-primary js-ajax-submit">@lang('account.Determine')</button>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <a href="javascript:window.history.go(-1);" type="button" class="btn btn-default">@lang('account.cancel')</a>
+                            <button type="submit" class="btn btn-primary js-ajax-submit">@lang('account.Determine')</button>
+                        </div>
                     </div>
                 </div>
+
 
             </form>
 

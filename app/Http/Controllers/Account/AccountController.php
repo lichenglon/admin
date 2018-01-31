@@ -57,11 +57,6 @@ class AccountController extends BaseController
     }
 
     public function store(Request $request){
-        //国家
-       /* $state = explode(',',$request->state);
-        $province =explode(',',$request->province);
-        //城市
-        $city = explode(',',$request->city);*/
         $data = [
             'name' => $request->name,
             'username' => $request->username,
@@ -72,16 +67,10 @@ class AccountController extends BaseController
             'role_id' => $request->role_id,
             'create_time' => time(),
             'update_time' => time(),
-            'state'       => '',
-            'en_state'    => '',
-            'province'    => '',
-            'en_province' => '',
-            'city'        => '',
-            'en_city'     => '',
+            'email'       => $request->email,
         ];
         $rs = Account::insert($data);
         if($rs){
-
             //更新操作日志
             $id = Session::get('user_id');
 
@@ -119,6 +108,7 @@ class AccountController extends BaseController
         $data['area'] = $request->area;
         $data['passwd'] = md5($request->password);
         $data['update_time'] = time();
+        $data['email'] = $request->email;
         Account::where('id', $request->id)
             ->update($data);
 

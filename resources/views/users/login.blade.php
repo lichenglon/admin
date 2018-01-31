@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>房源中介后台管理系统</title>
+		<title>@lang('layouts_aside.Intermediate')</title>
 		<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
 		<meta name="renderer" content="webkit|ie-comp|ie-stand">
 		<meta name="robots" content="noindex,nofollow">
@@ -32,21 +32,21 @@
 	</head>
 <body>
 	<div class="wrap">
-		<h1><a>房源中介后台管理系统</a></h1>
+		<h1><a>@lang('layouts_aside.Intermediate')</a></h1>
 		<form method="post" name="login" autoComplete="off" class="js-ajax-form">
 			<div class="login">
 				<ul>
 					<li>
 						<input type="hidden" name="_token"  value="{{csrf_token()}}"/>
-						<input class="input" name="username" type="text"  placeholder="请输入帐号"/>
+						<input class="input" name="username" type="text"  placeholder="User Name"/>
 					</li>
 					<li>
-						<input class="input" type="password" name="password" placeholder="请输入密码"/>
+						<input class="input" type="password" name="password" placeholder="Password"/>
 					</li>
 				</ul>
 				<div class="tips_error"></div>
 				<div id="login_btn_wraper">
-					<button type="submit" name="submit" class="btn js-ajax-submit">登录</button>
+					<button type="submit" name="submit" class="btn js-ajax-submit">Login</button>
 				</div>
 			</div>
 		</form>
@@ -63,11 +63,11 @@ $(function(){
 			password : $('input[name=password]').val()
 		};
 		if(!data.username){
-			$('.tips_error').html('用户名不能为空');
+			$('.tips_error').html('The user name cannot be empty.');
 			return false;
 		}
 		if(!data.password){
-			$('.tips_error').html('密码不能为空');
+			$('.tips_error').html('The password cannot be empty.');
 			return false;
 		}
 		$.post("{{asset('users/login')}}",data,function(msg){

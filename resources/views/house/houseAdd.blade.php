@@ -365,13 +365,13 @@
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <input type="text" name="landlord_site" id="landlord_site" class="input-text Wdate">
                         </div>
+                        <span id="landlord_siteMsg"></span>
                     </div>
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2">@lang('house_translate.The_landlord_note')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
                             <textarea name="landlord_remark" id="landlord_remark" cols="" rows="" class="textarea"  placeholder=""></textarea>
                         </div>
-                        <span id="landlord_remarkMsg"></span>
                     </div>
 
 
@@ -492,29 +492,31 @@
                 $landlord_phone=$("#landlord_phone"),/*房东电话*/
                 $landlord_phoneMsg=$('#landlord_phoneMsg'),
 
-                $landlord_remark=$('#landlord_remark'),/*房东备注*/
-                $landlord_remarkMsg=$('#landlord_remarkMsg');
+                $landlord_site=$('#landlord_site'),/*房东联系地址*/
+                $landlord_siteMsg=$('#landlord_siteMsg');
 
             /**/
-            onblurr($house_location,$house_locationMsg,/^[\u4e00-\u9fa5\w \d,，.'"-]{2,1000}$/,"Can't be empty",'格式错误');
+            onblurr($house_location,$house_locationMsg,/^[\u4e00-\u9fa5\w \d,，.'"-]{2,1000}$/,"Can't be empty",'Invalid format');
 
-            onblurr($house_structure,$house_structureMsg,/^[\u4e00-\u9fa5\w \d,，.'"]{2,1000}$/,"Can't be empty",'格式错误');
+            onblurr($house_structure,$house_structureMsg,/^[\u4e00-\u9fa5\w \d,，.'"]{2,1000}$/,"Can't be empty",'Invalid format');
 
-            onblurr($house_size,$house_sizeMsg,/[0-9]/,"Can't be empty",'格式错误');
+            onblurr($house_size,$house_sizeMsg,/[0-9]/,"Can't be empty",'Invalid format');
 
-            onblurr($house_price,$house_priceMsg,/[0-9]/,"Can't be empty",'格式错误');
+            onblurr($house_price,$house_priceMsg,/[0-9]/,"Can't be empty",'Invalid format');
 
-            onblurr($cash_pledge,$cash_pledgeMsg,/[0-9]/,"Can't be empty",'格式错误');//押金
+            onblurr($cash_pledge,$cash_pledgeMsg,/[0-9]/,"Can't be empty",'Invalid format');//押金
 
-            onblurr($house_keyword,$house_keywordMsg,/[\u4e00-\u9fa5\w ]{2,1000}$/,"Can't be empty",'格式错误');
+            onblurr($house_keyword,$house_keywordMsg,/[\u4e00-\u9fa5\w ]{2,1000}$/,"Can't be empty",'Invalid format');
 
-            onblurr($house_brief,$house_briefMsg,/[\u4e00-\u9fa5\w ]{2,1000}/,"Can't be empty",'格式错误');
+            onblurr($house_brief,$house_briefMsg,/[\u4e00-\u9fa5\w ]{2,1000}/,"Can't be empty",'Invalid format');
 
-            onblurr($landlord_name,$landlord_nameMsg,/[\u4e00-\u9fa5\w \d,，.'"]{2,1000}/,"Can't be empty",'格式错误');
+            onblurr($landlord_name,$landlord_nameMsg,/[\u4e00-\u9fa5\w \d,，.'"]{2,1000}/,"Can't be empty",'Invalid format');
 
-            onblurr($landlord_identity,$landlord_identityMsg,/^[0-9]\w{5,1000}$/,"Can't be empty",'格式错误');
+            onblurr($landlord_identity,$landlord_identityMsg,/^[0-9]\w{5,1000}$/,"Can't be empty",'Invalid format');
 
-            onblurr($landlord_phone,$landlord_phoneMsg, /^1(3|4|5|7|8)\d{9}$/,"Can't be empty",'格式错误');
+            onblurr($landlord_phone,$landlord_phoneMsg, /^1(3|4|5|7|8)\d{9}$/,"Can't be empty",'Invalid format');
+
+            onblurr($landlord_site,$landlord_siteMsg,/^[\u4e00-\u9fa5\w \d,，.'"-]{2,1000}$/,"Can't be empty",'Invalid format');
 
 
             /*获取焦点事件和按住事件*/
@@ -546,8 +548,8 @@
             }
 
             $("#verification").click(function(){
-                if ($(".ok").length==7 || $(".ok").length==8){
-                    if(window.confirm('亲！请确认好地区喔 往后不得更改')){
+                if ($(".ok").length==8 || $(".ok").length==9){
+                    if(window.confirm('Pro! Please make sure that the area is not changed.')){
                         document.getElementById('SUBMIT').submit();
                     }
                 }else alert("Dear！Please correct the above error");

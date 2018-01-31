@@ -24,7 +24,8 @@ class HomeController extends BaseController
                 Session::put('lang', $locale);
             }
         }
-        return view('home');
+        $Last_landing_time = Session::get('Last_landing_time');
+        return view('home', ['Last_landing_time' => $Last_landing_time]);
     }
 
     // 上传一张图片公共方法 name="image"

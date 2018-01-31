@@ -32,7 +32,7 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">主导航</li>
+            <li class="header">@lang('layouts_aside.The_main_navigation')</li>
 
 
             @foreach($__menu_lists__ as $values)
@@ -64,10 +64,6 @@
             @endforeach
 
 
-            <li class="header">标签</li>
-            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>@lang('layouts_aside.significance')</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>@lang('layouts_aside.Notice')</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>@lang('layouts_aside.news')</span></a></li>
 
 
 
