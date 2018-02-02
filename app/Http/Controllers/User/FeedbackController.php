@@ -52,82 +52,52 @@ class FeedbackController extends BaseController{
 
 	}
 
-		/*$where = [];
-		$wheredate = [];
-		$wheredates = [];
-		$stimeDate = date('Y-m-d H:i:s',$request->stime);
-		$etimeDate = date('Y-m-d H:i:s',$request->etime);
-		$kwd_k = isset($request->kwd_k) ? $request->kwd_k : false;
+	/**
+	 *用户评论
+	 */
+	public function comment(Request $request)
+	{
+		$where = [];
 		$search = isset($request->search) ? $request->search : false;
-		$msg = isset($request->msg) ? $request->msg : '%';
-		$stime = isset($stimeDate) ? $stimeDate : '%';
-		$etime = isset($etimeDate) ? $etimeDate : '%';
-		if($kwd_k){
-			$where[] = [$kwd_k,'like','%'.$msg.'%'];
-			$wheredate[] = ['time','>',strtotime($stime)];
-			$wheredates[] = ['time','<',strtotime($etime)];
-		}else{
-			$where[] = ['yourname','like','%'];
+		$stime = isset($request->stime) ? $request->stime : false;
+		$etime = isset($request->etime) ? $request->etime : false;
+		if($stime && $etime){
+			$where[] = ['create_time','>=',strtotime($stime.' 00:00:00')];
+			$where[] = ['create_time','<=',strtotime($etime.' 23:59:59')];
 		}
-
 		if($search)
 		{
-			$arr = DB::table('tb_email')->where($where)
-					->where('time','>',$wheredate)
-					->orWhere('time','<',$wheredates)
-					->paginate(5);
-		}else{
-			$arr = DB::table('tb_email')->paginate(5);
+			$arr = DB::table('comment')->where($where)
+					->join('tb_register','comment.user_id','=','tb_register.id')
+					->join('house_message','comment.house_id','=','house_message.msgid')
+					->select('comment.*','tb_register.user','tb_register.email','house_message.serial_number')
+					->paginate(8);
+			$total = DB::table('comment')->where($where)->count();
 		}
-		if(!empty($arr)){
-			foreach($arr as $value ){
-				$value->time = date('Y-m-d H:i:d',$value->time);
-				$arr[] =$value;
-			}
-
+		else
+		{
+			$arr = DB::table('comment')
+					->join('tb_register','comment.user_id','=','tb_register.id')
+					->join('house_message','comment.house_id','=','house_message.msgid')
+					->select('comment.*','tb_register.user','tb_register.email','house_message.serial_number')
+					->paginate(8);
+			$total = DB::table('comment')->count();
 		}
 
-		return view('user.feedback',[
-				'arr' => $arr,
-				'total'=>DB::table('tb_email')->count(),
-				'kwd_k' => $kwd_k,
-				'msg' => $msg,
-				'stime'=>$stime,
-				'etime'=>$etime
-		]);*/
 
 
+		return view('user.comment',['arr' => $arr, 'total' => $total,'stime' => $stime, 'etime' => $etime]);
+	}
 
+	/**
+	 *评论删除
+	 */
+	public function delete($id){
 
-
-
-
-
-		/*$stime = Input::get($request->stime) ? Input::get($request->stime) : '';    //开始时间
-		$etime = Input::get($request->etime) ? Input::get($request->etime) : '';    //结束时间
-		$kwd_k = Input::get($request->kwd_d) ? Input::get($request->kwd_k) : '';    //下拉框
-		$kwd_v = Input::get($request->kwd_v) ? Input::get($request->kwd_v) : '';    //搜索值
-		if($kwd_v != '' && $kwd_k !=''){
-			$data = DB::table('tb_email')
-						->where('tb_email'.$kwd_v,'like','%'.$kwd_v.'%')
-						->where($stime,'like','%'.$etime.'%')
-						->orderBy('id')
-						->get()
-						->toArray();
-			var_dump($data);
-			exit;
-
+		$rs = DB::table('comment')->where('id',$id)->delete();
+		if($rs){
+			return $this->ajaxSuccess('删除评论成功！', url('/user/comment'));
 		}
-		return view('user.feedback',
-			 [
-				 'stime'=>$stime,
-				 'etime'=>$etime,
-				 'kwd_k'=>$kwd_k,
-				 'kwd_v'=>$kwd_v,
-				'arr'=>DB::table('tb_email')->orderBy('id')->paginate(5),
-				 'total'=>DB::table('tb_email')->count(),
-
-			]);*/
-
-
+		return $this->ajaxError('删除评论失败！', url('/user/comment'));
+	}
 }

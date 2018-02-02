@@ -170,6 +170,10 @@ Route::group(['prefix'=>'helpHandbook'],function() {
 
 //用户反馈
 Route::any('user/feedback','User\FeedbackController@feedback');
+//用户评论
+Route::any('user/comment','User\FeedbackController@comment');
+//用户评论删除
+Route::any('user/comment/delete/{id?}','User\FeedbackController@delete');
 
 
 
