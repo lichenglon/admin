@@ -35,20 +35,33 @@
                                 <td>{{ $result->creat_time }}</td>
                             </tr>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 120px;">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="CSS grade: activate to sort column ascending" style="width: 120px;">
                                     @lang('order.Tenant_name')
                                 </th>
-                                <td>{{ $result->name }}</td>
+                                <td>{{ $renter->r_name }}</td>
                             </tr>
-
-
+                            <tr role="row">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="CSS grade: activate to sort column ascending" style="width: 120px;">
+                                    @lang('order.fname')
+                                </th>
+                                <td>{{ $renter->fname }}</td>
+                            </tr>
+                            <tr role="row">
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-label="CSS grade: activate to sort column ascending" style="width: 120px;">
+                                    @lang('order.lname')
+                                </th>
+                                <td>{{ $renter->lname }}</td>
+                            </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 150px;">
                                     @lang('order.Photo_of_ID_card')
                                 </th>
                                 <td class="sorting" tabindex="0" aria-controls="example1" aria-label="Browser: activate to sort column ascending">
-                                    <img width="300" height="150"  src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_idcard1}}" alt="">
-                                    <img width="300" height="150"  src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_idcard2}}" alt="">
+                                    <img width="300" height="150"  src="{{HOUSE_SERVER_PATH}}uploads/{{$renter->renter_idcard1}}" alt="">
+                                    <img width="300" height="150"  src="{{HOUSE_SERVER_PATH}}uploads/{{$renter->renter_idcard2}}" alt="">
                                 </td>
                             </tr>
                             <tr role="row">
@@ -56,7 +69,7 @@
                                     @lang('order.Passport_photo')
                                 </th>
                                 <td>
-                                    <img width="300" height="150" src="{{HOUSE_SERVER_PATH}}uploads/{{$result->renter_passport}}" alt="" />
+                                    <img width="300" height="150" src="{{HOUSE_SERVER_PATH}}uploads/{{$renter->renter_passport}}" alt="" />
                                 </td>
                             </tr>
                             <tr role="row">
@@ -64,7 +77,7 @@
                                     @lang('order.Student_card_photo')
                                 </th>
                                 <td>
-                                    <img width="300" height="150" src="{{HOUSE_SERVER_PATH}}uploads/{{$result->stu_idcard}}" alt="" />
+                                    <img width="300" height="150" src="{{HOUSE_SERVER_PATH}}uploads/{{$renter->stu_idcard}}" alt="" />
                                 </td>
                             </tr>
 
@@ -90,13 +103,22 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 80px;">
                                     @lang('order.Price')
                                 </th>
-                                <td>{{ $result->house_price }}</td>
+                                <td>$ {{ $result->house_price }}</td>
+                            </tr>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                    aria-sort="ascending"
+                                    aria-label="Rendering engine: activate to sort column descending"
+                                    style="width: 80px;">
+                                    @lang('order.p_money')
+                                </th>
+                                <td>￥ {{ $result->payment_amount }}</td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 120px;">
                                     @lang('order.Lease_term')
                                 </th>
-                                <td>{{ $result->rent_time }}</td>
+                                <td>{{ $result->rent_time }} @lang('order.week')</td>
                             </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 150px;">
@@ -104,19 +126,19 @@
                                 </th>
                                 <td>{{ date('Y-m-d H:i:s', $result->sign_time) }}</td>
                             </tr>
-                            <tr role="row">
+                            {{--<tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 150px;">
                                     @lang('order.contracting_place')
                                 </th>
                                 <td>{{ $result->sign_position }}</td>
-                            </tr>
+                            </tr>--}}
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 100px;">
                                     @lang('order.Order_status')
                                 </th>
                                 <td>{{ $orderStatus[$result->order_status] }}</td>
                             </tr>
-                            <tr role="row">
+                            {{--<tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
                                     @lang('order.contract')
                                 </th>
@@ -127,7 +149,7 @@
                                     @lang('order.evaluate')
                                 </th>
                                 <td>{{ $result->house_eva }}</td>
-                            </tr>
+                            </tr>--}}
                             <tr role="row" aria-required="true">
                                 <th><label>审核通过&nbsp;&nbsp;&nbsp;<input type="radio" name="order_status"  class="order_status" onclick="javascript:isRej('4');" value="4"/></label></th>
                                 <th><label>审核不通过&nbsp;&nbsp;&nbsp;<input type="radio" name="order_status" class="order_status" onclick="javascript:isRej('5');" value="5"/></label></th>

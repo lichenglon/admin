@@ -36,7 +36,6 @@
                             <select class="form-control" name="kwd_k" id="kwd_k">
                                 <option value="">@lang('order.Please_choose')</option>
                                 <option value="order_no">@lang('order.Order_number')</option>
-                                {{--<option value="u_name">下单人</option>--}}
                                 <option value="name">@lang('order.Tenant_name')</option>
                                 <option value="tel">@lang('order.Tenant_phone')</option>
                             </select>
@@ -63,7 +62,6 @@
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                     aria-label="Browser: activate to sort column ascending" style="width:10%;">
-                                    {{--租客姓名--}}
                                     @lang('order.Single_person')
                                 </th>
 
@@ -100,7 +98,7 @@
 
 
                                 <tr role="row">
-                                    <td class="sorting_1"><a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">{{ $value->order_no }}</a></td>
+                                    <td class="sorting_1"><a href="{{ url('order/order/detail',['id'=>$value->id]) }}" target="">{{ $value->order_no }}</a></td>
                                     <td>{{ $value->name }}</td>
                                     <td>{{ $value->tel }}</td>
                                     <td>{{ date('Y-m-d H:i:s',$value->creat_time) }}</td>
@@ -131,12 +129,12 @@
 
 
                                         @if($value->order_status == 2 || $value->order_status == 3)
-                                            <a href="{{ url('order/order/check',['id'=>$value->order_id]) }}" target="">去审核</a>
+                                            <a href="{{ url('order/order/check',['id'=>$value->id]) }}" target="">去审核</a>
                                            {{-- <label>审核通过<input name="order_status" type="radio" value="8" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('4','{{$value->order_id}}')}" /></label>
                                             &nbsp;&nbsp;
                                             <label>审核不通过<input name="order_status" type="radio" value="3" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('5','{{$value->order_id}}')}" /></label>--}}
                                         @else
-                                            <a href="{{ url('order/order/detail',['id'=>$value->order_id]) }}" target="">@lang('order.View_the_details')</a>
+                                            <a href="{{ url('order/order/detail',['id'=>$value->id]) }}" target="">@lang('order.View_the_details')</a>
 
                                         @endif
 

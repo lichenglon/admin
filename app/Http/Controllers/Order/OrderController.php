@@ -43,7 +43,7 @@ class OrderController extends BaseController
         //接收搜索值
         $status = $request->input('status');
         $stime = $request->input('stime') ? $request->input('stime') : '';
-        $etime = $request->input('etime') ? $request->input('etime') : '';
+        $etime = $request->input('etime') ? $request->input('etime') : date('Y-m-d');
         $kwd_k = $request->input('kwd_k') ? $request->input('kwd_k') : '';
         $kwd_v = $request->input('kwd_v') ? $request->input('kwd_v') : '';
 
@@ -64,7 +64,7 @@ class OrderController extends BaseController
         //判断是否导出excel
         if(isset($request->excel))
         {
-            $data = DB::table('order')->where($where)->join('tb_register','order.uid','=','id')->select('order.order_no','tb_register.uname as u_name','order.name','order.tel','order.creat_time','order.order_status','order.order_remark')->orderBy('order_id', 'desc')->get()->toArray();
+            $data = DB::table('order')->where($where)->join('tb_register','order.uid','=','id')->select('order.order_no','tb_register.uname as u_name','order.name','order.tel','order.creat_time','order.order_status','order.order_remark')->orderBy('id', 'desc')->get()->toArray();
             $arr = [];
             foreach($data as $v)
             {
@@ -76,24 +76,26 @@ class OrderController extends BaseController
             exportData($title,$arr,'订单信息'.date('Y-m-d'));
         }
 
-        $total = DB::table('order')->where($where)->orderBy('order_id', 'desc')->count();
-        $order_list = DB::table('order')->where($where)->orderBy('order_id', 'desc')->paginate(10);
-        return view('order.order.index', ['data'=>$order_list, 'total'=>$total, 'status_all'=>$status_all, 'orderStatus'=>$this->orderStatus, 'a_status'=>$status, 'stime' => $stime, 'etime' => $etime, 'kwd_k' => $kwd_k, 'kwd_v' =>$kwd_v]);
+        $total = DB::table('order')->where($where)->orderBy('id', 'desc')->count();
+        $order_list = DB::table('order')->where($where)->orderBy('id', 'desc')->paginate(10);
+        return view('order.order.index', ['data'=>$order_list, 'total'=>$total, 'status_all'=>$status_all, 'orderStatus'=>$this->orderStatus, 'a_status'=>$status, 'stime' => $stime, 'etime' => $request->etime, 'kwd_k' => $kwd_k, 'kwd_v' =>$kwd_v]);
 
     }
     //审核订单页面
     public function check($id){
-        DB::table('order')->where('order_id',$id)->update(['order_status'=>'3']);
-        $result = DB::table('order')->where('order_id', $id)->join('house_message','order.house_id','=','msgid')->first();
-        return view("order.order.check",['result'=>$result,'orderStatus'=>$this->orderStatus]);
+        DB::table('order')->where('id',$id)->update(['order_status'=>'3']);
+        $order_no = DB::table('order')->where('id',$id)->value('order_no');
+        $renter = DB::table('renter')->where('order_no',$order_no)->first();
+        $result = DB::table('order')->where('id', $id)->join('house_message','order.house_id','=','msgid')->first();
+        return view("order.order.check",['result'=>$result,'renter'=>$renter,'orderStatus'=>$this->orderStatus]);
     }
     //审核订单提交
     public function saveChk($id){
         if($_REQUEST['order_status'] == '4'){
-            DB::table('order')->where('order_id',$id)->update(['order_status'=>'4']);
+            DB::table('order')->where('id',$id)->update(['order_status'=>'4']);
         }
         if($_REQUEST['order_status'] == '5'){
-            DB::table('order')->where('order_id',$id)->update(['order_status'=>'5','reject_reason'=>$_REQUEST['reject_reason']]);
+            DB::table('order')->where('id',$id)->update(['order_status'=>'5','reject_reason'=>$_REQUEST['reject_reason']]);
         }
         return redirect('order/order');
     }
@@ -115,8 +117,10 @@ class OrderController extends BaseController
 
     //订单详情
     public function detail($id) {
-        $result = DB::table('order')->where('order_id', $id)->join('house_message','order.house_id','=','msgid')->first();
-        return view("order.order.detail",['result'=>$result,'orderStatus'=>$this->orderStatus]);
+        $result = DB::table('order')->where('id', $id)->join('house_message','order.house_id','=','msgid')->first();
+        $order_no = DB::table('order')->where('id',$id)->value('order_no');
+        $renter = DB::table('renter')->where('order_no',$order_no)->first();
+        return view("order.order.detail",['result'=>$result,'renter'=>$renter,'orderStatus'=>$this->orderStatus]);
     }
 
 }

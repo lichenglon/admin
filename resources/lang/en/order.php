@@ -10,6 +10,8 @@ return [
 	'Please_choose'             => 'Please choose',         //请选择
 	'Order_number'              => 'Order number',          //订单编号
 	'Tenant_name'               => 'Tenant name',           //租客姓名
+	'fname'                     =>'First Name',
+	'lname'                     =>'Last Name',
 	'Tenant_phone'              => 'Tenant phone',          //租客电话
 	'search'                    => 'Search',                //搜索
 	'Reset'                     => 'Reset',                 //重置
@@ -47,5 +49,8 @@ return [
 	'The_contract_has_been_uploaded' => 'The contract has been uploaded.',//合同已上传
 	'Order_completed'           => 'Order completed',       //订单已完成
 	'Order_cancellation'        => 'Order cancellation',    //订单取消
+	'week'                      =>'weeks',
+	'p_money'                   => 'Payment Amount',
+
 
 ];
