@@ -544,7 +544,17 @@
 
     <script src="{{ asset('home_style') }}/js/main.min.js"></script>
     <script src="{{ asset('home_style') }}/js/color-switcher.min.js"></script>
-
+@if(Session::get('hint'))
+    <script>
+        var title = "欢迎 {{$__user_info__['name']}} 登陆如需帮助请点击确定";
+        layer.confirm(title, {
+            btn: ['确定','取消'] //按钮
+        },function(index){
+            layer.close(index);
+            location.href = "{{url('helpHandbook/help')}}"
+        })
+    </script>
+@endif
     </body>
     </html>
 

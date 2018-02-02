@@ -18,7 +18,23 @@
 				color:#DFC05D;
 			}
 			#login_btn_wraper button:focus{outline:none;}
+
+			body{
+				margin:0;
+			}
+			video{
+				position:fixed;
+				right:0;
+				bottom:0;
+				min-width:100%;
+				min-height:100%;
+				width:auto;
+				height:auto;
+				z-index:-9999;
+				-webkit-filter:grayscale(0%)
+			}
 		</style>
+
 		<script>
 			if (window.parent !== window.self) {
 					document.write = '';
@@ -52,9 +68,19 @@
 		</form>
 	</div>
 
+	<video autoplay muted loop style="width:100%;" id="v1">
+		<source src="{{ url('mp4/a001.mp4') }}">
+	</video>
+
+
 	<script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
 	<script src="{{ asset('static/layer/layer.js') }}"></script>
+	<script>
+		var video= document.getElementById('v1');
+		video.playbackRate = 0.5;
+	</script>
 <script>
+
 $(function(){
 	$('.js-ajax-form').submit(function () {
 		var data  ={

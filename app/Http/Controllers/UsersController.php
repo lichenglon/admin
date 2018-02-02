@@ -39,6 +39,7 @@ class UsersController extends Controller {
 
 				Session::put('Last_landing_time',date('Y-m-d H:i:s'));
 				Session::put('user_id',$userInfo->id);
+				Session::flash('hint',$userInfo->id);
 				unset($userInfo->passwd);
 				Session::put('user_info',$userInfo->toArray());
 				Session::save();
