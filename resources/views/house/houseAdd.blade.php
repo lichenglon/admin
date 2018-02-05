@@ -92,7 +92,7 @@
 
 
             <div class="page-container">
-                <form action="{{url('house/houseAdd/save')}}" method="post" id="SUBMIT" class="form form-horizontal" id="form-article-add" enctype="multipart/form-data">
+                <form action="{{url('house/houseAdd/save')}}" method="post" id="SUBMIT" class="form form-horizontal form_submit" id="form-article-add" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
                     <div class="row cl">
@@ -126,7 +126,7 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Housing_name')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" class="input-text" value="" placeholder="房源名称" required maxlength="3000" id="house_location" name="house_name" >
+                            <input type="text" class="input-text" value="" placeholder="" required maxlength="3000" id="house_location" name="house_name" >
                         </div>
                         <span id="house_locationMsg"></span>
                     </div>
@@ -134,7 +134,7 @@
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>@lang('house_translate.Detailed_location')：</label>
                         <div class="formControls col-xs-8 col-sm-9" style="width:45%;">
-                            <input type="text" class="input-text" value="" placeholder="南山区泰邦科技大厦2308" required maxlength="3000" id="house_location" name="house_location" >
+                            <input type="text" class="input-text" value="" placeholder="" required maxlength="3000" id="house_location" name="house_location" >
                         </div>
                         <span id="house_locationMsg"></span>
                     </div>
@@ -401,7 +401,7 @@
 
                     <div class="row cl">
                         <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-                            <button class="btn btn-primary radius" type="button" id="verification">@lang('house_translate.Save_and_submit_the_audit')</button>
+                            <button class="btn btn-primary radius form_submit" type="submit" id="verification">@lang('house_translate.Save_and_submit_the_audit')</button>
                             <a href="javascript:window.history.go(-1);"><button class="btn btn-default radius" type="button">&nbsp;&nbsp;@lang('house_translate.cancel')&nbsp;&nbsp;</button></a>
                         </div>
                     </div>
@@ -554,6 +554,7 @@
                     }
                 }else alert("Dear！Please correct the above error");
             });
+
         </script>
 
 

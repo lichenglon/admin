@@ -56,10 +56,14 @@
 						<input type="hidden" name="_token"  value="{{csrf_token()}}"/>
 						<input class="input" name="username" type="text"  placeholder="User Name"/>
 					</li>
+
+				</ul>
+				<ul>
 					<li>
 						<input class="input" type="password" name="password" placeholder="Password"/>
 					</li>
 				</ul>
+
 				<div class="tips_error"></div>
 				<div id="login_btn_wraper">
 					<button type="submit" name="submit" class="btn js-ajax-submit">Login</button>
@@ -120,6 +124,7 @@ function showMsg(msg){
 		icon: 2,
 	});
 }
+
 </script>
 </body>
 </html>

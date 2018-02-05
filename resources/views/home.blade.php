@@ -546,7 +546,7 @@
     <script src="{{ asset('home_style') }}/js/color-switcher.min.js"></script>
 @if(Session::get('hint'))
     <script>
-        var title = "欢迎 {{$__user_info__['name']}} 登陆如需帮助请点击确定";
+        var title = "@lang('home.welcome') "+" {{ $__user_info__['name'] }} "+" @lang('home.If_the_landing_needs_help_please_click_OK')";
         layer.confirm(title, {
             btn: ['确定','取消'] //按钮
         },function(index){

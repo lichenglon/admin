@@ -31,10 +31,9 @@ Route::group(['prefix'=>'account'],function(){
     Route::post('user', 'Account\AccountController@index');
     Route::post('user/store', 'Account\AccountController@store');
     Route::get('user/updateStatus/{id}/{status}','Account\AccountController@updateStatus');
-    //部门
-    /*Route::resource('department','Account\DepartmentController');
-    Route::post('department/store', 'Account\DepartmentController@store');
-    Route::get('department/updateStatus/{id}/{status}','Account\DepartmentController@updateStatus');*/
+    //数据备份
+    Route::get('database','Account\DatabaseController@index');
+
     //角色
     Route::resource('role', 'Account\RoleController');
     Route::post('role/store', 'Account\RoleController@store');

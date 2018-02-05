@@ -25,6 +25,7 @@ class HouseController extends BaseController {
 	 *房源添加表单提交
 	 */
 	public function save(Request $param) {
+
 		$houseData = Input::all();
 		//国家
 		$state = explode(',',$houseData['state']);

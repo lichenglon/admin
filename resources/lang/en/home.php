@@ -24,4 +24,10 @@ return [
 
 
 
+	//系统提示
+	'welcome'                   => 'Welcome',           //欢迎
+	'If_the_landing_needs_help_please_click_OK' => 'If the landing needs help, please click OK',//登陆如需帮助请点击确定
+
+
+
 ];
