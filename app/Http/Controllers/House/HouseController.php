@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use DB;
-use App\libraries\libs\pinyin;
+
 class HouseController extends BaseController {
 	/**
 	 *房源添加
