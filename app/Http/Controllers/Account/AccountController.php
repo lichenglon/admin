@@ -17,6 +17,7 @@ class AccountController extends BaseController
     public function __construct(){
         parent::__construct();
         $this->account = new Account;
+
     }
 
     public function index(Request $request){
@@ -50,6 +51,8 @@ class AccountController extends BaseController
     public function create(){
 
         $roles = Account::where('status',1)->get(['id','name']);
+
+
         $departmentList = $this->getSelectList('departments');
         $roleList = $this->getSelectList('roles');
         $nationArr = DB::table('nation')->get();
