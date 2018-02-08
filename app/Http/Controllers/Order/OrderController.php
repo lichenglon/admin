@@ -91,7 +91,8 @@ class OrderController extends BaseController
         return view("order.order.check",['result'=>$result,'renter'=>$renter,'orderStatus'=>$this->orderStatus]);
     }
     //审核订单提交
-    public function saveChk($id){
+    public function saveChk(){
+        $id = $_REQUEST['id'];
         if($_REQUEST['order_status'] == '4'){
             DB::table('order')->where('id',$id)->update(['order_status'=>'4']);
         }
