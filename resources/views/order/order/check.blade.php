@@ -137,7 +137,7 @@
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 100px;">
                                     @lang('order.Order_status')
                                 </th>
-                                <td>{{ $orderStatus[$result->order_status] }}</td>
+                                <td>{{ $orderStatus->get_order_status($result->order_status)}}</td>
                             </tr>
                             {{--<tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">

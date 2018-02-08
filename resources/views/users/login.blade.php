@@ -26,21 +26,17 @@
 
 		</style>
 
-		{{--<script>
-			if (window.parent !== window.self) {
-					document.write = '';
-					window.parent.location.href = window.self.location.href;
-					setTimeout(function () {
-							document.body.innerHTML = '';
-					}, 0);
-			}
-		</script>--}}
+		
 
 		
 	</head>
 <body onload="refresh()">
+
 	<div class="wrap">
-		<h1><a>@lang('layouts_aside.Intermediate')</a></h1>
+		<h1>
+			<a href="http://www.home.com">ULzz.com</a>
+			<a>@lang('layouts_aside.Intermediate')</a>
+		</h1>
 		<form method="post" name="login" autoComplete="off" class="js-ajax-form">
 			<div class="login">
 				<ul>
@@ -122,6 +118,9 @@ function showMsg(msg){
 			"{{asset('images/4.jpg')}}",
 			"{{asset('images/5.jpg')}}",
 			"{{asset('images/6.jpg')}}",
+			"{{asset('images/7.png')}}",
+			"{{asset('images/8.jpg')}}",
+			"{{asset('images/9.jpg')}}",
 		];
 		var caution = false
 		function setCookie(name, value, expires, path, domain, secure)
@@ -150,7 +149,7 @@ function showMsg(msg){
 		var now = new Date();
 		now.setTime(now.getTime() + 365 * 24 * 60 * 60 * 1000);
 		var imagsNum = getCookie('imageNumber');
-		if(Number(imagsNum) > 5)
+		if(Number(imagsNum) > 8)
 		{
 			setCookie('imageNumber',0,now);
 		}
@@ -167,6 +166,7 @@ function showMsg(msg){
 		function refresh()
 		{
 			var index = getCookie('imageNumber');
+			//console.log(index);
 			var img = imgs[index];
 			document.body.style.backgroundImage="url("+img+")";
 		}

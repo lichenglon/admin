@@ -151,7 +151,7 @@
                                     @lang('order.Order_status')
                                 </th>
                                 {{--<td>{{ $result->order_status }}</td>--}}
-                                <td>{{ $orderStatus[$result->order_status] }}</td>
+                                <td>{{ $orderStatus->get_order_status($result->order_status)}}</td>
                             </tr>
                             {{--<tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
