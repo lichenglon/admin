@@ -74,7 +74,7 @@ Route::group(['prefix'=>'order'],function(){
     //审核订单
     Route::any('order/check/{id}','Order\OrderController@check');
     //审核保存
-    Route::any('order/saveChk/{id?}','Order\OrderController@saveChk');
+    Route::any('order/saveChk','Order\OrderController@saveChk');
 
 
 //    Route::resource('order', 'Order\OrderController');

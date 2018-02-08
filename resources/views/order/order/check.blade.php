@@ -19,7 +19,8 @@
                 </h4>
                 <div class="row">
                     <div class="col-sm-12">
-                        <form action="{{ url('order/order/saveChk',['order_id'=>$result->order_id]) }}" action="post">
+                        <form action="{{ url('order/order/saveChk') }}" method="post">
+                            <input type="hidden" name="id" value="{{ $result->id }}">
                         <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                             <thead>
                             <tr role="row">
