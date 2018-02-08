@@ -72,7 +72,7 @@ class FeedbackController extends BaseController{
 					->join('house_message','comment.house_id','=','house_message.msgid')
 					->select('comment.*','tb_register.user','tb_register.email','house_message.serial_number')
 					->paginate(8);
-			$total = DB::table('comment')->where($where)->count();
+			$total = DB::table('comment')->join('tb_register','comment.user_id','=','tb_register.id')->where($where)->count();
 		}
 		else
 		{
@@ -81,7 +81,7 @@ class FeedbackController extends BaseController{
 					->join('house_message','comment.house_id','=','house_message.msgid')
 					->select('comment.*','tb_register.user','tb_register.email','house_message.serial_number')
 					->paginate(8);
-			$total = DB::table('comment')->count();
+			$total = DB::table('comment')->join('tb_register','comment.user_id','=','tb_register.id')->count();
 		}
 
 

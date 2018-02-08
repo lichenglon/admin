@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use DB;
-use App\libraries\libs\pinyin;
+
 class HouseController extends BaseController {
 	/**
 	 *房源添加
@@ -25,6 +25,7 @@ class HouseController extends BaseController {
 	 *房源添加表单提交
 	 */
 	public function save(Request $param) {
+
 		$houseData = Input::all();
 		//国家
 		$state = explode(',',$houseData['state']);
@@ -380,7 +381,7 @@ class HouseController extends BaseController {
 		$search_k = Input::get('search_k') ? Input::get('search_k') : '%';
 		$search_v = Input::get('search_v') ? Input::get('search_v') : '%';
 		$type = Input::get('type') ? Input::get('type') : '%';
-		$find = Input::get('find') ? Input::get('find') : '';
+		$find = Input::get('find') ? Input::get('find') : false;
 		$export = Input::get('export') ? Input::get('export') : '';
 
 		if($find){

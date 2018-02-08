@@ -82,13 +82,25 @@
                                     <td>{{ $value->department_name }}</td>
                                     <td>{{ $value->parent_depart_name or '无' }}</td>
                                    {{-- <td>{{ $value->create_time }}</td>--}}
-                                    <td><span>
-                                        <a href="{{ url('account/role/updateStatus',['id'=>$value->id,'status'=>$value->status]) }}" class="layer-get">
-                                            @if($value->status) @lang('account.disable') @else @lang('account.Enable') @endif
-                                        </a>&nbsp;
-                                        <a href="{{ url('account/role/'.$value->id.'/edit') }}">@lang('account.The_editor')</a>&nbsp;
-                                        <a href="{{ url('account/role',['id'=>$value->id]) }}" token="{{ csrf_token() }}" class="layer-delete">@lang('account.delete')</a>
-                                    </span></td>
+                                    <td>
+                                        @if($value->id == 15)
+                                            <span>
+                                                <a href="javascript:layer.msg('@lang('account.Inability_to_operate_the_administrator')', {icon: 2})">
+                                                @if($value->status) @lang('account.disable') @else @lang('account.Enable') @endif
+                                                </a>&nbsp;
+                                                <a href="javascript:layer.msg('@lang('account.Inability_to_operate_the_administrator')', {icon: 2})">@lang('account.The_editor')</a>&nbsp;
+                                                <a href="javascript:layer.msg('@lang('account.Inability_to_operate_the_administrator')', {icon: 2})" token="{{ csrf_token() }}">@lang('account.delete')</a>
+                                            </span>
+                                        @else
+                                            <span>
+                                                <a href="{{ url('account/role/updateStatus',['id'=>$value->id,'status'=>$value->status]) }}" class="layer-get">
+                                                @if($value->status) @lang('account.disable') @else @lang('account.Enable') @endif
+                                                </a>&nbsp;
+                                                <a href="{{ url('account/role/'.$value->id.'/edit') }}">@lang('account.The_editor')</a>&nbsp;
+                                                <a href="{{ url('account/role',['id'=>$value->id]) }}" token="{{ csrf_token() }}" class="layer-delete">@lang('account.delete')</a>
+                                            </span>
+                                        @endif
+                                    </td>
 
                                 </tr>
 

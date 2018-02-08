@@ -22,6 +22,12 @@ return [
 	'Date'                      => '日期',
 	'State'                     => '州',
 
+	//系统提示
+	'welcome'                   => '欢迎',
+	'If_the_landing_needs_help_please_click_OK' => '登陆如需帮助请点击确定',
+	'Determine'                 => '确定',
+	'cancel'                    => '取消',
+
 
 
 ];

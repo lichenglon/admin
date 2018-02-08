@@ -12,6 +12,7 @@ use App\Models\TbuyLogistics;
 use App\Models\TbuyOrderDetails;
 use DB;
 use Illuminate\Http\Request;
+use App\Models\Order_status;
 
 class OrderController extends BaseController
 {
@@ -22,6 +23,7 @@ class OrderController extends BaseController
         3=>'订单关闭',
     ];
     //订单状态
+
     public $orderStatus = [
         '1' => '订单未付款',
         '2' => '订单未审核',
@@ -87,10 +89,11 @@ class OrderController extends BaseController
         $order_no = DB::table('order')->where('id',$id)->value('order_no');
         $renter = DB::table('renter')->where('order_no',$order_no)->first();
         $result = DB::table('order')->where('id', $id)->join('house_message','order.house_id','=','msgid')->first();
-        return view("order.order.check",['result'=>$result,'renter'=>$renter,'orderStatus'=>$this->orderStatus]);
+        return view("order.order.check",['result'=>$result,'renter'=>$renter,'orderStatus'=>new Order_status()]);
     }
     //审核订单提交
-    public function saveChk($id){
+    public function saveChk(){
+        $id = $_REQUEST['id'];
         if($_REQUEST['order_status'] == '4'){
             DB::table('order')->where('id',$id)->update(['order_status'=>'4']);
         }
@@ -120,7 +123,7 @@ class OrderController extends BaseController
         $result = DB::table('order')->where('id', $id)->join('house_message','order.house_id','=','msgid')->first();
         $order_no = DB::table('order')->where('id',$id)->value('order_no');
         $renter = DB::table('renter')->where('order_no',$order_no)->first();
-        return view("order.order.detail",['result'=>$result,'renter'=>$renter,'orderStatus'=>$this->orderStatus]);
+        return view("order.order.detail",['result'=>$result,'renter'=>$renter,'orderStatus'=>new Order_status()]);
     }
 
 }

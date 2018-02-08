@@ -82,14 +82,14 @@
 
 
             /* 实时更新分类信息 */
-            $(".category")
+            /*$(".category")
                     .on("submit", "form", function(){
                         var self = $(this);
                         $.post(
                                 self.attr("action"),
                                 self.serialize(),
                                 function(data){
-                                    /* 提示信息 */
+                                    /!* 提示信息 *!/
                                     var name = data.status ? "success" : "error", msg;
                                     msg = self.find(".msg").addClass(name).text(data.info)
                                             .css("display", "inline-block");
@@ -129,7 +129,7 @@
                             "json"
                         );
                         return false;
-                    });
+                    });*/
         });
     </script>
     @stop

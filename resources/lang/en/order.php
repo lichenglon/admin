@@ -49,8 +49,17 @@ return [
 	'The_contract_has_been_uploaded' => 'The contract has been uploaded.',//合同已上传
 	'Order_completed'           => 'Order completed',       //订单已完成
 	'Order_cancellation'        => 'Order cancellation',    //订单取消
-	'week'                      =>'weeks',
-	'p_money'                   => 'Payment Amount',
+	'week'                      =>'weeks',                  //周
+	'p_money'                   => 'Payment Amount',        //订金
+
+	'Go_to_audit'               => 'Go to audit',           //去审核
+	'Review_and_pass_through'   => 'Review and pass through', //审核通过
+	'Audit_does_not_pass_through' => 'Audit does not pass through', //审核不通过
+	'Please_choose_the_audit_not_to_pass_the_reason' => 'Please choose the audit not to pass the reason',//请选择审核不通过原因
+	'The_house_has_been_rented' => 'The house has been rented',     //房源已出租
+	'Information_audit_does_not_pass_through' => 'Information audit does not pass through', //信息审核不通过
+	'Undesirable_tenancy'       => 'Undesirable tenancy',   //租期不合要求
+	'Submission_of_audit'       => 'Submission of audit',   //提交审核
 
 
 ];

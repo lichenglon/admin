@@ -19,7 +19,8 @@
                 </h4>
                 <div class="row">
                     <div class="col-sm-12">
-                        <form action="{{ url('order/order/saveChk',['order_id'=>$result->order_id]) }}" action="post">
+                        <form action="{{ url('order/order/saveChk') }}" method="post">
+                            <input type="hidden" name="id" value="{{ $result->id }}">
                         <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                             <thead>
                             <tr role="row">
@@ -136,7 +137,7 @@
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 100px;">
                                     @lang('order.Order_status')
                                 </th>
-                                <td>{{ $orderStatus[$result->order_status] }}</td>
+                                <td>{{ $orderStatus->get_order_status($result->order_status)}}</td>
                             </tr>
                             {{--<tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
@@ -151,24 +152,24 @@
                                 <td>{{ $result->house_eva }}</td>
                             </tr>--}}
                             <tr role="row" aria-required="true">
-                                <th><label>审核通过&nbsp;&nbsp;&nbsp;<input type="radio" name="order_status"  class="order_status" onclick="javascript:isRej('4');" value="4"/></label></th>
-                                <th><label>审核不通过&nbsp;&nbsp;&nbsp;<input type="radio" name="order_status" class="order_status" onclick="javascript:isRej('5');" value="5"/></label></th>
+                                <th><label>@lang('order.Review_and_pass_through')&nbsp;&nbsp;&nbsp;<input type="radio" checked="true" name="order_status"  class="order_status" onclick="javascript:isRej('4');" value="4"/></label></th>
+                                <th><label>@lang('order.Audit_does_not_pass_through')&nbsp;&nbsp;&nbsp;<input type="radio" name="order_status" class="order_status" onclick="javascript:isRej('5');" value="5"/></label></th>
                             </tr>
                              <tr role="row" id="rej" style="display:none;">
                                  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
-                                     请选择审核不通过原因
+                                     @lang('order.Please_choose_the_audit_not_to_pass_the_reason')
                                  </th>
                                  <td>
                                      <select name="reject_reason" id="">
-                                         <option value="1">房源已出租</option>
-                                         <option value="2">信息审核不通过 </option>
-                                         <option value="3">租期不合要求</option>
+                                         <option value="1">@lang('order.The_house_has_been_rented')</option>
+                                         <option value="2">@lang('order.Information_audit_does_not_pass_through') </option>
+                                         <option value="3">@lang('order.Undesirable_tenancy')</option>
                                      </select>
                                  </td>
                              </tr>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
-                                    <button>提交审核</button>
+                                    <button>@lang('order.Submission_of_audit')</button>
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 111px;">
                                     <a href="{{ url('order/order') }}">@lang('order.Return_to_the_list_of_orders')</a>

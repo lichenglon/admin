@@ -72,9 +72,9 @@ class TypeController extends BaseController {
 			DB::table('operate_log')->insert($operate_log);
 
 
-			return $this->ajaxSuccess('删除分类成功！', url('house/type'));
+			return $this->ajaxSuccess('Delete classification success！', url('house/type'));
 		}
-		return $this->ajaxError('删除分类失败！', url('house/type'));
+		return $this->ajaxError('Delete classification failure！', url('house/type'));
 	}
 	/**
 	 *修改分类
@@ -95,9 +95,9 @@ class TypeController extends BaseController {
 						'operate_time' => time()
 				];
 				DB::table('operate_log')->insert($operate_log);
-				return $this->ajaxSuccess('编辑成功!');
+				return $this->ajaxSuccess('Editor\'s success!');
 			}else{
-				return $this->ajaxError('编辑失败!');
+				return $this->ajaxError('Failure of Editors!');
 			}
 		}
 	}
