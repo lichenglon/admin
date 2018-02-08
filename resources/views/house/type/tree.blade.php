@@ -14,7 +14,6 @@
 			<input type="hidden" name="id" value="{{ $values['id'] }}">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<input type="text" name="name" class="text" value="{{ $values['name'] }}">
-
 			<span class="help-inline msg"></span>
 		</div>
 	</form>

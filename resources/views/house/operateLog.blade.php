@@ -23,8 +23,6 @@
                                                         <input type="text" name="etime" id="etime" class="form-control" value="@if(!empty($etime)){{$etime}}@endif" />
                                                 </div>
                                                 <input type="submit" class="btn btn-default" name="search" value="@lang('house_translate.search')">
-
-
                                                 <div class="mt-20">
                                                         <table class="table table-border table-bordered table-bg table-hover table-sort" style="width: 80%">
                                                                 <thead>

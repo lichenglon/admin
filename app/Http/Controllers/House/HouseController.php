@@ -381,7 +381,7 @@ class HouseController extends BaseController {
 		$search_k = Input::get('search_k') ? Input::get('search_k') : '%';
 		$search_v = Input::get('search_v') ? Input::get('search_v') : '%';
 		$type = Input::get('type') ? Input::get('type') : '%';
-		$find = Input::get('find') ? Input::get('find') : '';
+		$find = Input::get('find') ? Input::get('find') : false;
 		$export = Input::get('export') ? Input::get('export') : '';
 
 		if($find){

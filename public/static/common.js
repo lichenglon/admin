@@ -185,10 +185,10 @@
     $('body').on("click",".layer-delete",function(){
         var _this = $(this);
         var title = $(this).attr('title');
-        title = title?title:'是否执行此操作?';
+        title = title?title:'Whether to perform this operation.?';
         var url = $(this).attr('href');
         layer.confirm(title, {
-            btn: ['确定','取消'] //按钮
+            btn: ['Yes','No'] //按钮
         }, function(index){
             layer.close(index);
             $.ajax({

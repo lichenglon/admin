@@ -22,6 +22,7 @@ class OrderController extends BaseController
         3=>'订单关闭',
     ];
     //订单状态
+
     public $orderStatus = [
         '1' => '订单未付款',
         '2' => '订单未审核',
@@ -97,7 +98,7 @@ class OrderController extends BaseController
         if($_REQUEST['order_status'] == '5'){
             DB::table('order')->where('id',$id)->update(['order_status'=>'5','reject_reason'=>$_REQUEST['reject_reason']]);
         }
-        return redirect('order/order');
+        //return redirect('order/order');
     }
     
 

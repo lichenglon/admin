@@ -129,7 +129,7 @@
 
 
                                         @if($value->order_status == 2 || $value->order_status == 3)
-                                            <a href="{{ url('order/order/check',['id'=>$value->id]) }}" target="">去审核</a>
+                                            <a href="{{ url('order/order/check',['id'=>$value->id]) }}" target="">@lang('order.Go_to_audit')</a>
                                            {{-- <label>审核通过<input name="order_status" type="radio" value="8" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('4','{{$value->order_id}}')}" /></label>
                                             &nbsp;&nbsp;
                                             <label>审核不通过<input name="order_status" type="radio" value="3" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('5','{{$value->order_id}}')}" /></label>--}}

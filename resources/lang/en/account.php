@@ -74,4 +74,9 @@ return [
 	'Last_landing_time'         => 'Last landing time', //最后登陆时间
 	'The_final_landing_IP'      => '',                  //最后登陆IP
 	'normal'                    => 'Normal',            //正常
+
+
+	'Inability_to_operate_the_administrator'    => 'Inability to operate the administrator',    //不能操作管理员
+	'Non_developers_have_to_operate'            => 'Non developers have to operate',            //非开发者必须操作
+
 ];

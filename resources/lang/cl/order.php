@@ -52,4 +52,13 @@ return [
 	'week'                      =>'周',
 	'p_money'                   =>'订金',
 
+	'Go_to_audit'               => '去审核',
+	'Review_and_pass_through'   => '审核通过',
+	'Audit_does_not_pass_through' => '审核不通过',
+	'Please_choose_the_audit_not_to_pass_the_reason' => '请选择审核不通过原因',
+	'The_house_has_been_rented' => '房源已出租',
+	'Information_audit_does_not_pass_through' => '信息审核不通过',
+	'Undesirable_tenancy'       => '租期不合要求',
+	'Submission_of_audit'       => '提交审核',
+
 ];

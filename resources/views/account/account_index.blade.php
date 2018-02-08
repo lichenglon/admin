@@ -81,8 +81,7 @@
                             <tbody>
 
                             @foreach($account_lists as $value)
-                                @if($value->username != 'root')
-                                <tr role="row">
+                                    <tr role="row">
                                     <td><input type="checkbox" name="" class="ids" id=""></td>
                                     {{--<td class="sorting_1">{{ $value->id }}</td>--}}
                                     <td>{{ $value->name }}</td>
@@ -92,15 +91,26 @@
                                     <td>{{ $value->tel }}</td>
                                     <td>@if(!$value->status) @lang('account.disable') @else @lang('account.Enable') @endif</td>
                                     <td>{{ date('Y-m-d H:i:s',$value->create_time) }}</td>
-                                    <td><span>
-                                        <a href="{{ url('account/user/updateStatus',['id'=>$value->id,'status'=>$value->status]) }}" class="layer-get">
-                                            @if($value->status) @lang('account.disable') @else @lang('account.Enable') @endif
-                                        </a>&nbsp;
-                                        <a href="{{ url('account/user/'.$value->id.'/edit') }}">@lang('account.The_editor')</a>&nbsp;
-                                        <a href="{{ url('account/user',['id'=>$value->id]) }}" token="{{ csrf_token() }}" class="layer-delete">@lang('account.delete')</a>
-                                    </span></td>
+                                    <td>
+                                        @if($value->id == 1)
+                                            <span>
+                                                <a href="javascript:layer.msg('@lang('account.Inability_to_operate_the_administrator')', {icon: 2})">
+                                                @if($value->status) @lang('account.disable') @else @lang('account.Enable') @endif
+                                                </a>&nbsp;
+                                                <a href="javascript:layer.msg('@lang('account.Inability_to_operate_the_administrator')', {icon: 2})">@lang('account.The_editor')</a>&nbsp;
+                                                <a href="javascript:layer.msg('@lang('account.Inability_to_operate_the_administrator')', {icon: 2})" token="{{ csrf_token() }}">@lang('account.delete')</a>
+                                            </span>
+                                        @else
+                                            <span>
+                                                <a href="{{ url('account/user/updateStatus',['id'=>$value->id,'status'=>$value->status]) }}" class="layer-get">
+                                                @if($value->status) @lang('account.disable') @else @lang('account.Enable') @endif
+                                                </a>&nbsp;
+                                                <a href="{{ url('account/user/'.$value->id.'/edit') }}">@lang('account.The_editor')</a>&nbsp;
+                                                <a href="{{ url('account/user',['id'=>$value->id]) }}" token="{{ csrf_token() }}" class="layer-delete">@lang('account.delete')</a>
+                                            </span>
+                                        @endif
+                                    </td>
                                 </tr>
-                                @endif
                             @endforeach
 
 
