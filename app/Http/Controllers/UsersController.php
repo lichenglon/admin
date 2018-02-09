@@ -24,17 +24,17 @@ class UsersController extends Controller {
 			$userInfo = Account::where(['username' => $username])->first();
 
 			if(!$userInfo){
-				ajax_error('用户名不存在');
+				ajax_error('User name does not exist.');
 			}
 
 			if(!$userInfo->status){
-				ajax_error('该用户被禁用，请联系管理员！');
+				ajax_error('This user is disabled, please contact the administrator.');
 			}
 
 			$md5_password = md5($password);
 
 			if($md5_password != $userInfo->passwd){
-				ajax_error('密码不正确');
+				ajax_error('Incorrect password');
 			}else{
 
 				Session::put('Last_landing_time',date('Y-m-d H:i:s'));

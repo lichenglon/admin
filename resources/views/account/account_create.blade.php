@@ -21,37 +21,37 @@
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.name')：</label>
                     <div class="col-sm-4">
-                        <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="">
+                        <input type="text" name="name" required class="form-control" id="inputEmail3" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.account')：</label>
                     <div class="col-sm-4">
-                        <input type="text" name="username" class="form-control" id="inputEmail3" placeholder="">
+                        <input type="text" name="username" required class="form-control" id="inputEmail3" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.password')：</label>
                     <div class="col-sm-4">
-                        <input type="text" name="passwd" class="form-control" id="inputEmail3" placeholder="">
+                        <input type="text" name="passwd" required class="form-control" id="inputEmail3" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.contact')：</label>
                     <div class="col-sm-4">
-                        <input type="text" name="tel" class="form-control" id="inputEmail3" placeholder="">
+                        <input type="text" name="tel" required class="form-control" id="inputEmail3" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.email')：</label>
                     <div class="col-sm-4">
-                        <input type="text" name="email" class="form-control" id="inputEmail3" placeholder="">
+                        <input type="text" name="email" required class="form-control" id="inputEmail3" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.area')：</label>
                     <div class="col-sm-4">
-                        <input type="text" name="area" class="form-control" id="inputEmail3" placeholder="">
+                        <input type="text" name="area" required class="form-control" id="inputEmail3" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">

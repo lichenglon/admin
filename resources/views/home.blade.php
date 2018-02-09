@@ -59,8 +59,7 @@
 
 
         <!-- Google Font -->
-        <link rel="stylesheet"
-              href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         <style>
             .main-sidebar { padding:0;}
         </style>
@@ -257,7 +256,7 @@
 
                                         <div class="col-xs-12">
                                             <div class="box-content" style="width:100%;">
-                                                <h4 class="box-title">@lang('home.Activity')</h4>
+                                                <h4 class="box-title">@lang('home.Daily_sales')</h4>
                                                 <!-- /.box-title -->
                                                 <div class="dropdown js__drop_down">
                                                     <a href="#" class="dropdown-icon glyphicon glyphicon-option-vertical js__drop_down_button"></a>
@@ -320,7 +319,7 @@
                                                 </div>
                                                 <!-- /.dropdown js__dropdown -->
                                                 <div class="content">
-                                                    <div id="chart-3" class="js__chart" data-type="curve" data-chart="'Year'/'Desktop'/'Mobile' | '2008'/53/0 | '2009'/35/73 | '2010'/89/14 | '2011'/50/50 | '2012'/86/37 | '2013'/47/89 | '2014'/75/50 | '2015'/100/70 "></div>
+                                                    <div id="chart-3" class="js__chart" data-type="curve" data-chart="'Year'/'Desktop' | '2008'/53 | '2009'/35 | '2010'/89 | '2011'/50 | '2012'/86 | '2013'/47 | '2014'/75 | '2015'/100 "></div>
                                                 </div>
                                                 <!-- /.content -->
                                             </div>
@@ -345,7 +344,7 @@
                                                 </div>
                                                 <!-- /.dropdown js__dropdown -->
                                                 <div class="content">
-                                                    <div id="chart-1" class="js__chart" data-type="donut" data-chart="'Type'/'Number' | 'Normal Sales'/50 | 'In-Site Sales'/20 | 'Mail-Order Sales'/20"></div>
+                                                    <div id="chart-1" class="js__chart" data-type="donut" data-chart="'Type'/'Number' | 'Apartment'/50 | 'Villa'/20 | 'Single apartment'/20"></div>
                                                 </div>
                                                 <!-- /.content -->
                                             </div>
@@ -471,27 +470,11 @@
                                         <!-- /.col-lg-6 col-xs-12 -->
                                     </div>
                                     <!-- /.row -->
-                                    <footer class="footer">
-                                        <ul class="list-inline">
-                                            <li>2016 © NinjaAdmin.</li>
-                                            <li><a href="#">Privacy</a></li>
-                                            <li><a href="#">Terms</a></li>
-                                            <li><a href="#">Help</a></li>
-                                        </ul>
-                                    </footer>
+
                                 <!-- /.main-content -->
-
-
-
                 </div>
-
-
-
-
             </section>
             <!-- /.content -->
-
-
         </div>
         <!-- /.content-wrapper -->
 

@@ -26,9 +26,6 @@
 
 		</style>
 
-		
-
-		
 	</head>
 <body onload="refresh()">
 

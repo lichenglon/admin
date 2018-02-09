@@ -21,13 +21,13 @@
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.name')：</label>
                     <div class="col-sm-4">
-                        <input type="text" name="name" value="{{ $lists->name }}" class="form-control" id="inputEmail3" placeholder="">
+                        <input type="text" name="name" required value="{{ $lists->name }}" class="form-control" id="inputEmail3" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.account')：</label>
                     <div class="col-sm-4">
-                        <input type="text" name="username" value="{{ $lists->username }}" class="form-control" id="inputEmail3" placeholder="">
+                        <input type="text" name="username" required value="{{ $lists->username }}" class="form-control" id="inputEmail3" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
@@ -66,14 +66,14 @@
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">@lang('account.Choice_of_roles')：</label>
                     <div class="col-sm-4">
-                        <select class="form-control" name="role_id">
+                        <select class="form-control" name="role_id" id="role_id">
 
                             @if(empty($roleList))
                                 <option value="0">@lang('account.Choice_of_roles')</option>
                             @endif
 
                             @foreach($roleList as $values)
-                                <option value="{{ $values['id'] }}"  @if($lists->role_id == 1) selected  @endif>{{ $values['name'] }}</option>
+                                <option value="{{ $values['id'] }}">{{ $values['name'] }}</option>
                             @endforeach
 
                         </select>
@@ -104,6 +104,7 @@
 @section('js')
 
     <script>
+        document.getElementById('role_id').value = "{{$lists->role_id }}";
         $(function (){
 
             $('.switch').click(function (){
