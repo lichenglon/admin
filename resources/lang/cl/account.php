@@ -46,6 +46,8 @@ return [
 	'Role_department'           => '角色所属部门',
 	'Upper_level'               => '上一级角色',
 
+	'Editing_role'              => '编辑角色',
+
 	//菜单列表
 	'All_folding'               => '全部折叠',
 	'All_open'                  => '全部打开',

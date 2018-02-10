@@ -16,7 +16,7 @@
 
                         <span>@lang('house_translate.National_city')：</span>
                             <select id="country" class="dept_select input-text" name="state" style="width:10%;">
-                                <option value="">请选择</option>
+                                <option value="">@lang('house_translate.Please_choose')</option>
                             @foreach($nationArr as $nation)
                                 <option value="{{$nation->chinese_n_name}},{{$nation->english_n_name}},{{$nation->abbreviation}},{{$nation->n_ID}}">@if(Session::get('lang') == 'en'){{ $nation->english_n_name }}@else{{$nation->chinese_n_name}}@endif</option>
                             @endforeach
@@ -59,9 +59,9 @@
                                     {{--<td>{{ $v->house_status }}</td>--}}
                                     <td>
                                         @if($v->chk_sta == 1)
-                                            <label>@lang('house_translate.adopt') <input name="chk_sta" type="radio" value="2" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('2','{{$v->msgid}}')}" /></label>
+                                            <label>@lang('house_translate.adopt') <input name="chk_sta" type="radio" value="2" onclick="javascript:if(window.confirm('@lang("house_translate.Are_you_sure_you_want_to_perform_this_operation")？')){isCheck('2','{{$v->msgid}}')}" /></label>
                                             &nbsp;&nbsp;
-                                            <label>@lang('house_translate.Not_through')<input name="chk_sta" type="radio" value="3" onclick="javascript:if(window.confirm('确定要执行此操作吗？')){isCheck('3','{{$v->msgid}}')}" /></label>
+                                            <label>@lang('house_translate.Not_through')<input name="chk_sta" type="radio" value="3" onclick="javascript:if(window.confirm('@lang("house_translate.Are_you_sure_you_want_to_perform_this_operation")？')){isCheck('3','{{$v->msgid}}')}" /></label>
                                         @elseif($v->chk_sta == 3)
                                             @lang('house_translate.Not_through')
                                         @endif

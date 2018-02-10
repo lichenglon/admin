@@ -127,4 +127,8 @@ return [
 
 	//房源详细信息
 	'Return_to_the_upper_level' => 'Return to the upper level', //返回上一级
+
+
+	//房源审核
+	'Are_you_sure_you_want_to_perform_this_operation' => 'Are you sure you want to perform this operation', //确定要执行此操作吗
 ];
